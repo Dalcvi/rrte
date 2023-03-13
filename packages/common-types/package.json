@@ -1,0 +1,22 @@
+{
+  "name": "@rrte/common-types",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint *.ts*",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@tiptap/core": "2.0.0-beta.220",
+    "@tiptap/extension-blockquote": "2.0.0-beta.220"
+  }
+}

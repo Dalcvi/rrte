@@ -1,0 +1,21 @@
+{
+  "name": "@rrte/extension-code-block",
+  "version": "0.0.0",
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint *.ts*",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "@rrte/common-types": "workspace:^0.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@tiptap/extension-code-block": "2.0.0-beta.220"
+  }
+}

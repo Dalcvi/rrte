@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@rrte/web",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -9,19 +9,40 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@rrte/editor": "workspace:*",
+    "@rrte/extension-blockquote": "workspace:^*",
+    "@rrte/extension-bold": "workspace:^*",
+    "@rrte/extension-bullet-list": "workspace:^*",
+    "@rrte/extension-code": "workspace:^*",
+    "@rrte/extension-code-block": "workspace:^*",
+    "@rrte/extension-dropcursor": "workspace:^*",
+    "@rrte/extension-gapcursor": "workspace:^*",
+    "@rrte/extension-hard-break": "workspace:^*",
+    "@rrte/extension-heading": "workspace:^*",
+    "@rrte/extension-highlight": "workspace:^*",
+    "@rrte/extension-history": "workspace:^*",
+    "@rrte/extension-horizontal-rule": "workspace:^*",
+    "@rrte/extension-italic": "workspace:^*",
+    "@rrte/extension-link": "workspace:^*",
+    "@rrte/extension-list-item": "workspace:^*",
+    "@rrte/extension-ordered-list": "workspace:^*",
+    "@rrte/extension-strike": "workspace:^*",
+    "@rrte/extension-subscript": "workspace:^*",
+    "@rrte/extension-superscript": "workspace:^*",
+    "@rrte/extension-text-style": "workspace:^*",
+    "@rrte/extension-underline": "workspace:^*",
     "next": "^13.1.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "ui": "workspace:*"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "eslint-config-custom": "workspace:*",
-    "eslint": "7.32.0",
-    "tsconfig": "workspace:*",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
-    "typescript": "^4.5.3"
+    "eslint": "7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.9.5"
   }
 }
