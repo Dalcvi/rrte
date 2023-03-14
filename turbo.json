@@ -14,6 +14,9 @@
     },
     "watch": {
       "outputs": ["dist/**"]
+    },
+    "build:dev": {
+      "outputs": ["dist/**"]
     }
   }
 }

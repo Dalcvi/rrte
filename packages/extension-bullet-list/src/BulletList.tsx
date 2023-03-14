@@ -1,6 +1,7 @@
 import { BulletList as TiptapBulletList } from '@tiptap/extension-bullet-list';
+import { EditorExtension } from '@rrte/common-types';
 
-export const Bold: EditorExtension<typeof TiptapBulletList> = () => {
+export const BulletList: EditorExtension<typeof TiptapBulletList> = () => {
     const defaultConfig = {
         extension: TiptapBulletList
     };

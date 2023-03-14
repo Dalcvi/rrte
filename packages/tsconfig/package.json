@@ -6,8 +6,5 @@
     "base.json",
     "nextjs.json",
     "react-library.json"
-  ],
-  "devDependencies": {
-    "typescript": "^4.9.5"
-  }
+  ]
 }

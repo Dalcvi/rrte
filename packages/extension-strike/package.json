@@ -1,24 +1,24 @@
 {
   "name": "@rrte/extension-strike",
   "version": "0.0.0",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
   "license": "MIT",
   "scripts": {
     "lint": "eslint *.ts*",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+"build:dev": "rollup -c ../../rollup.config.js"
   },
   "devDependencies": {
     "@rrte/common-types": "workspace:^0.0.0",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
-    "react": "^18.2.0",
-    "tsconfig": "workspace:*",
-    "typescript": "^4.9.5"
+    "react": "18.2.0",
+    "tsconfig": "workspace:*"
   },
   "dependencies": {
     "@tiptap/extension-strike": "2.0.0-beta.220"
+  },
+  "peerDependencies": {
+    "react": "18.2.0"
   }
 }
