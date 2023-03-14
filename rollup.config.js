@@ -1,7 +1,6 @@
 import excludeDependenciesFromBundle from "rollup-plugin-exclude-dependencies-from-bundle";
+import esbuild from 'rollup-plugin-esbuild';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
-import terser  from '@rollup/plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import * as fs from "fs";
@@ -34,7 +33,7 @@ const typescriptOptions = {
 };
 
 export default {
-  input: `${PACKAGE_NAME}/src/index.tsx`,
+  input: `${PACKAGE_NAME}/src/index.ts`,
   external: [...Object.keys(pkg.peerDependencies), '@emotion/cache'],
   output: [
     {
@@ -47,11 +46,25 @@ export default {
     }
   ],
   plugins: [
+      esbuild({
+      // All options are optional
+      include: /\.[jt]sx?$/, // default, inferred from `loaders` option
+      exclude: /node_modules/, // default
+      sourceMap: true, // default
+      minify: true,
+      target: 'es2017', // default, or 'es20XX', 'esnext'
+      jsx: 'transform', // default, or 'preserve'
+      jsxFactory: 'React.createElement',
+      jsxFragment: 'React.Fragment',
+      // Like @rollup/plugin-replace
+      define: {
+        __VERSION__: '"x.y.z"',
+      },
+      tsconfig: 'tsconfig.json', // default
+    }),
     nodeResolve(nodeOptions),
-    typescript(typescriptOptions),
     excludeDependenciesFromBundle({peerDependencies: true}),
     babel(babelOptions),
     commonjs(commonjsOptions),
-    terser(),
   ]
 }

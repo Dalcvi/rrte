@@ -1,24 +1,19 @@
 {
   "name": "@rrte/common-types",
   "version": "0.0.0",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "license": "MIT",
   "scripts": {
     "lint": "eslint *.ts*",
-    "watch": "tsc -w",
-"build:dev": "rollup -c ../../rollup.config.js"
+    "watch": "tsc -w"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
-    "react": "18.2.0",
     "tsconfig": "workspace:*"
   },
   "dependencies": {
     "@tiptap/core": "2.0.0-beta.220",
     "@tiptap/extension-blockquote": "2.0.0-beta.220"
-  },
-  "peerDependencies": {
-    "react": "18.2.0"
   }
 }

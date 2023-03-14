@@ -26,11 +26,13 @@
     "@rollup/plugin-typescript": "^11.0.0",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
+    "esbuild": "^0.17.11",
     "eslint": "7.32.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
     "react": "18.2.0",
     "rollup": "^2.79.1",
+    "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-exclude-dependencies-from-bundle": "^1.1.23",
     "turbo": "latest",
     "typescript": "4.7.4"

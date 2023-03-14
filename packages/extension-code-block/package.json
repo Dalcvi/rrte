@@ -1,8 +1,9 @@
 {
   "name": "@rrte/extension-code-block",
   "version": "0.0.0",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "main": "./dist/cjs/index.js",
+  "types": "./src/index.ts",
+  "module": "./dist/esm/index.js",
   "license": "MIT",
   "scripts": {
     "lint": "eslint *.ts*",
