@@ -46,6 +46,7 @@ export default {
     }
   ],
   plugins: [
+        excludeDependenciesFromBundle({peerDependencies: true}),
       esbuild({
       // All options are optional
       include: /\.[jt]sx?$/, // default, inferred from `loaders` option
@@ -62,9 +63,7 @@ export default {
       },
       tsconfig: 'tsconfig.json', // default
     }),
-    nodeResolve(nodeOptions),
-    excludeDependenciesFromBundle({peerDependencies: true}),
-    babel(babelOptions),
-    commonjs(commonjsOptions),
+    // babel(babelOptions),
+    // commonjs(commonjsOptions),
   ]
 }
