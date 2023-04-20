@@ -1,5 +1,5 @@
 {
-  "name": "@rrte/common-types",
+  "name": "@rrte/common",
   "version": "0.0.0",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -9,11 +9,8 @@
     "watch": "tsc -w"
   },
   "devDependencies": {
+    "@tiptap/core": "^2.0.3",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*"
-  },
-  "dependencies": {
-    "@tiptap/core": "2.0.0-beta.220",
-    "@tiptap/extension-blockquote": "2.0.0-beta.220"
   }
 }

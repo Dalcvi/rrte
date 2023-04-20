@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { useEditor, EditorContent, AnyExtension, JSONContent } from '@tiptap/react';
+import { useEditor, EditorContent, JSONContent, AnyExtension } from '@tiptap/react';
 import { Document } from '@rrte/extension-document';
 import { Paragraph } from '@rrte/extension-paragraph';
 import { Text } from '@rrte/extension-text';
-import type { EditorExtension } from '@rrte/common-types';
+import type { UnknownExtension } from '@rrte/common';
 
 export const Editor = ({
   extensions = [],
@@ -12,20 +12,21 @@ export const Editor = ({
   onUpdate,
 }: {
   className?: string;
-  extensions?: ReturnType<EditorExtension<AnyExtension, unknown>>[];
+  extensions?: UnknownExtension[];
   content: JSONContent | undefined;
   onUpdate: (content: JSONContent | undefined) => void;
 }) => {
+  console.log(extensions.map(({ extension }) => extension));
   const editor = useEditor({
     extensions: [Document, Paragraph, Text, ...extensions.map(({ extension }) => extension)],
     editorProps:
       className !== undefined
-        ? {
-            attributes: {
-              class: className,
-            },
-          }
-        : undefined,
+? {
+    attributes: {
+      class: className,
+    },
+  }
+: undefined,
     content,
   });
 

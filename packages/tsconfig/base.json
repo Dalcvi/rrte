@@ -15,7 +15,9 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "declarationDir": "types"
+    "declarationDir": "types",
+    "lib": ["es2015", "dom"]
   },
+  "include": ["./", "./Globals.d.ts"],
   "exclude": ["node_modules", "dist", ".turbo", ".next"]
 }

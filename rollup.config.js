@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import * as fs from "fs";
 import path from "path";
+import postcss from 'rollup-plugin-postcss'
 
 const PACKAGE_NAME = process.cwd();
 const pkg = JSON.parse(fs.readFileSync(path.join(PACKAGE_NAME, 'package.json'), 'utf-8'));
@@ -34,36 +35,39 @@ const typescriptOptions = {
 
 export default {
   input: `${PACKAGE_NAME}/src/index.ts`,
-  external: [...Object.keys(pkg.peerDependencies), '@emotion/cache'],
+  external: [...Object.keys(pkg.peerDependencies)],
   output: [
     {
       file: pkg.main,
-      format: 'cjs'
+      format: 'cjs',
+      chunkFileNames: 'chunks/[name]-[hash].js',
     },
     {
       file: pkg.module,
-      format: 'es'
+      format: 'es',
+      chunkFileNames: 'chunks/[name]-[hash].js',
     }
   ],
   plugins: [
-        excludeDependenciesFromBundle({peerDependencies: true}),
-      esbuild({
-      // All options are optional
-      include: /\.[jt]sx?$/, // default, inferred from `loaders` option
-      exclude: /node_modules/, // default
-      sourceMap: true, // default
-      minify: true,
-      target: 'es2017', // default, or 'es20XX', 'esnext'
-      jsx: 'transform', // default, or 'preserve'
+    excludeDependenciesFromBundle({peerDependencies: true}),
+    esbuild({
+      include: /\.[jt]sx?$/,
+      exclude: /node_modules/, 
+      sourceMap: true, 
+      minify: false,
+      target: 'es2017', 
+      jsx: 'transform',
       jsxFactory: 'React.createElement',
       jsxFragment: 'React.Fragment',
-      // Like @rollup/plugin-replace
       define: {
         __VERSION__: '"x.y.z"',
       },
-      tsconfig: 'tsconfig.json', // default
+      tsconfig: 'tsconfig.json',
     }),
-    // babel(babelOptions),
-    // commonjs(commonjsOptions),
+    postcss({
+      modules: true,
+      extract: true,
+      use: ['sass']
+    }),
   ]
 }

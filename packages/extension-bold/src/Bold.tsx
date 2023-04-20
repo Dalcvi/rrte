@@ -1,4 +1,4 @@
-import { EditorExtension } from '@rrte/common-types';
+import { EditorExtension } from '@rrte/common';
 import { Bold as TiptapBold } from '@tiptap/extension-bold';
 
 export const Bold: EditorExtension<typeof TiptapBold> = () => {

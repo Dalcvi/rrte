@@ -20,20 +20,29 @@ import { Highlight } from '@rrte/extension-highlight';
 import { History } from '@rrte/extension-history';
 import { Gapcursor } from '@rrte/extension-gapcursor';
 import { Dropcursor } from '@rrte/extension-dropcursor';
-import { JSONContent } from '@rrte/common-types';
+import { JSONContent } from '@rrte/common';
 import classes from './styles.module.css';
 import { useState } from 'react';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
-  console.log(content);
+
   return (
     <div className={classes.siteContainer}>
       <Editor
         content={content}
         onUpdate={setContent}
         extensions={[
-          Blockquote(),
+          Blockquote().extend({
+            addOptions() {
+              return {
+                ...this.parent?.(),
+                HTMLAttributes: {
+                  class: 'test',
+                },
+              };
+            },
+          }),
           // BulletList(),
           // CodeBlock,
           // HardBreak,

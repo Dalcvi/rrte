@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@rrte/common-types": "workspace:^*",
+    "@rrte/common": "workspace:^*",
     "@rrte/editor": "workspace:*",
     "@rrte/extension-blockquote": "workspace:^*",
     "@rrte/extension-bold": "workspace:^*",

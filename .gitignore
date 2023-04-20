@@ -5,6 +5,7 @@ node_modules
 .pnp
 .pnp.js
 .rollup.cache
+.yarn
 
 # testing
 coverage
