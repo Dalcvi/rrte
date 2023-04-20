@@ -16,8 +16,9 @@
     "skipLibCheck": true,
     "strict": true,
     "declarationDir": "types",
-    "lib": ["es2015", "dom"]
+    "lib": ["ES2015"],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": ["./", "./Globals.d.ts"],
+  "include": ["./"],
   "exclude": ["node_modules", "dist", ".turbo", ".next"]
 }
