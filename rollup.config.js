@@ -40,12 +40,12 @@ export default {
     {
       file: pkg.main,
       format: 'cjs',
-      chunkFileNames: 'chunks/[name]-[hash].js',
+      sourceMap: true
     },
     {
       file: pkg.module,
       format: 'es',
-      chunkFileNames: 'chunks/[name]-[hash].js',
+      sourceMap: true
     }
   ],
   plugins: [

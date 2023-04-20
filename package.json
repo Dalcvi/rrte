@@ -38,7 +38,8 @@
     "rollup-plugin-exclude-dependencies-from-bundle": "^1.1.23",
     "rollup-plugin-postcss": "^4.0.2",
     "turbo": "^1.9.3",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "typescript-plugin-css-modules": "^5.0.1"
   },
   "engines": {
     "node": ">=14.0.0"
