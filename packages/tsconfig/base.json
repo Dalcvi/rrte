@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Default",
   "compilerOptions": {
+    "typeRoots": ["./globals.d.ts"],
     "composite": false,
     "declaration": true,
     "declarationMap": true,
@@ -15,10 +16,10 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "declarationDir": "types",
     "lib": ["ES2015"],
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
+  "files": ["globals.d.ts"],
   "include": ["./"],
   "exclude": ["node_modules", "dist", ".turbo", ".next"]
 }
