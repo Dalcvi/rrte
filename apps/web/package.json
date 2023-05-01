@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "packages:size": "cost-of-modules"
   },
   "dependencies": {
     "@rrte/common": "workspace:^*",
@@ -16,13 +17,16 @@
     "@rrte/extension-bullet-list": "workspace:^*",
     "@rrte/extension-code": "workspace:^*",
     "@rrte/extension-code-block": "workspace:^*",
+    "@rrte/extension-color": "workspace:^",
     "@rrte/extension-dropcursor": "workspace:^*",
+    "@rrte/extension-font-size": "workspace:^",
     "@rrte/extension-gapcursor": "workspace:^*",
     "@rrte/extension-hard-break": "workspace:^*",
     "@rrte/extension-heading": "workspace:^*",
     "@rrte/extension-highlight": "workspace:^*",
     "@rrte/extension-history": "workspace:^*",
     "@rrte/extension-horizontal-rule": "workspace:^*",
+    "@rrte/extension-id": "workspace:^",
     "@rrte/extension-italic": "workspace:^*",
     "@rrte/extension-link": "workspace:^*",
     "@rrte/extension-list-item": "workspace:^*",
@@ -32,8 +36,10 @@
     "@rrte/extension-superscript": "workspace:^*",
     "@rrte/extension-text-style": "workspace:^*",
     "@rrte/extension-underline": "workspace:^*",
+    "cost-of-modules": "^1.0.1",
     "next": "^13.1.1",
     "react": "18.2.0",
+    "react-credit-cards": "^0.8.3",
     "react-dom": "18.2.0"
   },
   "devDependencies": {

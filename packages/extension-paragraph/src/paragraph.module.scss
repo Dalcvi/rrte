@@ -1,0 +1,23 @@
+:root {
+    --rrce-p-color: var(--rrce-p-color-ovr, var(--rrce-color-2));
+    --rrce-p-font-family: var(--rrce-p-font-family-ovr, 'Roboto', sans-serif);
+    --rrce-p-font-size: var(--rrce-p-font-size-ovr, 16px);
+    --rrce-p-line-height: var(--rrce-p-line-height-ovr, 1.5);
+    --rrce-p-font-weight: var(--rrce-p-font-weight-ovr, 400);
+    --rrce-p-text-decoration: var(--rrce-p-text-decoration-ovr, none);
+    --rrce-p-font-style: var(--rrce-p-font-style-ovr, normal);
+}
+
+.base {
+    margin: 0;
+    margin-block-start: 4px;
+}
+
+.toolbarItem {
+    color: rgb(var(--rrce-p-color));
+    font-family: var(--rrce-p-font-family);
+    font-size: var(--rrce-p-font-size);
+    font-weight: var(--rrce-p-font-weight);
+    text-decoration: var(--rrce-p-text-decoration);
+    font-style: var(--rrce-p-font-style);
+}

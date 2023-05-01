@@ -1,73 +1,79 @@
-import excludeDependenciesFromBundle from "rollup-plugin-exclude-dependencies-from-bundle";
 import esbuild from 'rollup-plugin-esbuild';
-import {nodeResolve} from '@rollup/plugin-node-resolve';
+import svgr from '@svgr/rollup';
+import * as fs from 'fs';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import path from 'path';
+import postcss from 'rollup-plugin-postcss';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
-import * as fs from "fs";
-import path from "path";
-import postcss from 'rollup-plugin-postcss'
+import postcssModules from 'postcss-modules';
 
 const PACKAGE_NAME = process.cwd();
 const pkg = JSON.parse(fs.readFileSync(path.join(PACKAGE_NAME, 'package.json'), 'utf-8'));
 
-const commonjsOptions = {
-  ignoreGlobal: true,
-  include: /node_modules/,
-}
-const extensions = ['.js', '.ts', '.tsx'];
+const externals = [
+  /node_modules/,
+  /@rrte\/.*/,
+  /@tiptap\/.*/,
+  ...Object.keys(pkg.peerDependencies ?? {}),
+  ...Object.keys(pkg.dependencies ?? {}),
+];
 
-const babelOptions = {
-  exclude: /node_modules/,
-  extensions,
-  configFile: '../../babel.config.json',
-  babelHelpers: 'runtime'
+const includeExternals = [/style-inject/];
+
+// const externals =[];
+
+// console.log(externals);
+
+const cjsOutput = {
+  dir: 'dist/cjs',
+  format: 'cjs',
+  sourcemap: true,
 };
-const nodeOptions = {
-  extensions,
-};
-const typescriptOptions = {
-  tsconfig: `${PACKAGE_NAME}/tsconfig.json`,
-  declaration: true,
-  declarationDir: '.',
-  emitDeclarationOnly: true,
-  declarationMap: true,
+
+const esOutput = {
+  dir: 'dist/es',
+  format: 'es',
+  preserveModules: true,
+  preserveModulesRoot: 'src',
+  sourcemap: true,
 };
 
 export default {
   input: `${PACKAGE_NAME}/src/index.ts`,
-  external: [...Object.keys(pkg.peerDependencies)],
-  output: [
-    {
-      file: pkg.main,
-      format: 'cjs',
-      sourceMap: true
-    },
-    {
-      file: pkg.module,
-      format: 'es',
-      sourceMap: true
-    }
-  ],
+  external: (moduleImport) => {
+    return (
+      !includeExternals.some((notExternal) => moduleImport.match(notExternal)) &&
+      externals.some((external) => moduleImport.match(external))
+    );
+  },
+  output: process.env.NODE_ENV === 'production' ? [cjsOutput, esOutput] : [esOutput],
   plugins: [
-    excludeDependenciesFromBundle({peerDependencies: true}),
+    nodeResolve({
+      preferBuiltins: true,
+      modulesOnly: true,
+    }),
+    commonjs({
+      sourceMap: process.env.NODE_ENV === 'production',
+      exclude: ['node_modules/**'],
+    }),
+    svgr({}),
     esbuild({
       include: /\.[jt]sx?$/,
-      exclude: /node_modules/, 
-      sourceMap: true, 
-      minify: false,
-      target: 'es2017', 
-      jsx: 'transform',
-      jsxFactory: 'React.createElement',
-      jsxFragment: 'React.Fragment',
+      exclude: /node_modules/,
+      sourceMap: process.env.NODE_ENV === 'development',
+      minify: process.env.NODE_ENV === 'production',
+      jsx: 'automatic',
+      target: 'es2017',
       define: {
         __VERSION__: '"x.y.z"',
       },
-      tsconfig: 'tsconfig.json',
     }),
     postcss({
       modules: true,
-      extract: true,
-      use: ['sass']
+      inject: true,
+      minimize: process.env.NODE_ENV === 'production',
+      use: ['sass'],
+      exclude: /node_modules/,
     }),
-  ]
-}
+  ],
+};

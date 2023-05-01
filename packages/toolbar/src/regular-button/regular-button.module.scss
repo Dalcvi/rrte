@@ -1,0 +1,22 @@
+.RegularButton {
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    padding: 6px;
+    background: none;
+    border: 1px solid rgb(var(--rrce-color-2));
+    border-radius: 5px;
+
+    &:hover {
+        background: rgb(var(--rrce-color-4), 0.3);
+        cursor: pointer;
+    }
+}
+
+.RegularButtonActive {
+    background: rgb(var(--rrce-color-4), 0.8);
+}

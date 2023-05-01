@@ -1,1 +1,1 @@
-export * from "./Gapcursor";
+export * from './gapcursor';

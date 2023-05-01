@@ -1,1 +1,0 @@
-export { OrderedList } from '@tiptap/extension-ordered-list';

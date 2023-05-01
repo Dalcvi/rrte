@@ -1,1 +1,1 @@
-export * from "./Dropcursor";
+export * from './dropcursor';

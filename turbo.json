@@ -16,9 +16,7 @@
       "outputs": ["dist/**"]
     },
     "build:dev": {
-      "outputs": ["dist/**"],
-      "cache": false
-
+      "outputs": ["dist/**"]
     }
   }
 }

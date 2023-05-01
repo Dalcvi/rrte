@@ -4,25 +4,29 @@ import { BulletList } from '@rrte/extension-bullet-list';
 import { CodeBlock } from '@rrte/extension-code-block';
 import { HardBreak } from '@rrte/extension-hard-break';
 import { Heading } from '@rrte/extension-heading';
-import { HorizontalRule } from '@rrte/extension-horizontal-rule';
+// import { HorizontalRule } from '@rrte/extension-horizontal-rule';
 import { ListItem } from '@rrte/extension-list-item';
 import { OrderedList } from '@rrte/extension-ordered-list';
 import { Bold } from '@rrte/extension-bold';
-import { Italic } from '@rrte/extension-italic';
-import { Link } from '@rrte/extension-link';
-import { Underline } from '@rrte/extension-underline';
-import { Strike } from '@rrte/extension-strike';
+// import { Italic } from '@rrte/extension-italic';
+// import { Link } from '@rrte/extension-link';
+// import { Underline } from '@rrte/extension-underline';
+// import { Strike } from '@rrte/extension-strike';
 import { Code } from '@rrte/extension-code';
-import { Subscript } from '@rrte/extension-subscript';
-import { Superscript } from '@rrte/extension-superscript';
+// import { Subscript } from '@rrte/extension-subscript';
+// import { Superscript } from '@rrte/extension-superscript';
 import { TextStyle } from '@rrte/extension-text-style';
-import { Highlight } from '@rrte/extension-highlight';
+// import { Highlight } from '@rrte/extension-highlight';
 import { History } from '@rrte/extension-history';
 import { Gapcursor } from '@rrte/extension-gapcursor';
 import { Dropcursor } from '@rrte/extension-dropcursor';
+import { Color } from '@rrte/extension-color';
+import { FontSize } from '@rrte/extension-font-size';
+import { Id } from '@rrte/extension-id';
 import { JSONContent } from '@rrte/common';
 import classes from './styles.module.css';
 import { useState } from 'react';
+import React from 'react';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
@@ -33,40 +37,34 @@ export default function Web() {
         content={content}
         onUpdate={setContent}
         extensions={[
-          Blockquote().extend({
-            addOptions() {
-              return {
-                ...this.parent?.(),
-                HTMLAttributes: {
-                  class: 'test',
-                },
-              };
-            },
-          }),
-          // BulletList(),
-          // CodeBlock,
-          // HardBreak,
-          // Heading,
+          Blockquote(),
+          Bold(),
+          Color(),
+          FontSize(),
+          Id(),
+          BulletList(),
+          CodeBlock(),
+          HardBreak(),
+          Heading(),
           // HorizontalRule,
-          // ListItem,
-          // OrderedList,
-          // Bold,
+          ListItem(),
+          OrderedList(),
           // Italic,
           // Link,
           // Underline,
           // Strike,
-          // Code,
+          Code(),
           // Subscript,
           // Superscript,
-          // TextStyle,
+          TextStyle(),
           // Highlight,
-          // History,
-          // Gapcursor,
-          // Dropcursor,
+          History(),
+          Gapcursor(),
+          Dropcursor(),
         ]}
         className={classes.editor}
+        editorContentClassName={classes.editorContent}
       />
-
       {content && (
         <div className={classes.schemaContainer}>
           <pre>{JSON.stringify(content, null, 6)}</pre>

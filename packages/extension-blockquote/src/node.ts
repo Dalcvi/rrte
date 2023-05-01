@@ -1,5 +1,5 @@
 import { mergeAttributes, Node, wrappingInputRule } from '@tiptap/core';
-import classes from './blockquote.module.css';
+import classes from './blockquote.module.scss';
 
 export interface BlockquoteOptions {
   HTMLAttributes: Record<string, any>;
@@ -37,7 +37,7 @@ export const BlockquoteNode = Node.create<BlockquoteOptions>({
     };
   },
 
-  content: 'block+',
+  content: 'paragraph*',
 
   group: 'block',
 

@@ -3,23 +3,33 @@
   "version": "0.0.0",
   "main": "./dist/cjs/index.js",
   "types": "./src/index.ts",
-  "module": "./dist/esm/index.js",
+  "module": "./dist/es/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/es/index.js"
+    }
+  },
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "lint": "eslint *.ts*",
     "watch": "tsc -w",
-    "build:dev": "rm -rf ./dist && rollup -c ../../rollup.config.js"
+    "build": "rm -rf ./dist && rollup -c ../../rollup.config.js",
+    "build:prod": "cross-env NODE_ENV=production pnpm build && pnpm move-style-inject",
+    "build:dev": "cross-env NODE_ENV=development pnpm build",
+    "move-style-inject": "node ../../moveStyleInject.js"
   },
   "devDependencies": {
-    "@rrte/common": "workspace:^0.0.0",
+    "@rrte/common": "workspace:^",
     "eslint-config-custom": "workspace:*",
     "react": "18.2.0",
     "tsconfig": "workspace:*"
   },
-  "dependencies": {
-    "@tiptap/extension-paragraph": "^2.0.3"
-  },
   "peerDependencies": {
     "react": "18.2.0"
+  },
+  "dependencies": {
+    "@tiptap/core": "^2.0.3"
   }
 }

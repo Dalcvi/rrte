@@ -16,7 +16,7 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "lib": ["ES2015"],
+    "lib": ["ES2017", "DOM", "DOM.Iterable"],
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "files": ["globals.d.ts"],

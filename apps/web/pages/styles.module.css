@@ -2,9 +2,14 @@
 
 .editor {
   min-height: 100vh;
-  border: 1px solid black;
-  padding: 12px 18px;
+  /* border: 1px solid black; */
+  /* padding: 12px 18px; */
   margin: 12px 24px;
+}
+.editorContent {
+  border: 1px solid black;
+  border-top: none;
+  padding: 12px 18px;
 }
 
 .siteContainer {

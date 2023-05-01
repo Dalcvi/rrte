@@ -1,0 +1,11 @@
+.toolbarList {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px;
+    border: 1px solid black;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
