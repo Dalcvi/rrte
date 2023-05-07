@@ -5,6 +5,7 @@
   /* border: 1px solid black; */
   /* padding: 12px 18px; */
   margin: 12px 24px;
+  overflow: hidden;
 }
 .editorContent {
   border: 1px solid black;

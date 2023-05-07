@@ -57,7 +57,7 @@ export const FontSizeExtension = Extension.create<FontSizeOptions>({
       setFontSize:
         (fontSize) =>
         ({ chain }) => {
-          return chain().nodeHasStyle('fontSize').setMark('textStyle', { fontSize }).run();
+          return chain().setMark('textStyle', { fontSize }).run();
         },
       unsetFontSize:
         () =>

@@ -1,4 +1,4 @@
 import { createExtension } from '@rrte/common';
-import { idExtension } from './extension';
+import { IdExtension } from './extension';
 
-export const Id = () => createExtension(idExtension, { });
+export const Id = () => createExtension(IdExtension, {});

@@ -10,31 +10,33 @@ export type {
 
 export type AllExtension<T, K> = TiptapExtension<T, K> | TiptapNode<T, K> | TiptapMark<T, K>;
 
-export type UnknownExtension = Extension<AllExtension<any, any>, any, any>;
+export type UnknownExtension = Extension<Config<any>, AllExtension<any, any>, any, any>;
 
-export type Extension<T extends AllExtension<TO, TS>, TO = any, TS = any> = {
+export type Extension<C extends Record<string, any>, T extends AllExtension<TO, TS>, TO = any, TS = any> = {
   extension: T;
-  config: Partial<Config>;
+  config: Config<C>;
   extend: <O extends TO & Extend, S extends TS & Extend>(
     ext: Record<string, any>,
-  ) => Extension<AllExtension<O, S>, O, S>;
-  extendConfig: (getConfig: (config: Partial<Config>) => Partial<Config>) => Extension<AllExtension<TO, TS>, TO, TS>;
+  ) => Extension<C, AllExtension<O, S>, O, S>;
+  extendConfig: <NC extends Record<string, any>>(
+    getConfig: (config: Config<C>) => Config<NC>,
+  ) => Extension<NC, AllExtension<TO, TS>, TO, TS>;
 };
 
 type Extend = {};
 
-export const createExtension = <T extends AllExtension<TO, TS>, TO = any, TS = any>(
+export const createExtension = <C extends Record<string, any>, T extends AllExtension<TO, TS>, TO = any, TS = any>(
   extension: T,
-  config: Partial<Config>,
-): Extension<T, TO, TS> => {
+  config: Config<C>,
+): Extension<C, T, TO, TS> => {
   return {
     extension,
     config,
     extend: <O extends TO & Extend, S extends TS & Extend>(ext: Record<string, any>) => {
-      return createExtension<AllExtension<O, S>, O, S>(extension.extend<O, S>(ext), config);
+      return createExtension<C, AllExtension<O, S>, O, S>(extension.extend<O, S>(ext), config);
     },
-    extendConfig: (getConfig: (config: Partial<Config>) => Partial<Config>) => {
-      return createExtension<AllExtension<TO, TS>, TO, TS>(extension, getConfig(cloneDeep(config)));
+    extendConfig: <NC extends Record<string, any>>(getConfig: (config: Config<C>) => Config<NC>) => {
+      return createExtension<NC, AllExtension<TO, TS>, TO, TS>(extension, getConfig(cloneDeep(config)));
     },
   };
 };

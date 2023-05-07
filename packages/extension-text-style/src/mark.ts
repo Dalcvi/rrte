@@ -8,13 +8,9 @@ declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     textStyle: {
       /**
-       * Checks if selected nodes have style attributes.
-       */
-      nodeHasStyle: (style: string) => ReturnType;
-      /**
        * Remove spans without inline style attributes.
        */
-      removeEmptyTextStyle: () => ReturnType;
+      removeEmptyTextStyle: (recentlyRemovedStyle?: string) => ReturnType;
     };
   }
 }
@@ -51,17 +47,17 @@ export const TextStyleMark = Mark.create<TextStyleOptions>({
 
   addCommands() {
     return {
-      nodeHasStyle:
-        (style: string) =>
-        ({ state, commands }) => {
-          console.warn('UPDATE THIS!');
-          return true;
-        },
       removeEmptyTextStyle:
-        () =>
+        (recentlyRemovedStyle?: string) =>
         ({ state, commands }) => {
           const attributes = getMarkAttributes(state, this.type);
-          const hasStyles = Object.entries(attributes).some(([, value]) => !!value);
+          const hasStyles = Object.entries(attributes).some(([style, value]) => {
+            if (style === recentlyRemovedStyle) {
+              return false;
+            }
+
+            return !!value;
+          });
 
           if (hasStyles) {
             return true;

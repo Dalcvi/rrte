@@ -1,5 +1,5 @@
 import { createExtension } from '@rrte/common';
-import { BoldExtension } from './extension';
+import { BoldMark } from './mark';
 import { ToolbarButton } from './toolbar';
 
-export const Bold = () => createExtension(BoldExtension, { toolbar: ToolbarButton });
+export const Bold = () => createExtension(BoldMark, { toolbar: ToolbarButton });

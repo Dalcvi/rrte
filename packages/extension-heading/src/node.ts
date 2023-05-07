@@ -1,6 +1,5 @@
 import { mergeAttributes, Node, textblockTypeInputRule } from '@tiptap/core';
 import classes from './heading.module.scss';
-import { generateStringAttribute } from '@rrte/common';
 
 export type Level = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -39,22 +38,6 @@ export const HeadingNode = Node.create<HeadingOptions>({
   group: 'block',
 
   defining: true,
-
-  addAttributes() {
-    return {
-      color: generateStringAttribute('color', 'heading', 'color', (value) => `rgb(${value})`),
-      fontFamily: generateStringAttribute('fontFamily', 'heading', 'font-family'),
-      fontSize: generateStringAttribute('fontSize', 'heading', 'font-size'),
-      lineHeight: generateStringAttribute('lineHeight', 'heading', 'line-height'),
-      fontWeight: generateStringAttribute('fontWeight', 'heading', 'font-weight'),
-      textDecoration: generateStringAttribute('textDecoration', 'heading', 'text-decoration'),
-      fontStyle: generateStringAttribute('fontStyle', 'heading', 'font-style'),
-      level: {
-        default: 1,
-        rendered: false,
-      },
-    };
-  },
 
   parseHTML() {
     return this.options.levels.map((level: Level) => ({

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import classes from './toolbar.module.scss';
 
 const Button = ({ editor }: { editor: Editor }) => {
-  const isActive = editor.isActive('bulletList');
+  const isActive = editor.isActive(OrderedListNode.name);
   return (
     <button
       data-hook="ordered-list-button"

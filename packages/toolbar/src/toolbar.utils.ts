@@ -7,29 +7,51 @@ import {
   ToolbarItemType,
 } from './toolbar.types';
 
-export const spreadToolbarItems = (items: ToolbarItem[]): SingleToolbarItem[] => {
-  return items.reduce((acc: SingleToolbarItem[], item) => {
+export const spreadToolbarItems = (items: ToolbarItem<any>[]): SingleToolbarItem<any>[] => {
+  return items.reduce((acc: SingleToolbarItem<any>[], item) => {
     if (Array.isArray(item)) {
       return [...acc, ...item];
     }
     return [...acc, item];
-  }, [] as SingleToolbarItem[]);
+  }, [] as SingleToolbarItem<any>[]);
 };
 
-export const getDifferentToolbarTypes = (items: SingleToolbarItem[]): SortedToolbarItems => {
+export const getConfigsMapByName = (
+  toolbarInfos: { toolbar: ToolbarItem<any>; config: Record<string, any> }[],
+): { [key: string]: Record<string, any> } => {
+  return toolbarInfos.reduce((acc, info) => {
+    if(Array.isArray(info.toolbar)) {
+      return {
+        ...acc,
+        ...info.toolbar.reduce((innerAcc, item) => {
+          return {
+            ...innerAcc,
+            [item.name]: info.config,
+          };
+        }, {} as Record<string, any>),
+      }
+    }
+    return {
+      ...acc,
+      [info.toolbar.name]: info.config,
+    };
+  });
+};
+
+export const getDifferentToolbarTypes = (items: SingleToolbarItem<any>[]): SortedToolbarItems<any> => {
   const toolbarItemNames = Object.values(ToolbarItemType);
   const defaults = toolbarItemNames.reduce((acc, name) => {
     return {
       ...acc,
       [name]: [],
     };
-  }, {} as SortedToolbarItems);
+  }, {} as SortedToolbarItems<any>);
   return items.reduce(
     (acc, item) => ({
       ...acc,
       [item.type]: [...(acc[item.type] || []), item],
     }),
-    defaults as SortedToolbarItems,
+    defaults as SortedToolbarItems<any>,
   );
 };
 

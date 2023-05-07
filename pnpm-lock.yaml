@@ -49,6 +49,9 @@ importers:
       node-sass:
         specifier: ^8.0.0
         version: 8.0.0
+      postcss-focus-within:
+        specifier: ^7.0.2
+        version: 7.0.2(postcss@8.4.23)
       postcss-modules:
         specifier: ^6.0.0
         version: 6.0.0(postcss@8.4.23)
@@ -173,12 +176,12 @@ importers:
       '@rrte/extension-history':
         specifier: workspace:^*
         version: link:../../packages/extension-history
-      '@rrte/extension-horizontal-rule':
-        specifier: workspace:^*
-        version: link:../../packages/extension-horizontal-rule
       '@rrte/extension-id':
         specifier: workspace:^
         version: link:../../packages/extension-id
+      '@rrte/extension-image':
+        specifier: workspace:^
+        version: link:../../packages/extension-image
       '@rrte/extension-italic':
         specifier: workspace:^*
         version: link:../../packages/extension-italic
@@ -206,6 +209,9 @@ importers:
       '@rrte/extension-underline':
         specifier: workspace:^*
         version: link:../../packages/extension-underline
+      '@rrte/extension-video':
+        specifier: workspace:^
+        version: link:../../packages/extension-video
       cost-of-modules:
         specifier: ^1.0.1
         version: 1.0.1
@@ -252,6 +258,12 @@ importers:
       '@rrte/toolbar':
         specifier: workspace:^
         version: link:../toolbar
+      '@tiptap/react':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -265,6 +277,9 @@ importers:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
@@ -348,15 +363,9 @@ importers:
       '@rrte/common':
         specifier: workspace:^
         version: link:../common
-      '@rrte/extension-text-style':
-        specifier: workspace:^
-        version: link:../extension-text-style
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
-      '@tiptap/extension-bold':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -445,6 +454,9 @@ importers:
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
     devDependencies:
       '@rrte/common':
         specifier: workspace:^0.0.0
@@ -590,13 +602,19 @@ importers:
 
   packages/extension-highlight:
     dependencies:
-      '@tiptap/extension-highlight':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)
-    devDependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: workspace:^
         version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+    devDependencies:
+      '@rrte/extension-text-style':
+        specifier: workspace:^
+        version: link:../extension-text-style
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -624,25 +642,6 @@ importers:
     devDependencies:
       '@rrte/common':
         specifier: workspace:^
-        version: link:../common
-      eslint-config-custom:
-        specifier: workspace:*
-        version: link:../eslint-config-custom
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
-
-  packages/extension-horizontal-rule:
-    dependencies:
-      '@tiptap/extension-horizontal-rule':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
-    devDependencies:
-      '@rrte/common':
-        specifier: workspace:^0.0.0
         version: link:../common
       eslint-config-custom:
         specifier: workspace:*
@@ -685,15 +684,46 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
-  packages/extension-italic:
+  packages/extension-image:
     dependencies:
-      '@tiptap/extension-italic':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)
-    devDependencies:
       '@rrte/common':
         specifier: workspace:^0.0.0
         version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      '@tiptap/pm':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/react':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+    devDependencies:
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/extension-italic:
+    dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+    devDependencies:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -706,13 +736,22 @@ importers:
 
   packages/extension-link:
     dependencies:
-      '@tiptap/extension-link':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
-    devDependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: workspace:^
         version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      '@tiptap/pm':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+      linkifyjs:
+        specifier: ^4.1.1
+        version: 4.1.1
+    devDependencies:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -783,15 +822,40 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
-  packages/extension-strike:
+  packages/extension-size:
     dependencies:
-      '@tiptap/extension-strike':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)
-    devDependencies:
       '@rrte/common':
         specifier: workspace:^0.0.0
         version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+    devDependencies:
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/extension-strike:
+    dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+    devDependencies:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -804,13 +868,16 @@ importers:
 
   packages/extension-subscript:
     dependencies:
-      '@tiptap/extension-subscript':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)
-    devDependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: workspace:^
         version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+    devDependencies:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -823,13 +890,16 @@ importers:
 
   packages/extension-superscript:
     dependencies:
-      '@tiptap/extension-superscript':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)
-    devDependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: workspace:^
         version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+    devDependencies:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -864,9 +934,6 @@ importers:
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
-      '@tiptap/extension-text-style':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)
     devDependencies:
       '@rrte/common':
         specifier: workspace:^
@@ -883,13 +950,44 @@ importers:
 
   packages/extension-underline:
     dependencies:
-      '@tiptap/extension-underline':
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
+      '@tiptap/core':
         specifier: ^2.0.3
-        version: 2.0.3(@tiptap/core@2.0.3)
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
     devDependencies:
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/extension-video:
+    dependencies:
       '@rrte/common':
         specifier: workspace:^0.0.0
         version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      '@tiptap/pm':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/react':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+    devDependencies:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -3089,14 +3187,6 @@ packages:
     dependencies:
       '@tiptap/pm': 2.0.3(@tiptap/core@2.0.3)
 
-  /@tiptap/extension-bold@2.0.3(@tiptap/core@2.0.3):
-    resolution: {integrity: sha512-OGT62fMRovSSayjehumygFWTg2Qn0IDbqyMpigg/RUAsnoOI2yBZFVrdM2gk1StyoSay7gTn2MLw97IUfr7FXg==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-    dev: false
-
   /@tiptap/extension-bubble-menu@2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3):
     resolution: {integrity: sha512-lPt1ELrYCuoQrQEUukqjp9xt38EwgPUwaKHI3wwt2Rbv+C6q1gmRsK1yeO/KqCNmFxNqF2p9ZF9srOnug/RZDQ==}
     peerDependencies:
@@ -3127,14 +3217,6 @@ packages:
       tippy.js: 6.3.7
     dev: false
 
-  /@tiptap/extension-highlight@2.0.3(@tiptap/core@2.0.3):
-    resolution: {integrity: sha512-NrtibY8cZkIjZMQuHRrKd4php+plOvAoSo8g3uVFu275I/Ixt5HqJ53R4voCXs8W8BOBRs2HS2QX8Cjh79XhtA==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-    dev: false
-
   /@tiptap/extension-history@2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3):
     resolution: {integrity: sha512-00KHIcJ8kivn2ARI6NQYphv2LfllVCXViHGm0EhzDW6NQxCrriJKE3tKDcTFCu7LlC5doMpq9Z6KXdljc4oVeQ==}
     peerDependencies:
@@ -3145,77 +3227,8 @@ packages:
       '@tiptap/pm': 2.0.3(@tiptap/core@2.0.3)
     dev: false
 
-  /@tiptap/extension-horizontal-rule@2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3):
-    resolution: {integrity: sha512-SZRUSh07b/M0kJHNKnfBwBMWrZBEm/E2LrK1NbluwT3DBhE+gvwiEdBxgB32zKHNxaDEXUJwUIPNC3JSbKvPUA==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-      '@tiptap/pm': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-      '@tiptap/pm': 2.0.3(@tiptap/core@2.0.3)
-    dev: false
-
-  /@tiptap/extension-italic@2.0.3(@tiptap/core@2.0.3):
-    resolution: {integrity: sha512-cfS5sW0gu7qf4ihwnLtW/QMTBrBEXaT0sJl3RwkhjIBg/65ywJKE5Nz9ewnQHmDeT18hvMJJ1VIb4j4ze9jj9A==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-    dev: false
-
-  /@tiptap/extension-link@2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3):
-    resolution: {integrity: sha512-H72tXQ5rkVCkAhFaf08fbEU7EBUCK0uocsqOF+4th9sOlrhfgyJtc8Jv5EXPDpxNgG5jixSqWBo0zKXQm9s9eg==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-      '@tiptap/pm': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-      '@tiptap/pm': 2.0.3(@tiptap/core@2.0.3)
-      linkifyjs: 4.1.0
-    dev: false
-
-  /@tiptap/extension-strike@2.0.3(@tiptap/core@2.0.3):
-    resolution: {integrity: sha512-RO4/EYe2iPD6ifDHORT8fF6O9tfdtnzxLGwZIKZXnEgtweH+MgoqevEzXYdS+54Wraq4TUQGNcsYhe49pv7Rlw==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-    dev: false
-
-  /@tiptap/extension-subscript@2.0.3(@tiptap/core@2.0.3):
-    resolution: {integrity: sha512-XFAEUaKxWRmTq7ePEF4aj7knelJPr2fTz0y/iSXydtS094LKwBHBzxatIZY3phrgfpDc+f51ycwarsgz27UJfg==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-    dev: false
-
-  /@tiptap/extension-superscript@2.0.3(@tiptap/core@2.0.3):
-    resolution: {integrity: sha512-5EBjUvkw2SXL1e8C1i0UF26/GBNHxEbiNQKw7Shy88omVa4HTY+D8KWC/j29ZW/IomUbGPlbpXp1z+1TETzmyw==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-    dev: false
-
-  /@tiptap/extension-text-style@2.0.3(@tiptap/core@2.0.3):
-    resolution: {integrity: sha512-yHIYtZVewSwfBfI6TffnsDRiOuXzytppcCsaDlsZFm8OtLG8v9ioH0ItMoOstmZZBiWJOm8iOy2yWSc4rNQEJw==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-    dev: false
-
   /@tiptap/extension-text@2.0.3(@tiptap/core@2.0.3):
     resolution: {integrity: sha512-LvzChcTCcPSMNLUjZe/A9SHXWGDHtvk73fR7CBqAeNU0MxhBPEBI03GFQ6RzW3xX0CmDmjpZoDxFMB+hDEtW1A==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-    dev: false
-
-  /@tiptap/extension-underline@2.0.3(@tiptap/core@2.0.3):
-    resolution: {integrity: sha512-oMYa7qib/5wJjpUp79GZEe+E/iyf1oZBsgiG26IspEtVTHZmpn3+Ktud7l43y/hpTeEzFTKOF1/uVbayHtSERg==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
     dependencies:
@@ -5678,8 +5691,8 @@ packages:
     dependencies:
       uc.micro: 1.0.6
 
-  /linkifyjs@4.1.0:
-    resolution: {integrity: sha512-Ffv8VoY3+ixI1b3aZ3O+jM6x17cOsgwfB1Wq7pkytbo1WlyRp6ZO0YDMqiWT/gQPY/CmtiGuKfzDIVqxh1aCTA==}
+  /linkifyjs@4.1.1:
+    resolution: {integrity: sha512-zFN/CTVmbcVef+WaDXT63dNzzkfRBKT1j464NJQkV7iSgJU0sLBus9W0HBwnXK13/hf168pbrx/V/bjEHOXNHA==}
     dev: false
 
   /loader-utils@3.2.1:
@@ -6459,6 +6472,16 @@ packages:
       postcss: ^8.2.15
     dependencies:
       postcss: 8.4.23
+    dev: true
+
+  /postcss-focus-within@7.0.2(postcss@8.4.23):
+    resolution: {integrity: sha512-AHAJ89UQBcqBvFgQJE9XasGuwMNkKsGj4D/f9Uk60jFmEBHpAL14DrnSk3Rj+SwZTr/WUG+mh+Rvf8fid/346w==}
+    engines: {node: ^14 || ^16 || >=18}
+    peerDependencies:
+      postcss: ^8.4
+    dependencies:
+      postcss: 8.4.23
+      postcss-selector-parser: 6.0.11
     dev: true
 
   /postcss-load-config@3.1.4(postcss@8.4.23):

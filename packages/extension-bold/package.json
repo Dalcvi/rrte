@@ -27,9 +27,7 @@
   },
   "dependencies": {
     "@rrte/common": "workspace:^",
-    "@rrte/extension-text-style": "workspace:^",
     "@tiptap/core": "^2.0.3",
-    "@tiptap/extension-bold": "^2.0.3",
     "classnames": "^2.3.2"
   },
   "peerDependencies": {

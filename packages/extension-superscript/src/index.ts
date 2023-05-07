@@ -1,1 +1,1 @@
-export * from "./Superscript";
+export * from './superscript';

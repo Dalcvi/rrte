@@ -29,10 +29,8 @@ const getValue = (value: string | AttributeValue | undefined) => {
   return Number(fontSize.replace(/\D/g, ''));
 };
 
-const getCurrentValue = currentSelectionAttributeValue('fontSize');
-
 const Button = ({ editor }: RegularButtonWrapperProps) => {
-  const value = getValue(getCurrentValue(editor));
+  const value = getValue(currentSelectionAttributeValue('fontSize', editor));
 
   return (
     <input

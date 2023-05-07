@@ -18,23 +18,22 @@ export function removeDuplicates<T>(array: T[]): T[] {
 }
 export interface IdOptions {
   attributeName: string;
-  generateID: () => any;
+  generateID: () => ReturnType<typeof uuidv4>;
   types: string[];
   filterTransaction: ((transaction: Transaction) => boolean) | null;
 }
-export const idExtension = Extension.create<IdOptions>({
+export const IdExtension = Extension.create<IdOptions>({
   name: 'Id',
   priority: 1000000,
   addOptions() {
     return {
       attributeName: 'id',
-      types: ['paragraph', 'heading', 'blockquote'],
-      generateID: () => uuidv4(),
+      types: ['paragraph', 'heading', 'blockquote', 'image', 'video'],
+      generateID: uuidv4,
       filterTransaction: null,
     };
   },
   addGlobalAttributes() {
-    console.log();
     return [
       {
         types: this.options.types,
@@ -76,6 +75,7 @@ export const idExtension = Extension.create<IdOptions>({
   },
   addProseMirrorPlugins() {
     let dragSourceElement: Element | null = null;
+
     return [
       new Plugin({
         key: new PluginKey('ID'),
@@ -91,21 +91,14 @@ export const idExtension = Extension.create<IdOptions>({
           const { attributeName, generateID } = this.options;
           const transform = combineTransactionSteps(oldState.doc, transactions as Transaction[]);
           const { mapping } = transform;
-          // get changed ranges based on the old state
           const changes = getChangedRanges(transform);
           changes.forEach(({ newRange }) => {
-            const newNodes = findChildrenInRange(newState.doc, newRange, (node) => {
+            const newNodes = findChildrenInRange(newState.doc, newRange, () => {
               return true;
             });
             const newIds = newNodes.map(({ node }) => node.attrs[attributeName]).filter((id) => id === null);
             newNodes.forEach(({ node, pos }, i) => {
-              // instead of checking `node.attrs[attributeName]` directly
-              // we look at the current state of the node within `tr.doc`.
-              // this helps to prevent adding new ids to the same node
-              // if the node changed multiple times within one transaction
               const id = tr.doc.nodeAt(pos)?.attrs[attributeName];
-              const what = tr.doc.nodeAt(pos);
-              console.log(what);
               if (id === null) {
                 tr.setNodeMarkup(pos, undefined, {
                   ...node.attrs,
@@ -142,7 +135,6 @@ export const idExtension = Extension.create<IdOptions>({
                 return tr;
               }
               const duplicatedNewIds = findDuplicates(newIds);
-              // check if the node doesn’t exist in the old state
               const { deleted } = mapping.invert().mapResult(pos);
               const newNode = deleted && duplicatedNewIds.includes(id);
               if (newNode) {
@@ -158,7 +150,6 @@ export const idExtension = Extension.create<IdOptions>({
           }
           return tr;
         },
-        // we register a global drag handler to track the current drag source element
         view(view) {
           const handleDragstart = (event: DragEvent) => {
             dragSourceElement = view.dom.parentElement?.contains(event.target as Element)

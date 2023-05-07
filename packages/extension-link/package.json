@@ -21,13 +21,16 @@
     "move-style-inject": "node ../../moveStyleInject.js"
   },
   "devDependencies": {
-    "@rrte/common": "workspace:^0.0.0",
     "eslint-config-custom": "workspace:*",
     "react": "18.2.0",
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@tiptap/extension-link": "^2.0.3"
+    "@rrte/common": "workspace:^",
+    "@tiptap/core": "^2.0.3",
+    "@tiptap/pm": "^2.0.3",
+    "classnames": "^2.3.2",
+    "linkifyjs": "^4.1.1"
   },
   "peerDependencies": {
     "react": "18.2.0"

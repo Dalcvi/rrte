@@ -1,9 +1,11 @@
 import { AttributeValue, currentSelectionAttributeValue, type RegularButtonConfig } from '@rrte/common';
 import { ColorExtension } from '../extension';
 import classes from './toolbar.module.scss';
+import classNames from 'classnames';
 import { Editor } from '@tiptap/core';
+import CloseIcon from './close.icon.svg';
 
-const getBackgroundColor = (value: string | AttributeValue) => {
+const getColor = (value: string | AttributeValue) => {
   if (typeof value === 'string') {
     return value;
   }
@@ -19,23 +21,53 @@ const getBackgroundColor = (value: string | AttributeValue) => {
   return window.getComputedStyle(element).color;
 };
 
-const getCurrentValue = currentSelectionAttributeValue('color');
-
 const Button = ({ editor }: { editor: Editor }) => {
-  const currentValue = getCurrentValue(editor);
-  const color = currentValue ? getBackgroundColor(currentValue) : undefined;
+  const currentValue = currentSelectionAttributeValue('color', editor);
+  const color = currentValue ? getColor(currentValue) : undefined;
 
   return (
-    <input
-      data-hook="color-input"
-      disabled={!editor.can().setColor(null)}
-      type="color"
-      value={color}
-      className={classes.colorInput}
-      onChange={(e) => {
-        editor.chain().focus().setColor(e.target.value).run();
-      }}
-    />
+    <div className={classes.colorContainer}>
+      <div
+        className={classNames(classes.colorMainButton, {
+          [classes.withReset]: color && color.startsWith('#'),
+        })}
+      >
+        <input
+          data-hook="color-input"
+          disabled={!editor.can().setColor(null)}
+          type="color"
+          value={color}
+          className={classes.colorInput}
+          onChange={(e) => {
+            editor.chain().focus().setColor(e.target.value).run();
+          }}
+        />
+        <div
+          className={classes.colorLetter}
+          style={{
+            color: color,
+          }}
+        >
+          A
+        </div>
+        <div
+          className={classes.colorBar}
+          style={{
+            background: color,
+          }}
+        />
+      </div>
+      {color && color.startsWith('#') && (
+        <button
+          className={classes.colorReset}
+          onClick={() => {
+            editor.chain().focus().unsetColor().run();
+          }}
+        >
+          <CloseIcon width={'15px'} height={'15px'} />
+        </button>
+      )}
+    </div>
   );
 };
 

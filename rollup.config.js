@@ -5,7 +5,6 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import path from 'path';
 import postcss from 'rollup-plugin-postcss';
 import commonjs from '@rollup/plugin-commonjs';
-import postcssModules from 'postcss-modules';
 
 const PACKAGE_NAME = process.cwd();
 const pkg = JSON.parse(fs.readFileSync(path.join(PACKAGE_NAME, 'package.json'), 'utf-8'));

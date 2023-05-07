@@ -1,0 +1,20 @@
+:root {
+    --rrte-link-color: var(--rrte-link-color-ovr, rgb(0, 123, 255));
+    --rrte-link-font: var(--rrte-link-font-ovr, inherit);
+    --rrte-link-font-size: var(--rrte-link-font-size-ovr, inherit);
+    --rrte-link-font-weight: var(--rrte-link-font-weight-ovr, inherit);
+    --rrte-link-text-decoration: var(--rrte-link-text-decoration-ovr, underline var(--rrte-link-color) solid 2px);
+    --rrte-link-visited-color: var(--rrte-link-visited-color-ovr, rgb(0, 123, 255));
+}
+
+.base {
+    color: var(--rrte-link-color);
+    font: var(--rrte-link-font);
+    font-size: var(--rrte-link-font-size);
+    font-weight: var(--rrte-link-font-weight);
+    text-decoration: var(--rrte-link-text-decoration);
+
+    &:visited {
+        color: var(--rrte-link-visited-color);
+    }
+}

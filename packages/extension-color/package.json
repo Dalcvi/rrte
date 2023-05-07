@@ -28,7 +28,8 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@tiptap/core": "^2.0.3"
+    "@tiptap/core": "^2.0.3",
+    "classnames": "^2.3.2"
   },
   "peerDependencies": {
     "react": "18.2.0"

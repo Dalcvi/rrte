@@ -58,12 +58,12 @@ export const ColorExtension = Extension.create<ColorOptions>({
       setColor:
         (color) =>
         ({ chain }) => {
-          return chain().nodeHasStyle('color').setMark('textStyle', { color }).run();
+          return chain().setMark('textStyle', { color }).run();
         },
       unsetColor:
         () =>
-        ({ chain }) => {
-          return chain().setMark('textStyle', { color: null }).removeEmptyTextStyle().run();
+        ({ commands }) => {
+          return commands.setMark('textStyle', { color: null }) && commands.removeEmptyTextStyle('color');
         },
     };
   },

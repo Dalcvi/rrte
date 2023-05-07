@@ -42,7 +42,6 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
   name: 'codeBlock',
 
   addOptions() {
-    console.log('best', this);
     return {
       exitOnTripleEnter: true,
       exitOnArrowDown: true,
@@ -72,9 +71,7 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
   },
 
   renderHTML({ node, HTMLAttributes }) {
-    console.log(node, 'test');
-    const test = { style: 'background-color: red;' };
-    return ['pre', mergeAttributes(this.options.HTMLAttributes, test, HTMLAttributes), ['code', {}, 0]];
+    return ['pre', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), ['code', {}, 0]];
   },
 
   addCommands() {

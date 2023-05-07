@@ -1,6 +1,6 @@
 import type { RegularButtonConfig } from '@rrte/common';
 import BoldIcon from './bold.icon.svg';
-import { BoldExtension } from '../extension';
+import { BoldMark } from '../mark';
 import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
 import classes from './toolbar.module.scss';
@@ -31,7 +31,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 
 export const ToolbarButton: RegularButtonConfig = {
   Button,
-  name: BoldExtension.name,
+  name: BoldMark.name,
   text: 'Bold',
   type: 'icon' as const,
   priority: 1,

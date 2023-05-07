@@ -11,6 +11,13 @@
 .base {
     margin: 0;
     margin-block-start: 4px;
+    color: rgb(var(--rrce-p-color));
+    font-family: var(--rrce-p-font-family);
+    font-size: var(--rrce-p-font-size);
+    line-height: var(--rrce-p-line-height);
+    font-weight: var(--rrce-p-font-weight);
+    text-decoration: var(--rrce-p-text-decoration);
+    font-style: var(--rrce-p-font-style);
 }
 
 .toolbarItem {
