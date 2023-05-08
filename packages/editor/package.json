@@ -21,7 +21,7 @@
     "move-style-inject": "node ../../moveStyleInject.js"
   },
   "devDependencies": {
-    "@rrte/common": "workspace:^0.0.0",
+    "@rrte/common": "^1.0.0",
     "eslint-config-custom": "workspace:*",
     "react": "18.2.0",
     "tsconfig": "workspace:*"
@@ -30,7 +30,7 @@
     "@rrte/extension-document": "workspace:*",
     "@rrte/extension-paragraph": "workspace:*",
     "@rrte/extension-text": "workspace:*",
-    "@rrte/toolbar": "workspace:^",
+    "@rrte/toolbar": "^1.0.0",
     "@tiptap/pm": "^2.0.3",
     "@tiptap/react": "^2.0.3"
   },

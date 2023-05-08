@@ -153,19 +153,19 @@ importers:
         specifier: workspace:^*
         version: link:../../packages/extension-code-block
       '@rrte/extension-color':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../../packages/extension-color
       '@rrte/extension-dropcursor':
         specifier: workspace:^*
         version: link:../../packages/extension-dropcursor
       '@rrte/extension-font-size':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../../packages/extension-font-size
       '@rrte/extension-gapcursor':
         specifier: workspace:^*
         version: link:../../packages/extension-gapcursor
       '@rrte/extension-gif':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../../packages/extension-gif
       '@rrte/extension-hard-break':
         specifier: workspace:^*
@@ -180,10 +180,10 @@ importers:
         specifier: workspace:^*
         version: link:../../packages/extension-history
       '@rrte/extension-id':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../../packages/extension-id
       '@rrte/extension-image':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../../packages/extension-image
       '@rrte/extension-italic':
         specifier: workspace:^*
@@ -213,10 +213,10 @@ importers:
         specifier: workspace:^*
         version: link:../../packages/extension-underline
       '@rrte/extension-video':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../../packages/extension-video
       '@rrte/extension-youtube':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../../packages/extension-youtube
       cost-of-modules:
         specifier: ^1.0.1
@@ -262,7 +262,7 @@ importers:
   packages/common:
     dependencies:
       '@rrte/toolbar':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../toolbar
       '@tiptap/react':
         specifier: ^2.0.3
@@ -302,7 +302,7 @@ importers:
         specifier: workspace:*
         version: link:../extension-text
       '@rrte/toolbar':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../toolbar
       '@tiptap/pm':
         specifier: ^2.0.3
@@ -312,7 +312,7 @@ importers:
         version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: ^1.0.0
         version: link:../common
       eslint-config-custom:
         specifier: workspace:*
@@ -342,7 +342,7 @@ importers:
   packages/extension-blockquote:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -352,7 +352,7 @@ importers:
         version: 2.3.2
     devDependencies:
       '@rrte/extension-paragraph':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../extension-paragraph
       eslint-config-custom:
         specifier: workspace:*
@@ -367,7 +367,7 @@ importers:
   packages/extension-bold:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -389,7 +389,7 @@ importers:
   packages/extension-bullet-list:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -411,7 +411,7 @@ importers:
   packages/extension-code:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -433,7 +433,7 @@ importers:
   packages/extension-code-block:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -458,7 +458,7 @@ importers:
   packages/extension-color:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -468,7 +468,7 @@ importers:
         version: 2.3.2
     devDependencies:
       '@rrte/extension-text-style':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../extension-text-style
       eslint-config-custom:
         specifier: workspace:*
@@ -487,7 +487,7 @@ importers:
         version: 2.0.3(@tiptap/core@2.0.3)
     devDependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: ^1.0.0
         version: link:../common
       eslint-config-custom:
         specifier: workspace:*
@@ -502,7 +502,7 @@ importers:
   packages/extension-dropcursor:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -524,14 +524,14 @@ importers:
   packages/extension-font-size:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
     devDependencies:
       '@rrte/extension-text-style':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../extension-text-style
       eslint-config-custom:
         specifier: workspace:*
@@ -546,7 +546,7 @@ importers:
   packages/extension-gapcursor:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -568,7 +568,7 @@ importers:
   packages/extension-gif:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -599,7 +599,7 @@ importers:
   packages/extension-hard-break:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -618,7 +618,7 @@ importers:
   packages/extension-heading:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -640,7 +640,7 @@ importers:
   packages/extension-highlight:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -650,7 +650,7 @@ importers:
         version: 2.3.2
     devDependencies:
       '@rrte/extension-text-style':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../extension-text-style
       eslint-config-custom:
         specifier: workspace:*
@@ -665,7 +665,7 @@ importers:
   packages/extension-history:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -693,7 +693,7 @@ importers:
   packages/extension-id:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap-pro/extension-unique-id':
         specifier: ^2.0.1
@@ -724,7 +724,7 @@ importers:
   packages/extension-image:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -752,7 +752,7 @@ importers:
   packages/extension-italic:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -774,7 +774,7 @@ importers:
   packages/extension-link:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -802,7 +802,7 @@ importers:
   packages/extension-list-item:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -821,7 +821,7 @@ importers:
   packages/extension-ordered-list:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -843,7 +843,7 @@ importers:
   packages/extension-paragraph:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -862,7 +862,7 @@ importers:
   packages/extension-strike:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -884,7 +884,7 @@ importers:
   packages/extension-subscript:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -906,7 +906,7 @@ importers:
   packages/extension-superscript:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -932,7 +932,7 @@ importers:
         version: 2.0.3(@tiptap/core@2.0.3)
     devDependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: ^1.0.0
         version: link:../common
       eslint-config-custom:
         specifier: workspace:*
@@ -947,7 +947,7 @@ importers:
   packages/extension-text-style:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -966,7 +966,7 @@ importers:
   packages/extension-underline:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -988,7 +988,7 @@ importers:
   packages/extension-video:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^0.0.0
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
@@ -1016,7 +1016,7 @@ importers:
   packages/extension-youtube:
     dependencies:
       '@rrte/common':
-        specifier: workspace:^
+        specifier: ^1.0.0
         version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
