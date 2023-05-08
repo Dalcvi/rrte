@@ -1,30 +1,30 @@
 :root {
-    --rrce-code-font-family: var(--rrce-code-font-family-ovr, 'Fira Code', 'Courier New', Courier, monospace);
-    --rrce-code-font-size: var(--rrce-code-font-size-ovr, 0.875rem);
-    --rrce-code-line-height: var(--rrce-code-line-height-ovr, 1.5);
-    --rrce-code-font-weight: var(--rrce-code-font-weight-ovr, 400);
-    --rrce-code-text-decoration: var(--rrce-code-text-decoration-ovr, none);
-    --rrce-code-font-style: var(--rrce-code-font-style-ovr, normal);
-    --rrce-code-background: var(--rrce-code-background-ovr, var(--rrce-color-3), 0.3);
-    --rrce-code-color: var(--rrce-code-color-ovr, var(--rrce-color-4));
-    --rrce-code-border: var(--rrce-code-border-ovr, 1px solid rgb(var(--rrce-color-4)));
-    --rrce-code-border-radius: var(--rrce-code-border-radius-ovr, 5px);
-    --rrce-code-padding: var(--rrce-code-padding-ovr, 0 3px);
-    --rrce-code-width: var(--rrce-code-width-ovr, 100%);
+    --rrte-code-font-family: var(--rrte-code-font-family-ovr, 'Fira Code', 'Courier New', Courier, monospace);
+    --rrte-code-font-size: var(--rrte-code-font-size-ovr, 0.875rem);
+    --rrte-code-line-height: var(--rrte-code-line-height-ovr, 1.5);
+    --rrte-code-font-weight: var(--rrte-code-font-weight-ovr, 400);
+    --rrte-code-text-decoration: var(--rrte-code-text-decoration-ovr, none);
+    --rrte-code-font-style: var(--rrte-code-font-style-ovr, normal);
+    --rrte-code-background: var(--rrte-code-background-ovr, var(--rrte-color-3), 0.3);
+    --rrte-code-color: var(--rrte-code-color-ovr, var(--rrte-color-4));
+    --rrte-code-border: var(--rrte-code-border-ovr, 1px solid rgb(var(--rrte-color-4)));
+    --rrte-code-border-radius: var(--rrte-code-border-radius-ovr, 5px);
+    --rrte-code-padding: var(--rrte-code-padding-ovr, 0 3px);
+    --rrte-code-width: var(--rrte-code-width-ovr, 100%);
 }
 
 .base {
     box-sizing: border-box;
-    width: var(--rrce-code-width);
-    background-color: rgb(var(--rrce-code-background));
-    color: rgb(var(--rrce-code-color));
-    font-family: var(--rrce-code-font-family);
-    font-size: var(--rrce-code-font-size);
-    line-height: var(--rrce-code-line-height);
-    font-weight: var(--rrce-code-font-weight);
-    text-decoration: var(--rrce-code-text-decoration);
-    font-style: var(--rrce-code-font-style);
-    border: var(--rrce-code-border);
-    border-radius: var(--rrce-code-border-radius);
-    padding: var(--rrce-code-padding);
+    width: var(--rrte-code-width);
+    background-color: rgb(var(--rrte-code-background));
+    color: rgb(var(--rrte-code-color));
+    font-family: var(--rrte-code-font-family);
+    font-size: var(--rrte-code-font-size);
+    line-height: var(--rrte-code-line-height);
+    font-weight: var(--rrte-code-font-weight);
+    text-decoration: var(--rrte-code-text-decoration);
+    font-style: var(--rrte-code-font-style);
+    border: var(--rrte-code-border);
+    border-radius: var(--rrte-code-border-radius);
+    padding: var(--rrte-code-padding);
 }

@@ -28,7 +28,7 @@ export const IdExtension = Extension.create<IdOptions>({
   addOptions() {
     return {
       attributeName: 'id',
-      types: ['paragraph', 'heading', 'blockquote', 'image', 'video'],
+      types: ['paragraph', 'heading', 'blockquote', 'image', 'video', 'youtube', 'gif'],
       generateID: uuidv4,
       filterTransaction: null,
     };

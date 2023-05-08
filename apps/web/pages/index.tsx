@@ -11,6 +11,7 @@ import { Italic } from '@rrte/extension-italic';
 import { Link } from '@rrte/extension-link';
 import { Video, VideoAttributes } from '@rrte/extension-video';
 import { Underline } from '@rrte/extension-underline';
+import { Gif } from '@rrte/extension-gif';
 import { Strike } from '@rrte/extension-strike';
 import { ImageAttributes, Image as ImageExtension } from '@rrte/extension-image';
 import { Code } from '@rrte/extension-code';
@@ -24,19 +25,30 @@ import { Dropcursor } from '@rrte/extension-dropcursor';
 import { Color } from '@rrte/extension-color';
 import { FontSize } from '@rrte/extension-font-size';
 import { Id } from '@rrte/extension-id';
+import { Youtube } from '@rrte/extension-youtube';
 import { JSONContent } from '@rrte/common';
 import classes from './styles.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setContent(JSON.parse(window.localStorage.getItem('rrte-content') ?? '{}'));
+    }
+  }, []);
 
   return (
     <div className={classes.siteContainer}>
       <Editor
         content={content}
-        onUpdate={setContent}
+        onUpdate={(content) => {
+          if (typeof window !== 'undefined') {
+            window.localStorage.setItem('rrte-content', JSON.stringify(content));
+          }
+          setContent(content);
+        }}
         extensions={[
           Blockquote(),
           Bold(),
@@ -60,6 +72,7 @@ export default function Web() {
           Highlight(),
           History(),
           Gapcursor(),
+          Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO'),
           Dropcursor(),
           ImageExtension({
             type: 'user-controlled',
@@ -117,6 +130,7 @@ export default function Web() {
             // maxFileSize: 100000000,
             // acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
           }),
+          Youtube(),
         ]}
         className={classes.editor}
         editorContentClassName={classes.editorContent}

@@ -164,6 +164,9 @@ importers:
       '@rrte/extension-gapcursor':
         specifier: workspace:^*
         version: link:../../packages/extension-gapcursor
+      '@rrte/extension-gif':
+        specifier: workspace:^
+        version: link:../../packages/extension-gif
       '@rrte/extension-hard-break':
         specifier: workspace:^*
         version: link:../../packages/extension-hard-break
@@ -212,6 +215,9 @@ importers:
       '@rrte/extension-video':
         specifier: workspace:^
         version: link:../../packages/extension-video
+      '@rrte/extension-youtube':
+        specifier: workspace:^
+        version: link:../../packages/extension-youtube
       cost-of-modules:
         specifier: ^1.0.1
         version: 1.0.1
@@ -451,6 +457,9 @@ importers:
 
   packages/extension-color:
     dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
@@ -458,9 +467,6 @@ importers:
         specifier: ^2.3.2
         version: 2.3.2
     devDependencies:
-      '@rrte/common':
-        specifier: workspace:^0.0.0
-        version: link:../common
       '@rrte/extension-text-style':
         specifier: workspace:^
         version: link:../extension-text-style
@@ -517,13 +523,13 @@ importers:
 
   packages/extension-font-size:
     dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
     devDependencies:
-      '@rrte/common':
-        specifier: workspace:^0.0.0
-        version: link:../common
       '@rrte/extension-text-style':
         specifier: workspace:^
         version: link:../extension-text-style
@@ -539,6 +545,9 @@ importers:
 
   packages/extension-gapcursor:
     dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
@@ -546,9 +555,37 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/core@2.0.3)
     devDependencies:
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/extension-gif:
+    dependencies:
       '@rrte/common':
         specifier: workspace:^
         version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      '@tiptap/pm':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/react':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+    devDependencies:
+      '@giphy/js-types':
+        specifier: ^4.4.0
+        version: 4.4.0
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -561,13 +598,13 @@ importers:
 
   packages/extension-hard-break:
     dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
     devDependencies:
-      '@rrte/common':
-        specifier: workspace:^
-        version: link:../common
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -580,6 +617,9 @@ importers:
 
   packages/extension-heading:
     dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
@@ -587,9 +627,6 @@ importers:
         specifier: ^2.3.2
         version: 2.3.2
     devDependencies:
-      '@rrte/common':
-        specifier: workspace:^
-        version: link:../common
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -627,6 +664,9 @@ importers:
 
   packages/extension-history:
     dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
@@ -640,9 +680,6 @@ importers:
         specifier: ^2.3.2
         version: 2.3.2
     devDependencies:
-      '@rrte/common':
-        specifier: workspace:^
-        version: link:../common
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -655,6 +692,9 @@ importers:
 
   packages/extension-id:
     dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
       '@tiptap-pro/extension-unique-id':
         specifier: ^2.0.1
         version: 2.0.1(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
@@ -668,9 +708,6 @@ importers:
         specifier: ^9.0.0
         version: 9.0.0
     devDependencies:
-      '@rrte/common':
-        specifier: workspace:^
-        version: link:../common
       '@types/uuid':
         specifier: ^9.0.1
         version: 9.0.1
@@ -805,34 +842,12 @@ importers:
 
   packages/extension-paragraph:
     dependencies:
-      '@tiptap/core':
-        specifier: ^2.0.3
-        version: 2.0.3(@tiptap/pm@2.0.3)
-    devDependencies:
       '@rrte/common':
         specifier: workspace:^
         version: link:../common
-      eslint-config-custom:
-        specifier: workspace:*
-        version: link:../eslint-config-custom
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
-
-  packages/extension-size:
-    dependencies:
-      '@rrte/common':
-        specifier: workspace:^0.0.0
-        version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
-      classnames:
-        specifier: ^2.3.2
-        version: 2.3.2
     devDependencies:
       eslint-config-custom:
         specifier: workspace:*
@@ -931,13 +946,13 @@ importers:
 
   packages/extension-text-style:
     dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
     devDependencies:
-      '@rrte/common':
-        specifier: workspace:^
-        version: link:../common
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -987,6 +1002,37 @@ importers:
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
+    devDependencies:
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/extension-youtube:
+    dependencies:
+      '@rrte/common':
+        specifier: workspace:^
+        version: link:../common
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      '@tiptap/pm':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/react':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
+      react-youtube:
+        specifier: ^10.1.0
+        version: 10.1.0(react@18.2.0)
     devDependencies:
       eslint-config-custom:
         specifier: workspace:*
@@ -2651,6 +2697,10 @@ packages:
   /@gar/promisify@1.1.3:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
 
+  /@giphy/js-types@4.4.0:
+    resolution: {integrity: sha512-W9G6crS2oqTn7g0RpvYu1l/sna4LnivRTk25jmxdzujOFb9kvQ+VFM/v9RPYV2GIBnzT/maW/EwjFIba9jkflA==}
+    dev: true
+
   /@humanwhocodes/config-array@0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
     engines: {node: '>=10.10.0'}
@@ -4160,6 +4210,17 @@ packages:
 
   /dash-get@1.0.2:
     resolution: {integrity: sha512-4FbVrHDwfOASx7uQVxeiCTo7ggSdYZbqs8lH+WU6ViypPlDbe9y6IP5VVUDQBv9DcnyaiPT5XT0UWHgJ64zLeQ==}
+
+  /debug@2.6.9:
+    resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.0.0
+    dev: false
 
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -5695,6 +5756,10 @@ packages:
     resolution: {integrity: sha512-zFN/CTVmbcVef+WaDXT63dNzzkfRBKT1j464NJQkV7iSgJU0sLBus9W0HBwnXK13/hf168pbrx/V/bjEHOXNHA==}
     dev: false
 
+  /load-script@1.0.0:
+    resolution: {integrity: sha512-kPEjMFtZvwL9TaZo0uZ2ml+Ye9HUMmPwbYRJ324qF9tqMejwykJ5ggTyvzmrbBeapCAbk98BSbTeovHEEP1uCA==}
+    dev: false
+
   /loader-utils@3.2.1:
     resolution: {integrity: sha512-ZvFw1KWS3GVyYBYb7qkmRM/WwL2TQQBxgCK62rlvm4WpVQ23Nb4tYjApUlfjrEGvOs7KHEsmyUn75OHZrJMWPw==}
     engines: {node: '>= 12.13.0'}
@@ -5998,6 +6063,10 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+
+  /ms@2.0.0:
+    resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
+    dev: false
 
   /ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
@@ -7062,6 +7131,20 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
+  /react-youtube@10.1.0(react@18.2.0):
+    resolution: {integrity: sha512-ZfGtcVpk0SSZtWCSTYOQKhfx5/1cfyEW1JN/mugGNfAxT3rmVJeMbGpA9+e78yG21ls5nc/5uZJETE3cm3knBg==}
+    engines: {node: '>= 14.x'}
+    peerDependencies:
+      react: '>=0.14.1'
+    dependencies:
+      fast-deep-equal: 3.1.3
+      prop-types: 15.8.1
+      react: 18.2.0
+      youtube-player: 5.5.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
@@ -7392,6 +7475,10 @@ packages:
 
   /signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
+
+  /sister@3.0.2:
+    resolution: {integrity: sha512-p19rtTs+NksBRKW9qn0UhZ8/TUI9BPw9lmtHny+Y3TinWlOa9jWh9xB0AtPSdmOy49NJJJSSe0Ey4C7h0TrcYA==}
+    dev: false
 
   /slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
@@ -8110,3 +8197,13 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  /youtube-player@5.5.2:
+    resolution: {integrity: sha512-ZGtsemSpXnDky2AUYWgxjaopgB+shFHgXVpiJFeNB5nWEugpW1KWYDaHKuLqh2b67r24GtP6HoSW5swvf0fFIQ==}
+    dependencies:
+      debug: 2.6.9
+      load-script: 1.0.0
+      sister: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false

@@ -66,7 +66,7 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
           };
         }}
       />
-      <ImageIcon width={'15px'} height={'15px'} />
+      <ImageIcon className={classes.icon} width={'15px'} height={'15px'} />
     </div>
   );
 };
@@ -83,7 +83,7 @@ const UserControlledButton = ({ editor, config }: { editor: Editor; config: User
         await handleFileImage(await uploadValue.finalFile, editor, tempImgId);
       }}
     >
-      <ImageIcon width={'15px'} height={'15px'} />
+      <ImageIcon className={classes.icon} width={'15px'} height={'15px'} />
     </button>
   );
 };

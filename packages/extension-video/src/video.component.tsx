@@ -1,6 +1,6 @@
 import { Editor } from '@tiptap/core';
 import classes from './video.component.module.scss';
-import { VideoAttributes, VideoNode } from './node';
+import { VideoAttributes } from './node';
 import { useEffect, useState } from 'react';
 import { NodeView } from '@rrte/common';
 import classNames from 'classnames';
@@ -18,12 +18,13 @@ export const VideoComponent = ({ editor, node, selected }: { editor: Editor; nod
   const isCustomSizeEnabled = !!node.attrs.customSize;
   const customWidth = node.attrs.width;
   const customHeight = node.attrs.height;
+  const isEditable = editor.isEditable;
 
   useEffect(() => {
     const func = ({ editor }: { editor: Editor }) => {
       const nodeId = node.attrs.id;
       editor.view.state.doc.descendants((node, pos) => {
-        if (node.type.name === VideoNode.name && node.attrs.id === nodeId) {
+        if (node.type.name === 'video' && node.attrs.id === nodeId) {
           const { from, to } = editor.state.selection;
           if (from <= pos && to >= pos) {
             setIsSelected(true);
@@ -54,6 +55,7 @@ export const VideoComponent = ({ editor, node, selected }: { editor: Editor; nod
     >
       <div className={classes.videoContainer}>
         <video
+          controls={!isEditable}
           src={node.attrs.src}
           style={
             isCustomSizeEnabled

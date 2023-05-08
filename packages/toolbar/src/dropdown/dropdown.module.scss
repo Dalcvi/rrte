@@ -7,7 +7,8 @@
     min-width: 100px;
     height: 30px;
     background: none;
-    border: 1px solid rgb(var(--rrce-color-2));
+    border: 1px solid rgb(var(--rrte-color-2));
+    color: rgb(var(--rrte-color-2));
     border-radius: 6px;
     padding: 0 12px;
     display: flex;
@@ -16,7 +17,7 @@
     gap: 12px;
 
     &:hover {
-        background: rgb(var(--rrce-color-4), 0.3);
+        background: rgb(var(--rrte-color-4), 0.3);
         cursor: pointer;
     }
 
@@ -37,7 +38,7 @@
 
 .value {
     word-break: keep-all;
-    font-family: var(--rrce-p-font-family);
+    font-family: var(--rrte-p-font-family);
     font-size: 14px;
 }
 
@@ -46,20 +47,20 @@
     height: 12px;
 
     &>path {
-        fill: rgb(var(--rrce-color-2));
+        fill: rgb(var(--rrte-color-2));
     }
 
     *.arrowOpen {
         transform: rotate(180deg);
 
         &>path {
-            fill: rgb(var(--rrce-color-4), 0.3);
+            fill: rgb(var(--rrte-color-4), 0.3);
         }
     }
 }
 
 .open {
-    border: 1px solid rgb(var(--rrce-color-4), 0.8);
+    border: 1px solid rgb(var(--rrte-color-4), 0.8);
 }
 
 
@@ -73,9 +74,9 @@
     border-radius: 6px;
     overflow: hidden;
     display: flex;
-    border: 1px solid rgb(var(--rrce-color-4), 0.8);
+    border: 1px solid rgb(var(--rrte-color-4), 0.8);
     flex-direction: column;
-    background-color: rgb(var(--rrce-color-1));
+    background-color: rgb(var(--rrte-color-1));
 }
 
 .dropdownItem {
@@ -83,9 +84,9 @@
     height: min-content;
     white-space: nowrap;
     text-align: left;
-    background-color: rgb(var(--rrce-color-1));
-    color: rgb(var(--rrce-color-2));
-    font-family: var(--rrce-p-font-family);
+    background-color: rgb(var(--rrte-color-1));
+    color: rgb(var(--rrte-color-2));
+    font-family: var(--rrte-p-font-family);
     font-size: 18px;
     line-height: 1.5;
     font-weight: 400;
@@ -93,14 +94,14 @@
     font-style: normal;
 
     &:hover {
-        background-color: rgb(var(--rrce-color-4), 0.3);
+        background-color: rgb(var(--rrte-color-4), 0.3);
         cursor: pointer;
     }
 }
 
 // all dropdown items that are not the first one
 .dropdownItem:not(:first-child) {
-    border-top: 1px solid rgb(var(--rrce-color-2));
+    border-top: 1px solid rgb(var(--rrte-color-2));
 }
 
 .buttonContent {

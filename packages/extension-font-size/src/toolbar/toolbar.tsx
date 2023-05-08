@@ -6,6 +6,7 @@ import {
 } from '@rrte/common';
 import { FontSizeExtension } from '../extension';
 import classes from './toolbar.module.scss';
+import { Editor } from '@tiptap/core';
 
 const getValue = (value: string | AttributeValue | undefined) => {
   if (!value) {
@@ -29,7 +30,7 @@ const getValue = (value: string | AttributeValue | undefined) => {
   return Number(fontSize.replace(/\D/g, ''));
 };
 
-const Button = ({ editor }: RegularButtonWrapperProps) => {
+const Button = ({ editor }: { editor: Editor }) => {
   const value = getValue(currentSelectionAttributeValue('fontSize', editor));
 
   return (

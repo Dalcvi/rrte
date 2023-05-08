@@ -17,7 +17,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
   const currentAttributes = editor.getAttributes(ImageNode.name) as ImageAttributes & { id: string | undefined };
 
   useEffect(() => {
-    const editor = document.querySelector("[data-hook='rrce-editor']") as HTMLElement;
+    const editor = document.querySelector("[data-hook='rrte-editor']") as HTMLElement;
     if (!editor) {
       return;
     }
@@ -206,7 +206,7 @@ const ExtensionControlledChangeButton = ({
           };
         }}
       />
-      <ReplaceIcon width={'15px'} height={'15px'} />
+      <ReplaceIcon className={classes.icon} width={'15px'} height={'15px'} />
     </div>
   );
 };
@@ -230,7 +230,7 @@ const UserControlledChangeButton = ({
         await handleFileImage(await uploadValue.finalFile, editor, imgId);
       }}
     >
-      <ReplaceIcon width={'15px'} height={'15px'} />
+      <ReplaceIcon className={classes.icon}  width={'15px'} height={'15px'} />
     </button>
   );
 };

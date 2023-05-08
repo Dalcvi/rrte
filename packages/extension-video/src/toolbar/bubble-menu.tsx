@@ -17,7 +17,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
   const currentAttributes = editor.getAttributes(VideoNode.name) as VideoAttributes & { id: string | undefined };
 
   useEffect(() => {
-    const editor = document.querySelector("[data-hook='rrce-editor']") as HTMLElement;
+    const editor = document.querySelector("[data-hook='rrte-editor']") as HTMLElement;
     if (!editor) {
       return;
     }
@@ -189,7 +189,7 @@ const ExtensionControlledChangeButton = ({
           };
         }}
       />
-      <ReplaceIcon width={'15px'} height={'15px'} />
+      <ReplaceIcon className={classes.icon} width={'15px'} height={'15px'} />
     </div>
   );
 };
@@ -213,7 +213,7 @@ const UserControlledChangeButton = ({
         await handleFileVideo(await uploadValue.finalFile, editor, videoId);
       }}
     >
-      <ReplaceIcon width={'15px'} height={'15px'} />
+      <ReplaceIcon className={classes.icon} width={'15px'} height={'15px'} />
     </button>
   );
 };

@@ -8,15 +8,15 @@
     height: 30px;
     padding: 6px;
     background: none;
-    border: 1px solid rgb(var(--rrce-color-2));
+    border: 1px solid rgb(var(--rrte-color-2));
     border-radius: 5px;
 
     &:hover {
-        background: rgb(var(--rrce-color-4), 0.3);
+        background: rgb(var(--rrte-color-4), 0.3);
         cursor: pointer;
     }
 }
 
 .RegularButtonActive {
-    background: rgb(var(--rrce-color-4), 0.8);
+    background: rgb(var(--rrte-color-4), 0.8);
 }

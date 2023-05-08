@@ -1,4 +1,14 @@
 import { Node, mergeAttributes } from '@tiptap/core';
+import { ReactNodeViewRenderer } from '@tiptap/react';
+import { YoutubeComponent } from './youtube.component';
+
+export interface YoutubeAttributes {
+  url: string;
+  videoId: string;
+  customSize: boolean | null;
+  width: number;
+  alignment: 'left' | 'center' | 'right';
+}
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -6,15 +16,7 @@ declare module '@tiptap/core' {
       /**
        * Set a youtube node
        */
-      setYoutube: () => ReturnType;
-      /**
-       * Toggle a youtube node
-       */
-      toggleYoutube: () => ReturnType;
-      /**
-       * Unset a youtube node
-       */
-      unsetYoutube: () => ReturnType;
+      setYoutube: ({ url, id }: { url: string; id: string }) => ReturnType;
     };
   }
 }
@@ -22,16 +24,32 @@ declare module '@tiptap/core' {
 export const YoutubeNode = Node.create({
   name: 'youtube',
 
-  priority: 1000,
+  group: 'block',
 
-  keepOnSplit: false,
+  atom: true,
 
-  allowGapCursor: true,
+  selectable: true,
 
-  exitable: true,
+  draggable: true,
 
   addAttributes() {
-    return {};
+    return {
+      url: {
+        default: null,
+      },
+      videoId: {
+        default: null,
+      },
+      alignment: {
+        default: 'center',
+      },
+      customSize: {
+        default: null,
+      },
+      width: {
+        default: 320,
+      },
+    };
   },
 
   parseHTML() {
@@ -39,27 +57,26 @@ export const YoutubeNode = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['youtube-node', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+    return ['youtube-node', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)];
+  },
+
+  addNodeView() {
+    return ReactNodeViewRenderer(YoutubeComponent);
   },
 
   addCommands() {
     return {
       setYoutube:
-        () =>
-        ({ chain }) => {
-          return true;
-        },
-
-      toggleYoutube:
-        () =>
-        ({ chain, commands, state }) => {
-          return true;
-        },
-
-      unsetYoutube:
-        () =>
-        ({ chain }) => {
-          return true;
+        ({ url, id }) =>
+        ({ commands }) => {
+          const attrs = {
+            url,
+            videoId: id,
+          };
+          return commands.insertContent({
+            type: this.name,
+            attrs,
+          });
         },
     };
   },

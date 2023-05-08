@@ -1,15 +1,15 @@
 .bubbleMenu {
-    border: 1px solid rgb(var(--rrce-color-2));
+    border: 1px solid rgb(var(--rrte-color-2));
     border-radius: 12px;
     padding: 6px;
     display: flex;
     align-items: center;
     gap: 6px;
-    background: rgb(var(--rrce-color-1));
-    font-family: var(--rrce-p-font-family);
+    background: rgb(var(--rrte-color-1));
+    font-family: var(--rrte-p-font-family);
     font-size: 14px;
-    font-weight: var(--rrce-p-font-weight);
-    color: rgb(var(--rrce-color-2));
+    font-weight: var(--rrte-p-font-weight);
+    color: rgb(var(--rrte-color-2));
     z-index: 100;
 }
 
@@ -22,11 +22,11 @@
 
 .input {
     flex: 1;
-    border: 1px solid rgb(var(--rrce-color-2));
+    border: 1px solid rgb(var(--rrte-color-2));
     background: transparent;
-    font-family: var(--rrce-p-font-family);
+    font-family: var(--rrte-p-font-family);
     font-size: 14px;
-    font-weight: var(--rrce-p-font-weight);
-    color: rgb(var(--rrce-color-2));
+    font-weight: var(--rrte-p-font-weight);
+    color: rgb(var(--rrte-color-2));
     outline: none;
 }

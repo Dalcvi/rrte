@@ -1,5 +1,4 @@
 import { Node, mergeAttributes } from '@tiptap/core';
-import classes from './video.module.scss';
 import { VideoComponent } from './video.component';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import { NeededVideoAttributes, VideoReturn } from './upload-config';
@@ -46,7 +45,7 @@ export const VideoNode = Node.create<VideoOptions>({
   addOptions() {
     return {
       HTMLAttributes: {
-        class: classes.base,
+        class: undefined,
       },
       upload: undefined,
       acceptedVideoFileTypes: [],

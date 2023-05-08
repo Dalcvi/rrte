@@ -5,7 +5,7 @@ import { Text } from '@rrte/extension-text';
 import type { UnknownExtension, BubbleMenuToolbar, Config } from '@rrte/common';
 import { Toolbar } from '@rrte/toolbar';
 import type { ToolbarItem } from '@rrte/toolbar';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import classes from './Editor.module.scss';
 import { BubbleMenuList } from './bubble-menus';
 
@@ -22,6 +22,7 @@ export const Editor = ({
   content: JSONContent | undefined;
   onUpdate: (content: JSONContent | undefined) => void;
 }) => {
+  const [contentHasBeenSet, setContentHasBeenSet] = useState(false);
   const allExtensions = useMemo(() => [Paragraph(), ...extensions] as UnknownExtension[], [extensions]);
   const allBubbleMenus = useMemo(
     () =>
@@ -48,14 +49,25 @@ export const Editor = ({
     if (editor === null) {
       return;
     }
-    editor.on('update', () => {
+    const updateFunc = () => {
       onUpdate(editor.getJSON());
-    });
+    };
+
+    editor.on('update', updateFunc);
 
     return () => {
-      editor.off('update');
+      editor.off('update', updateFunc);
     };
   }, [editor, onUpdate]);
+
+  useEffect(() => {
+    if (contentHasBeenSet || editor === null || content === undefined) {
+      return;
+    }
+    setContentHasBeenSet(true);
+    editor.commands.setContent(content);
+  }, [content]);
+
   return (
     <div className={`${classes.editorWrapper} ${className}`}>
       {editor && (
@@ -68,8 +80,8 @@ export const Editor = ({
           }
         />
       )}
-      <div className={editorContentClassName}>
-        <EditorContent editor={editor} data-hook="rrce-editor" />
+      <div className={`${classes.editorContent}  ${editorContentClassName}`}>
+        <EditorContent editor={editor} data-hook="rrte-editor" />
       </div>
       {editor && allBubbleMenus.length > 0 && <BubbleMenuList editor={editor} list={allBubbleMenus} />}
     </div>

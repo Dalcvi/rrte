@@ -1,5 +1,4 @@
 import { Node, mergeAttributes } from '@tiptap/core';
-import classes from './image.module.scss';
 import { ImageComponent } from './image.component';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import { Plugin, PluginKey } from '@tiptap/pm/state';
@@ -48,7 +47,7 @@ export const ImageNode = Node.create<ImageOptions>({
   addOptions() {
     return {
       HTMLAttributes: {
-        class: classes.base,
+        class: undefined,
       },
       upload: undefined,
       acceptedImageFileTypes: [],

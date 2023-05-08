@@ -1,0 +1,28 @@
+.videoContainer {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+
+    .youtubeVideo {
+        max-width: 100%;
+    }
+
+    .blocker {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+}
+
+.left {
+    margin-right: auto;
+}
+
+.right {
+    margin-left: auto;
+}
+
+.center {
+    margin: 0 auto;
+}

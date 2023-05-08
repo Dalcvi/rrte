@@ -1,6 +1,6 @@
 import { Editor, EditorEvents } from '@tiptap/core';
 import classes from './image.component.module.scss';
-import { ImageAttributes, ImageNode } from './node';
+import { ImageAttributes } from './node';
 import { useEffect, useState } from 'react';
 import { NodeView } from '@rrte/common';
 import classNames from 'classnames';
@@ -23,7 +23,7 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
     const func = ({ editor }: { editor: Editor }) => {
       const nodeId = node.attrs.id;
       editor.view.state.doc.descendants((node, pos) => {
-        if (node.type.name === ImageNode.name && node.attrs.id === nodeId) {
+        if (node.type.name === 'image' && node.attrs.id === nodeId) {
           const { from, to } = editor.state.selection;
           if (from <= pos && to >= pos) {
             console.log('selected', node.attrs.id, editor, node, pos);

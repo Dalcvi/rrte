@@ -29,8 +29,9 @@
     "@rrte/common": "workspace:^",
     "@tiptap/core": "^2.0.3",
     "@tiptap/pm": "^2.0.3",
+    "@tiptap/react": "^2.0.3",
     "classnames": "^2.3.2",
-    "linkifyjs": "^4.1.1"
+    "react-youtube": "^10.1.0"
   },
   "peerDependencies": {
     "react": "18.2.0"

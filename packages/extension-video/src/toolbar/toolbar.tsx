@@ -15,10 +15,12 @@ const Button = ({ editor, config }: { editor: Editor; config: UploadConfig }) =>
 };
 
 const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config: ExtensionControlledUploadConfig }) => {
+  const selected = editor.isActive('video');
   return (
     <div
       className={classNames(classes.videoButton, {
         [classes.disabledButton]: !editor.can().setVideo({ src: '' }),
+        [classes.buttonActive]: selected
       })}
     >
       <input
@@ -58,24 +60,36 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
           };
         }}
       />
-      <VideoIcon width={'15px'} height={'15px'} />
+      <VideoIcon className={classNames(classes.icon, {
+        [classes.active]: selected
+      })} width={'15px'} height={'15px'} />
     </div>
   );
 };
 
 const UserControlledButton = ({ editor, config }: { editor: Editor; config: UserControlledUploadConfig }) => {
+  const selected = editor.isActive('video');
   return (
     <button
       data-hook="user-controlled-video-button"
       disabled={!editor.can().setVideo({ src: '' })}
-      className={classNames(classes.videoButton)}
+      className={classNames(classes.videoButton, {
+        [classes.disabledButton]: !editor.can().setVideo({ src: '' }),
+        [classes.buttonActive]: selected,
+      })}
       onClick={async () => {
         const uploadValue = await config.onVideoAddClick();
         const tempImgId = await createTempVideo(editor, uploadValue.tempFile);
         await handleFileVideo(await uploadValue.finalFile, editor, tempImgId);
       }}
     >
-      <VideoIcon width={'15px'} height={'15px'} />
+      <VideoIcon
+        className={classNames(classes.icon, {
+          [classes.active]: selected,
+        })}
+        width={'15px'}
+        height={'15px'}
+      />
     </button>
   );
 };

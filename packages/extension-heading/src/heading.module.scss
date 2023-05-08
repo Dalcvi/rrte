@@ -1,109 +1,109 @@
 :root {
-    --rrce-h1-color: var(--rrce-h1-color-ovr, var(--rrce-color-2));
-    --rrce-h1-font-family: var(--rrce-h1-font-family-ovr, 'Roboto', sans-serif);
-    --rrce-h1-font-size: var(--rrce-h1-font-size-ovr, 2.5rem);
-    --rrce-h1-line-height: var(--rrce-h1-line-height-ovr, 1.2);
-    --rrce-h1-font-weight: var(--rrce-h1-font-weight-ovr, 400);
-    --rrce-h1-text-decoration: var(--rrce-h1-text-decoration-ovr, none);
-    --rrce-h1-font-style: var(--rrce-h1-font-style-ovr, normal);
+    --rrte-h1-color: var(--rrte-h1-color-ovr, var(--rrte-color-2));
+    --rrte-h1-font-family: var(--rrte-h1-font-family-ovr, 'Roboto', sans-serif);
+    --rrte-h1-font-size: var(--rrte-h1-font-size-ovr, 2.5rem);
+    --rrte-h1-line-height: var(--rrte-h1-line-height-ovr, 1.2);
+    --rrte-h1-font-weight: var(--rrte-h1-font-weight-ovr, 400);
+    --rrte-h1-text-decoration: var(--rrte-h1-text-decoration-ovr, none);
+    --rrte-h1-font-style: var(--rrte-h1-font-style-ovr, normal);
 
-    --rrce-h2-color: var(--rrce-h2-color-ovr, var(--rrce-color-2));
-    --rrce-h2-font-family: var(--rrce-h2-font-family-ovr, 'Roboto', sans-serif);
-    --rrce-h2-font-size: var(--rrce-h2-font-size-ovr, 2rem);
-    --rrce-h2-line-height: var(--rrce-h2-line-height-ovr, 1.2);
-    --rrce-h2-font-weight: var(--rrce-h2-font-weight-ovr, 400);
-    --rrce-h2-text-decoration: var(--rrce-h2-text-decoration-ovr, none);
-    --rrce-h2-font-style: var(--rrce-h2-font-style-ovr, normal);
+    --rrte-h2-color: var(--rrte-h2-color-ovr, var(--rrte-color-2));
+    --rrte-h2-font-family: var(--rrte-h2-font-family-ovr, 'Roboto', sans-serif);
+    --rrte-h2-font-size: var(--rrte-h2-font-size-ovr, 2rem);
+    --rrte-h2-line-height: var(--rrte-h2-line-height-ovr, 1.2);
+    --rrte-h2-font-weight: var(--rrte-h2-font-weight-ovr, 400);
+    --rrte-h2-text-decoration: var(--rrte-h2-text-decoration-ovr, none);
+    --rrte-h2-font-style: var(--rrte-h2-font-style-ovr, normal);
 
-    --rrce-h3-color: var(--rrce-h3-color-ovr, var(--rrce-color-2));
-    --rrce-h3-font-family: var(--rrce-h3-font-family-ovr, 'Roboto', sans-serif);
-    --rrce-h3-font-size: var(--rrce-h3-font-size-ovr, 1.75rem);
-    --rrce-h3-line-height: var(--rrce-h3-line-height-ovr, 1.2);
-    --rrce-h3-font-weight: var(--rrce-h3-font-weight-ovr, 400);
-    --rrce-h3-text-decoration: var(--rrce-h3-text-decoration-ovr, none);
-    --rrce-h3-font-style: var(--rrce-h3-font-style-ovr, normal);
+    --rrte-h3-color: var(--rrte-h3-color-ovr, var(--rrte-color-2));
+    --rrte-h3-font-family: var(--rrte-h3-font-family-ovr, 'Roboto', sans-serif);
+    --rrte-h3-font-size: var(--rrte-h3-font-size-ovr, 1.75rem);
+    --rrte-h3-line-height: var(--rrte-h3-line-height-ovr, 1.2);
+    --rrte-h3-font-weight: var(--rrte-h3-font-weight-ovr, 400);
+    --rrte-h3-text-decoration: var(--rrte-h3-text-decoration-ovr, none);
+    --rrte-h3-font-style: var(--rrte-h3-font-style-ovr, normal);
 
-    --rrce-h4-color: var(--rrce-h4-color-ovr, var(--rrce-color-2));
-    --rrce-h4-font-family: var(--rrce-h4-font-family-ovr, 'Roboto', sans-serif);
-    --rrce-h4-font-size: var(--rrce-h4-font-size-ovr, 1.5rem);
-    --rrce-h4-line-height: var(--rrce-h4-line-height-ovr, 1.2);
-    --rrce-h4-font-weight: var(--rrce-h4-font-weight-ovr, 400);
-    --rrce-h4-text-decoration: var(--rrce-h4-text-decoration-ovr, none);
-    --rrce-h4-font-style: var(--rrce-h4-font-style-ovr, normal);
+    --rrte-h4-color: var(--rrte-h4-color-ovr, var(--rrte-color-2));
+    --rrte-h4-font-family: var(--rrte-h4-font-family-ovr, 'Roboto', sans-serif);
+    --rrte-h4-font-size: var(--rrte-h4-font-size-ovr, 1.5rem);
+    --rrte-h4-line-height: var(--rrte-h4-line-height-ovr, 1.2);
+    --rrte-h4-font-weight: var(--rrte-h4-font-weight-ovr, 400);
+    --rrte-h4-text-decoration: var(--rrte-h4-text-decoration-ovr, none);
+    --rrte-h4-font-style: var(--rrte-h4-font-style-ovr, normal);
 
-    --rrce-h5-color: var(--rrce-h5-color-ovr, var(--rrce-color-2));
-    --rrce-h5-font-family: var(--rrce-h5-font-family-ovr, 'Roboto', sans-serif);
-    --rrce-h5-font-size: var(--rrce-h5-font-size-ovr, 1.25rem);
-    --rrce-h5-line-height: var(--rrce-h5-line-height-ovr, 1.2);
-    --rrce-h5-font-weight: var(--rrce-h5-font-weight-ovr, 400);
-    --rrce-h5-text-decoration: var(--rrce-h5-text-decoration-ovr, none);
-    --rrce-h5-font-style: var(--rrce-h5-font-style-ovr, normal);
+    --rrte-h5-color: var(--rrte-h5-color-ovr, var(--rrte-color-2));
+    --rrte-h5-font-family: var(--rrte-h5-font-family-ovr, 'Roboto', sans-serif);
+    --rrte-h5-font-size: var(--rrte-h5-font-size-ovr, 1.25rem);
+    --rrte-h5-line-height: var(--rrte-h5-line-height-ovr, 1.2);
+    --rrte-h5-font-weight: var(--rrte-h5-font-weight-ovr, 400);
+    --rrte-h5-text-decoration: var(--rrte-h5-text-decoration-ovr, none);
+    --rrte-h5-font-style: var(--rrte-h5-font-style-ovr, normal);
 
-    --rrce-h6-color: var(--rrce-h6-color-ovr, var(--rrce-color-2));
-    --rrce-h6-font-family: var(--rrce-h6-font-family-ovr, 'Roboto', sans-serif);
-    --rrce-h6-font-size: var(--rrce-h6-font-size-ovr, 1rem);
-    --rrce-h6-line-height: var(--rrce-h6-line-height-ovr, 1.2);
-    --rrce-h6-font-weight: var(--rrce-h6-font-weight-ovr, 400);
-    --rrce-h6-text-decoration: var(--rrce-h6-text-decoration-ovr, none);
-    --rrce-h6-font-style: var(--rrce-h6-font-style-ovr, normal);
+    --rrte-h6-color: var(--rrte-h6-color-ovr, var(--rrte-color-2));
+    --rrte-h6-font-family: var(--rrte-h6-font-family-ovr, 'Roboto', sans-serif);
+    --rrte-h6-font-size: var(--rrte-h6-font-size-ovr, 1rem);
+    --rrte-h6-line-height: var(--rrte-h6-line-height-ovr, 1.2);
+    --rrte-h6-font-weight: var(--rrte-h6-font-weight-ovr, 400);
+    --rrte-h6-text-decoration: var(--rrte-h6-text-decoration-ovr, none);
+    --rrte-h6-font-style: var(--rrte-h6-font-style-ovr, normal);
 }
 
 h1.heading {
-    font-family: var(--rrce-h1-font-family);
-    font-size: var(--rrce-h1-font-size);
-    line-height: var(--rrce-h1-line-height);
-    font-weight: var(--rrce-h1-font-weight);
-    text-decoration: var(--rrce-h1-text-decoration);
-    font-style: var(--rrce-h1-font-style);
-    color: var(--rrce-h1-color);
+    font-family: var(--rrte-h1-font-family);
+    font-size: var(--rrte-h1-font-size);
+    line-height: var(--rrte-h1-line-height);
+    font-weight: var(--rrte-h1-font-weight);
+    text-decoration: var(--rrte-h1-text-decoration);
+    font-style: var(--rrte-h1-font-style);
+    color: rgb(var(--rrte-h1-color));
 }
 
 h2.heading {
-    font-family: var(--rrce-h2-font-family);
-    font-size: var(--rrce-h2-font-size);
-    line-height: var(--rrce-h2-line-height);
-    font-weight: var(--rrce-h2-font-weight);
-    text-decoration: var(--rrce-h2-text-decoration);
-    font-style: var(--rrce-h2-font-style);
-    color: var(--rrce-h2-color);
+    font-family: var(--rrte-h2-font-family);
+    font-size: var(--rrte-h2-font-size);
+    line-height: var(--rrte-h2-line-height);
+    font-weight: var(--rrte-h2-font-weight);
+    text-decoration: var(--rrte-h2-text-decoration);
+    font-style: var(--rrte-h2-font-style);
+    color: rgb(var(--rrte-h2-color));
 }
 
 h3.heading {
-    font-family: var(--rrce-h3-font-family);
-    font-size: var(--rrce-h3-font-size);
-    line-height: var(--rrce-h3-line-height);
-    font-weight: var(--rrce-h3-font-weight);
-    text-decoration: var(--rrce-h3-text-decoration);
-    font-style: var(--rrce-h3-font-style);
-    color: var(--rrce-h3-color);
+    font-family: var(--rrte-h3-font-family);
+    font-size: var(--rrte-h3-font-size);
+    line-height: var(--rrte-h3-line-height);
+    font-weight: var(--rrte-h3-font-weight);
+    text-decoration: var(--rrte-h3-text-decoration);
+    font-style: var(--rrte-h3-font-style);
+    color: rgb(var(--rrte-h3-color));
 }
 
 h4.heading {
-    font-family: var(--rrce-h4-font-family);
-    font-size: var(--rrce-h4-font-size);
-    line-height: var(--rrce-h4-line-height);
-    font-weight: var(--rrce-h4-font-weight);
-    text-decoration: var(--rrce-h4-text-decoration);
-    font-style: var(--rrce-h4-font-style);
-    color: var(--rrce-h4-color);
+    font-family: var(--rrte-h4-font-family);
+    font-size: var(--rrte-h4-font-size);
+    line-height: var(--rrte-h4-line-height);
+    font-weight: var(--rrte-h4-font-weight);
+    text-decoration: var(--rrte-h4-text-decoration);
+    font-style: var(--rrte-h4-font-style);
+    color: rgb(var(--rrte-h4-color));
 }
 
 h5.heading {
-    font-family: var(--rrce-h5-font-family);
-    font-size: var(--rrce-h5-font-size);
-    line-height: var(--rrce-h5-line-height);
-    font-weight: var(--rrce-h5-font-weight);
-    text-decoration: var(--rrce-h5-text-decoration);
-    font-style: var(--rrce-h5-font-style);
-    color: var(--rrce-h5-color);
+    font-family: var(--rrte-h5-font-family);
+    font-size: var(--rrte-h5-font-size);
+    line-height: var(--rrte-h5-line-height);
+    font-weight: var(--rrte-h5-font-weight);
+    text-decoration: var(--rrte-h5-text-decoration);
+    font-style: var(--rrte-h5-font-style);
+    color: rgb(var(--rrte-h5-color));
 }
 
 h6.heading {
-    font-family: var(--rrce-h6-font-family);
-    font-size: var(--rrce-h6-font-size);
-    line-height: var(--rrce-h6-line-height);
-    font-weight: var(--rrce-h6-font-weight);
-    text-decoration: var(--rrce-h6-text-decoration);
-    font-style: var(--rrce-h6-font-style);
-    color: var(--rrce-h6-color);
+    font-family: var(--rrte-h6-font-family);
+    font-size: var(--rrte-h6-font-size);
+    line-height: var(--rrte-h6-line-height);
+    font-weight: var(--rrte-h6-font-weight);
+    text-decoration: var(--rrte-h6-text-decoration);
+    font-style: var(--rrte-h6-font-style);
+    color: rgb(var(--rrte-h6-color));
 }

@@ -1,15 +1,15 @@
 .bubbleMenu {
-    border: 1px solid rgb(var(--rrce-color-2));
+    border: 1px solid rgb(var(--rrte-color-2));
     border-radius: 12px;
     padding: 6px;
     display: flex;
     align-items: center;
     gap: 6px;
-    background: rgb(var(--rrce-color-1));
-    font-family: var(--rrce-p-font-family);
+    background: rgb(var(--rrte-color-1));
+    font-family: var(--rrte-p-font-family);
     font-size: 14px;
-    font-weight: var(--rrce-p-font-weight);
-    color: rgb(var(--rrce-color-2));
+    font-weight: var(--rrte-p-font-weight);
+    color: rgb(var(--rrte-color-2));
     z-index: 100;
     flex-wrap: wrap;
 
@@ -23,13 +23,16 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    color: rgb(var(--rrte-color-2));
 
     .inputField {
         max-width: 100%;
         width: 100px;
         height: 30px;
-        border: 1px solid rgb(var(--rrce-color-2));
+        border: 1px solid rgb(var(--rrte-color-2));
         border-radius: 5px;
+        background: rgb(var(--rrte-color-1));
+        color: rgb(var(--rrte-color-2));
 
         &:disabled {
             opacity: 0.3;
@@ -37,17 +40,6 @@
     }
 }
 
-
-.input {
-    flex: 1;
-    border: 1px solid rgb(var(--rrce-color-2));
-    background: transparent;
-    font-family: var(--rrce-p-font-family);
-    font-size: 14px;
-    font-weight: var(--rrce-p-font-weight);
-    color: rgb(var(--rrce-color-2));
-    outline: none;
-}
 
 .button {
     position: relative;
@@ -59,7 +51,7 @@
     width: 30px;
     height: 30px;
     padding: 0px 2px;
-    border: 1px solid rgb(var(--rrce-color-2));
+    border: 1px solid rgb(var(--rrte-color-2));
     border-radius: 5px;
     overflow: hidden;
     background: transparent;
@@ -80,7 +72,7 @@
     }
 
     &:hover {
-        background: rgb(var(--rrce-color-4), 0.3);
+        background: rgb(var(--rrte-color-4), 0.3);
         cursor: pointer;
     }
 
@@ -92,23 +84,26 @@
     &:disabled:hover {
         background: none;
     }
+
+    & .icon {
+        & * {
+            fill: rgb(var(--rrte-color-2));
+            stroke: rgb(var(--rrte-color-2));
+        }
+    }
+
 }
 
 .buttonActive {
-    background: rgb(var(--rrce-color-4), 0.8);
+    background: rgb(var(--rrte-color-4), 0.8);
 
     .icon {
         &.active {
             & * {
-                fill: rgb(var(--rrce-color-1));
-                stroke: rgb(var(--rrce-color-1));
+                fill: rgb(var(--rrte-color-1));
+                stroke: rgb(var(--rrte-color-1));
             }
 
-        }
-
-        & * {
-            fill: rgb(var(--rrce-color-2));
-            stroke: rgb(var(--rrce-color-2));
         }
     }
 }
