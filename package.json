@@ -1,6 +1,6 @@
 {
   "name": "@rrte/root",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -14,6 +14,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "build:dev": "turbo run build:dev",
+    "build:prod": "turbo run build:prod",
     "clean-install": "caffeinate rm -rf './**/node_modules' './**/dist' && pnpm install && pnpm build:dev"
   },
   "devDependencies": {

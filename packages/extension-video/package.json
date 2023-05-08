@@ -1,6 +1,6 @@
 {
   "name": "@rrte/extension-video",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "./dist/cjs/index.js",
   "types": "./src/index.ts",
   "module": "./dist/es/index.js",

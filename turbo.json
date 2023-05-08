@@ -17,6 +17,9 @@
     },
     "build:dev": {
       "outputs": ["dist/**"]
+    },
+    "build:prod": {
+      "outputs": ["dist/**"]
     }
   }
 }
