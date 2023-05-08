@@ -39,6 +39,14 @@ export const HeadingNode = Node.create<HeadingOptions>({
 
   defining: true,
 
+  addAttributes() {
+    return {
+      level: {
+        default: 1,
+      },
+    };
+  },
+
   parseHTML() {
     return this.options.levels.map((level: Level) => ({
       tag: `h${level}`,

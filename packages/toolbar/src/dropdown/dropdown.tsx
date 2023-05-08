@@ -42,6 +42,7 @@ export const Dropdown = (props: DropdownConfig & { editor: Editor }) => {
   return (
     <div className={classes.container}>
       <div
+        data-testid={dropdown.name}
         ref={setDropdownButton}
         className={classNames(classes.select, {
           [classes.open]: isOpen,
@@ -65,6 +66,7 @@ export const Dropdown = (props: DropdownConfig & { editor: Editor }) => {
           {valuesByPriority.map((value, index) => {
             return (
               <button
+                data-testid={value.name}
                 autoFocus={index === 0}
                 className={classNames(classes.dropdownItem, value.className)}
                 key={value.name}

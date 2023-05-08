@@ -16,8 +16,8 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
   const showSelection = isSelected || selected;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
-  const customWidth = node.attrs.width === null ? node.attrs.originalWidth : node.attrs.width;
-  const customHeight = node.attrs.height === null ? node.attrs.originalHeight : node.attrs.height;
+  const customWidth = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth;
+  const customHeight = node.attrs.customHeight === null ? node.attrs.originalHeight : node.attrs.customHeight;
 
   useEffect(() => {
     const func = ({ editor }: { editor: Editor }) => {

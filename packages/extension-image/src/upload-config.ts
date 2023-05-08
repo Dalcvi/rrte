@@ -7,7 +7,7 @@ export type ImageReturnFunction = () => Promise<ImageReturnValue | ImageReturnEr
 export type ImageReturnValue = NeededImageAttributes | false;
 export type NeededImageAttributes = Omit<
   ImageAttributes,
-  'isLoading' | 'alignment' | 'customSize' | 'width' | 'height' | 'alt'
+  'isLoading' | 'alignment' | 'customSize' | 'customWidth' | 'customHeight' | 'alt'
 > &
   Partial<ImageAttributes>;
 export type ImageReturnError = 'ERROR';

@@ -41,7 +41,7 @@ export default {
       externals.some((external) => moduleImport.match(external))
     );
   },
-  output: process.env.NODE_ENV === 'production' ? [cjsOutput, esOutput] : [esOutput],
+  output: [cjsOutput, esOutput],
   plugins: [
     nodeResolve({
       preferBuiltins: true,

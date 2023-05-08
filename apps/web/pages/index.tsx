@@ -26,13 +26,14 @@ import { Color } from '@rrte/extension-color';
 import { FontSize } from '@rrte/extension-font-size';
 import { Id } from '@rrte/extension-id';
 import { Youtube } from '@rrte/extension-youtube';
-import { JSONContent } from '@rrte/common';
+import { HTMLContent, JSONContent } from '@rrte/common';
 import classes from './styles.module.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
+  const [htmlContent, setHtmlContent] = useState<HTMLContent | undefined>(undefined);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setContent(JSON.parse(window.localStorage.getItem('rrte-content') ?? '{}'));
@@ -43,11 +44,14 @@ export default function Web() {
     <div className={classes.siteContainer}>
       <Editor
         content={content}
-        onUpdate={(content) => {
+        onUpdateJson={(content) => {
           if (typeof window !== 'undefined') {
             window.localStorage.setItem('rrte-content', JSON.stringify(content));
           }
           setContent(content);
+        }}
+        onUpdateHtml={(content) => {
+          setHtmlContent(content);
         }}
         extensions={[
           Blockquote(),
@@ -134,10 +138,12 @@ export default function Web() {
         ]}
         className={classes.editor}
         editorContentClassName={classes.editorContent}
+        editorContentWrapperClassName={classes.editorContentWrapper}
       />
       {content && (
         <div className={classes.schemaContainer}>
           <pre>{JSON.stringify(content, null, 6)}</pre>
+          {/* {htmlContent && <div dangerouslySetInnerHTML={{ __html: htmlContent }} />} */}
         </div>
       )}
     </div>

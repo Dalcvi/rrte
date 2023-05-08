@@ -5,7 +5,11 @@ export type UploadConfig = UserControlledUploadConfig | ExtensionControlledUploa
 export type VideoReturn = VideoReturnFunction | VideoReturnValue | VideoReturnError;
 export type VideoReturnFunction = () => Promise<VideoReturnValue | VideoReturnError>;
 export type VideoReturnValue = NeededVideoAttributes | false;
-export type NeededVideoAttributes = Omit<VideoAttributes, 'isLoading' | 'alignment' | 'customSize' | 'width' | 'height'> & Partial<VideoAttributes>;
+export type NeededVideoAttributes = Omit<
+  VideoAttributes,
+  'isLoading' | 'alignment' | 'customSize' | 'customWidth' | 'customHeight'
+> &
+  Partial<VideoAttributes>;
 export type VideoReturnError = 'ERROR';
 
 export type UserControlledUploadConfig = {

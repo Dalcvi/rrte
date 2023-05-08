@@ -160,8 +160,10 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
-          value={currentAttributes.width === null ? currentAttributes.originalWidth : currentAttributes.width}
-          onChange={(e) => editor.commands.updateAttributes(GifNode.name, { width: Number(e.target.value) })}
+          value={
+            currentAttributes.customWidth === null ? currentAttributes.originalWidth : currentAttributes.customWidth
+          }
+          onChange={(e) => editor.commands.updateAttributes(GifNode.name, { customWidth: Number(e.target.value) })}
         />
       </label>
       <label className={classes.inputContainer}>
@@ -170,8 +172,10 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
-          value={currentAttributes.height === null ? currentAttributes.originalHeight : currentAttributes.height}
-          onChange={(e) => editor.commands.updateAttributes(GifNode.name, { height: Number(e.target.value) })}
+          value={
+            currentAttributes.customHeight === null ? currentAttributes.originalHeight : currentAttributes.customHeight
+          }
+          onChange={(e) => editor.commands.updateAttributes(GifNode.name, { customHeight: Number(e.target.value) })}
         />
       </label>
     </div>

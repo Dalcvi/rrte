@@ -120,8 +120,10 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
-          value={currentAttributes.width === null ? currentAttributes.originalWidth : currentAttributes.width}
-          onChange={(e) => editor.commands.updateAttributes(ImageNode.name, { width: Number(e.target.value) })}
+          value={
+            currentAttributes.customWidth === null ? currentAttributes.originalWidth : currentAttributes.customWidth
+          }
+          onChange={(e) => editor.commands.updateAttributes(ImageNode.name, { customWidth: Number(e.target.value) })}
         />
       </label>
       <label className={classes.inputContainer}>
@@ -130,8 +132,10 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
-          value={currentAttributes.height === null ? currentAttributes.originalHeight : currentAttributes.height}
-          onChange={(e) => editor.commands.updateAttributes(ImageNode.name, { height: Number(e.target.value) })}
+          value={
+            currentAttributes.customHeight === null ? currentAttributes.originalHeight : currentAttributes.customHeight
+          }
+          onChange={(e) => editor.commands.updateAttributes(ImageNode.name, { customHeight: Number(e.target.value) })}
         />
       </label>
     </div>
@@ -230,7 +234,7 @@ const UserControlledChangeButton = ({
         await handleFileImage(await uploadValue.finalFile, editor, imgId);
       }}
     >
-      <ReplaceIcon className={classes.icon}  width={'15px'} height={'15px'} />
+      <ReplaceIcon className={classes.icon} width={'15px'} height={'15px'} />
     </button>
   );
 };

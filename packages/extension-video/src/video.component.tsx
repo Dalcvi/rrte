@@ -16,8 +16,8 @@ export const VideoComponent = ({ editor, node, selected }: { editor: Editor; nod
   const showLoader = !!node.attrs.isLoading && canShowLoader;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
-  const customWidth = node.attrs.width;
-  const customHeight = node.attrs.height;
+  const customWidth = node.attrs.customWidth;
+  const customHeight = node.attrs.customHeight;
   const isEditable = editor.isEditable;
 
   useEffect(() => {

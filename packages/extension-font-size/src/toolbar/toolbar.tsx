@@ -35,6 +35,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 
   return (
     <input
+      data-testid="font-size-input"
       className={classes.numberInput}
       type="number"
       value={value}

@@ -9,8 +9,8 @@ export interface GifAttributes {
   originalHeight: number;
   alt: string | null;
   customSize: boolean | null;
-  width: number | null;
-  height: number | null;
+  customWidth: number | null;
+  customHeight: number | null;
   alignment: 'left' | 'center' | 'right';
 }
 
@@ -71,21 +71,90 @@ export const GifNode = Node.create({
       customSize: {
         default: null,
       },
-      width: {
+      customWidth: {
         default: null,
       },
-      height: {
+      customHeight: {
         default: null,
       },
     };
   },
 
   parseHTML() {
-    return [{ tag: 'gif-node' }];
+    return [
+      {
+        tag: 'img[src]',
+        getAttrs: (dom) => {
+          if (!(dom instanceof HTMLElement)) {
+            return false;
+          }
+          const src = dom.getAttribute('src');
+          if (src === null || !src.includes('giphy')) {
+            return false;
+          }
+
+          return {
+            originalWidth: dom.getAttribute('originalWidth'),
+            originalHeight: dom.getAttribute('originalHeight'),
+            alt: dom.getAttribute('alt'),
+            customSize: dom.getAttribute('customSize'),
+            customWidth: dom.getAttribute('customWidth'),
+            customHeight: dom.getAttribute('customHeight'),
+            webp: dom.getAttribute('webp'),
+            mp4: dom.getAttribute('mp4'),
+            alignment: dom.getAttribute('alignment'),
+          };
+        },
+      },
+      {
+        tag: 'video[src]',
+        getAttrs: (dom) => {
+          if (!(dom instanceof HTMLElement)) {
+            return false;
+          }
+          const src = dom.getAttribute('src');
+          if (src === null || !src.includes('giphy')) {
+            return false;
+          }
+
+          return {
+            originalWidth: dom.getAttribute('originalWidth'),
+            originalHeight: dom.getAttribute('originalHeight'),
+            alt: dom.getAttribute('alt'),
+            customSize: dom.getAttribute('customSize'),
+            customWidth: dom.getAttribute('customWidth'),
+            customHeight: dom.getAttribute('customHeight'),
+            webp: dom.getAttribute('webp'),
+            mp4: dom.getAttribute('mp4'),
+            alignment: dom.getAttribute('alignment'),
+          };
+        },
+      },
+    ];
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['gif-node', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)];
+    const { id, ...restAttributes } = HTMLAttributes;
+    const width = HTMLAttributes.customSize
+      ? `width: ${HTMLAttributes.customWidth === null ? HTMLAttributes.originalWidth : HTMLAttributes.customWidth}px;`
+      : '';
+    const height = HTMLAttributes.customSize
+      ? `height: ${
+          HTMLAttributes.customHeight === null ? HTMLAttributes.originalHeight : HTMLAttributes.customHeight
+        }px;`
+      : '';
+    const src = HTMLAttributes.webp ? HTMLAttributes.webp : HTMLAttributes.mp4;
+    const srcAttribute = { src };
+    const marginLeft = `margin-left: ${HTMLAttributes.alignment === 'left' ? '0' : 'auto'};`;
+    const marginRight = `margin-right: ${HTMLAttributes.alignment === 'right' ? '0' : 'auto'};`;
+    const style = { style: `${width} ${height} ${marginLeft} ${marginRight}` };
+    const wrapperStyle = `display:flex;justify-content:center;width:100%`;
+    const element = HTMLAttributes.webp ? 'img' : 'video';
+    return [
+      'div',
+      { style: wrapperStyle },
+      [element, mergeAttributes(this.options.HTMLAttributes, restAttributes, style, srcAttribute)],
+    ];
   },
 
   addNodeView() {

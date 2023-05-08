@@ -10,7 +10,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive(BlockquoteNode.name);
   return (
     <button
-      data-hook="blockquote-button"
+      data-testid="blockquote-button"
       disabled={!editor.can().toggleBlockquote()}
       className={classNames(classes.blockquoteButton, {
         [classes.active]: isActive,

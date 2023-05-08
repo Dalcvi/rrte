@@ -1,4 +1,4 @@
-import { useEditor, EditorContent, JSONContent, BubbleMenu } from '@tiptap/react';
+import { useEditor, EditorContent, JSONContent, HTMLContent } from '@tiptap/react';
 import { Document } from '@rrte/extension-document';
 import { Paragraph } from '@rrte/extension-paragraph';
 import { Text } from '@rrte/extension-text';
@@ -13,14 +13,18 @@ export const Editor = ({
   extensions = [],
   className,
   editorContentClassName,
+  editorContentWrapperClassName,
   content,
-  onUpdate,
+  onUpdateJson,
+  onUpdateHtml,
 }: {
   className?: string;
   editorContentClassName?: string;
+  editorContentWrapperClassName?: string;
   extensions?: UnknownExtension[];
-  content: JSONContent | undefined;
-  onUpdate: (content: JSONContent | undefined) => void;
+  content: JSONContent | HTMLContent | undefined;
+  onUpdateJson?: (content: JSONContent | undefined) => void;
+  onUpdateHtml?: (content: HTMLContent | undefined) => void;
 }) => {
   const [contentHasBeenSet, setContentHasBeenSet] = useState(false);
   const allExtensions = useMemo(() => [Paragraph(), ...extensions] as UnknownExtension[], [extensions]);
@@ -37,20 +41,39 @@ export const Editor = ({
   const editor = useEditor({
     extensions: [Document, Text, ...allExtensions.map(({ extension }) => extension)],
     content,
+    editorProps: editorContentClassName
+      ? {
+          attributes: {
+            class: editorContentClassName,
+          },
+        }
+      : undefined,
   });
 
   useEffect(() => {
     if (editor !== null && content === undefined) {
-      onUpdate(editor.getJSON());
+      if (onUpdateJson) {
+        onUpdateJson(editor.getJSON());
+      }
+
+      if (onUpdateHtml) {
+        onUpdateHtml(editor.getHTML());
+      }
     }
-  }, [content, editor, onUpdate]);
+  }, [content, editor, onUpdateHtml, onUpdateJson]);
 
   useEffect(() => {
     if (editor === null) {
       return;
     }
     const updateFunc = () => {
-      onUpdate(editor.getJSON());
+      if (onUpdateJson) {
+        onUpdateJson(editor.getJSON());
+      }
+
+      if (onUpdateHtml) {
+        onUpdateHtml(editor.getHTML());
+      }
     };
 
     editor.on('update', updateFunc);
@@ -58,7 +81,7 @@ export const Editor = ({
     return () => {
       editor.off('update', updateFunc);
     };
-  }, [editor, onUpdate]);
+  }, [editor, onUpdateHtml, onUpdateJson]);
 
   useEffect(() => {
     if (contentHasBeenSet || editor === null || content === undefined) {
@@ -80,7 +103,7 @@ export const Editor = ({
           }
         />
       )}
-      <div className={`${classes.editorContent}  ${editorContentClassName}`}>
+      <div className={`${classes.editorContent}  ${editorContentWrapperClassName}`}>
         <EditorContent editor={editor} data-hook="rrte-editor" />
       </div>
       {editor && allBubbleMenus.length > 0 && <BubbleMenuList editor={editor} list={allBubbleMenus} />}
