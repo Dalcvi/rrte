@@ -1,0 +1,43 @@
+.bulletListButton {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+    background: none;
+    border: 1px solid rgb(var(--rrte-color-2));
+    border-radius: 5px;
+
+    &:hover {
+        background: rgb(var(--rrte-color-4), 0.3);
+        cursor: pointer;
+    }
+
+    &.active {
+        background: rgb(var(--rrte-color-4), 0.8);
+    }
+
+    .icon {
+        &.active {
+            & * {
+                fill: rgb(var(--rrte-color-1));
+            }
+
+        }
+
+        & * {
+            fill: rgb(var(--rrte-color-2));
+        }
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+        background: none;
+    }
+}

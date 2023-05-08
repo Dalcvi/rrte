@@ -1,0 +1,36 @@
+{
+  "name": "@rrte/extension-dropcursor",
+  "version": "1.0.0",
+  "main": "./dist/cjs/index.js",
+  "types": "./src/index.ts",
+  "module": "./dist/es/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/es/index.js"
+    }
+  },
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint *.ts*",
+    "watch": "tsc -w",
+    "build": "rm -rf ./dist && rollup -c ../../rollup.config.js",
+    "build:prod": "cross-env NODE_ENV=production pnpm build && pnpm move-style-inject",
+    "build:dev": "cross-env NODE_ENV=development pnpm build",
+    "move-style-inject": "node ../../moveStyleInject.js"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "workspace:*",
+    "react": "18.2.0",
+    "tsconfig": "workspace:*"
+  },
+  "dependencies": {
+    "@rrte/common": "^1.0.0",
+    "@tiptap/core": "^2.0.3",
+    "@tiptap/pm": "^2.0.3"
+  },
+  "peerDependencies": {
+    "react": "18.2.0"
+  }
+}

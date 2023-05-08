@@ -1,0 +1,29 @@
+:root {
+  --rrte-codeblock-color: var(--rrte-codeblock-color-ovr, var(--rrte-color-2));
+  --rrte-codeblock-font-family: var(--rrte-codeblock-font-family-ovr, 'Fira Code', 'Courier New', Courier, monospace);
+  --rrte-codeblock-font-size: var(--rrte-codeblock-font-size-ovr, 0.875rem);
+  --rrte-codeblock-line-height: var(--rrte-codeblock-line-height-ovr, 1.5);
+  --rrte-codeblock-font-weight: var(--rrte-codeblock-font-weight-ovr, 400);
+  --rrte-codeblock-text-decoration: var(--rrte-codeblock-text-decoration-ovr, none);
+  --rrte-codeblock-font-style: var(--rrte-codeblock-font-style-ovr, normal);
+  --rrte-codeblock-padding-start: var(--rrte-codeblock-padding-start-ovr, 12px);
+  --rrte-codeblock-background: var(--rrte-codeblock-background-ovr, var(--rrte-color-3), 0.4);
+  --rrte-codeblock-border-start: var(--rrte-codeblock-border-start-ovr, 2px solid rgb(var(--rrte-color-3)));
+}
+
+.base {
+  border-inline-start: var(--rrte-codeblock-border-start);
+  padding-inline-start: var(--rrte-codeblock-padding-start);
+  background: rgb(var(--rrte-codeblock-background));
+  --rrte-p-color: var(--rrte-codeblock-color);
+  --rrte-p-font-family: var(--rrte-codeblock-font-family);
+  --rrte-p-font-size: var(--rrte-codeblock-font-size);
+  --rrte-p-line-height: var(--rrte-codeblock-line-height);
+  --rrte-p-font-weight: var(--rrte-codeblock-font-weight);
+  --rrte-p-text-decoration: var(--rrte-codeblock-text-decoration);
+  --rrte-p-font-style: var(--rrte-codeblock-font-style);
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}

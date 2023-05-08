@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    "typeRoots": ["./globals.d.ts"],
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "lib": ["ES2017", "DOM", "DOM.Iterable"],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  },
+  "files": ["globals.d.ts"],
+  "include": ["./"],
+  "exclude": ["node_modules", "dist", ".turbo", ".next"]
+}
