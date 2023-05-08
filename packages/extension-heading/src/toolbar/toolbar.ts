@@ -16,7 +16,7 @@ const createValue = (level: Level): DropdownValue => ({
   text: `Heading ${level}`,
 });
 
-export const toolbarDropdown: DropdownConfig = {
+export const ToolbarDropdown: DropdownConfig = {
   name: 'text-type',
   type: ToolbarItemType.DROPDOWN,
   text: 'Text type',

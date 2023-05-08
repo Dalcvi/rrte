@@ -9,7 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive('superscript');
   return (
     <button
-      data-hook="superscript-button"
+      data-testid="superscript-button"
       className={classNames(classes.superscriptButton, {
         [classes.active]: isActive,
       })}

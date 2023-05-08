@@ -9,7 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive('underline');
   return (
     <button
-      data-hook="underline-button"
+      data-testid="underline-button"
       className={classNames(classes.underlineButton, {
         [classes.active]: isActive,
       })}

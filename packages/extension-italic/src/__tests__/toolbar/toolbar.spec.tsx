@@ -5,7 +5,7 @@ import FakeEditor from '../editor.mock';
 jest.mock('../editor.mock', () => {
   return jest.fn().mockImplementation(() => {
     return {
-      toggleCodeBlock: jest.fn().mockReturnThis(),
+      toggleItalic: jest.fn().mockReturnThis(),
       chain: jest.fn().mockReturnThis(),
       run: jest.fn().mockReturnThis(),
       focus: jest.fn().mockReturnThis(),
@@ -15,46 +15,46 @@ jest.mock('../editor.mock', () => {
   });
 });
 
-describe('Code block toolbar button', () => {
+describe('Italic toolbar button', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should toggle codeblock on click', () => {
+  it('should toggle italic on click', () => {
     const editor = new FakeEditor() as any;
 
     render(<ToolbarButton.Button editor={editor} config={{}} />);
 
-    const button = screen.getByTestId('codeblock-button');
+    const button = screen.getByTestId('italic-button');
     fireEvent.click(button);
 
     expect(editor.chain).toHaveBeenCalledTimes(1);
     expect(editor.focus).toHaveBeenCalledTimes(1);
-    expect(editor.toggleCodeBlock).toHaveBeenCalledTimes(2);
+    expect(editor.toggleItalic).toHaveBeenCalledTimes(2);
     expect(editor.run).toHaveBeenCalledTimes(1);
   });
 
-  it('should disable when it cannot toggle codeblock', () => {
+  it('should disable when it cannot toggle italic', () => {
     const editor = new FakeEditor() as any;
-    editor.toggleCodeBlock = jest.fn().mockReturnValue(false);
+    editor.toggleItalic = jest.fn().mockReturnValue(false);
 
     render(<ToolbarButton.Button editor={editor} config={{}} />);
 
-    const button = screen.getByTestId('codeblock-button');
+    const button = screen.getByTestId('italic-button');
     expect(button).toBeDisabled();
   });
 
-  it('should not togglecode on click if disabled', () => {
+  it('should not italic on click if disabled', () => {
     const editor = new FakeEditor() as any;
-    editor.toggleCodeBlock = jest.fn().mockReturnValue(false);
+    editor.toggleItalic = jest.fn().mockReturnValue(false);
 
     render(<ToolbarButton.Button editor={editor} config={{}} />);
 
-    const button = screen.getByTestId('codeblock-button');
+    const button = screen.getByTestId('italic-button');
     fireEvent.click(button);
 
     expect(editor.chain).toHaveBeenCalledTimes(0);
     expect(editor.focus).toHaveBeenCalledTimes(0);
-    expect(editor.toggleCodeBlock).toHaveBeenCalledTimes(1);
+    expect(editor.toggleItalic).toHaveBeenCalledTimes(1);
     expect(editor.run).toHaveBeenCalledTimes(0);
   });
 
@@ -64,7 +64,7 @@ describe('Code block toolbar button', () => {
 
     render(<ToolbarButton.Button editor={editor} config={{}} />);
 
-    const button = screen.getByTestId('codeblock-button');
+    const button = screen.getByTestId('italic-button');
     const classNamesAmount = button.className.split(' ').length;
     expect(classNamesAmount).toBe(2);
   });
@@ -75,7 +75,7 @@ describe('Code block toolbar button', () => {
 
     render(<ToolbarButton.Button editor={editor} config={{}} />);
 
-    const button = screen.getByTestId('codeblock-button');
+    const button = screen.getByTestId('italic-button');
     const classNamesAmount = button.className.split(' ').length;
     expect(classNamesAmount).toBe(1);
   });

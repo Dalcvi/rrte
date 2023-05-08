@@ -8,7 +8,7 @@ export default class FakeEditor {
     return this;
   }
 
-  toggleCodeBlock() {
+  toggleSubscript() {
     return this;
   }
 

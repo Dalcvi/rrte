@@ -9,7 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive('subscript');
   return (
     <button
-      data-hook="subscript-button"
+      data-testid="subscript-button"
       className={classNames(classes.subscriptButton, {
         [classes.active]: isActive,
       })}
