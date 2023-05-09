@@ -157,7 +157,6 @@ export const ImageNode = Node.create<ImageOptions>({
         props: {
           handleDrop: (view, event, slice, moved) => {
             event.preventDefault();
-            console.log(this);
             const upload = this.options.upload;
             if (!moved && event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0]) {
               let file = event.dataTransfer.files[0];

@@ -10,9 +10,9 @@ const Button = ({ editor }: { editor: Editor }) => {
   const currentHref = editor.getAttributes(LinkMark.name)?.href ?? '';
   return (
     <button
-      data-hook="blockquote-button"
+      data-testid="link-button"
       disabled={!editor.can().toggleLink({ href: currentHref })}
-      className={classNames(classes.blockquoteButton, {
+      className={classNames(classes.linkButton, {
         [classes.active]: isActive,
       })}
       onClick={() => {

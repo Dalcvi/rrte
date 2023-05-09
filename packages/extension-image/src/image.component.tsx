@@ -26,7 +26,6 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
         if (node.type.name === 'image' && node.attrs.id === nodeId) {
           const { from, to } = editor.state.selection;
           if (from <= pos && to >= pos) {
-            console.log('selected', node.attrs.id, editor, node, pos);
             setIsSelected(true);
             return false;
           }

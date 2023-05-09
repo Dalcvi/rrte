@@ -42,6 +42,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
     <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
       <ChangeImageButton config={config} editor={editor} imgId={imgId} />
       <button
+        data-testid="image-bubble-menu-align-left"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'left',
         })}
@@ -58,6 +59,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        data-testid="image-bubble-menu-align-center"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'center',
         })}
@@ -74,6 +76,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        data-testid="image-bubble-menu-align-right"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'right',
         })}
@@ -90,6 +93,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        data-testid="image-bubble-menu-custom-size"
         className={classNames(classes.button, {
           [classes.buttonActive]: isCustomSizeEnabled,
         })}
@@ -108,6 +112,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Alt:
         <input
+          data-testid="image-bubble-menu-input-alt"
           className={classes.inputField}
           type="text"
           value={currentAttributes.alt ?? undefined}
@@ -117,6 +122,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Width:
         <input
+          data-testid="image-bubble-menu-input-width"
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
@@ -129,6 +135,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Height:
         <input
+          data-testid="image-bubble-menu-input-height"
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"

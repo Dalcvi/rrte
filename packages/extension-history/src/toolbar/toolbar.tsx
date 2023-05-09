@@ -21,7 +21,6 @@ const UndoButton = ({ editor }: { editor: Editor }) => {
 };
 
 const RedoButton = ({ editor }: { editor: Editor }) => {
-  console.log(editor.can());
   return (
     <button
       data-testid="redo-button"
