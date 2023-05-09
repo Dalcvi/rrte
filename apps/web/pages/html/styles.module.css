@@ -3,7 +3,7 @@
 .editor {
   min-height: 100vh;
   margin: 12px 24px;
-  max-width: 80%;
+  max-width: 50%;
 }
 .editorContentWrapper {
   border: 1px solid black;
@@ -20,7 +20,6 @@
 
 .siteContainer {
   display: flex;
-  justify-content: center;
 }
 
 .siteContainer > * {

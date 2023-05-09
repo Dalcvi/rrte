@@ -30,7 +30,7 @@ import { HTMLContent, JSONContent } from '@rrte/common';
 import classes from './styles.module.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { Header } from '../components/header';
+import { Header } from '../../components/header';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
@@ -146,6 +146,12 @@ export default function Web() {
           editorContentClassName={classes.editorContent}
           editorContentWrapperClassName={classes.editorContentWrapper}
         />
+        {content && (
+          <div className={classes.schemaContainer}>
+            <pre>{JSON.stringify(content, null, 6)}</pre>
+            {/* {htmlContent && <div dangerouslySetInnerHTML={{ __html: htmlContent }} />} */}
+          </div>
+        )}
       </div>
     </div>
   );

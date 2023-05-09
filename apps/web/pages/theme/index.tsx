@@ -30,14 +30,14 @@ import { HTMLContent, JSONContent } from '@rrte/common';
 import classes from './styles.module.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { Header } from '../components/header';
+import { Header } from '../../components/header';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
   const [htmlContent, setHtmlContent] = useState<HTMLContent | undefined>(undefined);
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setContent(JSON.parse(window.localStorage.getItem('rrte-content') ?? '{}'));
+      setContent(JSON.parse(window.localStorage.getItem('rrte-content-theme') ?? '{}'));
     }
   }, []);
 
@@ -49,15 +49,9 @@ export default function Web() {
           content={content}
           onUpdateJson={(content) => {
             if (typeof window !== 'undefined') {
-              window.localStorage.setItem('rrte-content', JSON.stringify(content));
+              window.localStorage.setItem('rrte-content-theme', JSON.stringify(content));
             }
             setContent(content);
-          }}
-          onUpdateHtml={(content) => {
-            setHtmlContent(content);
-            if (typeof window !== 'undefined') {
-              window.localStorage.setItem('rrte-content-html', JSON.stringify(content));
-            }
           }}
           extensions={[
             Blockquote(),

@@ -13,7 +13,7 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
   const [canShowLoader, setCanShowLoader] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const showLoader = !!node.attrs.isLoading && canShowLoader;
-  const showSelection = isSelected || selected;
+  const showSelection = (isSelected || selected) && !editor.isEditable;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
   const customWidth = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth;

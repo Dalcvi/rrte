@@ -1,4 +1,5 @@
 import { mergeAttributes, Node, wrappingInputRule } from '@tiptap/core';
+import classes from './bullet-list.module.scss';
 
 export interface BulletListOptions {
   itemTypeName: string;
@@ -26,7 +27,9 @@ export const BulletListNode = Node.create<BulletListOptions>({
   addOptions() {
     return {
       itemTypeName: 'listItem',
-      HTMLAttributes: {},
+      HTMLAttributes: {
+        class: classes.bulletList,
+      },
       keepMarks: false,
       keepAttributes: false,
     };

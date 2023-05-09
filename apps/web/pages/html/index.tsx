@@ -30,14 +30,14 @@ import { HTMLContent, JSONContent } from '@rrte/common';
 import classes from './styles.module.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { Header } from '../components/header';
+import { Header } from '../../components/header';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
   const [htmlContent, setHtmlContent] = useState<HTMLContent | undefined>(undefined);
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setContent(JSON.parse(window.localStorage.getItem('rrte-content') ?? '{}'));
+      setHtmlContent(JSON.parse(window.localStorage.getItem('rrte-content-html') ?? '{}'));
     }
   }, []);
 
@@ -46,7 +46,7 @@ export default function Web() {
       <Header />
       <div className={classes.siteContainer}>
         <Editor
-          content={content}
+          content={htmlContent}
           onUpdateJson={(content) => {
             if (typeof window !== 'undefined') {
               window.localStorage.setItem('rrte-content', JSON.stringify(content));
@@ -146,6 +146,11 @@ export default function Web() {
           editorContentClassName={classes.editorContent}
           editorContentWrapperClassName={classes.editorContentWrapper}
         />
+        {content && (
+          <div className={classes.schemaContainer}>
+            {htmlContent && <div dangerouslySetInnerHTML={{ __html: htmlContent }} />}
+          </div>
+        )}
       </div>
     </div>
   );

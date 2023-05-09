@@ -117,12 +117,12 @@ export const VideoNode = Node.create<VideoOptions>({
     const height = HTMLAttributes.customSize ? `height: ${HTMLAttributes.customHeight}px;` : '';
     const marginLeft = `margin-left: ${HTMLAttributes.alignment === 'left' ? '0' : 'auto'};`;
     const marginRight = `margin-right: ${HTMLAttributes.alignment === 'right' ? '0' : 'auto'};`;
-    const style = { style: `${width} ${height} ${marginLeft} ${marginRight} object-fit: fill;` };
+    const additionalAttributes = { style: `${width} ${height} ${marginLeft} ${marginRight} object-fit: fill;`, controls: true  };
     const wrapperStyle = `display:flex;justify-content:center;width:100%`;
     return [
       'div',
       { style: wrapperStyle },
-      ['video', mergeAttributes(this.options.HTMLAttributes, restAttributes, style)],
+      ['video', mergeAttributes(this.options.HTMLAttributes, restAttributes, additionalAttributes)],
     ];
   },
 

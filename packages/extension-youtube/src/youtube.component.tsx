@@ -20,7 +20,7 @@ export const YoutubeComponent = ({
   selected: boolean;
 }) => {
   const [isSelected, setIsSelected] = useState(false);
-  const showSelection = isSelected || selected;
+  const showSelection = (isSelected || selected) && !editor.isEditable;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
   const customWidth = node.attrs.customWidth;

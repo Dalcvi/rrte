@@ -9,18 +9,24 @@ import { useEffect, useMemo, useState } from 'react';
 import classes from './Editor.module.scss';
 import { BubbleMenuList } from './bubble-menus';
 
+export type EditorRef = ReturnType<typeof useEditor>;
+
 export const Editor = ({
   extensions = [],
   className,
+  editorRef,
   editorContentClassName,
   editorContentWrapperClassName,
   content,
+  viewerMode,
   onUpdateJson,
   onUpdateHtml,
 }: {
   className?: string;
+  editorRef?: React.MutableRefObject<EditorRef>;
   editorContentClassName?: string;
   editorContentWrapperClassName?: string;
+  viewerMode?: boolean;
   extensions?: UnknownExtension[];
   content: JSONContent | HTMLContent | undefined;
   onUpdateJson?: (content: JSONContent | undefined) => void;
@@ -41,6 +47,7 @@ export const Editor = ({
   const editor = useEditor({
     extensions: [Document, Text, ...allExtensions.map(({ extension }) => extension)],
     content,
+    editable: !viewerMode,
     editorProps: editorContentClassName
       ? {
           attributes: {
@@ -49,6 +56,12 @@ export const Editor = ({
         }
       : undefined,
   });
+
+  useEffect(() => {
+    if (editorRef && editorRef.current !== editor) {
+      editorRef.current = editor;
+    }
+  }, [editorRef, editor]);
 
   useEffect(() => {
     if (editor !== null && content === undefined) {
@@ -93,7 +106,7 @@ export const Editor = ({
 
   return (
     <div className={`${classes.editorWrapper} ${className}`}>
-      {editor && (
+      {editor && !viewerMode && (
         <Toolbar
           editor={editor}
           items={
@@ -106,7 +119,7 @@ export const Editor = ({
       <div className={`${classes.editorContent}  ${editorContentWrapperClassName}`}>
         <EditorContent editor={editor} data-hook="rrte-editor" />
       </div>
-      {editor && allBubbleMenus.length > 0 && <BubbleMenuList editor={editor} list={allBubbleMenus} />}
+      {editor && !viewerMode && allBubbleMenus.length > 0 && <BubbleMenuList editor={editor} list={allBubbleMenus} />}
     </div>
   );
 };
