@@ -23,7 +23,7 @@ export const YoutubeComponent = ({
   const showSelection = isSelected || selected;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
-  const customWidth = node.attrs.width;
+  const customWidth = node.attrs.customWidth;
   const customHeight = (9 * customWidth) / 16;
   const isEditMode = editor.isEditable;
 
@@ -53,6 +53,7 @@ export const YoutubeComponent = ({
 
   return (
     <NodeView
+      isEditable={editor.isEditable}
       selected={showSelection}
       draggable
       className={classNames({

@@ -2,19 +2,25 @@
 
 .editor {
   min-height: 100vh;
-  /* border: 1px solid black; */
-  /* padding: 12px 18px; */
   margin: 12px 24px;
-  max-width: 50%;
+  max-width: 80%;
 }
-.editorContent {
+.editorContentWrapper {
   border: 1px solid black;
   border-top: none;
   padding: 12px 18px;
 }
 
+.editorContent {
+  min-height: 600px;
+  outline: none;
+  padding: 6px;
+  border: 1px solid var(--rrte-color-2);
+}
+
 .siteContainer {
   display: flex;
+  justify-content: center;
 }
 
 .siteContainer > * {

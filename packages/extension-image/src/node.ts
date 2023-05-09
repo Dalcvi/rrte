@@ -10,8 +10,8 @@ export interface ImageAttributes {
   originalHeight: number;
   alt: string | null;
   customSize: boolean | null;
-  width: number | null;
-  height: number | null;
+  customWidth: number | null;
+  customHeight: number | null;
   isLoading: boolean;
   alignment: 'left' | 'center' | 'right';
 }
@@ -72,10 +72,10 @@ export const ImageNode = Node.create<ImageOptions>({
       customSize: {
         default: null,
       },
-      width: {
+      customWidth: {
         default: null,
       },
-      height: {
+      customHeight: {
         default: null,
       },
       isLoading: {
@@ -98,14 +98,52 @@ export const ImageNode = Node.create<ImageOptions>({
   parseHTML() {
     return [
       {
-        tag: 'image-node',
+        tag: 'img[src]',
+        getAttrs: (dom) => {
+          if (!(dom instanceof HTMLElement)) {
+            return false;
+          }
+          const src = dom.getAttribute('src');
+          if (src === null || src.includes('giphy')) {
+            return false;
+          }
+
+          return {
+            src,
+            originalWidth: dom.getAttribute('originalWidth'),
+            originalHeight: dom.getAttribute('originalHeight'),
+            alt: dom.getAttribute('alt'),
+            customSize: dom.getAttribute('customSize'),
+            customWidth: dom.getAttribute('customWidth'),
+            customHeight: dom.getAttribute('customHeight'),
+            isLoading: dom.getAttribute('isLoading'),
+            alignment: dom.getAttribute('alignment'),
+          };
+        },
       },
     ];
   },
 
   renderHTML({ HTMLAttributes }) {
     const { id, ...restAttributes } = HTMLAttributes;
-    return ['image-node', mergeAttributes(this.options.HTMLAttributes, restAttributes)];
+    const width = HTMLAttributes.customSize
+      ? `width: ${HTMLAttributes.customWidth === null ? HTMLAttributes.originalWidth : HTMLAttributes.customWidth}px;`
+      : '';
+    const height = HTMLAttributes.customSize
+      ? `height: ${
+          HTMLAttributes.customHeight === null ? HTMLAttributes.originalHeight : HTMLAttributes.customHeight
+        }px;`
+      : '';
+    const marginLeft = `margin-left: ${HTMLAttributes.alignment === 'left' ? '0' : 'auto'};`;
+    const marginRight = `margin-right: ${HTMLAttributes.alignment === 'right' ? '0' : 'auto'};`;
+    const style = { style: `${width} ${height} ${marginLeft} ${marginRight}` };
+
+    const wrapperStyle = `display:flex;justify-content:center;width:100%`;
+    return [
+      'div',
+      { style: wrapperStyle },
+      ['img', mergeAttributes(this.options.HTMLAttributes, restAttributes, style)],
+    ];
   },
 
   addNodeView() {
@@ -119,7 +157,6 @@ export const ImageNode = Node.create<ImageOptions>({
         props: {
           handleDrop: (view, event, slice, moved) => {
             event.preventDefault();
-            console.log(this);
             const upload = this.options.upload;
             if (!moved && event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0]) {
               let file = event.dataTransfer.files[0];

@@ -42,6 +42,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
     <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
       <ChangeImageButton config={config} editor={editor} imgId={imgId} />
       <button
+        data-testid="image-bubble-menu-align-left"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'left',
         })}
@@ -58,6 +59,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        data-testid="image-bubble-menu-align-center"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'center',
         })}
@@ -74,6 +76,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        data-testid="image-bubble-menu-align-right"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'right',
         })}
@@ -90,6 +93,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        data-testid="image-bubble-menu-custom-size"
         className={classNames(classes.button, {
           [classes.buttonActive]: isCustomSizeEnabled,
         })}
@@ -108,6 +112,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Alt:
         <input
+          data-testid="image-bubble-menu-input-alt"
           className={classes.inputField}
           type="text"
           value={currentAttributes.alt ?? undefined}
@@ -117,21 +122,27 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Width:
         <input
+          data-testid="image-bubble-menu-input-width"
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
-          value={currentAttributes.width === null ? currentAttributes.originalWidth : currentAttributes.width}
-          onChange={(e) => editor.commands.updateAttributes(ImageNode.name, { width: Number(e.target.value) })}
+          value={
+            currentAttributes.customWidth === null ? currentAttributes.originalWidth : currentAttributes.customWidth
+          }
+          onChange={(e) => editor.commands.updateAttributes(ImageNode.name, { customWidth: Number(e.target.value) })}
         />
       </label>
       <label className={classes.inputContainer}>
         Height:
         <input
+          data-testid="image-bubble-menu-input-height"
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
-          value={currentAttributes.height === null ? currentAttributes.originalHeight : currentAttributes.height}
-          onChange={(e) => editor.commands.updateAttributes(ImageNode.name, { height: Number(e.target.value) })}
+          value={
+            currentAttributes.customHeight === null ? currentAttributes.originalHeight : currentAttributes.customHeight
+          }
+          onChange={(e) => editor.commands.updateAttributes(ImageNode.name, { customHeight: Number(e.target.value) })}
         />
       </label>
     </div>
@@ -230,7 +241,7 @@ const UserControlledChangeButton = ({
         await handleFileImage(await uploadValue.finalFile, editor, imgId);
       }}
     >
-      <ReplaceIcon className={classes.icon}  width={'15px'} height={'15px'} />
+      <ReplaceIcon className={classes.icon} width={'15px'} height={'15px'} />
     </button>
   );
 };

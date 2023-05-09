@@ -1,0 +1,15 @@
+.base {
+    list-style-type: var(--rrte-ordered-list-style-type);
+    list-style-position: var(--rrte-ordered-list-style-position);
+    list-style-image: var(--rrte-ordered-list-style-image);
+    margin: var(--rrte-ordered-list-margin);
+    padding: var(--rrte-ordered-list-padding);
+    --rrte-p-color: var(--rrte-ordered-list-color);
+    --rrte-p-font-family: var(--rrte-ordered-list-font-family);
+    --rrte-p-font-size: var(--rrte-ordered-list-font-size);
+    --rrte-p-line-height: var(--rrte-ordered-list-line-height);
+    --rrte-p-font-weight: var(--rrte-ordered-list-font-weight);
+    --rrte-p-text-decoration: var(--rrte-ordered-list-text-decoration);
+    --rrte-p-font-style: var(--rrte-ordered-list-font-style);
+
+}

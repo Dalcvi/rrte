@@ -9,7 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive('strike');
   return (
     <button
-      data-hook="strike-button"
+      data-testid="strike-button"
       className={classNames(classes.strikeButton, {
         [classes.active]: isActive,
       })}

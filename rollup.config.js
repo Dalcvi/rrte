@@ -5,7 +5,6 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import path from 'path';
 import postcss from 'rollup-plugin-postcss';
 import commonjs from '@rollup/plugin-commonjs';
-import dts from 'rollup-plugin-dts';
 
 const PACKAGE_NAME = process.cwd();
 const pkg = JSON.parse(fs.readFileSync(path.join(PACKAGE_NAME, 'package.json'), 'utf-8'));
@@ -19,13 +18,6 @@ const externals = [
 ];
 
 const includeExternals = [/style-inject/];
-
-const dtsOutput = {
-  dir: 'dist/types',
-  format: 'es',
-};
-
-const additionalPackages = process.env.NODE_ENV === 'production' ? [dts({ output: dtsOutput })] : [];
 
 const cjsOutput = {
   dir: 'dist/cjs',
@@ -49,7 +41,7 @@ export default {
       externals.some((external) => moduleImport.match(external))
     );
   },
-  output: process.env.NODE_ENV === 'production' ? [cjsOutput, esOutput] : [esOutput],
+  output: [cjsOutput, esOutput],
   plugins: [
     nodeResolve({
       preferBuiltins: true,
@@ -78,6 +70,5 @@ export default {
       use: ['sass'],
       exclude: /node_modules/,
     }),
-    ...additionalPackages,
   ],
 };

@@ -1,6 +1,6 @@
 {
   "name": "@rrte/toolbar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "./dist/cjs/index.js",
   "types": "./src/index.ts",
   "module": "./dist/es/index.js",
@@ -18,7 +18,8 @@
     "build": "rm -rf ./dist && rollup -c ../../rollup.config.js",
     "build:prod": "cross-env NODE_ENV=production pnpm build && pnpm move-style-inject",
     "build:dev": "cross-env NODE_ENV=development pnpm build",
-    "move-style-inject": "node ../../moveStyleInject.js"
+    "move-style-inject": "node ../../moveStyleInject.js",
+    "test": "jest --config='../../jest.config.js'"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",

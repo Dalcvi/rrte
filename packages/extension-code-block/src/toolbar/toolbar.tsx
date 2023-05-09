@@ -9,7 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive(CodeBlockNode.name);
   return (
     <button
-      data-hook="codeblock-button"
+      data-testid="codeblock-button"
       disabled={!editor.can().toggleCodeBlock()}
       className={classNames(classes.codeblockButton, {
         [classes.active]: isActive,

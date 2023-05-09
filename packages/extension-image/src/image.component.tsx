@@ -16,8 +16,8 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
   const showSelection = isSelected || selected;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
-  const customWidth = node.attrs.width === null ? node.attrs.originalWidth : node.attrs.width;
-  const customHeight = node.attrs.height === null ? node.attrs.originalHeight : node.attrs.height;
+  const customWidth = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth;
+  const customHeight = node.attrs.customHeight === null ? node.attrs.originalHeight : node.attrs.customHeight;
 
   useEffect(() => {
     const func = ({ editor }: { editor: Editor }) => {
@@ -26,7 +26,6 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
         if (node.type.name === 'image' && node.attrs.id === nodeId) {
           const { from, to } = editor.state.selection;
           if (from <= pos && to >= pos) {
-            console.log('selected', node.attrs.id, editor, node, pos);
             setIsSelected(true);
             return false;
           }
@@ -46,6 +45,7 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
 
   return (
     <NodeView
+      isEditable={editor.isEditable}
       selected={showSelection}
       draggable
       className={classNames({

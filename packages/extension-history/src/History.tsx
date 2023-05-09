@@ -1,8 +1,8 @@
 import { createExtension } from '@rrte/common';
 import { historyExtension } from './extension';
-import { toolbarButtons } from './toolbar';
+import { ToolbarButtons } from './toolbar';
 
 export const History = () =>
   createExtension(historyExtension, {
-    toolbar: toolbarButtons,
+    toolbar: ToolbarButtons,
   });

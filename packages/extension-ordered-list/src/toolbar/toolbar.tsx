@@ -9,7 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive(OrderedListNode.name);
   return (
     <button
-      data-hook="ordered-list-button"
+      data-testid="ordered-list-button"
       className={classNames(classes.orderedListButton, {
         [classes.active]: isActive,
       })}

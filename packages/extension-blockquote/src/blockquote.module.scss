@@ -1,18 +1,3 @@
-:root {
-  --rrte-blockquote-color: var(--rrte-blockquote-color-ovr, var(--rrte-color-2));
-  --rrte-blockquote-font-family: var(--rrte-blockquote-font-family-ovr, "Times New Roman", Times, serif);
-  --rrte-blockquote-line-height: var(--rrte-blockquote-line-height-ovr, 1.5);
-  --rrte-blockquote-font-weight: var(--rrte-blockquote-font-weight-ovr, 400);
-  --rrte-blockquote-text-decoration: var(--rrte-blockquote-text-decoration-ovr, none);
-  --rrte-blockquote-font-style: var(--rrte-blockquote-font-style-ovr, normal);
-  --rrte-blockquote-font-size: var(--rrte-blockquote-font-size-ovr, 14px);
-  --rrte-blockquote-padding-start: var(--rrte-blockquote-padding-start-ovr, 12px);
-  --rrte-blockquote-background: var(--rrte-blockquote-background-ovr, var(--rrte-color-3));
-  --rrte-blockquote-border-start: var(--rrte-blockquote-border-start-ovr, 2px solid rgb(var(--rrte-color-2)));
-  --rrte-blockquote-margin: var(--rrte-blockquote-margin-ovr, 0 0 0 30px);
-  --rrte-blockquote-width: var(--rrte-blockquote-width-ovr, calc(100% - 30px));
-}
-
 .base {
   box-sizing: border-box;
   width: var(--rrte-blockquote-width);

@@ -20,8 +20,10 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
       className={classNames(classes.imageButton, {
         [classes.disabledButton]: !editor.can().setImage({ src: '', originalHeight: 0, originalWidth: 0 }),
       })}
+      data-testid="extension-controlled-image-button"
     >
       <input
+        data-testid="extension-controlled-input"
         type="file"
         disabled={!editor.can().setImage({ src: '', originalHeight: 0, originalWidth: 0 })}
         accept={config.acceptedImageFileTypes.join(', ')}
@@ -47,6 +49,7 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
               const blob = new Blob([result], { type: file.type });
               image.src = URL.createObjectURL(blob);
             }
+
             image.onload = async () => {
               const originalWidth = image.naturalWidth;
               const originalHeight = image.naturalHeight;
@@ -74,7 +77,7 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
 const UserControlledButton = ({ editor, config }: { editor: Editor; config: UserControlledUploadConfig }) => {
   return (
     <button
-      data-hook="user-controlled-image-button"
+      data-testid="user-controlled-image-button"
       disabled={!editor.can().setImage({ src: '', originalHeight: 0, originalWidth: 0 })}
       className={classNames(classes.imageButton)}
       onClick={async () => {

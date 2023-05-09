@@ -9,7 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive('bold');
   return (
     <button
-      data-hook="bold-button"
+      data-testid="bold-button"
       className={classNames(classes.boldButton, {
         [classes.active]: isActive,
       })}

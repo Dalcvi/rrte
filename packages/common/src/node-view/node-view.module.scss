@@ -3,7 +3,9 @@
     width: max-content;
     cursor: pointer;
     max-width: 100%;
+}
 
+.editable {
     &:hover {
         outline: 3px solid rgb(var(--rrte-color-4));
     }

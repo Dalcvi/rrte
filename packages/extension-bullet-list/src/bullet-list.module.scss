@@ -1,0 +1,14 @@
+.base {
+    list-style-type: var(--rrte-bullet-list-style-type);
+    list-style-position: var(--rrte-bullet-list-style-position);
+    list-style-image: var(--rrte-bullet-list-style-image);
+    margin: var(--rrte-bullet-list-margin);
+    padding: var(--rrte-bullet-list-padding);
+    --rrte-p-color: var(--rrte-bullet-list-color);
+    --rrte-p-font-family: var(--rrte-bullet-list-font-family);
+    --rrte-p-font-size: var(--rrte-bullet-list-font-size);
+    --rrte-p-line-height: var(--rrte-bullet-list-line-height);
+    --rrte-p-font-weight: var(--rrte-bullet-list-font-weight);
+    --rrte-p-text-decoration: var(--rrte-bullet-list-text-decoration);
+    --rrte-p-font-style: var(--rrte-bullet-list-font-style);
+}

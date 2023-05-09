@@ -10,6 +10,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
       <label className={classes.inputContainer}>
         URL:
         <input
+          data-testid="link-input"
           type="text"
           className={classes.input}
           value={currentAttributes.href}

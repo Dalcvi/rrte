@@ -26,13 +26,15 @@ import { Color } from '@rrte/extension-color';
 import { FontSize } from '@rrte/extension-font-size';
 import { Id } from '@rrte/extension-id';
 import { Youtube } from '@rrte/extension-youtube';
-import { JSONContent } from '@rrte/common';
+import { HTMLContent, JSONContent } from '@rrte/common';
 import classes from './styles.module.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
+import { Header } from '../components/header';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
+  const [htmlContent, setHtmlContent] = useState<HTMLContent | undefined>(undefined);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setContent(JSON.parse(window.localStorage.getItem('rrte-content') ?? '{}'));
@@ -40,106 +42,111 @@ export default function Web() {
   }, []);
 
   return (
-    <div className={classes.siteContainer}>
-      <Editor
-        content={content}
-        onUpdate={(content) => {
-          if (typeof window !== 'undefined') {
-            window.localStorage.setItem('rrte-content', JSON.stringify(content));
-          }
-          setContent(content);
-        }}
-        extensions={[
-          Blockquote(),
-          Bold(),
-          Color(),
-          FontSize(),
-          Id(),
-          BulletList(),
-          CodeBlock(),
-          HardBreak(),
-          Heading(),
-          ListItem(),
-          OrderedList(),
-          Italic(),
-          Link(),
-          Underline(),
-          Strike(),
-          Code(),
-          Subscript(),
-          Superscript(),
-          TextStyle(),
-          Highlight(),
-          History(),
-          Gapcursor(),
-          Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO'),
-          Dropcursor(),
-          ImageExtension({
-            type: 'user-controlled',
-            maxFileSize: 100000000,
-            acceptedImageFileTypes: ['image/jpeg', 'image/png'],
-            onImageAddClick: async () => {
-              const tempFile = {
-                src: 'https://picsum.photos/300/200',
-                originalHeight: 200,
-                originalWidth: 300,
-              };
-              const finalFile = new Promise<ImageAttributes>((resolve) =>
-                setTimeout(resolve, 1000, {
-                  src: 'https://picsum.photos/200/300',
-                  originalHeight: 300,
-                  originalWidth: 200,
-                }),
-              );
+    <div>
+      <Header />
+      <div className={classes.siteContainer}>
+        <Editor
+          content={content}
+          onUpdateJson={(jsonContent) => {
+            if (typeof window !== 'undefined') {
+              window.localStorage.setItem('rrte-content', JSON.stringify(jsonContent));
+            }
+            setContent(jsonContent);
+          }}
+          onUpdateHtml={(htmlC) => {
+            setHtmlContent(htmlC);
+            if (typeof window !== 'undefined') {
+              window.localStorage.setItem('rrte-content-html', JSON.stringify(htmlC));
+            }
+          }}
+          extensions={[
+            Blockquote(),
+            Bold(),
+            Color(),
+            FontSize(),
+            Id(),
+            BulletList(),
+            CodeBlock(),
+            HardBreak(),
+            Heading(),
+            ListItem(),
+            OrderedList(),
+            Italic(),
+            Link(),
+            Underline(),
+            Strike(),
+            Code(),
+            Subscript(),
+            Superscript(),
+            TextStyle(),
+            Highlight(),
+            History(),
+            Gapcursor(),
+            Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO'),
+            Dropcursor(),
+            ImageExtension({
+              type: 'user-controlled',
+              maxFileSize: 100000000,
+              acceptedImageFileTypes: ['image/jpeg', 'image/png'],
+              onImageAddClick: async () => {
+                const tempFile = {
+                  src: 'https://picsum.photos/300/200',
+                  originalHeight: 200,
+                  originalWidth: 300,
+                };
+                const finalFile = new Promise<ImageAttributes>((resolve) =>
+                  setTimeout(resolve, 1000, {
+                    src: 'https://picsum.photos/200/300',
+                    originalHeight: 300,
+                    originalWidth: 200,
+                  }),
+                );
 
-              return { tempFile, finalFile };
-            },
-            onPaste: async (file, imgAttr) =>
-              new Promise<ImageAttributes>((resolve) => setTimeout(resolve, 1000, imgAttr)),
-            // type: 'extension-controlled',
-            // maxFileSize: 100000000,
-            // onImageAdd: async (file, imgAttr) => {
-            //   return imgAttr;
-            // },
-            // acceptedImageFileTypes: ['image/jpeg', 'image/png'],
-          }),
-          Video({
-            type: 'user-controlled',
-            onVideoAddClick: async () => {
-              const tempFile = {
-                // src to a video
-                src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-              };
-              const finalFile = new Promise<VideoAttributes>((resolve) =>
-                setTimeout(resolve, 1000, {
+                return { tempFile, finalFile };
+              },
+              onPaste: async (file, imgAttr) =>
+                new Promise<ImageAttributes>((resolve) => setTimeout(resolve, 1000, imgAttr)),
+              // type: 'extension-controlled',
+              // maxFileSize: 100000000,
+              // onImageAdd: async (file, imgAttr) => {
+              //   return imgAttr;
+              // },
+              // acceptedImageFileTypes: ['image/jpeg', 'image/png'],
+            }),
+            Video({
+              type: 'user-controlled',
+              onVideoAddClick: async () => {
+                const tempFile = {
+                  // src to a video
                   src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-                }),
-              );
+                };
+                const finalFile = new Promise<VideoAttributes>((resolve) =>
+                  setTimeout(resolve, 1000, {
+                    src: 'https://www.w3schools.com/html/mov_bbb.mp4',
+                  }),
+                );
 
-              return { tempFile, finalFile };
-            },
-            onPaste: async (file, videoAttr) =>
-              new Promise<VideoAttributes>((resolve) => setTimeout(resolve, 1000, videoAttr)),
-            maxFileSize: 100000000,
-            acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
+                return { tempFile, finalFile };
+              },
+              onPaste: async (file, videoAttr) =>
+                new Promise<VideoAttributes>((resolve) => setTimeout(resolve, 1000, videoAttr)),
+              maxFileSize: 100000000,
+              acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
 
-            // type: 'extension-controlled',
-            // onVideoAdd: async (file, videoAttr) => {
-            //   return videoAttr;
-            // },
-            // maxFileSize: 100000000,
-            // acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
-          }),
-          Youtube(),
-        ]}
-        className={classes.editor}
-        editorContentClassName={classes.editorContent}
-      />
-      {content && (
-        <div className={classes.schemaContainer}>
-          <pre>{JSON.stringify(content, null, 6)}</pre>
-        </div>
-      )}
+              // type: 'extension-controlled',
+              // onVideoAdd: async (file, videoAttr) => {
+              //   return videoAttr;
+              // },
+              // maxFileSize: 100000000,
+              // acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
+            }),
+            Youtube(),
+          ]}
+          className={classes.editor}
+          editorContentClassName={classes.editorContent}
+          editorContentWrapperClassName={classes.editorContentWrapper}
+        />
+      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive('italic');
   return (
     <button
-      data-hook="italic-button"
+      data-testid="italic-button"
       className={classNames(classes.italicButton, {
         [classes.active]: isActive,
       })}

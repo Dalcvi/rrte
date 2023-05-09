@@ -28,7 +28,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <div className={classes.highlightContainer}>
       <input
-        data-hook="highlight-input"
+        data-testid="highlight-input"
         disabled={!editor.can().setHighlight(null)}
         type="color"
         value={highlight}
@@ -41,6 +41,7 @@ const Button = ({ editor }: { editor: Editor }) => {
       />
       {highlight && highlight.startsWith('#') && (
         <button
+          data-testid="highlight-reset"
           className={classes.highlightReset}
           onClick={() => {
             editor.chain().focus().unsetHighlight().run();

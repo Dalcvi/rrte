@@ -8,7 +8,7 @@ import classNames from 'classnames';
 const UndoButton = ({ editor }: { editor: Editor }) => {
   return (
     <button
-      data-hook="undo-button"
+      data-testid="undo-button"
       disabled={!editor.can().undo()}
       className={classes.historyButton}
       onClick={() => {
@@ -23,7 +23,7 @@ const UndoButton = ({ editor }: { editor: Editor }) => {
 const RedoButton = ({ editor }: { editor: Editor }) => {
   return (
     <button
-      data-hook="redo-button"
+      data-testid="redo-button"
       disabled={!editor.can().redo()}
       className={classes.historyButton}
       onClick={() => {
@@ -35,7 +35,7 @@ const RedoButton = ({ editor }: { editor: Editor }) => {
   );
 };
 
-export const toolbarButtons: RegularButtonConfig[] = [
+export const ToolbarButtons: RegularButtonConfig[] = [
   {
     Button: UndoButton,
     name: 'Undo',

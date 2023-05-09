@@ -8,8 +8,8 @@ export interface VideoAttributes {
   src: string;
   isLoading: boolean;
   customSize: boolean | null;
-  width: number;
-  height: number;
+  customWidth: number;
+  customHeight: number;
   alignment: 'left' | 'center' | 'right';
 }
 
@@ -67,10 +67,10 @@ export const VideoNode = Node.create<VideoOptions>({
       customSize: {
         default: null,
       },
-      width: {
+      customWidth: {
         default: 320,
       },
-      height: {
+      customHeight: {
         default: 180,
       },
     };
@@ -87,15 +87,43 @@ export const VideoNode = Node.create<VideoOptions>({
   parseHTML() {
     return [
       {
-        tag: 'video-node',
+        tag: 'video[src]',
+        getAttrs: (dom) => {
+          if (!(dom instanceof HTMLElement)) {
+            return false;
+          }
+          const src = dom.getAttribute('src');
+          if (src === null || src.includes('giphy')) {
+            return false;
+          }
+
+          return {
+            src,
+            alt: dom.getAttribute('alt'),
+            customSize: dom.getAttribute('customSize'),
+            customWidth: dom.getAttribute('customWidth'),
+            customHeight: dom.getAttribute('customHeight'),
+            isLoading: dom.getAttribute('isLoading'),
+            alignment: dom.getAttribute('alignment'),
+          };
+        },
       },
     ];
   },
 
   renderHTML({ HTMLAttributes }) {
     const { id, ...restAttributes } = HTMLAttributes;
-
-    return ['video-node', mergeAttributes(this.options.HTMLAttributes, restAttributes)];
+    const width = HTMLAttributes.customSize ? `width: ${HTMLAttributes.customWidth}px;` : '';
+    const height = HTMLAttributes.customSize ? `height: ${HTMLAttributes.customHeight}px;` : '';
+    const marginLeft = `margin-left: ${HTMLAttributes.alignment === 'left' ? '0' : 'auto'};`;
+    const marginRight = `margin-right: ${HTMLAttributes.alignment === 'right' ? '0' : 'auto'};`;
+    const additionalAttributes = { style: `${width} ${height} ${marginLeft} ${marginRight} object-fit: fill;`, controls: true  };
+    const wrapperStyle = `display:flex;justify-content:center;width:100%`;
+    return [
+      'div',
+      { style: wrapperStyle },
+      ['video', mergeAttributes(this.options.HTMLAttributes, restAttributes, additionalAttributes)],
+    ];
   },
 
   addNodeView() {

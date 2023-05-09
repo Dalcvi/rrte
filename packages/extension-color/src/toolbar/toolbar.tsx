@@ -24,7 +24,6 @@ const getColor = (value: string | AttributeValue) => {
 const Button = ({ editor }: { editor: Editor }) => {
   const currentValue = currentSelectionAttributeValue('color', editor);
   const color = currentValue ? getColor(currentValue) : undefined;
-
   return (
     <div className={classes.colorContainer}>
       <div
@@ -33,7 +32,7 @@ const Button = ({ editor }: { editor: Editor }) => {
         })}
       >
         <input
-          data-hook="color-input"
+          data-testid="color-input"
           disabled={!editor.can().setColor(null)}
           type="color"
           value={color}
@@ -43,6 +42,7 @@ const Button = ({ editor }: { editor: Editor }) => {
           }}
         />
         <div
+          data-testid="color-letter"
           className={classes.colorLetter}
           style={{
             color: color,
@@ -51,6 +51,7 @@ const Button = ({ editor }: { editor: Editor }) => {
           A
         </div>
         <div
+          data-testid="color-bar"
           className={classes.colorBar}
           style={{
             background: color,
@@ -59,6 +60,7 @@ const Button = ({ editor }: { editor: Editor }) => {
       </div>
       {color && color.startsWith('#') && (
         <button
+          data-testid="color-reset"
           className={classes.colorReset}
           onClick={() => {
             editor.chain().focus().unsetColor().run();

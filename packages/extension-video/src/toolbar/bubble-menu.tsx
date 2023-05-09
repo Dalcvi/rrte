@@ -111,8 +111,8 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
-          value={currentAttributes.width === null ? 320 : currentAttributes.width}
-          onChange={(e) => editor.commands.updateAttributes(VideoNode.name, { width: Number(e.target.value) })}
+          value={currentAttributes.customWidth === null ? 320 : currentAttributes.customWidth}
+          onChange={(e) => editor.commands.updateAttributes(VideoNode.name, { customWidth: Number(e.target.value) })}
         />
       </label>
       <label className={classes.inputContainer}>
@@ -121,8 +121,8 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
-          value={currentAttributes.height === null ? 180 : currentAttributes.height}
-          onChange={(e) => editor.commands.updateAttributes(VideoNode.name, { height: Number(e.target.value) })}
+          value={currentAttributes.customHeight === null ? 180 : currentAttributes.customHeight}
+          onChange={(e) => editor.commands.updateAttributes(VideoNode.name, { customHeight: Number(e.target.value) })}
         />
       </label>
     </div>

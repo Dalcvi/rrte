@@ -117,8 +117,8 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
-          value={currentAttributes.width === null ? 320 : currentAttributes.width}
-          onChange={(e) => editor.commands.updateAttributes(YoutubeNode.name, { width: Number(e.target.value) })}
+          value={currentAttributes.customWidth === null ? 320 : currentAttributes.customWidth}
+          onChange={(e) => editor.commands.updateAttributes(YoutubeNode.name, { customWidth: Number(e.target.value) })}
         />
       </label>
     </div>

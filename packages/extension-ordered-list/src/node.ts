@@ -1,4 +1,5 @@
 import { mergeAttributes, Node, wrappingInputRule } from '@tiptap/core';
+import classes from './ordered-list.module.scss';
 
 export interface OrderedListOptions {
   itemTypeName: string;
@@ -26,7 +27,9 @@ export const OrderedListNode = Node.create<OrderedListOptions>({
   addOptions() {
     return {
       itemTypeName: 'listItem',
-      HTMLAttributes: {},
+      HTMLAttributes: {
+        class: classes.base
+      },
       keepMarks: false,
       keepAttributes: false,
     };
