@@ -20,7 +20,7 @@ export const YoutubeComponent = ({
   selected: boolean;
 }) => {
   const [isSelected, setIsSelected] = useState(false);
-  const showSelection = (isSelected || selected) && !editor.isEditable;
+  const showSelection = isSelected || selected;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
   const customWidth = node.attrs.customWidth;
@@ -53,6 +53,7 @@ export const YoutubeComponent = ({
 
   return (
     <NodeView
+      isEditable={editor.isEditable}
       selected={showSelection}
       draggable
       className={classNames({

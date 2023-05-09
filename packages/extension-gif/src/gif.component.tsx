@@ -11,7 +11,7 @@ type GifNode = {
 
 export const GifComponent = ({ editor, node, selected }: { editor: Editor; node: GifNode; selected: boolean }) => {
   const [isSelected, setIsSelected] = useState(false);
-  const showSelection = (isSelected || selected) && !editor.isEditable;
+  const showSelection = isSelected || selected;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
   const customWidth = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth;
@@ -44,6 +44,7 @@ export const GifComponent = ({ editor, node, selected }: { editor: Editor; node:
 
   return (
     <NodeView
+      isEditable={editor.isEditable}
       selected={showSelection}
       draggable
       className={classNames({

@@ -47,16 +47,16 @@ export default function Web() {
       <div className={classes.siteContainer}>
         <Editor
           content={content}
-          onUpdateJson={(content) => {
+          onUpdateJson={(jsonContent) => {
             if (typeof window !== 'undefined') {
-              window.localStorage.setItem('rrte-content', JSON.stringify(content));
+              window.localStorage.setItem('rrte-content', JSON.stringify(jsonContent));
             }
-            setContent(content);
+            setContent(jsonContent);
           }}
-          onUpdateHtml={(content) => {
-            setHtmlContent(content);
+          onUpdateHtml={(htmlC) => {
+            setHtmlContent(htmlC);
             if (typeof window !== 'undefined') {
-              window.localStorage.setItem('rrte-content-html', JSON.stringify(content));
+              window.localStorage.setItem('rrte-content-html', JSON.stringify(htmlC));
             }
           }}
           extensions={[

@@ -33,7 +33,6 @@ import React from 'react';
 import { Header } from '../../components/header';
 
 export default function Web() {
-  const [content, setContent] = useState<JSONContent | undefined>(undefined);
   const [htmlContent, setHtmlContent] = useState<HTMLContent | undefined>(undefined);
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -47,12 +46,6 @@ export default function Web() {
       <div className={classes.siteContainer}>
         <Editor
           content={htmlContent}
-          onUpdateJson={(content) => {
-            if (typeof window !== 'undefined') {
-              window.localStorage.setItem('rrte-content', JSON.stringify(content));
-            }
-            setContent(content);
-          }}
           onUpdateHtml={(content) => {
             setHtmlContent(content);
             if (typeof window !== 'undefined') {
@@ -146,7 +139,7 @@ export default function Web() {
           editorContentClassName={classes.editorContent}
           editorContentWrapperClassName={classes.editorContentWrapper}
         />
-        {content && (
+        {htmlContent && (
           <div className={classes.schemaContainer}>
             {htmlContent && <div dangerouslySetInnerHTML={{ __html: htmlContent }} />}
           </div>

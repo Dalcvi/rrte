@@ -59,7 +59,10 @@ export default function Web() {
             Color(),
             FontSize(),
             Id(),
-            BulletList(),
+            BulletList().extendConfig((conf) => ({
+              ...conf,
+              priority: 10000,
+            })),
             CodeBlock(),
             HardBreak(),
             Heading(),

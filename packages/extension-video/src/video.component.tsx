@@ -12,7 +12,7 @@ type VideoNode = {
 export const VideoComponent = ({ editor, node, selected }: { editor: Editor; node: VideoNode; selected: boolean }) => {
   const [canShowLoader, setCanShowLoader] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
-  const showSelection = (isSelected || selected) && !editor.isEditable;
+  const showSelection = isSelected || selected;
   const showLoader = !!node.attrs.isLoading && canShowLoader;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
@@ -45,6 +45,7 @@ export const VideoComponent = ({ editor, node, selected }: { editor: Editor; nod
   }, [node.attrs.id]);
   return (
     <NodeView
+      isEditable={editor.isEditable}
       selected={showSelection}
       draggable
       className={classNames({

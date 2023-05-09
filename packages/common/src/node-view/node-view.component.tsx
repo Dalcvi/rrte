@@ -7,7 +7,9 @@ export const NodeView = ({
   selected,
   draggable,
   children,
+  isEditable,
 }: {
+  isEditable: boolean;
   className?: string;
   selected: boolean;
   children: React.ReactNode;
@@ -17,7 +19,8 @@ export const NodeView = ({
     <NodeViewWrapper>
       <div
         className={classNames(classes.container, className, {
-          [classes.selected]: selected,
+          [classes.selected]: selected && isEditable,
+          [classes.editable]: isEditable,
         })}
       >
         {draggable ? (
