@@ -59,13 +59,14 @@ export const Dropdown = (props: DropdownConfig & { editor: Editor }) => {
             [classes.arrowOpen]: isOpen,
           })}
         />
-        <input className={classes.input} value={selectedValue} readOnly />
+        <input aria-label={dropdown.name} className={classes.input} value={selectedValue} readOnly />
       </div>
       {isOpen && (
         <div className={classNames(classes.dropdownItemsContainer, classes.openDropdown)}>
           {valuesByPriority.map((value, index) => {
             return (
               <button
+                aria-label={value.name}
                 data-testid={value.name}
                 autoFocus={index === 0}
                 className={classNames(classes.dropdownItem, value.className)}

@@ -9,6 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive('italic');
   return (
     <button
+      aria-label="italic"
       data-testid="italic-button"
       className={classNames(classes.italicButton, {
         [classes.active]: isActive,

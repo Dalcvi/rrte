@@ -127,6 +127,7 @@ export default function Web() {
           </div>
           <div className={classes.submitWrapper}>
             <button
+              aria-label="submit"
               className={classes.submit}
               disabled={editor.current?.isEmpty}
               onClick={() => {

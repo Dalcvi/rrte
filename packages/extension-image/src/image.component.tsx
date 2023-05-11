@@ -1,7 +1,7 @@
 import { Editor, EditorEvents } from '@tiptap/core';
 import classes from './image.component.module.scss';
 import { ImageAttributes } from './node';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NodeView } from '@rrte/common';
 import classNames from 'classnames';
 
@@ -10,14 +10,24 @@ type ImageNode = {
 };
 
 export const ImageComponent = ({ editor, node, selected }: { editor: Editor; node: ImageNode; selected: boolean }) => {
+  const [imageWidth, setWidth] = useState((node.attrs.customSize ? node.attrs.customWidth : undefined) ?? undefined);
+  const [imageHeight, setHeight] = useState((node.attrs.customSize ? node.attrs.customHeight : undefined) ?? undefined);
+  const imageRef = useRef<HTMLImageElement>(null);
   const [canShowLoader, setCanShowLoader] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const showLoader = !!node.attrs.isLoading && canShowLoader;
   const showSelection = isSelected || selected;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
-  const customWidth = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth;
-  const customHeight = node.attrs.customHeight === null ? node.attrs.originalHeight : node.attrs.customHeight;
+  // const width = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth ?? undefined;
+  // const height = node.attrs.customHeight === null ? node.attrs.originalHeight : node.attrs.customHeight ?? undefined;
+
+  useEffect(() => {
+    if (node.attrs.customSize && (imageWidth !== node.attrs.customWidth || imageHeight !== node.attrs.customHeight)) {
+      setWidth(node.attrs.customWidth ?? undefined);
+      setHeight(node.attrs.customHeight ?? undefined);
+    }
+  }, [imageRef.current, node.attrs.customSize, node.attrs.customWidth, node.attrs.customHeight]);
 
   useEffect(() => {
     const func = ({ editor }: { editor: Editor }) => {
@@ -56,19 +66,14 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
     >
       <div className={classes.imageContainer}>
         <img
+          ref={imageRef}
           className={classNames(classes.image, {
             [classes.customSize]: isCustomSizeEnabled,
           })}
           src={node.attrs.src}
           alt={node.attrs.alt ?? undefined}
-          style={
-            isCustomSizeEnabled
-              ? {
-                  width: `${customWidth}px`,
-                  height: `${customHeight}px`,
-                }
-              : undefined
-          }
+          width={isCustomSizeEnabled ? imageWidth : node.attrs.originalWidth}
+          height={isCustomSizeEnabled ? imageHeight : node.attrs.originalHeight}
           onLoad={() => {
             setCanShowLoader(true);
           }}

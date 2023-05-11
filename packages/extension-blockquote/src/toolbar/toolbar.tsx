@@ -10,6 +10,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive(BlockquoteNode.name);
   return (
     <button
+      aria-label="blockquote"
       data-testid="blockquote-button"
       disabled={!editor.can().toggleBlockquote()}
       className={classNames(classes.blockquoteButton, {

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { HeadingNode, Level } from '../node';
 
 const createValue = (level: Level): DropdownValue => ({
-  name: `heading-${level}`,
+  name: `heading ${level}`,
   priority: 7 - level,
   onClick: ({ editor }) => {
     editor.chain().focus().setHeading({ level }).run();
@@ -17,7 +17,7 @@ const createValue = (level: Level): DropdownValue => ({
 });
 
 export const ToolbarDropdown: DropdownConfig = {
-  name: 'text-type',
+  name: 'text type',
   type: ToolbarItemType.DROPDOWN,
   text: 'Text type',
   priority: 0,

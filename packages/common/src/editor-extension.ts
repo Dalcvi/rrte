@@ -8,35 +8,65 @@ export type {
   AnyExtension as TiptapAnyExtension,
 } from '@tiptap/core';
 
-export type AllExtension<T, K> = TiptapExtension<T, K> | TiptapNode<T, K> | TiptapMark<T, K>;
+export type AllExtension<ExtensionConfig, ExtensionType> =
+  | TiptapExtension<ExtensionConfig, ExtensionType>
+  | TiptapNode<ExtensionConfig, ExtensionType>
+  | TiptapMark<ExtensionConfig, ExtensionType>;
 
 export type UnknownExtension = Extension<Config<any>, AllExtension<any, any>, any, any>;
 
-export type Extension<C extends Record<string, any>, T extends AllExtension<TO, TS>, TO = any, TS = any> = {
-  extension: T;
-  config: Config<C>;
-  extend: <O extends TO & Extend, S extends TS & Extend>(
+export type Extension<
+  ConfigType extends Record<string, any>,
+  TiptapExtensionType extends AllExtension<OriginalType, SubType>,
+  OriginalType = any,
+  SubType = any,
+> = {
+  extension: TiptapExtensionType;
+  config: Config<ConfigType>;
+  extend: <ExtendedOriginalType extends OriginalType & Extend, ExtendedSubType extends SubType & Extend>(
     ext: Record<string, any>,
-  ) => Extension<C, AllExtension<O, S>, O, S>;
-  extendConfig: <NC extends Record<string, any>>(
-    getConfig: (config: Config<C>) => Config<NC>,
-  ) => Extension<NC, AllExtension<TO, TS>, TO, TS>;
+  ) => Extension<
+    ConfigType,
+    AllExtension<ExtendedOriginalType, ExtendedSubType>,
+    ExtendedOriginalType,
+    ExtendedSubType
+  >;
+  extendConfig: <NewConfigType extends Record<string, any>>(
+    getConfig: (config: Config<ConfigType>) => Config<NewConfigType>,
+  ) => Extension<NewConfigType, AllExtension<OriginalType, SubType>, OriginalType, SubType>;
 };
 
 type Extend = {};
 
-export const createExtension = <C extends Record<string, any>, T extends AllExtension<TO, TS>, TO = any, TS = any>(
-  extension: T,
-  config: Config<C>,
-): Extension<C, T, TO, TS> => {
+export const createExtension = <
+  ConfigType extends Record<string, any>,
+  TiptapExtensionType extends AllExtension<OriginalType, SubType>,
+  OriginalType = any,
+  SubType = any,
+>(
+  extension: TiptapExtensionType,
+  config: Config<ConfigType>,
+): Extension<ConfigType, TiptapExtensionType, OriginalType, SubType> => {
   return {
     extension,
     config,
-    extend: <O extends TO & Extend, S extends TS & Extend>(ext: Record<string, any>) => {
-      return createExtension<C, AllExtension<O, S>, O, S>(extension.extend<O, S>(ext), config);
+    extend: <ExtendedOriginalType extends OriginalType & Extend, ExtendedSubType extends SubType & Extend>(
+      ext: Record<string, any>,
+    ) => {
+      return createExtension<
+        ConfigType,
+        AllExtension<ExtendedOriginalType, ExtendedSubType>,
+        ExtendedOriginalType,
+        ExtendedSubType
+      >(extension.extend<ExtendedOriginalType, ExtendedSubType>(ext), config);
     },
-    extendConfig: <NC extends Record<string, any>>(getConfig: (config: Config<C>) => Config<NC>) => {
-      return createExtension<NC, AllExtension<TO, TS>, TO, TS>(extension, getConfig(cloneDeep(config)));
+    extendConfig: <NewConfigType extends Record<string, any>>(
+      getConfig: (config: Config<ConfigType>) => Config<NewConfigType>,
+    ) => {
+      return createExtension<NewConfigType, AllExtension<OriginalType, SubType>, OriginalType, SubType>(
+        extension,
+        getConfig(cloneDeep(config)),
+      );
     },
   };
 };

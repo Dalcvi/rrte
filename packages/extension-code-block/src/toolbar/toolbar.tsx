@@ -9,6 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive(CodeBlockNode.name);
   return (
     <button
+      aria-label="codeblock"
       data-testid="codeblock-button"
       disabled={!editor.can().toggleCodeBlock()}
       className={classNames(classes.codeblockButton, {

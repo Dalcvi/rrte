@@ -9,6 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive(BulletListNode.name);
   return (
     <button
+      aria-label="bullet list"
       data-testid="bullet-list-button"
       className={classNames(classes.bulletListButton, {
         [classes.active]: isActive,

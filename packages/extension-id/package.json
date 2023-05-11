@@ -18,7 +18,8 @@
     "build": "rm -rf ./dist && rollup -c ../../rollup.config.js",
     "build:prod": "cross-env NODE_ENV=production pnpm build && pnpm move-style-inject",
     "build:dev": "cross-env NODE_ENV=development pnpm build",
-    "move-style-inject": "node ../../moveStyleInject.js"
+    "move-style-inject": "node ../../moveStyleInject.js",
+    "test": "jest --config='../../jest.config.js'"
   },
   "devDependencies": {
     "@types/uuid": "^9.0.1",

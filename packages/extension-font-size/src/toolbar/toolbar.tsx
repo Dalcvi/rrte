@@ -36,6 +36,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <input
       data-testid="font-size-input"
+      aria-label="Font size"
       className={classes.numberInput}
       type="number"
       value={value}

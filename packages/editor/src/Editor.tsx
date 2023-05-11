@@ -117,7 +117,7 @@ export const Editor = ({
         />
       )}
       <div className={`${classes.editorContent}  ${editorContentWrapperClassName}`}>
-        <EditorContent editor={editor} data-hook="rrte-editor" />
+        <EditorContent editor={editor} data-testid="rrte-editor" />
       </div>
       {editor && !viewerMode && allBubbleMenus.length > 0 && <BubbleMenuList editor={editor} list={allBubbleMenus} />}
     </div>

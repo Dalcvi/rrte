@@ -104,7 +104,13 @@ export const GifSearch = ({
 
   return (
     <div className={classes.gifGridContainer}>
-      <input type="text" className={classes.gifSearch} value={search} onChange={(e) => setSearch(e.target.value)} />
+      <input
+        aria-label="gif search"
+        type="search"
+        className={classes.gifSearch}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <div className={classes.gifGrid}>
         {gifs.map((gif, index) => {
           const addRef = gifs.length - 4 === index && search !== '' && gifs.length !== totalCount;

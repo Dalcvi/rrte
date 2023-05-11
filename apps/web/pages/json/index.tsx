@@ -17,6 +17,7 @@ import { ImageAttributes, Image as ImageExtension } from '@rrte/extension-image'
 import { Code } from '@rrte/extension-code';
 import { Subscript } from '@rrte/extension-subscript';
 import { Superscript } from '@rrte/extension-superscript';
+import { TextAlign } from '@rrte/extension-text-align';
 import { TextStyle } from '@rrte/extension-text-style';
 import { Highlight } from '@rrte/extension-highlight';
 import { History } from '@rrte/extension-history';
@@ -69,6 +70,7 @@ export default function Web() {
             CodeBlock(),
             HardBreak(),
             Heading(),
+            TextAlign(),
             ListItem(),
             OrderedList(),
             Italic(),

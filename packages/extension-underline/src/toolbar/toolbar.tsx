@@ -10,6 +10,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <button
       data-testid="underline-button"
+      aria-label="underline"
       className={classNames(classes.underlineButton, {
         [classes.active]: isActive,
       })}

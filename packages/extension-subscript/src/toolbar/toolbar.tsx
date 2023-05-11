@@ -10,6 +10,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <button
       data-testid="subscript-button"
+      aria-label="subscript"
       className={classNames(classes.subscriptButton, {
         [classes.active]: isActive,
       })}

@@ -10,6 +10,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <button
       data-testid="strike-button"
+      aria-label="strike"
       className={classNames(classes.strikeButton, {
         [classes.active]: isActive,
       })}

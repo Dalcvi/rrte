@@ -9,6 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive('bold');
   return (
     <button
+      aria-label="bold"
       data-testid="bold-button"
       className={classNames(classes.boldButton, {
         [classes.active]: isActive,

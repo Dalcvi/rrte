@@ -4,7 +4,7 @@ import { YoutubeAttributes } from './node';
 import { useEffect, useState } from 'react';
 import { NodeView } from '@rrte/common';
 import classNames from 'classnames';
-import YouTube from 'react-youtube';
+import YouTubeLite from 'react-lite-youtube-embed';
 
 type YoutubeNode = {
   attrs: YoutubeAttributes & { id: string };
@@ -24,7 +24,6 @@ export const YoutubeComponent = ({
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
   const customWidth = node.attrs.customWidth;
-  const customHeight = (9 * customWidth) / 16;
   const isEditMode = editor.isEditable;
 
   useEffect(() => {
@@ -62,18 +61,19 @@ export const YoutubeComponent = ({
         [classes.right]: alignment === 'right',
       })}
     >
-      <div className={classes.videoContainer}>
-        <YouTube
-          videoId={node.attrs.videoId}
-          iframeClassName={classes.youtubeVideo}
-          opts={
-            isCustomSizeEnabled
-              ? {
-                  width: customWidth,
-                  height: customHeight,
-                }
-              : undefined
-          }
+      <div
+        className={classes.videoContainer}
+        style={{
+          width: isCustomSizeEnabled ? customWidth : node.attrs.defaultWidth,
+        }}
+      >
+        <YouTubeLite
+          id={node.attrs.videoId}
+          iframeClass={classes.youtubeVideo}
+          title="YouTube video player"
+          noCookie
+          aspectHeight={9}
+          aspectWidth={16}
         />
         {isEditMode && <div className={classes.blocker} />}
       </div>

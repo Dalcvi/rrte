@@ -1,7 +1,7 @@
 import { Editor } from '@tiptap/core';
 import classes from './gif.component.module.scss';
 import { GifAttributes } from './node';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NodeView } from '@rrte/common';
 import classNames from 'classnames';
 
@@ -10,6 +10,14 @@ type GifNode = {
 };
 
 export const GifComponent = ({ editor, node, selected }: { editor: Editor; node: GifNode; selected: boolean }) => {
+  const [gifWidth, setWidth] = useState(
+    node.attrs.customSize ? node.attrs.customWidth ?? undefined : node.attrs.originalWidth ?? undefined,
+  );
+  const [gifHeight, setHeight] = useState(
+    node.attrs.customSize ? node.attrs.customHeight ?? undefined : node.attrs.originalHeight ?? undefined,
+  );
+  const gifRef = useRef<HTMLElement>(null);
+
   const [isSelected, setIsSelected] = useState(false);
   const showSelection = isSelected || selected;
   const alignment = node.attrs.alignment;
@@ -17,6 +25,25 @@ export const GifComponent = ({ editor, node, selected }: { editor: Editor; node:
   const customWidth = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth;
   const customHeight = node.attrs.customHeight === null ? node.attrs.originalHeight : node.attrs.customHeight;
   const style = isCustomSizeEnabled ? { width: `${customWidth}px`, height: `${customHeight}px` } : {};
+
+  useEffect(() => {
+    if (
+      gifRef.current &&
+      (!node.attrs.customSize ||
+        (!node.attrs.customSize && (node.attrs.customWidth === null || node.attrs.customHeight === null)))
+    ) {
+      const gif = gifRef.current;
+      const { width, height } = gif.getBoundingClientRect();
+      if (width !== gifWidth || height !== gifHeight) {
+        setWidth(width);
+        setHeight(height);
+      }
+    }
+    if (node.attrs.customSize && (gifWidth !== node.attrs.customWidth || gifHeight !== node.attrs.customHeight)) {
+      setWidth(node.attrs.customWidth ?? undefined);
+      setHeight(node.attrs.customHeight ?? undefined);
+    }
+  }, [gifRef.current, node.attrs.customSize, node.attrs.customWidth, node.attrs.customHeight]);
 
   useEffect(() => {
     const func = ({ editor }: { editor: Editor }) => {
@@ -55,10 +82,27 @@ export const GifComponent = ({ editor, node, selected }: { editor: Editor; node:
     >
       {node.attrs.webp ? (
         <div className={classes.imageWrapper}>
-          <img className={classes.gif} src={node.attrs.webp} alt={node.attrs.alt ?? undefined} style={style} />
+          <img
+            ref={gifRef as React.RefObject<HTMLImageElement>}
+            className={classes.gif}
+            src={node.attrs.webp}
+            alt={node.attrs.alt ?? undefined}
+            width={gifWidth}
+            height={gifHeight}
+            // style={style}
+          />
         </div>
       ) : (
-        <video className={classes.gif} autoPlay loop src={node.attrs.mp4} style={style} />
+        <video
+          ref={gifRef as React.RefObject<HTMLVideoElement>}
+          className={classes.gif}
+          autoPlay
+          loop
+          src={node.attrs.mp4}
+          width={gifWidth}
+          height={gifHeight}
+          // style={style}
+        />
       )}
       <div className={classes.videoContainer}></div>
     </NodeView>

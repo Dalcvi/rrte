@@ -42,7 +42,8 @@ const Button = ({ editor, config }: { editor: Editor; config: GifConfig }) => {
   return (
     <div className={classes.container} ref={setContainer}>
       <button
-        data-hook="gif-button"
+        data-testid="gif-button"
+        aria-label="Gif"
         disabled={!editor.can().setGif({ originalHeight: 0, originalWidth: 0 })}
         className={classNames(classes.gifButton, {
           [classes.active]: isActive,

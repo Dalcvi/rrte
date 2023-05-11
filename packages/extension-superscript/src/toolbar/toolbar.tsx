@@ -10,6 +10,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <button
       data-testid="superscript-button"
+      aria-label="superscript"
       className={classNames(classes.superscriptButton, {
         [classes.active]: isActive,
       })}

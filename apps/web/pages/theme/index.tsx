@@ -61,7 +61,12 @@ export default function Web() {
             Id(),
             BulletList().extendConfig((conf) => ({
               ...conf,
-              priority: 10000,
+              toolbar: conf.toolbar
+                ? {
+                    ...conf.toolbar,
+                    priority: 100000000000,
+                  }
+                : undefined,
             })),
             CodeBlock(),
             HardBreak(),

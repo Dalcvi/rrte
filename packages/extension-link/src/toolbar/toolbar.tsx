@@ -11,6 +11,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <button
       data-testid="link-button"
+      aria-label="link"
       disabled={!editor.can().toggleLink({ href: currentHref })}
       className={classNames(classes.linkButton, {
         [classes.active]: isActive,

@@ -29,9 +29,17 @@ export default {
   testEnvironmentOptions: { resources: 'usable' },
 
   // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  // ANY .svg files
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/dist/',
+    '/coverage/',
+    '/.storybook/',
+    '/.vscode/',
+    '/.github/',
+    '/.git/',
+    '/.*.svg/',
+  ],
 
   // Indicates which provider should be used to instrument code for coverage
   // coverageProvider: "babel",

@@ -8,7 +8,7 @@ export const Paragraph = () =>
   });
 
 const toolbarDropdown: DropdownConfig = {
-  name: 'text-type',
+  name: 'text type',
   type: ToolbarItemType.DROPDOWN,
   text: 'Text type',
   priority: 10,

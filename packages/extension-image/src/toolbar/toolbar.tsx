@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import classes from './toolbar.module.scss';
 import { ExtensionControlledUploadConfig, UploadConfig, UserControlledUploadConfig } from '../upload-config';
 import { createTempImage, handleFileImage } from './toolbar.utils';
+import { extractImageInfo } from '../image.utils';
 
 const Button = ({ editor, config }: { editor: Editor; config: UploadConfig }) => {
   if (config.type === 'user-controlled') {
@@ -24,6 +25,7 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
     >
       <input
         data-testid="extension-controlled-input"
+        aria-label="image"
         type="file"
         disabled={!editor.can().setImage({ src: '', originalHeight: 0, originalWidth: 0 })}
         accept={config.acceptedImageFileTypes.join(', ')}
@@ -34,39 +36,52 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
           if (!file) {
             return;
           }
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
+          const { originalWidth, originalHeight, src } = await extractImageInfo(file);
+          const tempImgId = await createTempImage(editor, {
+            src,
+            originalWidth,
+            originalHeight,
+          });
 
-          const image = new Image();
-          reader.onload = (e) => {
-            if (!e.target || !e.target.result) {
-              return;
-            }
-            const result = e.target.result;
-            if (typeof result === 'string') {
-              image.src = result;
-            } else {
-              const blob = new Blob([result], { type: file.type });
-              image.src = URL.createObjectURL(blob);
-            }
+          const finalImg = await config.onImageAdd(file, {
+            src,
+            originalWidth,
+            originalHeight,
+          });
 
-            image.onload = async () => {
-              const originalWidth = image.naturalWidth;
-              const originalHeight = image.naturalHeight;
-              const tempImgId = await createTempImage(editor, {
-                src: image.src,
-                originalWidth,
-                originalHeight,
-              });
+          // const reader = new FileReader();
+          // reader.readAsDataURL(file);
 
-              const finalImg = await config.onImageAdd(file, {
-                src: image.src,
-                originalWidth,
-                originalHeight,
-              });
-              await handleFileImage(finalImg, editor, tempImgId);
-            };
-          };
+          // const image = new Image();
+          // reader.onload = (e) => {
+          //   if (!e.target || !e.target.result) {
+          //     return;
+          //   }
+          //   const result = e.target.result;
+          //   if (typeof result === 'string') {
+          //     image.src = result;
+          //   } else {
+          //     const blob = new Blob([result], { type: file.type });
+          //     image.src = URL.createObjectURL(blob);
+          //   }
+
+          //   image.onload = async () => {
+          //     const originalWidth = image.naturalWidth;
+          //     const originalHeight = image.naturalHeight;
+          //     const tempImgId = await createTempImage(editor, {
+          //       src: image.src,
+          //       originalWidth,
+          //       originalHeight,
+          //     });
+
+          //     const finalImg = await config.onImageAdd(file, {
+          //       src: image.src,
+          //       originalWidth,
+          //       originalHeight,
+          //     });
+          //     await handleFileImage(finalImg, editor, tempImgId);
+          //   };
+          // };
         }}
       />
       <ImageIcon className={classes.icon} width={'15px'} height={'15px'} />
@@ -78,6 +93,7 @@ const UserControlledButton = ({ editor, config }: { editor: Editor; config: User
   return (
     <button
       data-testid="user-controlled-image-button"
+      aria-label="add image"
       disabled={!editor.can().setImage({ src: '', originalHeight: 0, originalWidth: 0 })}
       className={classNames(classes.imageButton)}
       onClick={async () => {

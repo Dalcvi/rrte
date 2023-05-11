@@ -20,10 +20,11 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
     <div
       className={classNames(classes.videoButton, {
         [classes.disabledButton]: !editor.can().setVideo({ src: '' }),
-        [classes.buttonActive]: selected
+        [classes.buttonActive]: selected,
       })}
     >
       <input
+        aria-label="add video"
         type="file"
         disabled={!editor.can().setVideo({ src: '' })}
         accept={config.acceptedVideoFileTypes.join(', ')}
@@ -60,9 +61,13 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
           };
         }}
       />
-      <VideoIcon className={classNames(classes.icon, {
-        [classes.active]: selected
-      })} width={'15px'} height={'15px'} />
+      <VideoIcon
+        className={classNames(classes.icon, {
+          [classes.active]: selected,
+        })}
+        width={'15px'}
+        height={'15px'}
+      />
     </div>
   );
 };
@@ -71,7 +76,8 @@ const UserControlledButton = ({ editor, config }: { editor: Editor; config: User
   const selected = editor.isActive('video');
   return (
     <button
-      data-hook="user-controlled-video-button"
+      aria-label="add video"
+      data-testid="user-controlled-video-button"
       disabled={!editor.can().setVideo({ src: '' })}
       className={classNames(classes.videoButton, {
         [classes.disabledButton]: !editor.can().setVideo({ src: '' }),

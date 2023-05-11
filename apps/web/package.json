@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "packages:size": "cost-of-modules"
+    "analyze": "ANALYZE=true pnpm build"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^13.4.1",
     "@rrte/common": "workspace:^*",
     "@rrte/editor": "workspace:*",
     "@rrte/extension-blockquote": "workspace:^*",
@@ -35,6 +36,7 @@
     "@rrte/extension-strike": "workspace:^*",
     "@rrte/extension-subscript": "workspace:^*",
     "@rrte/extension-superscript": "workspace:^*",
+    "@rrte/extension-text-align": "workspace:^",
     "@rrte/extension-text-style": "workspace:^*",
     "@rrte/extension-underline": "workspace:^*",
     "@rrte/extension-video": "^1.0.0",

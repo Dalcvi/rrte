@@ -6,6 +6,7 @@ import { getYouTubeID } from './toolbar/toolbar.utils';
 export interface YoutubeAttributes {
   url: string;
   videoId: string;
+  defaultWidth: number;
   customSize: boolean | null;
   customWidth: number;
   alignment: 'left' | 'center' | 'right';
@@ -40,6 +41,9 @@ export const YoutubeNode = Node.create({
       },
       videoId: {
         default: null,
+      },
+      defaultWidth: {
+        default: 640,
       },
       alignment: {
         default: 'center',

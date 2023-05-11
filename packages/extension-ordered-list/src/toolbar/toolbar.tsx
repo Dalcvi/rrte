@@ -10,6 +10,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <button
       data-testid="ordered-list-button"
+      aria-label="ordered-list"
       className={classNames(classes.orderedListButton, {
         [classes.active]: isActive,
       })}

@@ -23,11 +23,19 @@ export const handleFileImage = async (
     }
     return;
   }
+
   if (img && imgId === false) {
     return editor.chain().focus().setImage(img).run();
   }
   if (img && imgId) {
-    editor.commands.updateImage({ ...img, isLoading: isLoading ?? false }, imgId);
+    editor
+      .chain()
+      .command(({ tr }) => {
+        tr.setMeta('addToHistory', false);
+        return true;
+      })
+      .updateImage({ ...img, isLoading: isLoading ?? false }, imgId)
+      .run();
   }
 };
 
