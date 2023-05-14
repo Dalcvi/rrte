@@ -48,7 +48,13 @@ export const BlockquoteNode = Node.create<BlockquoteOptions>({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['blockquote', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+    return [
+      'blockquote',
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+        'data-testid': 'blockquote',
+      }),
+      0,
+    ];
   },
 
   addCommands() {

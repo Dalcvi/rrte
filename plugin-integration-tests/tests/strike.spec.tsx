@@ -2,14 +2,24 @@
  * @jest-environment jsdom
  */
 
-import { Editor } from '@rrte/editor';
-import { Paragraph } from '@rrte/extension-paragraph';
-import { Strike } from '@rrte/extension-strike';
+import { Editor } from '../../packages/editor/src';
+import { Paragraph } from '../../packages/extension-paragraph/src';
+import { Strike } from '../../packages/extension-strike/src';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import React from 'react';
 
 describe('Strike', () => {
+  it('button should start storedmark', async () => {
+    const editorRef = {} as any;
+    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Strike()]} />);
+
+    const strikeButton = screen.getByTestId('strike-button');
+    await userEvent.click(strikeButton);
+
+    expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('strike');
+  });
   it('should render strike text', async () => {
     const content = {
       type: 'doc',

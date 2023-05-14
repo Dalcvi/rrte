@@ -4,23 +4,24 @@
 
 import { Editor } from '../../packages/editor/src';
 import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Bold } from '../../packages/extension-bold/src';
+import { Superscript } from '../../packages/extension-superscript/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-describe('Bold', () => {
+describe('Superscript', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Bold()]} />);
+    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Superscript()]} />);
 
-    const button = screen.getByTestId('bold-button');
+    const button = screen.getByTestId('superscript-button');
     await userEvent.click(button);
 
-    expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('bold');
+    expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('superscript');
   });
-  it('should render bold text', async () => {
+
+  it('should render superscript text', async () => {
     const content = {
       type: 'doc',
       content: [
@@ -31,10 +32,10 @@ describe('Bold', () => {
               type: 'text',
               marks: [
                 {
-                  type: 'bold',
+                  type: 'superscript',
                 },
               ],
-              text: 'Bold',
+              text: 'Superscript',
             },
           ],
         },
@@ -42,12 +43,12 @@ describe('Bold', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Bold()]} />);
+    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Superscript()]} />);
 
     const paragraph = screen.getByTestId('paragraph');
-    const boldTag = paragraph.querySelector('strong');
+    const superscriptTag = paragraph.querySelector('sup');
 
-    expect(boldTag).toBeInTheDocument();
+    expect(superscriptTag).toBeInTheDocument();
     expect(editorRef.current.getJSON()).toEqual(content);
   });
 });

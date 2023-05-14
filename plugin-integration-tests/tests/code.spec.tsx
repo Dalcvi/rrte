@@ -4,23 +4,23 @@
 
 import { Editor } from '../../packages/editor/src';
 import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Bold } from '../../packages/extension-bold/src';
+import { Code } from '../../packages/extension-code/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-describe('Bold', () => {
+describe('Code', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Bold()]} />);
+    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Code()]} />);
 
-    const button = screen.getByTestId('bold-button');
+    const button = screen.getByTestId('code-button');
     await userEvent.click(button);
 
-    expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('bold');
+    expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('code');
   });
-  it('should render bold text', async () => {
+  it('should render code text', async () => {
     const content = {
       type: 'doc',
       content: [
@@ -31,10 +31,14 @@ describe('Bold', () => {
               type: 'text',
               marks: [
                 {
-                  type: 'bold',
+                  type: 'code',
                 },
               ],
-              text: 'Bold',
+              text: 'Code today',
+            },
+            {
+              type: 'text',
+              text: ' ',
             },
           ],
         },
@@ -42,12 +46,12 @@ describe('Bold', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Bold()]} />);
+    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Code()]} />);
 
     const paragraph = screen.getByTestId('paragraph');
-    const boldTag = paragraph.querySelector('strong');
+    const codeTag = paragraph.querySelector('code');
 
-    expect(boldTag).toBeInTheDocument();
+    expect(codeTag).toBeInTheDocument();
     expect(editorRef.current.getJSON()).toEqual(content);
   });
 });

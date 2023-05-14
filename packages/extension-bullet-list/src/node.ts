@@ -46,7 +46,13 @@ export const BulletListNode = Node.create<BulletListOptions>({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['ul', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+    return [
+      'ul',
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+        'data-testid': 'bulletList',
+      }),
+      0,
+    ];
   },
 
   addCommands() {

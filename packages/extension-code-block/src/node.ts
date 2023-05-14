@@ -66,7 +66,13 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['pre', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), ['code', {}, 0]];
+    return [
+      'pre',
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+        'data-testid': 'codeBlock',
+      }),
+      ['code', {}, 0],
+    ];
   },
 
   addCommands() {

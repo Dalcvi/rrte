@@ -4,13 +4,13 @@
 
 import { Editor } from '../../packages/editor/src';
 import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Italic } from '../../packages/extension-italic/src';
+import { Link } from '../../packages/extension-link/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 
-describe('Italic', () => {
-  it('should render italic text', async () => {
+describe('Link', () => {
+  it('should render link', async () => {
     const content = {
       type: 'doc',
       content: [
@@ -21,10 +21,14 @@ describe('Italic', () => {
               type: 'text',
               marks: [
                 {
-                  type: 'italic',
+                  type: 'link',
+                  attrs: {
+                    href: 'https://www.google.com',
+                    target: '_blank',
+                  },
                 },
               ],
-              text: 'Italic',
+              text: 'Link',
             },
           ],
         },
@@ -32,12 +36,12 @@ describe('Italic', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Italic()]} />);
+    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Link()]} />);
 
     const paragraph = screen.getByTestId('paragraph');
-    const italicTag = paragraph.querySelector('em');
+    const linkTag = paragraph.querySelector('a');
 
-    expect(italicTag).toBeInTheDocument();
+    expect(linkTag).toBeInTheDocument();
     expect(editorRef.current.getJSON()).toEqual(content);
   });
 });

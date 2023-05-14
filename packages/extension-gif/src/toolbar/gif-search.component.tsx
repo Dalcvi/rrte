@@ -105,6 +105,7 @@ export const GifSearch = ({
   return (
     <div className={classes.gifGridContainer}>
       <input
+        data-testid="gif-search"
         aria-label="gif search"
         type="search"
         className={classes.gifSearch}
@@ -117,6 +118,7 @@ export const GifSearch = ({
           if (gif.images.fixed_width.webp) {
             return (
               <img
+                data-testid="gif-img-select"
                 key={gif.id}
                 ref={addRef ? setObservedGif : null}
                 className={classes.gif}
@@ -136,6 +138,7 @@ export const GifSearch = ({
           }
           return (
             <video
+              data-testid="gif-vid-select"
               key={gif.id}
               ref={addRef ? setObservedGif : null}
               className={classes.gif}

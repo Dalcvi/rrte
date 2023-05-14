@@ -60,11 +60,15 @@ export const YoutubeComponent = ({
         [classes.center]: alignment === 'center',
         [classes.right]: alignment === 'right',
       })}
+      style={{
+        width: `min(${isCustomSizeEnabled ? customWidth : node.attrs.defaultWidth}px, 100%)`,
+      }}
     >
       <div
+        data-testid="youtube-comp"
         className={classes.videoContainer}
         style={{
-          width: isCustomSizeEnabled ? customWidth : node.attrs.defaultWidth,
+          width: `min(${isCustomSizeEnabled ? customWidth : node.attrs.defaultWidth}px, 100%)`,
         }}
       >
         <YouTubeLite

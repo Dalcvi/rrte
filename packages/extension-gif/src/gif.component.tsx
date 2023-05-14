@@ -24,7 +24,6 @@ export const GifComponent = ({ editor, node, selected }: { editor: Editor; node:
   const isCustomSizeEnabled = !!node.attrs.customSize;
   const customWidth = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth;
   const customHeight = node.attrs.customHeight === null ? node.attrs.originalHeight : node.attrs.customHeight;
-  const style = isCustomSizeEnabled ? { width: `${customWidth}px`, height: `${customHeight}px` } : {};
 
   useEffect(() => {
     if (
@@ -81,7 +80,7 @@ export const GifComponent = ({ editor, node, selected }: { editor: Editor; node:
       })}
     >
       {node.attrs.webp ? (
-        <div className={classes.imageWrapper}>
+        <div className={classes.imageWrapper} data-testid="gif-comp-img">
           <img
             ref={gifRef as React.RefObject<HTMLImageElement>}
             className={classes.gif}
@@ -94,6 +93,7 @@ export const GifComponent = ({ editor, node, selected }: { editor: Editor; node:
         </div>
       ) : (
         <video
+          data-testid="gif-comp-vid"
           ref={gifRef as React.RefObject<HTMLVideoElement>}
           className={classes.gif}
           autoPlay

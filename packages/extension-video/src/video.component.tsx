@@ -70,7 +70,7 @@ export const VideoComponent = ({ editor, node, selected }: { editor: Editor; nod
         [classes.right]: alignment === 'right',
       })}
     >
-      <div className={classes.videoContainer}>
+      <div data-testid="video-comp" className={classes.videoContainer}>
         <video
           ref={videoRef}
           controls={!isEditable}
