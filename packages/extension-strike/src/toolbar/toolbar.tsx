@@ -15,9 +15,9 @@ const Button = ({ editor }: { editor: Editor }) => {
         [classes.active]: isActive,
       })}
       onClick={() => {
-        editor.chain().focus().toggleStrike(isActive).run();
+        editor.chain().focus().toggleStrike().run();
       }}
-      disabled={!editor.can().toggleStrike(isActive)}
+      disabled={!editor.can().toggleStrike()}
     >
       <StrikeIcon
         height={'15px'}
@@ -35,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: StrikeMark.name,
   text: 'Strike',
   type: 'icon' as const,
-  priority: 1,
+  priority: 96,
 };

@@ -1,4 +1,4 @@
-import { Mark, mergeAttributes } from '@tiptap/core';
+import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap/core';
 
 export type SuperscriptOptions = {
   HTMLAttributes: Record<string, any>;
@@ -14,7 +14,7 @@ declare module '@tiptap/core' {
       /**
        * Toggle the superscript
        */
-      toggleSuperscript: (isActive: boolean) => ReturnType;
+      toggleSuperscript: () => ReturnType;
       /**
        * Unset the superscript
        */
@@ -22,6 +22,8 @@ declare module '@tiptap/core' {
     };
   }
 }
+
+const regex = /(?<!\^)\^(.*?)\^(?!\^)/g;
 
 export const SuperscriptMark = Mark.create<SuperscriptOptions>({
   name: 'superscript',
@@ -55,13 +57,16 @@ export const SuperscriptMark = Mark.create<SuperscriptOptions>({
     return {
       setSuperscript:
         () =>
-        ({ commands }) => {
-          commands.unsetMark('subscript');
+        ({ commands, editor }) => {
+          if (editor.extensionManager.extensions.some((val) => val.name === 'subscript')) {
+            commands.unsetMark('subscript');
+          }
           return commands.setMark('superscript');
         },
       toggleSuperscript:
-        (isActive: boolean) =>
-        ({ commands }) => {
+        () =>
+        ({ commands, editor }) => {
+          const isActive = editor.isActive('superscript');
           if (isActive) {
             return commands.unsetSuperscript();
           }
@@ -74,5 +79,30 @@ export const SuperscriptMark = Mark.create<SuperscriptOptions>({
           return commands.unsetMark('superscript');
         },
     };
+  },
+
+  addKeyboardShortcuts() {
+    return {
+      'Mod-shift-u': () => this.editor.commands.toggleSuperscript(),
+      'Mod-shift-U': () => this.editor.commands.toggleSuperscript(),
+    };
+  },
+
+  addInputRules() {
+    return [
+      markInputRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
+  },
+
+  addPasteRules() {
+    return [
+      markPasteRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
   },
 });

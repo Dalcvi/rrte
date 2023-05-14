@@ -4,14 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "watch": "turbo run watch",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "build:dev": "turbo run build:dev",
-    "build:prod": "turbo run build:prod",
-    "clean-install": "caffeinate rm -rf './**/node_modules' './**/dist' && pnpm install && pnpm build:dev",
     "test": "jest --config='../jest.config.js'"
   },
   "devDependencies": {

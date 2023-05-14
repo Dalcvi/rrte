@@ -36,5 +36,5 @@ export const LeftAlignToolbarButton: RegularButtonConfig<TextAlignConfig> = {
   name: `${TextAlignExtension.name}-left`,
   text: 'Text align left',
   type: 'icon' as const,
-  priority: 1,
+  priority: 92,
 };

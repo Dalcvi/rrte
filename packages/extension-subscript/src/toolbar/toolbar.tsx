@@ -15,9 +15,9 @@ const Button = ({ editor }: { editor: Editor }) => {
         [classes.active]: isActive,
       })}
       onClick={() => {
-        editor.chain().focus().toggleSubscript(isActive).run();
+        editor.chain().focus().toggleSubscript().run();
       }}
-      disabled={!editor.can().toggleSubscript(isActive)}
+      disabled={!editor.can().toggleSubscript()}
     >
       <SubscriptIcon
         height={'15px'}
@@ -35,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: SubscriptMark.name,
   text: 'Subscript',
   type: 'icon' as const,
-  priority: 1,
+  priority: 93,
 };

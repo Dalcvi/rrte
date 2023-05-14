@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "@rrte/extension-document": "workspace:*",
-    "@rrte/extension-paragraph": "workspace:*",
     "@rrte/extension-text": "workspace:*",
     "@rrte/toolbar": "^1.0.0",
     "@tiptap/pm": "^2.0.3",

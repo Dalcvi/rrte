@@ -5,7 +5,8 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "plugin-integration-tests"
+    "plugin-integration-tests",
+    "documentation"
   ],
   "type": "module",
   "scripts": {
@@ -17,7 +18,8 @@
     "build:dev": "turbo run build:dev",
     "build:prod": "turbo run build:prod",
     "clean-install": "caffeinate rm -rf './**/node_modules' './**/dist' && pnpm install && pnpm build:dev",
-    "test": "jest"
+    "test": "jest",
+    "docs:dev": "turbo run docs:dev"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",

@@ -1,0 +1,8 @@
+{
+  "label": "Extensions",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "The editor allows you to extend its functionality by installing extensions. This section lists all available extensions and their documentation."
+  }
+}

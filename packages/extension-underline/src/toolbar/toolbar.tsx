@@ -15,9 +15,9 @@ const Button = ({ editor }: { editor: Editor }) => {
         [classes.active]: isActive,
       })}
       onClick={() => {
-        editor.chain().focus().toggleUnderline(isActive).run();
+        editor.chain().focus().toggleUnderline().run();
       }}
-      disabled={!editor.can().toggleUnderline(isActive)}
+      disabled={!editor.can().toggleUnderline()}
     >
       <UnderlineIcon
         height={'15px'}
@@ -35,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: UnderlineMark.name,
   text: 'Underline',
   type: 'icon' as const,
-  priority: 1,
+  priority: 95,
 };

@@ -36,5 +36,5 @@ export const JustifyAlignToolbarButton: RegularButtonConfig<TextAlignConfig> = {
   name: `${TextAlignExtension.name}-justify`,
   text: 'Text align justify',
   type: 'icon' as const,
-  priority: 1,
+  priority: 89,
 };

@@ -12,10 +12,7 @@ declare module '@tiptap/core' {
     textAlign: {
       /**
        * Set the text alignment
-       * @param textAlign - Text alignment
-       * @returns
-       * - `true` if the text alignment is set
-       * - `false` otherwise
+       * @param textAlign - 'left', 'center', 'right', 'justify'
        */
       setTextAlign: (textAlign: Alignment) => ReturnType;
     };
@@ -60,7 +57,7 @@ export const TextAlignExtension = Extension.create<TextAlignOptions>({
       setTextAlign:
         (textAlign) =>
         ({ commands }) => {
-          return this.options.types.every((type) => {
+          return this.options.types.some((type) => {
             return commands.updateAttributes(type, { textAlign });
           });
         },

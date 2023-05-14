@@ -35,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: OrderedListNode.name,
   text: 'Ordered list',
   type: 'icon' as const,
-  priority: 1,
+  priority: 80,
 };

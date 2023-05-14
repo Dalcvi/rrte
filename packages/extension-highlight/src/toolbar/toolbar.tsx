@@ -61,5 +61,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: HighlightExtension.name,
   text: 'Highlight',
   type: 'icon' as const,
-  priority: 1,
+  priority: 102,
 };

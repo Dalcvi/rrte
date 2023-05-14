@@ -33,6 +33,7 @@
     "@rrte/extension-link": "workspace:^*",
     "@rrte/extension-list-item": "workspace:^*",
     "@rrte/extension-ordered-list": "workspace:^*",
+    "@rrte/extension-paragraph": "workspace:^",
     "@rrte/extension-strike": "workspace:^*",
     "@rrte/extension-subscript": "workspace:^*",
     "@rrte/extension-superscript": "workspace:^*",

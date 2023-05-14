@@ -57,5 +57,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: FontSizeExtension.name,
   text: 'Color',
   type: 'icon' as const,
-  priority: 4,
+  priority: 104,
 };

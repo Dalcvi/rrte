@@ -36,5 +36,5 @@ export const CenterAlignToolbarButton: RegularButtonConfig<TextAlignConfig> = {
   name: `${TextAlignExtension.name}-center`,
   text: 'Text align center',
   type: 'icon' as const,
-  priority: 1,
+  priority: 91,
 };

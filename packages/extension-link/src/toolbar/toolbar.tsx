@@ -36,5 +36,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: LinkMark.name,
   text: 'Link',
   type: 'icon' as const,
-  priority: 1,
+  priority: 85,
 };

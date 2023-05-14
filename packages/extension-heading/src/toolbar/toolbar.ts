@@ -20,7 +20,7 @@ export const ToolbarDropdown: DropdownConfig = {
   name: 'text type',
   type: ToolbarItemType.DROPDOWN,
   text: 'Text type',
-  priority: 0,
+  priority: 105,
   DropdownPriority: 1000,
   values: [createValue(1), createValue(2), createValue(3), createValue(4), createValue(5), createValue(6)],
 };

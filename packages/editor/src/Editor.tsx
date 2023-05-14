@@ -1,6 +1,5 @@
 import { useEditor, EditorContent, JSONContent, HTMLContent } from '@tiptap/react';
 import { Document } from '@rrte/extension-document';
-import { Paragraph } from '@rrte/extension-paragraph';
 import { Text } from '@rrte/extension-text';
 import type { UnknownExtension, BubbleMenuToolbar, Config } from '@rrte/common';
 import { Toolbar } from '@rrte/toolbar';
@@ -13,19 +12,21 @@ export type EditorRef = ReturnType<typeof useEditor>;
 
 export const Editor = ({
   extensions = [],
-  className,
+  editorWrapperClassName,
+  toolbarClassName,
   editorRef,
-  editorContentClassName,
-  editorContentWrapperClassName,
+  contentClassName,
+  contentWrapperClassName,
   content,
   viewerMode,
   onUpdateJson,
   onUpdateHtml,
 }: {
-  className?: string;
+  toolbarClassName?: string;
+  editorWrapperClassName?: string;
   editorRef?: React.MutableRefObject<EditorRef>;
-  editorContentClassName?: string;
-  editorContentWrapperClassName?: string;
+  contentClassName?: string;
+  contentWrapperClassName?: string;
   viewerMode?: boolean;
   extensions?: UnknownExtension[];
   content: JSONContent | HTMLContent | undefined;
@@ -33,25 +34,24 @@ export const Editor = ({
   onUpdateHtml?: (content: HTMLContent | undefined) => void;
 }) => {
   const [contentHasBeenSet, setContentHasBeenSet] = useState(false);
-  const allExtensions = useMemo(() => [Paragraph(), ...extensions] as UnknownExtension[], [extensions]);
   const allBubbleMenus = useMemo(
     () =>
-      allExtensions.reduce((acc, { extension, config }) => {
+      extensions.reduce((acc, { extension, config }) => {
         if (config.bubbleMenu) {
           return [...acc, { name: extension.name, menu: config.bubbleMenu, config }];
         }
         return acc;
       }, [] as { name: string; menu: BubbleMenuToolbar; config: Config }[]),
-    [allExtensions],
+    [extensions],
   );
   const editor = useEditor({
-    extensions: [Document, Text, ...allExtensions.map(({ extension }) => extension)],
+    extensions: [Document, Text, ...extensions.map(({ extension }) => extension)],
     content,
     editable: !viewerMode,
-    editorProps: editorContentClassName
+    editorProps: contentClassName
       ? {
           attributes: {
-            class: editorContentClassName,
+            class: contentClassName,
           },
         }
       : undefined,
@@ -100,23 +100,24 @@ export const Editor = ({
     if (contentHasBeenSet || editor === null || content === undefined) {
       return;
     }
-    setContentHasBeenSet(true);
+    setContentHasBeenSet(true && !viewerMode);
     editor.commands.setContent(content);
   }, [content]);
 
   return (
-    <div className={`${classes.editorWrapper} ${className}`}>
+    <div className={`${classes.editorWrapper} ${editorWrapperClassName}`}>
       {editor && !viewerMode && (
         <Toolbar
           editor={editor}
+          wrapperClassName={toolbarClassName}
           items={
-            allExtensions
+            extensions
               .map((extension) => ({ toolbar: extension.config.toolbar, config: extension.config }))
               .filter((toolbar) => !!toolbar.toolbar) as { toolbar: ToolbarItem<any>; config: any }[]
           }
         />
       )}
-      <div className={`${classes.editorContent}  ${editorContentWrapperClassName}`}>
+      <div className={`${classes.editorContent}  ${contentWrapperClassName}`}>
         <EditorContent editor={editor} data-testid="rrte-editor" />
       </div>
       {editor && !viewerMode && allBubbleMenus.length > 0 && <BubbleMenuList editor={editor} list={allBubbleMenus} />}

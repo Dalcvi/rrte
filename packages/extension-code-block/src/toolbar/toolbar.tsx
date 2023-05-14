@@ -35,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: CodeBlockNode.name,
   text: 'Code Block',
   type: 'icon' as const,
-  priority: 1,
+  priority: 87,
 };

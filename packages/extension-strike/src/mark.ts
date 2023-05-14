@@ -1,4 +1,4 @@
-import { Mark, mergeAttributes } from '@tiptap/core';
+import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap/core';
 
 export type StrikeOptions = {
   HTMLAttributes: Record<string, any>;
@@ -14,7 +14,7 @@ declare module '@tiptap/core' {
       /**
        * Toggle the strike
        */
-      toggleStrike: (isActive: boolean) => ReturnType;
+      toggleStrike: () => ReturnType;
       /**
        * Unset the strike
        */
@@ -22,6 +22,8 @@ declare module '@tiptap/core' {
     };
   }
 }
+
+const regex = /~~(.*?)~~/g;
 
 export const StrikeMark = Mark.create<StrikeOptions>({
   name: 'strike',
@@ -62,8 +64,9 @@ export const StrikeMark = Mark.create<StrikeOptions>({
           return commands.setMark('strike');
         },
       toggleStrike:
-        (isActive: boolean) =>
-        ({ commands }) => {
+        () =>
+        ({ commands, editor }) => {
+          const isActive = editor.isActive('strike');
           if (isActive) {
             return commands.unsetStrike();
           }
@@ -76,5 +79,30 @@ export const StrikeMark = Mark.create<StrikeOptions>({
           return commands.unsetMark('strike');
         },
     };
+  },
+
+  addKeyboardShortcuts() {
+    return {
+      'Mod-s': () => this.editor.commands.toggleStrike(),
+      'Mod-S': () => this.editor.commands.toggleStrike(),
+    };
+  },
+
+  addInputRules() {
+    return [
+      markInputRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
+  },
+
+  addPasteRules() {
+    return [
+      markPasteRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
   },
 });

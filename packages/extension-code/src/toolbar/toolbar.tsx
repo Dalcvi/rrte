@@ -35,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: CodeMark.name,
   text: 'Code',
   type: 'icon' as const,
-  priority: 1,
+  priority: 86,
 };

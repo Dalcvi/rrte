@@ -35,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: BulletListNode.name,
   text: 'Bullet list',
   type: 'icon' as const,
-  priority: 1,
+  priority: 82,
 };

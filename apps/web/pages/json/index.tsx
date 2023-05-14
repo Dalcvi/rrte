@@ -32,6 +32,7 @@ import classes from './styles.module.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { Header } from '../../components/header';
+import { Paragraph } from '@rrte/extension-paragraph';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
@@ -81,6 +82,7 @@ export default function Web() {
             Subscript(),
             Superscript(),
             TextStyle(),
+            Paragraph(),
             Highlight(),
             History(),
             Gapcursor(),
@@ -144,9 +146,9 @@ export default function Web() {
             }),
             Youtube(),
           ]}
-          className={classes.editor}
-          editorContentClassName={classes.editorContent}
-          editorContentWrapperClassName={classes.editorContentWrapper}
+          editorWrapperClassName={classes.editor}
+          contentClassName={classes.editorContent}
+          contentWrapperClassName={classes.editorContentWrapper}
         />
         {content && (
           <div className={classes.schemaContainer}>

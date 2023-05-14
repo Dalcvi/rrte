@@ -25,6 +25,7 @@ import { Dropcursor } from '@rrte/extension-dropcursor';
 import { Color } from '@rrte/extension-color';
 import { FontSize } from '@rrte/extension-font-size';
 import { TextAlign } from '@rrte/extension-text-align';
+import { Paragraph } from '@rrte/extension-paragraph';
 import { Id } from '@rrte/extension-id';
 import { Youtube } from '@rrte/extension-youtube';
 import { HTMLContent, JSONContent } from '@rrte/common';
@@ -91,6 +92,7 @@ export default function Web() {
             Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO'),
             Dropcursor(),
             TextAlign(),
+            Paragraph(),
             ImageExtension({
               type: 'user-controlled',
               maxFileSize: 100000000,
@@ -149,9 +151,9 @@ export default function Web() {
             }),
             Youtube(),
           ]}
-          className={classes.editor}
-          editorContentClassName={classes.editorContent}
-          editorContentWrapperClassName={classes.editorContentWrapper}
+          editorWrapperClassName={classes.editor}
+          contentClassName={classes.editorContent}
+          contentWrapperClassName={classes.editorContentWrapper}
         />
       </div>
     </div>

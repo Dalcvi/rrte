@@ -36,5 +36,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: BlockquoteNode.name,
   text: 'Blockquote',
   type: 'icon' as const,
-  priority: 1,
+  priority: 88,
 };

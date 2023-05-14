@@ -11,7 +11,7 @@ const toolbarDropdown: DropdownConfig = {
   name: 'text type',
   type: ToolbarItemType.DROPDOWN,
   text: 'Text type',
-  priority: 10,
+  priority: 105,
   DropdownPriority: 1000,
   values: [
     {

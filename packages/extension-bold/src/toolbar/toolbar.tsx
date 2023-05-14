@@ -15,9 +15,9 @@ const Button = ({ editor }: { editor: Editor }) => {
         [classes.active]: isActive,
       })}
       onClick={() => {
-        editor.chain().focus().toggleBold(isActive).run();
+        editor.chain().focus().toggleBold().run();
       }}
-      disabled={!editor.can().toggleBold(isActive)}
+      disabled={!editor.can().toggleBold()}
     >
       <BoldIcon
         height={'10px'}
@@ -35,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: BoldMark.name,
   text: 'Bold',
   type: 'icon' as const,
-  priority: 1,
+  priority: 98,
 };

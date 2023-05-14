@@ -83,5 +83,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: ColorExtension.name,
   text: 'Color',
   type: 'icon',
-  priority: 1,
+  priority: 103,
 };

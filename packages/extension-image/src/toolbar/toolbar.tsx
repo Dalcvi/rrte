@@ -49,39 +49,7 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
             originalHeight,
           });
 
-          // const reader = new FileReader();
-          // reader.readAsDataURL(file);
-
-          // const image = new Image();
-          // reader.onload = (e) => {
-          //   if (!e.target || !e.target.result) {
-          //     return;
-          //   }
-          //   const result = e.target.result;
-          //   if (typeof result === 'string') {
-          //     image.src = result;
-          //   } else {
-          //     const blob = new Blob([result], { type: file.type });
-          //     image.src = URL.createObjectURL(blob);
-          //   }
-
-          //   image.onload = async () => {
-          //     const originalWidth = image.naturalWidth;
-          //     const originalHeight = image.naturalHeight;
-          //     const tempImgId = await createTempImage(editor, {
-          //       src: image.src,
-          //       originalWidth,
-          //       originalHeight,
-          //     });
-
-          //     const finalImg = await config.onImageAdd(file, {
-          //       src: image.src,
-          //       originalWidth,
-          //       originalHeight,
-          //     });
-          //     await handleFileImage(finalImg, editor, tempImgId);
-          //   };
-          // };
+          await handleFileImage(finalImg, editor, tempImgId);
         }}
       />
       <ImageIcon className={classes.icon} width={'15px'} height={'15px'} />
@@ -99,6 +67,8 @@ const UserControlledButton = ({ editor, config }: { editor: Editor; config: User
       onClick={async () => {
         const uploadValue = await config.onImageAddClick();
         const tempImgId = await createTempImage(editor, uploadValue.tempFile);
+        const finalFile = await uploadValue.finalFile;
+        console.log(finalFile);
         await handleFileImage(await uploadValue.finalFile, editor, tempImgId);
       }}
     >
