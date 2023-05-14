@@ -38,7 +38,13 @@ export const ParagraphNode = Node.create<ParagraphOptions>({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['p', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+    return [
+      'p',
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+        'data-testid': 'paragraph',
+      }),
+      0,
+    ];
   },
 
   addCommands() {

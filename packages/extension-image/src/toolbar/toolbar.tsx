@@ -68,7 +68,6 @@ const UserControlledButton = ({ editor, config }: { editor: Editor; config: User
         const uploadValue = await config.onImageAddClick();
         const tempImgId = await createTempImage(editor, uploadValue.tempFile);
         const finalFile = await uploadValue.finalFile;
-        console.log(finalFile);
         await handleFileImage(await uploadValue.finalFile, editor, tempImgId);
       }}
     >

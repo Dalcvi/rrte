@@ -19,8 +19,6 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
   const showSelection = isSelected || selected;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
-  // const width = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth ?? undefined;
-  // const height = node.attrs.customHeight === null ? node.attrs.originalHeight : node.attrs.customHeight ?? undefined;
 
   useEffect(() => {
     if (node.attrs.customSize && (imageWidth !== node.attrs.customWidth || imageHeight !== node.attrs.customHeight)) {
@@ -64,7 +62,7 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
         [classes.right]: alignment === 'right',
       })}
     >
-      <div className={classes.imageContainer}>
+      <div className={classes.imageContainer} data-testid="image-comp">
         <img
           ref={imageRef}
           className={classNames(classes.image, {

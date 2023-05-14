@@ -8,7 +8,7 @@ export default function Web() {
   const [comments, setComments] = useState([]);
   const editor = useRef(null);
   const extensions = useMemo(() => getConfig(), []);
-  console.log(extensions);
+
   return (
     <div>
       <div className={classes.commentsContainer}>
