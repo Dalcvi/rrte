@@ -70,6 +70,7 @@ const Button = ({ editor }: { editor: Editor }) => {
             YouTube URL:
             <input
               aria-label="youtube url"
+              data-testid="youtube-input"
               type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
