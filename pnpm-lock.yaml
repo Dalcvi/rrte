@@ -886,9 +886,6 @@ importers:
       '@rrte/common':
         specifier: ^1.0.0
         version: link:../common
-      '@tiptap-pro/extension-unique-id':
-        specifier: ^2.0.1
-        version: 2.0.1(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
@@ -4882,17 +4879,6 @@ packages:
     dependencies:
       '@testing-library/dom': 9.2.0
     dev: true
-
-  /@tiptap-pro/extension-unique-id@2.0.1(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3):
-    resolution: {integrity: sha512-5C7ZMHKI+9rF/T4KGJfwTy5dM1DQpHGH8sXDWLxPunxYkZhxPuM0QyUsX2Nv1Czi3Px5/c0IzieQ7EJKLi9oLA==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-      '@tiptap/pm': ^2.0.0
-    dependencies:
-      '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
-      '@tiptap/pm': 2.0.3(@tiptap/core@2.0.3)
-      uuid: 8.3.2
-    dev: false
 
   /@tiptap/core@2.0.3(@tiptap/pm@2.0.3):
     resolution: {integrity: sha512-jLyVIWAdjjlNzrsRhSE2lVL/7N8228/1R1QtaVU85UlMIwHFAcdzhD8FeiKkqxpTnGpaDVaTy7VNEtEgaYdCyA==}

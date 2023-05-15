@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "@rrte/common": "^1.0.0",
-    "@tiptap-pro/extension-unique-id": "^2.0.1",
     "@tiptap/core": "^2.0.3",
     "@tiptap/pm": "^2.0.3",
     "uuid": "^9.0.0"
