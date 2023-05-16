@@ -10,13 +10,14 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <button
       data-testid="superscript-button"
+      aria-label="superscript"
       className={classNames(classes.superscriptButton, {
         [classes.active]: isActive,
       })}
       onClick={() => {
-        editor.chain().focus().toggleSuperscript(isActive).run();
+        editor.chain().focus().toggleSuperscript().run();
       }}
-      disabled={!editor.can().toggleSuperscript(isActive)}
+      disabled={!editor.can().toggleSuperscript()}
     >
       <SuperscriptIcon
         height={'15px'}
@@ -34,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: SuperscriptMark.name,
   text: 'Superscript',
   type: 'icon' as const,
-  priority: 1,
+  priority: 94,
 };

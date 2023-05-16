@@ -10,6 +10,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive(BlockquoteNode.name);
   return (
     <button
+      aria-label="blockquote"
       data-testid="blockquote-button"
       disabled={!editor.can().toggleBlockquote()}
       className={classNames(classes.blockquoteButton, {
@@ -35,5 +36,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: BlockquoteNode.name,
   text: 'Blockquote',
   type: 'icon' as const,
-  priority: 1,
+  priority: 88,
 };

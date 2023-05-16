@@ -11,8 +11,17 @@ import {
 } from './toolbar.utils';
 import { Dropdown } from './dropdown';
 import classes from './toolbar.module.scss';
+import classNames from 'classnames';
 
-export const Toolbar = ({ editor, items }: { editor: Editor; items: { toolbar: ToolbarItem<any>; config: any }[] }) => {
+export const Toolbar = ({
+  editor,
+  items,
+  wrapperClassName,
+}: {
+  editor: Editor;
+  items: { toolbar: ToolbarItem<any>; config: any }[];
+  wrapperClassName?: string;
+}) => {
   const configsByName = useMemo(() => getConfigsMapByName(items), [items]);
   const toolbarItems = useMemo(() => items.map(({ toolbar }) => toolbar), [items]);
   const spreadedItems = useMemo(() => spreadToolbarItems(toolbarItems), [items]);
@@ -27,7 +36,7 @@ export const Toolbar = ({ editor, items }: { editor: Editor; items: { toolbar: T
     [],
   );
   return (
-    <div className={classes.toolbarList}>
+    <div className={classNames(classes.toolbarList, wrapperClassName)}>
       {sortedButtons.map((item) => {
         switch (item.type) {
           case ToolbarItemType.ICON:

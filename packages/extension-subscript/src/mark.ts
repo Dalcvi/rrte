@@ -1,4 +1,4 @@
-import { Mark, mergeAttributes } from '@tiptap/core';
+import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap/core';
 
 export type SubscriptOptions = {
   HTMLAttributes: Record<string, any>;
@@ -14,7 +14,7 @@ declare module '@tiptap/core' {
       /**
        * Toggle the subscript
        */
-      toggleSubscript: (isActive: boolean) => ReturnType;
+      toggleSubscript: () => ReturnType;
       /**
        * Unset the subscript
        */
@@ -22,6 +22,8 @@ declare module '@tiptap/core' {
     };
   }
 }
+
+const regex = /(?<!~)~(.*?)~(?!~)/g;
 
 export const SubscriptMark = Mark.create<SubscriptOptions>({
   name: 'subscript',
@@ -55,13 +57,16 @@ export const SubscriptMark = Mark.create<SubscriptOptions>({
     return {
       setSubscript:
         () =>
-        ({ commands }) => {
-          commands.unsetMark('superscript');
+        ({ commands, editor }) => {
+          if (editor.extensionManager.extensions.some((val) => val.name === 'superscript')) {
+            commands.unsetMark('superscript');
+          }
           return commands.setMark('subscript');
         },
       toggleSubscript:
-        (isActive: boolean) =>
-        ({ commands }) => {
+        () =>
+        ({ commands, editor }) => {
+          const isActive = editor.isActive('subscript');
           if (isActive) {
             return commands.unsetSubscript();
           }
@@ -74,5 +79,30 @@ export const SubscriptMark = Mark.create<SubscriptOptions>({
           return commands.unsetMark('subscript');
         },
     };
+  },
+
+  addKeyboardShortcuts() {
+    return {
+      'Mod-shift-d': () => this.editor.commands.toggleSubscript(),
+      'Mod-shift-D': () => this.editor.commands.toggleSubscript(),
+    };
+  },
+
+  addInputRules() {
+    return [
+      markInputRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
+  },
+
+  addPasteRules() {
+    return [
+      markPasteRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
   },
 });

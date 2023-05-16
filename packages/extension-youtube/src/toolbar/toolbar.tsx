@@ -25,6 +25,7 @@ const Button = ({ editor }: { editor: Editor }) => {
     },
     [container],
   );
+  const test = "false";
   const escapeClose = useMemo(
     () => (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -44,7 +45,8 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <div className={classes.container} ref={setContainer}>
       <button
-        data-hook="youtube-button"
+        data-testid="youtube-button"
+        aria-label="YouTube"
         disabled={!editor.can().setYoutube({ url: '', id: 'video' })}
         className={classNames(classes.youtubeButton, {
           [classes.active]: isActive,
@@ -67,9 +69,17 @@ const Button = ({ editor }: { editor: Editor }) => {
         <div className={classes.inputContainer}>
           <label className={classes.inputLabel}>
             YouTube URL:
-            <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className={classes.input} />
+            <input
+              aria-label="youtube url"
+              data-testid="youtube-input"
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className={classes.input}
+            />
           </label>
           <button
+            data-testid="youtube-add-button"
             onClick={() => {
               if (!videoId) {
                 return;

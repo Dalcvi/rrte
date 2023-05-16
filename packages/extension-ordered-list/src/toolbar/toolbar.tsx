@@ -10,6 +10,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   return (
     <button
       data-testid="ordered-list-button"
+      aria-label="ordered-list"
       className={classNames(classes.orderedListButton, {
         [classes.active]: isActive,
       })}
@@ -34,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: OrderedListNode.name,
   text: 'Ordered list',
   type: 'icon' as const,
-  priority: 1,
+  priority: 80,
 };

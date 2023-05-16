@@ -1,4 +1,4 @@
-import { Mark, mergeAttributes } from '@tiptap/core';
+import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap/core';
 
 export type BoldOptions = {
   HTMLAttributes: Record<string, any>;
@@ -8,13 +8,13 @@ declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     bold: {
       /**
-       * Set the the selection as bold
+       * Set the selection as bold
        */
       setBold: () => ReturnType;
       /**
        * Toggle the bold
        */
-      toggleBold: (isActive: boolean) => ReturnType;
+      toggleBold: () => ReturnType;
       /**
        * Unset the bold
        */
@@ -22,6 +22,8 @@ declare module '@tiptap/core' {
     };
   }
 }
+
+const regex = /(\*\*|__)(.*?)\1/g;
 
 export const BoldMark = Mark.create<BoldOptions>({
   name: 'bold',
@@ -62,8 +64,9 @@ export const BoldMark = Mark.create<BoldOptions>({
           return chain().setMark('bold').run();
         },
       toggleBold:
-        (isActive: boolean) =>
-        ({ chain }) => {
+        () =>
+        ({ chain, editor }) => {
+          const isActive = editor.isActive('bold');
           if (isActive) {
             return chain().unsetBold().run();
           }
@@ -76,5 +79,30 @@ export const BoldMark = Mark.create<BoldOptions>({
           return chain().unsetMark('bold').run();
         },
     };
+  },
+
+  addKeyboardShortcuts() {
+    return {
+      'Mod-b': () => this.editor.commands.toggleBold(),
+      'Mod-B': () => this.editor.commands.toggleBold(),
+    };
+  },
+
+  addInputRules() {
+    return [
+      markInputRule({
+        find: regex,
+        type: this.type,
+      })
+    ];
+  },
+
+  addPasteRules() {
+    return [
+      markPasteRule({
+        find: regex,
+        type: this.type,
+      })
+    ];
   },
 });

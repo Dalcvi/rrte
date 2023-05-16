@@ -8,6 +8,7 @@ import classNames from 'classnames';
 const UndoButton = ({ editor }: { editor: Editor }) => {
   return (
     <button
+      aria-label="undo"
       data-testid="undo-button"
       disabled={!editor.can().undo()}
       className={classes.historyButton}
@@ -23,6 +24,7 @@ const UndoButton = ({ editor }: { editor: Editor }) => {
 const RedoButton = ({ editor }: { editor: Editor }) => {
   return (
     <button
+      aria-label="redo"
       data-testid="redo-button"
       disabled={!editor.can().redo()}
       className={classes.historyButton}

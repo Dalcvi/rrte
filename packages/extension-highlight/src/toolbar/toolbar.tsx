@@ -29,6 +29,7 @@ const Button = ({ editor }: { editor: Editor }) => {
     <div className={classes.highlightContainer}>
       <input
         data-testid="highlight-input"
+        aria-label="highlight"
         disabled={!editor.can().setHighlight(null)}
         type="color"
         value={highlight}
@@ -41,6 +42,7 @@ const Button = ({ editor }: { editor: Editor }) => {
       />
       {highlight && highlight.startsWith('#') && (
         <button
+          aria-label="reset highlight"
           data-testid="highlight-reset"
           className={classes.highlightReset}
           onClick={() => {
@@ -59,5 +61,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: HighlightExtension.name,
   text: 'Highlight',
   type: 'icon' as const,
-  priority: 1,
+  priority: 102,
 };

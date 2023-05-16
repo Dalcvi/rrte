@@ -17,7 +17,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
   const currentAttributes = editor.getAttributes(VideoNode.name) as VideoAttributes & { id: string | undefined };
 
   useEffect(() => {
-    const editor = document.querySelector("[data-hook='rrte-editor']") as HTMLElement;
+    const editor = document.querySelector("[data-testid='rrte-editor']") as HTMLElement;
     if (!editor) {
       return;
     }
@@ -42,6 +42,8 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
     <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
       <ChangeVideoButton config={config} editor={editor} videoId={videoId} />
       <button
+        data-testid="video-align-left"
+        aria-label="align left"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'left',
         })}
@@ -58,6 +60,8 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        data-testid="video-align-center"
+        aria-label="align center"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'center',
         })}
@@ -74,6 +78,8 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        data-testid="video-align-right"
+        aria-label="align right"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'right',
         })}
@@ -90,6 +96,8 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        data-testid="video-custom-size"
+        aria-label="custom size"
         className={classNames(classes.button, {
           [classes.buttonActive]: isCustomSizeEnabled,
         })}
@@ -108,6 +116,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Width:
         <input
+          aria-label="video width"
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
@@ -118,6 +127,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Height:
         <input
+          aria-label="video height"
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"
@@ -149,6 +159,7 @@ const ExtensionControlledChangeButton = ({
   return (
     <div className={classes.button}>
       <input
+        aria-label="change video"
         type="file"
         accept={config.acceptedVideoFileTypes.join(', ')}
         className={classes.videoInput}
@@ -205,7 +216,8 @@ const UserControlledChangeButton = ({
 }) => {
   return (
     <button
-      data-hook="user-controlled-video-button"
+      aria-label="change video"
+      data-testid="user-controlled-video-button"
       className={classNames(classes.button)}
       onClick={async () => {
         const uploadValue = await config.onVideoAddClick();

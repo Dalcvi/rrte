@@ -1,0 +1,17 @@
+{
+  "name": "plugin-integration-tests",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "jest --config='../jest.config.js'"
+  },
+  "devDependencies": {
+    "react": "18.2.0",
+    "tsconfig": "workspace:^"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "pnpm@7.29.1"
+}

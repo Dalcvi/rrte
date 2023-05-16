@@ -28,7 +28,7 @@ export const OrderedListNode = Node.create<OrderedListOptions>({
     return {
       itemTypeName: 'listItem',
       HTMLAttributes: {
-        class: classes.base
+        class: classes.base,
       },
       keepMarks: false,
       keepAttributes: false,
@@ -64,8 +64,20 @@ export const OrderedListNode = Node.create<OrderedListOptions>({
     const { start, ...attributesWithoutStart } = HTMLAttributes;
 
     return start === 1
-      ? ['ol', mergeAttributes(this.options.HTMLAttributes, attributesWithoutStart), 0]
-      : ['ol', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+      ? [
+          'ol',
+          mergeAttributes(this.options.HTMLAttributes, attributesWithoutStart, {
+            'data-testid': 'orderedList',
+          }),
+          0,
+        ]
+      : [
+          'ol',
+          mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+            'data-testid': 'orderedList',
+          }),
+          0,
+        ];
   },
 
   addCommands() {

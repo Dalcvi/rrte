@@ -48,14 +48,17 @@ export default {
       modulesOnly: true,
     }),
     commonjs({
-      sourceMap: process.env.NODE_ENV === 'production',
+      sourceMap: true,
+      minify: process.env.NODE_ENV === 'production',
       exclude: ['node_modules/**'],
     }),
-    svgr({}),
+    svgr({
+      minify: process.env.NODE_ENV === 'production',
+    }),
     esbuild({
       include: /\.[jt]sx?$/,
       exclude: /node_modules/,
-      sourceMap: process.env.NODE_ENV === 'development',
+      sourceMap: true,
       minify: process.env.NODE_ENV === 'production',
       jsx: 'automatic',
       target: 'es2017',

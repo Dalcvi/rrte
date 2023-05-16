@@ -24,19 +24,19 @@ export interface LinkProtocolOptions {
 
 export interface LinkOptions {
   /**
-   * If enabled, it adds links as you type.
+   * Checks for links when writing and automatically creates links for them
    */
   autolink: boolean;
   /**
-   * An array of custom protocols to be registered with linkifyjs.
+   * Linkifyjs protocols
    */
   protocols: Array<LinkProtocolOptions | string>;
   /**
-   * If enabled, links will be opened on click.
+   * Enables link clicking. Disabled in editing mode
    */
   openOnClick: boolean;
   /**
-   * Adds a link to the current selection if the pasted content only contains an url.
+   * Enables link creation on pasting
    */
   linkOnPaste: boolean;
   /**
@@ -44,7 +44,7 @@ export interface LinkOptions {
    */
   HTMLAttributes: Record<string, any>;
   /**
-   * A validation function that modifies link verification for the auto linker.
+   * validation function that is called when creating a link
    * @param url - The url to be validated.
    * @returns - True if the url is valid, false otherwise.
    */

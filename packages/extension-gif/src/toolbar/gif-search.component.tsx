@@ -104,13 +104,21 @@ export const GifSearch = ({
 
   return (
     <div className={classes.gifGridContainer}>
-      <input type="text" className={classes.gifSearch} value={search} onChange={(e) => setSearch(e.target.value)} />
+      <input
+        data-testid="gif-search"
+        aria-label="gif search"
+        type="search"
+        className={classes.gifSearch}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <div className={classes.gifGrid}>
         {gifs.map((gif, index) => {
           const addRef = gifs.length - 4 === index && search !== '' && gifs.length !== totalCount;
           if (gif.images.fixed_width.webp) {
             return (
               <img
+                data-testid="gif-img-select"
                 key={gif.id}
                 ref={addRef ? setObservedGif : null}
                 className={classes.gif}
@@ -130,6 +138,7 @@ export const GifSearch = ({
           }
           return (
             <video
+              data-testid="gif-vid-select"
               key={gif.id}
               ref={addRef ? setObservedGif : null}
               className={classes.gif}

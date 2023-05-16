@@ -1,4 +1,4 @@
-import { Mark, mergeAttributes } from '@tiptap/core';
+import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap/core';
 
 export type ItalicOptions = {
   HTMLAttributes: Record<string, any>;
@@ -14,7 +14,7 @@ declare module '@tiptap/core' {
       /**
        * Toggle the italic
        */
-      toggleItalic: (isActive: boolean) => ReturnType;
+      toggleItalic: () => ReturnType;
       /**
        * Unset the italic
        */
@@ -22,6 +22,8 @@ declare module '@tiptap/core' {
     };
   }
 }
+
+const regex = /(\*|_)(.*?)\1/g;
 
 export const ItalicMark = Mark.create<ItalicOptions>({
   name: 'italic',
@@ -62,8 +64,9 @@ export const ItalicMark = Mark.create<ItalicOptions>({
           return commands.setMark('italic');
         },
       toggleItalic:
-        (isActive: boolean) =>
-        ({ commands }) => {
+        () =>
+        ({ commands, editor }) => {
+          const isActive = editor.isActive('italic');
           if (isActive) {
             return commands.unsetItalic();
           }
@@ -76,5 +79,30 @@ export const ItalicMark = Mark.create<ItalicOptions>({
           return commands.unsetMark('italic');
         },
     };
+  },
+
+  addKeyboardShortcuts() {
+    return {
+      'Mod-i': () => this.editor.commands.toggleItalic(),
+      'Mod-I': () => this.editor.commands.toggleItalic(),
+    };
+  },
+
+  addInputRules() {
+    return [
+      markInputRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
+  },
+
+  addPasteRules() {
+    return [
+      markPasteRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
   },
 });

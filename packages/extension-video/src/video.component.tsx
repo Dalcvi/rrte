@@ -1,7 +1,7 @@
 import { Editor } from '@tiptap/core';
 import classes from './video.component.module.scss';
 import { VideoAttributes } from './node';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NodeView } from '@rrte/common';
 import classNames from 'classnames';
 
@@ -10,15 +10,31 @@ type VideoNode = {
 };
 
 export const VideoComponent = ({ editor, node, selected }: { editor: Editor; node: VideoNode; selected: boolean }) => {
+  const [videoWidth, setWidth] = useState(node.attrs.customSize ? node.attrs.customWidth : undefined);
+  const [videoHeight, setHeight] = useState(node.attrs.customSize ? node.attrs.customHeight : undefined);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [canShowLoader, setCanShowLoader] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const showSelection = isSelected || selected;
   const showLoader = !!node.attrs.isLoading && canShowLoader;
   const alignment = node.attrs.alignment;
   const isCustomSizeEnabled = !!node.attrs.customSize;
-  const customWidth = node.attrs.customWidth;
-  const customHeight = node.attrs.customHeight;
   const isEditable = editor.isEditable;
+
+  useEffect(() => {
+    if (videoRef.current && !node.attrs.customSize) {
+      const video = videoRef.current;
+      const { width, height } = video.getBoundingClientRect();
+      if (width !== videoWidth || height !== videoHeight) {
+        setWidth(width);
+        setHeight(height);
+      }
+    }
+    if (node.attrs.customSize && (videoWidth !== node.attrs.customWidth || videoHeight !== node.attrs.customHeight)) {
+      setWidth(node.attrs.customWidth);
+      setHeight(node.attrs.customHeight);
+    }
+  }, [videoRef.current, node.attrs.customSize, node.attrs.customWidth, node.attrs.customHeight]);
 
   useEffect(() => {
     const func = ({ editor }: { editor: Editor }) => {
@@ -54,18 +70,13 @@ export const VideoComponent = ({ editor, node, selected }: { editor: Editor; nod
         [classes.right]: alignment === 'right',
       })}
     >
-      <div className={classes.videoContainer}>
+      <div data-testid="video-comp" className={classes.videoContainer}>
         <video
+          ref={videoRef}
           controls={!isEditable}
           src={node.attrs.src}
-          style={
-            isCustomSizeEnabled
-              ? {
-                  width: `${customWidth}px`,
-                  height: `${customHeight}px`,
-                }
-              : undefined
-          }
+          width={videoWidth}
+          height={videoHeight}
           className={classNames(classes.video, {
             [classes.customSize]: isCustomSizeEnabled,
           })}

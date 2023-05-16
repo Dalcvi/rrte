@@ -17,7 +17,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
   const currentAttributes = editor.getAttributes(ImageNode.name) as ImageAttributes & { id: string | undefined };
 
   useEffect(() => {
-    const editor = document.querySelector("[data-hook='rrte-editor']") as HTMLElement;
+    const editor = document.querySelector("[data-testid='rrte-editor']") as HTMLElement;
     if (!editor) {
       return;
     }
@@ -43,6 +43,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <ChangeImageButton config={config} editor={editor} imgId={imgId} />
       <button
         data-testid="image-bubble-menu-align-left"
+        aria-label="align left"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'left',
         })}
@@ -59,6 +60,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        aria-label="align center"
         data-testid="image-bubble-menu-align-center"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'center',
@@ -76,6 +78,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        aria-label="align right"
         data-testid="image-bubble-menu-align-right"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'right',
@@ -93,6 +96,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
+        aria-label="custom size"
         data-testid="image-bubble-menu-custom-size"
         className={classNames(classes.button, {
           [classes.buttonActive]: isCustomSizeEnabled,
@@ -112,6 +116,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Alt:
         <input
+          aria-label="image alt"
           data-testid="image-bubble-menu-input-alt"
           className={classes.inputField}
           type="text"
@@ -122,6 +127,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Width:
         <input
+          aria-label="image width"
           data-testid="image-bubble-menu-input-width"
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
@@ -135,6 +141,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       <label className={classes.inputContainer}>
         Height:
         <input
+          aria-label="image height"
           data-testid="image-bubble-menu-input-height"
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
@@ -169,6 +176,7 @@ const ExtensionControlledChangeButton = ({
   return (
     <div className={classes.button}>
       <input
+        aria-label="change image"
         type="file"
         accept={config.acceptedImageFileTypes.join(', ')}
         className={classes.imageInput}
@@ -233,7 +241,8 @@ const UserControlledChangeButton = ({
 }) => {
   return (
     <button
-      data-hook="user-controlled-image-button"
+      aria-label="change image"
+      data-testid="user-controlled-image-button"
       className={classNames(classes.button)}
       onClick={async () => {
         const uploadValue = await config.onImageAddClick();

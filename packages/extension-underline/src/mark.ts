@@ -1,4 +1,4 @@
-import { Mark, mergeAttributes } from '@tiptap/core';
+import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap/core';
 
 export type UnderlineOptions = {
   HTMLAttributes: Record<string, any>;
@@ -14,7 +14,7 @@ declare module '@tiptap/core' {
       /**
        * Toggle the underline
        */
-      toggleUnderline: (isActive: boolean) => ReturnType;
+      toggleUnderline: () => ReturnType;
       /**
        * Unset the underline
        */
@@ -22,6 +22,8 @@ declare module '@tiptap/core' {
     };
   }
 }
+
+const regex = /-_(.*?)_-/g;
 
 export const UnderlineMark = Mark.create<UnderlineOptions>({
   name: 'underline',
@@ -59,8 +61,9 @@ export const UnderlineMark = Mark.create<UnderlineOptions>({
           return commands.setMark('underline');
         },
       toggleUnderline:
-        (isActive: boolean) =>
-        ({ commands }) => {
+        () =>
+        ({ commands, editor }) => {
+          const isActive = editor.isActive('underline');
           if (isActive) {
             return commands.unsetUnderline();
           }
@@ -73,5 +76,30 @@ export const UnderlineMark = Mark.create<UnderlineOptions>({
           return commands.unsetMark('underline');
         },
     };
+  },
+
+  addKeyboardShortcuts() {
+    return {
+      'Mod-u': () => this.editor.commands.toggleUnderline(),
+      'Mod-U': () => this.editor.commands.toggleUnderline(),
+    };
+  },
+
+  addInputRules() {
+    return [
+      markInputRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
+  },
+
+  addPasteRules() {
+    return [
+      markPasteRule({
+        find: regex,
+        type: this.type,
+      }),
+    ];
   },
 });

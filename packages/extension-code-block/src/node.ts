@@ -1,22 +1,18 @@
 import { mergeAttributes, Node, textblockTypeInputRule } from '@tiptap/core';
 import { Plugin, PluginKey, TextSelection } from '@tiptap/pm/state';
 import classes from './code-block.module.scss';
-import classNames from 'classnames';
 
 export interface CodeBlockOptions {
   /**
-   * Define whether the node should be exited on triple enter.
+   * Should the node be exited on triple enter.
    * Defaults to `true`.
    */
   exitOnTripleEnter: boolean;
   /**
-   * Define whether the node should be exited on arrow down if there is no node after it.
+   * Should the node be exited on arrow down.
    * Defaults to `true`.
    */
   exitOnArrowDown: boolean;
-  /**
-   * Custom HTML attributes that should be added to the rendered HTML tag.
-   */
   HTMLAttributes: Record<string, any>;
 }
 
@@ -36,7 +32,6 @@ declare module '@tiptap/core' {
 }
 
 export const backtickInputRegex = /^```([a-z]+)?[\s\n]$/;
-export const tildeInputRegex = /^~~~([a-z]+)?[\s\n]$/;
 
 export const CodeBlockNode = Node.create<CodeBlockOptions>({
   name: 'codeBlock',
@@ -70,8 +65,14 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
     ];
   },
 
-  renderHTML({ node, HTMLAttributes }) {
-    return ['pre', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), ['code', {}, 0]];
+  renderHTML({ HTMLAttributes }) {
+    return [
+      'pre',
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+        'data-testid': 'codeBlock',
+      }),
+      ['code', {}, 0],
+    ];
   },
 
   addCommands() {
@@ -122,9 +123,9 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
         }
 
         const isAtEnd = $from.parentOffset === $from.parent.nodeSize - 2;
-        const endsWithDoubleNewline = $from.parent.textContent.endsWith('\n\n');
+        const alreadyTwoEndlines = $from.parent.textContent.endsWith('\n\n');
 
-        if (!isAtEnd || !endsWithDoubleNewline) {
+        if (!isAtEnd || !alreadyTwoEndlines) {
           return false;
         }
 
@@ -153,20 +154,14 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
         }
 
         const isAtEnd = $from.parentOffset === $from.parent.nodeSize - 2;
-
-        if (!isAtEnd) {
-          return false;
-        }
-
         const after = $from.after();
+        const cantExit = !isAtEnd || after === undefined;
 
-        if (after === undefined) {
+        if (!cantExit) {
           return false;
         }
 
-        const nodeAfter = doc.nodeAt(after);
-
-        if (nodeAfter) {
+        if (doc.nodeAt(after)) {
           return false;
         }
 
@@ -179,13 +174,6 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
     return [
       textblockTypeInputRule({
         find: backtickInputRegex,
-        type: this.type,
-        getAttributes: (match) => ({
-          language: match[1],
-        }),
-      }),
-      textblockTypeInputRule({
-        find: tildeInputRegex,
         type: this.type,
         getAttributes: (match) => ({
           language: match[1],

@@ -58,7 +58,13 @@ export const HeadingNode = Node.create<HeadingOptions>({
     const hasLevel = this.options.levels.includes(node.attrs.level);
     const level = hasLevel ? node.attrs.level : this.options.levels[0];
 
-    return [`h${level}`, mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+    return [
+      `h${level}`,
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+        'data-testid': `heading-${level}`,
+      }),
+      0,
+    ];
   },
 
   addCommands() {

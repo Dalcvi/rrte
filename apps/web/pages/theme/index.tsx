@@ -31,6 +31,8 @@ import classes from './styles.module.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { Header } from '../../components/header';
+import { TextAlign } from '@rrte/extension-text-align';
+import { Paragraph } from '@rrte/extension-paragraph';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
@@ -61,7 +63,12 @@ export default function Web() {
             Id(),
             BulletList().extendConfig((conf) => ({
               ...conf,
-              priority: 10000,
+              toolbar: conf.toolbar
+                ? {
+                    ...conf.toolbar,
+                    priority: 100000000000,
+                  }
+                : undefined,
             })),
             CodeBlock(),
             HardBreak(),
@@ -76,6 +83,8 @@ export default function Web() {
             Subscript(),
             Superscript(),
             TextStyle(),
+            TextAlign(),
+            Paragraph(),
             Highlight(),
             History(),
             Gapcursor(),
@@ -139,9 +148,9 @@ export default function Web() {
             }),
             Youtube(),
           ]}
-          className={classes.editor}
-          editorContentClassName={classes.editorContent}
-          editorContentWrapperClassName={classes.editorContentWrapper}
+          editorWrapperClassName={classes.editor}
+          contentClassName={classes.content}
+          contentWrapperClassName={classes.editorContentWrapper}
         />
       </div>
     </div>

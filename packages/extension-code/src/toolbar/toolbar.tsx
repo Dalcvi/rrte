@@ -9,6 +9,7 @@ const Button = ({ editor }: { editor: Editor }) => {
   const isActive = editor.isActive(CodeMark.name);
   return (
     <button
+      aria-label="code"
       data-testid="code-button"
       className={classNames(classes.codeButton, {
         [classes.active]: isActive,
@@ -34,5 +35,5 @@ export const ToolbarButton: RegularButtonConfig = {
   name: CodeMark.name,
   text: 'Code',
   type: 'icon' as const,
-  priority: 1,
+  priority: 86,
 };

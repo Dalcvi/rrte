@@ -3,8 +3,10 @@ import classes from './toolbar.module.scss';
 import classNames from 'classnames';
 import { HeadingNode, Level } from '../node';
 
+const test = 'value';
+
 const createValue = (level: Level): DropdownValue => ({
-  name: `heading-${level}`,
+  name: `heading ${level}`,
   priority: 7 - level,
   onClick: ({ editor }) => {
     editor.chain().focus().setHeading({ level }).run();
@@ -17,10 +19,10 @@ const createValue = (level: Level): DropdownValue => ({
 });
 
 export const ToolbarDropdown: DropdownConfig = {
-  name: 'text-type',
+  name: 'text type',
   type: ToolbarItemType.DROPDOWN,
   text: 'Text type',
-  priority: 0,
+  priority: 105,
   DropdownPriority: 1000,
   values: [createValue(1), createValue(2), createValue(3), createValue(4), createValue(5), createValue(6)],
 };

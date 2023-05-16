@@ -13,12 +13,13 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint *.ts*",
+    "lint": "eslint -c '../../.eslintrc.cjs' \"**/*.{ts,tsx}\"",
     "watch": "tsc -w",
     "build": "rm -rf ./dist && rollup -c ../../rollup.config.js",
     "build:prod": "cross-env NODE_ENV=production pnpm build && pnpm move-style-inject",
     "build:dev": "cross-env NODE_ENV=development pnpm build",
-    "move-style-inject": "node ../../moveStyleInject.js"
+    "move-style-inject": "node ../../moveStyleInject.js",
+    "test": "jest --config='../../jest.config.js'"
   },
   "devDependencies": {
     "@types/uuid": "^9.0.1",
@@ -28,7 +29,6 @@
   },
   "dependencies": {
     "@rrte/common": "^1.0.0",
-    "@tiptap-pro/extension-unique-id": "^2.0.1",
     "@tiptap/core": "^2.0.3",
     "@tiptap/pm": "^2.0.3",
     "uuid": "^9.0.0"

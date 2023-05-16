@@ -32,6 +32,8 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import { Header } from '../../components/header';
 import { useRef } from 'react';
+import { TextAlign } from '@rrte/extension-text-align';
+import { Paragraph } from '@rrte/extension-paragraph';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
@@ -120,13 +122,14 @@ export default function Web() {
                 }),
                 Youtube(),
               ]}
-              className={classes.editor}
-              editorContentClassName={classes.editorContent}
-              editorContentWrapperClassName={classes.editorContentWrapper}
+              editorWrapperClassName={classes.editor}
+              contentClassName={classes.editorContent}
+              contentWrapperClassName={classes.editorContentWrapper}
             />
           </div>
           <div className={classes.submitWrapper}>
             <button
+              aria-label="submit"
               className={classes.submit}
               disabled={editor.current?.isEmpty}
               onClick={() => {
@@ -175,6 +178,8 @@ export default function Web() {
                     Superscript(),
                     TextStyle(),
                     Highlight(),
+                    TextAlign(),
+                    Paragraph(),
                     History(),
                     Gapcursor(),
                     Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO'),
@@ -223,9 +228,9 @@ export default function Web() {
                     }),
                     Youtube(),
                   ]}
-                  className={classes.editor}
-                  editorContentClassName={classes.viewerContent}
-                  editorContentWrapperClassName={classes.editorWrapper}
+                  editorWrapperClassName={classes.editor}
+                  contentClassName={classes.viewerContent}
+                  contentWrapperClassName={classes.editorWrapper}
                 />
               </div>
             );

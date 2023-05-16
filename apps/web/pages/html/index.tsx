@@ -31,6 +31,8 @@ import classes from './styles.module.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { Header } from '../../components/header';
+import { TextAlign } from '@rrte/extension-text-align';
+import { Paragraph } from '@rrte/extension-paragraph';
 
 export default function Web() {
   const [htmlContent, setHtmlContent] = useState<HTMLContent | undefined>(undefined);
@@ -74,6 +76,8 @@ export default function Web() {
             TextStyle(),
             Highlight(),
             History(),
+            TextAlign(),
+            Paragraph(),
             Gapcursor(),
             Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO'),
             Dropcursor(),
@@ -135,9 +139,9 @@ export default function Web() {
             }),
             Youtube(),
           ]}
-          className={classes.editor}
-          editorContentClassName={classes.editorContent}
-          editorContentWrapperClassName={classes.editorContentWrapper}
+          editorWrapperClassName={classes.editor}
+          contentClassName={classes.editorContent}
+          contentWrapperClassName={classes.editorContentWrapper}
         />
         {htmlContent && (
           <div className={classes.schemaContainer}>
