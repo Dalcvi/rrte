@@ -13,7 +13,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint *.ts*",
+    "lint": "eslint -c '../../.eslintrc.cjs' \"**/*.{ts,tsx}\"",
     "watch": "tsc -w",
     "build": "rm -rf ./dist && rollup -c ../../rollup.config.js",
     "build:prod": "cross-env NODE_ENV=production pnpm build && pnpm move-style-inject",
