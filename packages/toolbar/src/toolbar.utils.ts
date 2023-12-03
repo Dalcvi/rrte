@@ -1,6 +1,5 @@
 import {
   DropdownConfig,
-  DropdownValue,
   SingleToolbarItem,
   SortedToolbarItems,
   ToolbarItem,
@@ -12,7 +11,7 @@ export const spreadToolbarItems = (items: ToolbarItem<any>[]): SingleToolbarItem
 };
 
 export const getConfigsMapByName = (
-  toolbarInfos: { toolbar: ToolbarItem<any>; config: Record<string, any> }[],
+  toolbarInfos: { toolbar: ToolbarItem<any>; config: Record<string, any> }[]
 ): { [key: string]: Record<string, any> } => {
   return toolbarInfos
     .flatMap(({ toolbar, config }) => {
@@ -22,7 +21,9 @@ export const getConfigsMapByName = (
     .reduce((acc, { name, config }) => ({ ...acc, [name]: config }), {});
 };
 
-export const getDifferentToolbarTypes = (items: SingleToolbarItem<any>[]): SortedToolbarItems<any> => {
+export const getDifferentToolbarTypes = (
+  items: SingleToolbarItem<any>[]
+): SortedToolbarItems<any> => {
   const toolbarItemNames = Object.values(ToolbarItemType);
   const defaults = toolbarItemNames.reduce((acc, name) => {
     return {
@@ -35,7 +36,7 @@ export const getDifferentToolbarTypes = (items: SingleToolbarItem<any>[]): Sorte
       ...acc,
       [item.type]: [...(acc[item.type] || []), item],
     }),
-    defaults as SortedToolbarItems<any>,
+    defaults as SortedToolbarItems<any>
   );
 };
 
@@ -49,14 +50,16 @@ export const getReducedMutliExtensions = (items: DropdownConfig[]): DropdownConf
       ...acc,
       [item.name]: [...(acc[item.name] || []), item],
     }),
-    {} as { [key: string]: DropdownConfig[] },
+    {} as { [key: string]: DropdownConfig[] }
   );
 
   return Object.values(dropdownsGroupedByName)
-    .map((groupedItems) => reduceMultiExtensionValuesIntoOne(groupedItems))
+    .map(groupedItems => reduceMultiExtensionValuesIntoOne(groupedItems))
     .filter((item): item is DropdownConfig => !!item);
 };
-export const reduceMultiExtensionValuesIntoOne = (items: DropdownConfig[]): DropdownConfig | undefined => {
+export const reduceMultiExtensionValuesIntoOne = (
+  items: DropdownConfig[]
+): DropdownConfig | undefined => {
   if (items.length === 0) {
     return undefined;
   }
@@ -65,9 +68,9 @@ export const reduceMultiExtensionValuesIntoOne = (items: DropdownConfig[]): Drop
     return items[0];
   }
 
-  const values = items.flatMap((item) => item.values);
+  const values = items.flatMap(item => item.values);
   const biggestPriorityDropdown = items.reduce((acc, item) =>
-    item.DropdownPriority > acc.DropdownPriority ? item : acc,
+    item.DropdownPriority > acc.DropdownPriority ? item : acc
   );
 
   return {

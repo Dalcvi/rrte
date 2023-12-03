@@ -1,4 +1,10 @@
-import { DropdownConfig, RegularButtonConfig, SingleToolbarItem, ToolbarItem, ToolbarItemType } from '../toolbar.types';
+import {
+  DropdownConfig,
+  RegularButtonConfig,
+  SingleToolbarItem,
+  ToolbarItem,
+  ToolbarItemType,
+} from '../toolbar.types';
 import {
   getConfigsMapByName,
   getDifferentToolbarTypes,
@@ -7,9 +13,6 @@ import {
   sortByPriority,
   spreadToolbarItems,
 } from '../toolbar.utils';
-
-// Mocks
-const mockEditor = {}; // Replace this with an actual instance or mock of Editor if necessary
 
 const mockButton = (name: string, priority: number) => ({
   name,
@@ -29,8 +32,8 @@ const mockDropdown = (name: string, priority: number) => ({
     {
       name: `${name}-value`,
       text: `${name}-value`,
-      isActive: ({ editor }: { editor: typeof mockEditor }) => true,
-      onClick: ({ editor }: { editor: typeof mockEditor }) => {},
+      isActive: () => true,
+      onClick: () => {},
       priority,
     },
   ],
@@ -248,15 +251,15 @@ describe('toolbar utils', () => {
             {
               name: 'Value1',
               text: 'Value 1',
-              isActive: ({ editor }: any) => true,
-              onClick: ({ editor }: any) => {},
+              isActive: () => true,
+              onClick: () => {},
               priority: 1,
             },
             {
               name: 'Value2',
               text: 'Value 2',
-              isActive: ({ editor }: any) => true,
-              onClick: ({ editor }: any) => {},
+              isActive: () => true,
+              onClick: () => {},
               priority: 2,
             },
           ],
@@ -271,15 +274,15 @@ describe('toolbar utils', () => {
             {
               name: 'Value3',
               text: 'Value 3',
-              isActive: ({ editor }: any) => true,
-              onClick: ({ editor }: any) => {},
+              isActive: () => true,
+              onClick: () => {},
               priority: 3,
             },
             {
               name: 'Value4',
               text: 'Value 4',
-              isActive: ({ editor }: any) => true,
-              onClick: ({ editor }: any) => {},
+              isActive: () => true,
+              onClick: () => {},
               priority: 2,
             },
           ],
@@ -344,8 +347,20 @@ describe('toolbar utils', () => {
       DropdownPriority: 1,
       priority: 1,
       values: [
-        { name: 'Value1', text: 'Value 1', isActive: () => true, onClick: () => {}, priority: 1 },
-        { name: 'Value2', text: 'Value 2', isActive: () => false, onClick: () => {}, priority: 2 },
+        {
+          name: 'Value1',
+          text: 'Value 1',
+          isActive: () => true,
+          onClick: () => {},
+          priority: 1,
+        },
+        {
+          name: 'Value2',
+          text: 'Value 2',
+          isActive: () => false,
+          onClick: () => {},
+          priority: 2,
+        },
       ],
     };
 
@@ -356,8 +371,20 @@ describe('toolbar utils', () => {
       DropdownPriority: 2,
       priority: 2,
       values: [
-        { name: 'Value3', text: 'Value 3', isActive: () => true, onClick: () => {}, priority: 1 },
-        { name: 'Value4', text: 'Value 4', isActive: () => true, onClick: () => {}, priority: 2 },
+        {
+          name: 'Value3',
+          text: 'Value 3',
+          isActive: () => true,
+          onClick: () => {},
+          priority: 1,
+        },
+        {
+          name: 'Value4',
+          text: 'Value 4',
+          isActive: () => true,
+          onClick: () => {},
+          priority: 2,
+        },
       ],
     };
 
@@ -368,8 +395,20 @@ describe('toolbar utils', () => {
       DropdownPriority: 3,
       priority: 3,
       values: [
-        { name: 'Value5', text: 'Value 5', isActive: () => true, onClick: () => {}, priority: 1 },
-        { name: 'Value6', text: 'Value 6', isActive: () => true, onClick: () => {}, priority: 2 },
+        {
+          name: 'Value5',
+          text: 'Value 5',
+          isActive: () => true,
+          onClick: () => {},
+          priority: 1,
+        },
+        {
+          name: 'Value6',
+          text: 'Value 6',
+          isActive: () => true,
+          onClick: () => {},
+          priority: 2,
+        },
       ],
     };
 
@@ -378,7 +417,9 @@ describe('toolbar utils', () => {
     it('should reduce multiple extensions with the same name into one', () => {
       const reducedExtensions = getReducedMutliExtensions(items);
       expect(reducedExtensions).toHaveLength(2);
-      expect(reducedExtensions[0]).toEqual(reduceMultiExtensionValuesIntoOne([dropdown1, dropdown3]));
+      expect(reducedExtensions[0]).toEqual(
+        reduceMultiExtensionValuesIntoOne([dropdown1, dropdown3])
+      );
       expect(reducedExtensions[1]).toEqual(dropdown2);
     });
   });

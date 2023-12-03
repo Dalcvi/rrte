@@ -78,12 +78,12 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
   addCommands() {
     return {
       setCodeBlock:
-        (attributes) =>
+        attributes =>
         ({ commands }) => {
           return commands.setNode(this.name, attributes);
         },
       toggleCodeBlock:
-        (attributes) =>
+        attributes =>
         ({ commands }) => {
           return commands.toggleNode(this.name, 'paragraph', attributes);
         },
@@ -175,7 +175,7 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
       textblockTypeInputRule({
         find: backtickInputRegex,
         type: this.type,
-        getAttributes: (match) => ({
+        getAttributes: match => ({
           language: match[1],
         }),
       }),

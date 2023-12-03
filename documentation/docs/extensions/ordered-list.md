@@ -36,12 +36,12 @@ pnpm add @rrte/extension-ordered-list
 
 ## Options
 
-| Option name    | Type                  | description                                                       |
-| -------------- | --------------------- | ----------------------------------------------------------------- |
-| HTMLAttributes | _Record<string, any>_ | HTML attributes to be applied to the ordered list element.        |
-| itemTypeName   | _string_              | The name of extension that it supports as content                 |
-| keepMarks      | _boolean_             | Whether to remove or to keep marks when toggling bullet list      |
-| keepAttributes | _boolean_             | Whether to remove or to keep attributes when toggling bullet list |
+| Option name    | Type                   | description                                                       |
+| -------------- | ---------------------- | ----------------------------------------------------------------- |
+| HTMLAttributes | _Record\<string, any>_ | HTML attributes to be applied to the ordered list element.        |
+| itemTypeName   | _string_               | The name of extension that it supports as content                 |
+| keepMarks      | _boolean_              | Whether to remove or to keep marks when toggling bullet list      |
+| keepAttributes | _boolean_              | Whether to remove or to keep attributes when toggling bullet list |
 
 ## Functions
 

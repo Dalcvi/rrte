@@ -23,15 +23,11 @@
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
-    "react": "18.2.0",
     "tsconfig": "workspace:*"
   },
   "dependencies": {
     "@rrte/common": "^1.0.0",
     "@tiptap/core": "^2.0.3",
     "@tiptap/pm": "^2.0.3"
-  },
-  "peerDependencies": {
-    "react": "18.2.0"
   }
 }

@@ -3,9 +3,9 @@
   "display": "React Library",
   "extends": "./base.json",
   "compilerOptions": {
+    "strict": true,
     "jsx": "react-jsx",
     "module": "ESNext",
-    "emitDeclarationOnly": true,
     "target": "es6",
     "typeRoots": ["../../node_modules/@types"]
   },

@@ -14,7 +14,7 @@ export const handleFileImage = async (
   getImg: ImageReturn,
   editor: Editor,
   imgId: string | false | undefined,
-  isLoading?: boolean,
+  isLoading?: boolean
 ) => {
   const img = await getImageValue(getImg);
   if (img === 'ERROR') {

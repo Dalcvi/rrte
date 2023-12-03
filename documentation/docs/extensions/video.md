@@ -37,31 +37,31 @@ pnpm add @rrte/extension-video
 
 ### User controlled
 
-| Option name            | Type                                                                              | Description                                            |
-| ---------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| type                   | "user-controlled"                                                                 | Sets the type for better typescript support            |
-| onVideoAddClick        | _() => Promise<{ tempFile: VideoReturnValue;finalFile: Promise<VideoReturn\>;}\>_ | Function that is called when the add button is clicked |
-| acceptedVideoFileTypes | string[]                                                                          | All types of videos accepted, for example: "video/mp4" |
-| maxFileSize            | number                                                                            | Max file size in bytes                                 |
-| onPaste                | (file: File, videoAttr: NeededVideoAttributes) => Promise<VideoReturn\>           | Handler for when an video gets pasted/dropped in       |
+| Option name            | Type                                                                                 | Description                                            |
+| ---------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| type                   | "user-controlled"                                                                    | Sets the type for better typescript support            |
+| onVideoAddClick        | _() => Promise\<\{ tempFile: VideoReturnValue;finalFile: Promise\<VideoReturn\>;}\>_ | Function that is called when the add button is clicked |
+| acceptedVideoFileTypes | string[]                                                                             | All types of videos accepted, for example: "video/mp4" |
+| maxFileSize            | number                                                                               | Max file size in bytes                                 |
+| onPaste                | (file: File, videoAttr: NeededVideoAttributes) => Promise\<VideoReturn\>             | Handler for when an video gets pasted/dropped in       |
 
 ### Extension controlled
 
-| Option name            | Type                                                                      | Description                                                        |
-| ---------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| type                   | "extension-controlled"                                                    | Sets the type for better typescript support                        |
-| onVideoAdd             | _(file: File, videoAttr: NeededVideoAttributes) => Promise<VideoReturn\>_ | Function that is called after user selects a file from file picker |
-| acceptedVideoFileTypes | string[]                                                                  | All types of videos accepted, for example: "video/webp"            |
-| maxFileSize            | number                                                                    | Max file size in bytes                                             |
+| Option name            | Type                                                                       | Description                                                        |
+| ---------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| type                   | "extension-controlled"                                                     | Sets the type for better typescript support                        |
+| onVideoAdd             | _(file: File, videoAttr: NeededVideoAttributes) => Promise\<VideoReturn\>_ | Function that is called after user selects a file from file picker |
+| acceptedVideoFileTypes | string[]                                                                   | All types of videos accepted, for example: "video/webp"            |
+| maxFileSize            | number                                                                     | Max file size in bytes                                             |
 
 ## Options
 
-| Option name            | Type                                                                                     | Description                                                        |
-| ---------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| HTMLAttributes         | _Record<string, any>_                                                                    | HTML attributes to be applied to the video element.                |
-| upload                 | _((file: File, videoAttr: NeededVideoAttributes) => Promise<VideoReturn\>) \| undefined_ | Function for uploading files when user drops in or pastes an video |
-| acceptedVideoFileTypes | string[]                                                                                 | All types of videos accepted, for example: "video/webp"            |
-| maxFileSize            | number                                                                                   | Max file size in bytes                                             |
+| Option name            | Type                                                                                      | Description                                                        |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| HTMLAttributes         | _Record\<string, any>_                                                                    | HTML attributes to be applied to the video element.                |
+| upload                 | _((file: File, videoAttr: NeededVideoAttributes) => Promise\<VideoReturn\>) \| undefined_ | Function for uploading files when user drops in or pastes an video |
+| acceptedVideoFileTypes | string[]                                                                                  | All types of videos accepted, for example: "video/webp"            |
+| maxFileSize            | number                                                                                    | Max file size in bytes                                             |
 
 ## Attributes
 
@@ -77,11 +77,11 @@ pnpm add @rrte/extension-video
 
 ## Functions
 
-| Function name | Parameters                                     | Description                                           |
-| ------------- | ---------------------------------------------- | ----------------------------------------------------- |
-| setVideo      | options: Partial<VideoAttributes\>             | Sets the selection as video node                      |
-| updateVideo   | options: Partial<VideoAttributes\>, id: string | Updates attributes of video that matches the given id |
-| removeVideo   | id: string                                     | Removes video by id                                   |
+| Function name | Parameters                                      | Description                                           |
+| ------------- | ----------------------------------------------- | ----------------------------------------------------- |
+| setVideo      | options: Partial\<VideoAttributes\>             | Sets the selection as video node                      |
+| updateVideo   | options: Partial\<VideoAttributes\>, id: string | Updates attributes of video that matches the given id |
+| removeVideo   | id: string                                      | Removes video by id                                   |
 
 ## Example
 

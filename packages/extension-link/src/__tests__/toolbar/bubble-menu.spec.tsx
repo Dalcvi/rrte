@@ -54,7 +54,9 @@ describe('Link bubble menu', () => {
 
     expect(editor.chain).toHaveBeenCalledTimes(1);
     expect(editor.extendMarkRange).toHaveBeenCalledTimes(1);
-    expect(editor.updateAttributes).toHaveBeenCalledWith('link', { href: 'https://www.youtube.com' });
+    expect(editor.updateAttributes).toHaveBeenCalledWith('link', {
+      href: 'https://www.youtube.com',
+    });
     expect(editor.run).toHaveBeenCalledTimes(1);
   });
 

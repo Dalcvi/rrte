@@ -1,12 +1,16 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import ImageIcon from './image.icon.svg';
-import { ImageNode } from '../node';
 import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
-import classes from './toolbar.module.scss';
-import { ExtensionControlledUploadConfig, UploadConfig, UserControlledUploadConfig } from '../upload-config';
-import { createTempImage, handleFileImage } from './toolbar.utils';
 import { extractImageInfo } from '../image.utils';
+import { ImageNode } from '../node';
+import {
+  ExtensionControlledUploadConfig,
+  UploadConfig,
+  UserControlledUploadConfig,
+} from '../upload-config';
+import ImageIcon from './image.icon.svg';
+import classes from './toolbar.module.scss';
+import { createTempImage, handleFileImage } from './toolbar.utils';
 
 const Button = ({ editor, config }: { editor: Editor; config: UploadConfig }) => {
   if (config.type === 'user-controlled') {
@@ -15,11 +19,19 @@ const Button = ({ editor, config }: { editor: Editor; config: UploadConfig }) =>
   return <ExtensionControlledButton editor={editor} config={config} />;
 };
 
-const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config: ExtensionControlledUploadConfig }) => {
+const ExtensionControlledButton = ({
+  editor,
+  config,
+}: {
+  editor: Editor;
+  config: ExtensionControlledUploadConfig;
+}) => {
   return (
     <div
       className={classNames(classes.imageButton, {
-        [classes.disabledButton]: !editor.can().setImage({ src: '', originalHeight: 0, originalWidth: 0 }),
+        [classes.disabledButton]: !editor
+          .can()
+          .setImage({ src: '', originalHeight: 0, originalWidth: 0 }),
       })}
       data-testid="extension-controlled-image-button"
     >
@@ -31,7 +43,7 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
         accept={config.acceptedImageFileTypes.join(', ')}
         className={classes.imageInput}
         value={''}
-        onChange={async (e) => {
+        onChange={async e => {
           const file = e.target.files?.[0];
           if (!file) {
             return;
@@ -57,7 +69,13 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
   );
 };
 
-const UserControlledButton = ({ editor, config }: { editor: Editor; config: UserControlledUploadConfig }) => {
+const UserControlledButton = ({
+  editor,
+  config,
+}: {
+  editor: Editor;
+  config: UserControlledUploadConfig;
+}) => {
   return (
     <button
       data-testid="user-controlled-image-button"
@@ -68,7 +86,7 @@ const UserControlledButton = ({ editor, config }: { editor: Editor; config: User
         const uploadValue = await config.onImageAddClick();
         const tempImgId = await createTempImage(editor, uploadValue.tempFile);
         const finalFile = await uploadValue.finalFile;
-        await handleFileImage(await uploadValue.finalFile, editor, tempImgId);
+        await handleFileImage(finalFile, editor, tempImgId);
       }}
     >
       <ImageIcon className={classes.icon} width={'15px'} height={'15px'} />

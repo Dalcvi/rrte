@@ -35,9 +35,9 @@ pnpm add @rrte/extension-blockquote
 
 ## Options
 
-| Option name    | Type                  | description                                              |
-| -------------- | --------------------- | -------------------------------------------------------- |
-| HTMLAttributes | _Record<string, any>_ | HTML attributes to be applied to the blockquote element. |
+| Option name    | Type                   | Description                                              |
+| -------------- | ---------------------- | -------------------------------------------------------- |
+| HTMLAttributes | _Record\<string, any>_ | HTML attributes to be applied to the blockquote element. |
 
 ## Functions
 

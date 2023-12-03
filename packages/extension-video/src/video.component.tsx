@@ -9,9 +9,21 @@ type VideoNode = {
   attrs: VideoAttributes & { id: string };
 };
 
-export const VideoComponent = ({ editor, node, selected }: { editor: Editor; node: VideoNode; selected: boolean }) => {
-  const [videoWidth, setWidth] = useState(node.attrs.customSize ? node.attrs.customWidth : undefined);
-  const [videoHeight, setHeight] = useState(node.attrs.customSize ? node.attrs.customHeight : undefined);
+export const VideoComponent = ({
+  editor,
+  node,
+  selected,
+}: {
+  editor: Editor;
+  node: VideoNode;
+  selected: boolean;
+}) => {
+  const [videoWidth, setWidth] = useState(
+    node.attrs.customSize ? node.attrs.customWidth : undefined
+  );
+  const [videoHeight, setHeight] = useState(
+    node.attrs.customSize ? node.attrs.customHeight : undefined
+  );
   const videoRef = useRef<HTMLVideoElement>(null);
   const [canShowLoader, setCanShowLoader] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
@@ -30,7 +42,10 @@ export const VideoComponent = ({ editor, node, selected }: { editor: Editor; nod
         setHeight(height);
       }
     }
-    if (node.attrs.customSize && (videoWidth !== node.attrs.customWidth || videoHeight !== node.attrs.customHeight)) {
+    if (
+      node.attrs.customSize &&
+      (videoWidth !== node.attrs.customWidth || videoHeight !== node.attrs.customHeight)
+    ) {
       setWidth(node.attrs.customWidth);
       setHeight(node.attrs.customHeight);
     }

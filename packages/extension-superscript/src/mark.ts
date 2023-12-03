@@ -37,7 +37,7 @@ export const SuperscriptMark = Mark.create<SuperscriptOptions>({
       },
       {
         style: 'vertical-align',
-        getAttrs: (value) => {
+        getAttrs: value => {
           if (typeof value === 'string' && value.includes('super')) {
             return {
               verticalAlign: 'super',
@@ -58,7 +58,7 @@ export const SuperscriptMark = Mark.create<SuperscriptOptions>({
       setSuperscript:
         () =>
         ({ commands, editor }) => {
-          if (editor.extensionManager.extensions.some((val) => val.name === 'subscript')) {
+          if (editor.extensionManager.extensions.some(val => val.name === 'subscript')) {
             commands.unsetMark('subscript');
           }
           return commands.setMark('superscript');

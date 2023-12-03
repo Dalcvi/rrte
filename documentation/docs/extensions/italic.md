@@ -31,9 +31,9 @@ pnpm add @rrte/extension-italic
 
 ## Options
 
-| Option name    | Type                  | description                                          |
-| -------------- | --------------------- | ---------------------------------------------------- |
-| HTMLAttributes | _Record<string, any>_ | HTML attributes to be applied to the italic element. |
+| Option name    | Type                   | description                                          |
+| -------------- | ---------------------- | ---------------------------------------------------- |
+| HTMLAttributes | _Record\<string, any>_ | HTML attributes to be applied to the italic element. |
 
 ## Functions
 

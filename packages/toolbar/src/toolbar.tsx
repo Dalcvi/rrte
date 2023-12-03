@@ -28,19 +28,26 @@ export const Toolbar = ({
   const itemsSortedByType = useMemo(() => getDifferentToolbarTypes(spreadedItems), [items]);
   const reducedDropdowns = useMemo(
     () => getReducedMutliExtensions(itemsSortedByType[ToolbarItemType.DROPDOWN]),
-    [itemsSortedByType],
+    [itemsSortedByType]
   );
 
   const sortedButtons = useMemo(
     () => sortByPriority([...itemsSortedByType[ToolbarItemType.ICON], ...reducedDropdowns]),
-    [],
+    []
   );
   return (
     <div className={classNames(classes.toolbarList, wrapperClassName)}>
-      {sortedButtons.map((item) => {
+      {sortedButtons.map(item => {
         switch (item.type) {
           case ToolbarItemType.ICON:
-            return <RegularButton key={item.name} editor={editor} {...item} config={configsByName[item.name]} />;
+            return (
+              <RegularButton
+                key={item.name}
+                editor={editor}
+                {...item}
+                config={configsByName[item.name]}
+              />
+            );
           case ToolbarItemType.DROPDOWN:
             return <Dropdown key={item.name} editor={editor} {...item} />;
           default:

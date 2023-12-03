@@ -70,7 +70,7 @@ export const HeadingNode = Node.create<HeadingOptions>({
   addCommands() {
     return {
       setHeading:
-        (attributes) =>
+        attributes =>
         ({ commands }) => {
           if (!this.options.levels.includes(attributes.level)) {
             return false;
@@ -79,7 +79,7 @@ export const HeadingNode = Node.create<HeadingOptions>({
           return commands.setNode(this.name, attributes);
         },
       toggleHeading:
-        (attributes) =>
+        attributes =>
         ({ commands }) => {
           if (!this.options.levels.includes(attributes.level)) {
             return false;
@@ -98,12 +98,12 @@ export const HeadingNode = Node.create<HeadingOptions>({
           [`Mod-Alt-${level}`]: () => this.editor.commands.toggleHeading({ level }),
         },
       }),
-      {},
+      {}
     );
   },
 
   addInputRules() {
-    return this.options.levels.map((level) => {
+    return this.options.levels.map(level => {
       return textblockTypeInputRule({
         find: new RegExp(`^(#{1,${level}})\\s$`),
         type: this.type,

@@ -15,7 +15,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
           type="text"
           className={classes.input}
           value={currentAttributes.href}
-          onChange={(e) => {
+          onChange={e => {
             editor
               .chain()
               .extendMarkRange(LinkMark.name)
@@ -24,7 +24,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
               })
               .run();
           }}
-          onKeyDown={(e) => {
+          onKeyDown={e => {
             if (e.key === 'Enter' || e.key === 'Escape') {
               const focusTo = editor.state.selection.$to.pos;
 
@@ -40,6 +40,8 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
 export const LinkBubbleMenu: BubbleMenuToolbar = {
   Menu: BubbleMenu,
   shouldShow: ({ editor }) => {
-    return editor.isActive(LinkMark.name) && editor.state.selection.$from.parent.textContent.length > 0;
+    return (
+      editor.isActive(LinkMark.name) && editor.state.selection.$from.parent.textContent.length > 0
+    );
   },
 };

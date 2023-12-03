@@ -23,16 +23,16 @@ const Button = ({ editor }: { editor: Editor }) => {
       setIsOpen(false);
       setUrl('');
     },
-    [container],
+    [container]
   );
-  const test = "false";
+
   const escapeClose = useMemo(
     () => (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         close();
       }
     },
-    [close],
+    [close]
   );
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const Button = ({ editor }: { editor: Editor }) => {
               data-testid="youtube-input"
               type="text"
               value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={e => setUrl(e.target.value)}
               className={classes.input}
             />
           </label>

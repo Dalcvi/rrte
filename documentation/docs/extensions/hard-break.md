@@ -31,10 +31,10 @@ pnpm add @rrte/extension-hard-break
 
 ## Options
 
-| Option name    | Type                  | description                                              |
-| -------------- | --------------------- | -------------------------------------------------------- |
-| HTMLAttributes | _Record<string, any>_ | HTML attributes to be applied to the hard break element. |
-| keepMarks      | boolean               | If the text after hard break should keep marks           |
+| Option name    | Type                   | description                                              |
+| -------------- | ---------------------- | -------------------------------------------------------- |
+| HTMLAttributes | _Record\<string, any>_ | HTML attributes to be applied to the hard break element. |
+| keepMarks      | boolean                | If the text after hard break should keep marks           |
 
 ## Functions
 

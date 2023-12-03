@@ -1,9 +1,13 @@
-import { EditorView } from "@tiptap/pm/view";
-import { ImageOptions } from "./node";
-import { ImageReturnValue } from "./upload-config";
-import { extractImageInfo } from "./image.utils";
+import { EditorView } from '@tiptap/pm/view';
+import { ImageOptions } from './node';
+import { ImageReturnValue } from './upload-config';
+import { extractImageInfo } from './image.utils';
 
-export const changeWithRealImage = (imgProps: ImageReturnValue | 'ERROR', id: string, view: EditorView) => {
+export const changeWithRealImage = (
+  imgProps: ImageReturnValue | 'ERROR',
+  id: string,
+  view: EditorView
+) => {
   if (!imgProps || imgProps === 'ERROR') {
     return;
   }
@@ -31,7 +35,7 @@ export const fileUpload = (file: File, options: ImageOptions, view: EditorView) 
     return false;
   }
 
-  extractImageInfo(file).then((imageInfo) => {
+  extractImageInfo(file).then(imageInfo => {
     const node = view.state.schema.nodes.image.create({
       ...imageInfo,
       isLoading: true,
@@ -50,9 +54,9 @@ export const fileUpload = (file: File, options: ImageOptions, view: EditorView) 
     if (!upload) {
       return;
     }
-    upload(file, imageInfo).then((uploadInfo) => {
+    upload(file, imageInfo).then(uploadInfo => {
       if (typeof uploadInfo === 'function') {
-        uploadInfo().then((uploadedAttributes) => {
+        uploadInfo().then(uploadedAttributes => {
           changeWithRealImage(uploadedAttributes, nodeId, view);
         });
         return;

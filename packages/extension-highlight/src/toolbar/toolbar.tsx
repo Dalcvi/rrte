@@ -1,4 +1,8 @@
-import { AttributeValue, currentSelectionAttributeValue, type RegularButtonConfig } from '@rrte/common';
+import {
+  AttributeValue,
+  currentSelectionAttributeValue,
+  type RegularButtonConfig,
+} from '@rrte/common';
 import { HighlightExtension } from '../extension';
 import classes from './toolbar.module.scss';
 import { Editor } from '@tiptap/core';
@@ -36,7 +40,7 @@ const Button = ({ editor }: { editor: Editor }) => {
         className={classNames(classes.highlightInput, {
           [classes.withReset]: highlight && highlight.startsWith('#'),
         })}
-        onChange={(e) => {
+        onChange={e => {
           editor.chain().focus().setHighlight(e.target.value).run();
         }}
       />

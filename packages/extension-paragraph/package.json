@@ -23,14 +23,17 @@
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
-    "react": "18.2.0",
     "tsconfig": "workspace:*"
   },
   "peerDependencies": {
-    "react": "18.2.0"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "dependencies": {
     "@rrte/common": "^1.0.0",
-    "@tiptap/core": "^2.0.3"
+    "@tiptap/core": "^2.0.3",
+    "@tiptap/pm": "^2.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

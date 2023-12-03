@@ -6,8 +6,14 @@ import classes from './toolbar.module.scss';
 import AlignLeftIcon from './align-left.icon.svg';
 import { TextAlignConfig } from '../text-align-config';
 
-const TextAlignToolbarButton = ({ editor, config }: { editor: Editor; config: TextAlignConfig }) => {
-  const isActive = config.types.some((type) => editor.isActive(type, { textAlign: 'left' }));
+const TextAlignToolbarButton = ({
+  editor,
+  config,
+}: {
+  editor: Editor;
+  config: TextAlignConfig;
+}) => {
+  const isActive = config.types.some(type => editor.isActive(type, { textAlign: 'left' }));
   return (
     <button
       data-testid="text-align-left-button"

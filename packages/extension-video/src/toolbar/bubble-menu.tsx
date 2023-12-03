@@ -6,7 +6,11 @@ import AlignRight from './align-right.icon.svg';
 import AlignCenter from './align-center.icon.svg';
 import CustomSize from './custom-size.icon.svg';
 import { VideoAttributes, VideoNode } from '../node';
-import { ExtensionControlledUploadConfig, UploadConfig, UserControlledUploadConfig } from '../upload-config';
+import {
+  ExtensionControlledUploadConfig,
+  UploadConfig,
+  UserControlledUploadConfig,
+} from '../upload-config';
 import classNames from 'classnames';
 import { Editor } from '@tiptap/core';
 import { handleFileVideo } from './toolbar.utils';
@@ -14,14 +18,16 @@ import { useEffect, useState } from 'react';
 
 const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config }) => {
   const [maxWidth, setMaxWidth] = useState(0);
-  const currentAttributes = editor.getAttributes(VideoNode.name) as VideoAttributes & { id: string | undefined };
+  const currentAttributes = editor.getAttributes(VideoNode.name) as VideoAttributes & {
+    id: string | undefined;
+  };
 
   useEffect(() => {
     const editor = document.querySelector("[data-testid='rrte-editor']") as HTMLElement;
     if (!editor) {
       return;
     }
-    const observer = new ResizeObserver((entries) => {
+    const observer = new ResizeObserver(entries => {
       const maxWidth = entries[0].contentRect.width;
       setMaxWidth(maxWidth);
     });
@@ -121,7 +127,11 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
           className={classes.inputField}
           type="number"
           value={currentAttributes.customWidth === null ? 320 : currentAttributes.customWidth}
-          onChange={(e) => editor.commands.updateAttributes(VideoNode.name, { customWidth: Number(e.target.value) })}
+          onChange={e =>
+            editor.commands.updateAttributes(VideoNode.name, {
+              customWidth: Number(e.target.value),
+            })
+          }
         />
       </label>
       <label className={classes.inputContainer}>
@@ -132,14 +142,26 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
           className={classes.inputField}
           type="number"
           value={currentAttributes.customHeight === null ? 180 : currentAttributes.customHeight}
-          onChange={(e) => editor.commands.updateAttributes(VideoNode.name, { customHeight: Number(e.target.value) })}
+          onChange={e =>
+            editor.commands.updateAttributes(VideoNode.name, {
+              customHeight: Number(e.target.value),
+            })
+          }
         />
       </label>
     </div>
   );
 };
 
-const ChangeVideoButton = ({ editor, config, videoId }: { editor: Editor; config: UploadConfig; videoId: string }) => {
+const ChangeVideoButton = ({
+  editor,
+  config,
+  videoId,
+}: {
+  editor: Editor;
+  config: UploadConfig;
+  videoId: string;
+}) => {
   if (config.type === 'user-controlled') {
     return <UserControlledChangeButton editor={editor} config={config} videoId={videoId} />;
   }
@@ -164,14 +186,14 @@ const ExtensionControlledChangeButton = ({
         accept={config.acceptedVideoFileTypes.join(', ')}
         className={classes.videoInput}
         value={''}
-        onChange={async (e) => {
+        onChange={async e => {
           const file = e.target.files?.[0];
           if (!file) {
             return;
           }
           const reader = new FileReader();
           reader.readAsDataURL(file);
-          reader.onload = async (e) => {
+          reader.onload = async e => {
             if (!e.target || !e.target.result) {
               return;
             }
@@ -190,7 +212,7 @@ const ExtensionControlledChangeButton = ({
               },
               editor,
               videoId,
-              true,
+              true
             );
 
             const finalImg = await config.onVideoAdd(file, {

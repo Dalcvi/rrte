@@ -3,7 +3,6 @@
   "include": ["./src", "jest.config.js"],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
-      "outDir": "./dist",
-      "composite": true
+      "outDir": "./dist"
     }
 }

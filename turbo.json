@@ -20,9 +20,6 @@
     },
     "build:prod": {
       "outputs": ["dist/**"]
-    },
-    "docs:dev" : {
-      "cache": false
     }
   }
 }

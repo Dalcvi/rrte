@@ -37,31 +37,31 @@ pnpm add @rrte/extension-image
 
 ### User controlled
 
-| Option name            | Type                                                                              | Description                                             |
-| ---------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| type                   | "user-controlled"                                                                 | Sets the type for better typescript support             |
-| onImageAddClick        | _() => Promise<{ tempFile: ImageReturnValue;finalFile: Promise<ImageReturn\>;}\>_ | Function that is called when the add button is clicked  |
-| acceptedImageFileTypes | string[]                                                                          | All types of images accepted, for example: "image/webp" |
-| maxFileSize            | number                                                                            | Max file size in bytes                                  |
-| onPaste                | (file: File, imgAttr: NeededImageAttributes) => Promise<ImageReturn\>             | Handler for when an image gets pasted/dropped in        |
+| Option name            | Type                                                                                | Description                                             |
+| ---------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| type                   | "user-controlled"                                                                   | Sets the type for better typescript support             |
+| onImageAddClick        | _() => Promise\<\{tempFile: ImageReturnValue;finalFile: Promise\<ImageReturn\>;}\>_ | Function that is called when the add button is clicked  |
+| acceptedImageFileTypes | string[]                                                                            | All types of images accepted, for example: "image/webp" |
+| maxFileSize            | number                                                                              | Max file size in bytes                                  |
+| onPaste                | (file: File, imgAttr: NeededImageAttributes) => Promise\<ImageReturn\>              | Handler for when an image gets pasted/dropped in        |
 
 ### Extension controlled
 
-| Option name            | Type                                                                    | Description                                                        |
-| ---------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| type                   | "extension-controlled"                                                  | Sets the type for better typescript support                        |
-| onImageAdd             | _(file: File, imgAttr: NeededImageAttributes) => Promise<ImageReturn\>_ | Function that is called after user selects a file from file picker |
-| acceptedImageFileTypes | string[]                                                                | All types of images accepted, for example: "image/webp"            |
-| maxFileSize            | number                                                                  | Max file size in bytes                                             |
+| Option name            | Type                                                                     | Description                                                        |
+| ---------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| type                   | "extension-controlled"                                                   | Sets the type for better typescript support                        |
+| onImageAdd             | _(file: File, imgAttr: NeededImageAttributes) => Promise\<ImageReturn\>_ | Function that is called after user selects a file from file picker |
+| acceptedImageFileTypes | string[]                                                                 | All types of images accepted, for example: "image/webp"            |
+| maxFileSize            | number                                                                   | Max file size in bytes                                             |
 
 ## Options
 
-| Option name            | Type                                                                                   | Description                                                        |
-| ---------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| HTMLAttributes         | _Record<string, any>_                                                                  | HTML attributes to be applied to the image element.                |
-| upload                 | _((file: File, imgAttr: NeededImageAttributes) => Promise<ImageReturn\>) \| undefined_ | Function for uploading files when user drops in or pastes an image |
-| acceptedImageFileTypes | string[]                                                                               | All types of images accepted, for example: "image/webp"            |
-| maxFileSize            | number                                                                                 | Max file size in bytes                                             |
+| Option name            | Type                                                                                    | Description                                                        |
+| ---------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| HTMLAttributes         | _Record\<string, any>_                                                                  | HTML attributes to be applied to the image element.                |
+| upload                 | _((file: File, imgAttr: NeededImageAttributes) => Promise\<ImageReturn\>) \| undefined_ | Function for uploading files when user drops in or pastes an image |
+| acceptedImageFileTypes | string[]                                                                                | All types of images accepted, for example: "image/webp"            |
+| maxFileSize            | number                                                                                  | Max file size in bytes                                             |
 
 ## Attributes
 
@@ -79,11 +79,11 @@ pnpm add @rrte/extension-image
 
 ## Functions
 
-| Function name | Parameters                                     | Description                                               |
-| ------------- | ---------------------------------------------- | ----------------------------------------------------- |
-| setImage      | options: Partial<ImageAttributes\>             | Sets the selection as image node                      |
-| updateImage   | options: Partial<ImageAttributes\>, id: string | Updates attributes of image that matches the given id |
-| removeImage   | id: string                                     | Removes image by id                                   |
+| Function name | Parameters                                      | Description                                           |
+| ------------- | ----------------------------------------------- | ----------------------------------------------------- |
+| setImage      | options: Partial\<ImageAttributes\>             | Sets the selection as image node                      |
+| updateImage   | options: Partial\<ImageAttributes\>, id: string | Updates attributes of image that matches the given id |
+| removeImage   | id: string                                      | Removes image by id                                   |
 
 ## Example
 

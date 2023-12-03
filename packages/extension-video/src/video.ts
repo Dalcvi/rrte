@@ -12,7 +12,8 @@ export const Video = (uploadConfig: UploadConfig) =>
     addOptions() {
       return {
         ...this.parent?.(),
-        upload: uploadConfig.type === 'user-controlled' ? uploadConfig.onPaste : uploadConfig.onVideoAdd,
+        upload:
+          uploadConfig.type === 'user-controlled' ? uploadConfig.onPaste : uploadConfig.onVideoAdd,
         maxFileSize: uploadConfig.maxFileSize,
         acceptedVideoFileTypes: uploadConfig.acceptedVideoFileTypes,
       };

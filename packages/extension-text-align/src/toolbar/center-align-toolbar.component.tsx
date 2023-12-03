@@ -6,8 +6,14 @@ import classes from './toolbar.module.scss';
 import AlignCenterIcon from './align-center.icon.svg';
 import { TextAlignConfig } from '../text-align-config';
 
-const TextAlignToolbarButton = ({ editor, config }: { editor: Editor; config: TextAlignConfig }) => {
-  const isActive = config.types.some((type) => editor.isActive(type, { textAlign: 'center' }));
+const TextAlignToolbarButton = ({
+  editor,
+  config,
+}: {
+  editor: Editor;
+  config: TextAlignConfig;
+}) => {
+  const isActive = config.types.some(type => editor.isActive(type, { textAlign: 'center' }));
   return (
     <button
       data-testid="text-align-center-button"

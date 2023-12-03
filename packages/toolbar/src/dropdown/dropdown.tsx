@@ -20,7 +20,7 @@ export const Dropdown = (props: DropdownConfig & { editor: Editor }) => {
       document.removeEventListener('keydown', escapeClose);
       setIsOpen(false);
     },
-    [dropdownButton],
+    [dropdownButton]
   );
   const escapeClose = useMemo(
     () => (e: KeyboardEvent) => {
@@ -28,9 +28,9 @@ export const Dropdown = (props: DropdownConfig & { editor: Editor }) => {
         close();
       }
     },
-    [close],
+    [close]
   );
-  const selectedValue = valuesByPriority.find((value) => value.isActive({ editor }))?.text;
+  const selectedValue = valuesByPriority.find(value => value.isActive({ editor }))?.text;
 
   useEffect(() => {
     return () => {
@@ -59,7 +59,12 @@ export const Dropdown = (props: DropdownConfig & { editor: Editor }) => {
             [classes.arrowOpen]: isOpen,
           })}
         />
-        <input aria-label={dropdown.name} className={classes.input} value={selectedValue} readOnly />
+        <input
+          aria-label={dropdown.name}
+          className={classes.input}
+          value={selectedValue}
+          readOnly
+        />
       </div>
       {isOpen && (
         <div className={classNames(classes.dropdownItemsContainer, classes.openDropdown)}>

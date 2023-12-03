@@ -1,5 +1,5 @@
 export const extractImageInfo = (
-  file: File,
+  file: File
 ): Promise<{ originalWidth: number; originalHeight: number; src: string }> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -7,7 +7,7 @@ export const extractImageInfo = (
 
     const image = new Image();
 
-    reader.onload = (e) => {
+    reader.onload = e => {
       if (!e.target || !e.target.result) {
         reject(new Error('Failed to load the image file.'));
         return;

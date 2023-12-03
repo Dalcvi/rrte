@@ -37,7 +37,7 @@ export const UnderlineMark = Mark.create<UnderlineOptions>({
       },
       {
         style: 'text-decoration',
-        getAttrs: (value) => {
+        getAttrs: value => {
           if (typeof value === 'string' && value.includes('underline')) {
             return {
               verticalAlign: 'underline',

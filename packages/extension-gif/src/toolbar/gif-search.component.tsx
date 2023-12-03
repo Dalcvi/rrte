@@ -54,7 +54,7 @@ export const GifSearch = ({
       setCurrentPage(0);
       setIsLoading(true);
       fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${sdk}&limit=25&rating=g`)
-        .then((res) => res.json())
+        .then(res => res.json())
         .then((res: GifsResult) => {
           setGifs(res.data);
           setIsLoading(false);
@@ -69,12 +69,12 @@ export const GifSearch = ({
       return;
     }
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         if (entries[0].isIntersecting) {
           fetchMore(currentPage, search);
         }
       },
-      { threshold: 1 },
+      { threshold: 1 }
     );
     observer.observe(observedGif);
 
@@ -89,9 +89,9 @@ export const GifSearch = ({
       fetch(
         `https://api.giphy.com/v1/gifs/search?api_key=${sdk}&q=${search}&limit=25&offset=${
           currentPage * 25
-        }&rating=g&lang=en`,
+        }&rating=g&lang=en`
       )
-        .then((res) => res.json())
+        .then(res => res.json())
         .then((res: GifsResult) => {
           setGifs(res.data);
           setCurrentPage(currentPage + 1);
@@ -99,7 +99,7 @@ export const GifSearch = ({
           setIsLoading(false);
         });
     },
-    [],
+    []
   );
 
   return (
@@ -110,7 +110,7 @@ export const GifSearch = ({
         type="search"
         className={classes.gifSearch}
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={e => setSearch(e.target.value)}
       />
       <div className={classes.gifGrid}>
         {gifs.map((gif, index) => {

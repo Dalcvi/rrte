@@ -1,17 +1,16 @@
 import {
   Mark,
-  markPasteRule,
-  mergeAttributes,
-  getAttributes,
+  NodeWithPos,
   combineTransactionSteps,
   findChildrenInRange,
+  getAttributes,
   getChangedRanges,
-  getMarksBetween,
-  NodeWithPos,
   getMarkType,
-  getMarkRange,
+  getMarksBetween,
   isMarkActive,
   isTextSelection,
+  markPasteRule,
+  mergeAttributes,
 } from '@tiptap/core';
 import { Plugin, PluginKey } from '@tiptap/pm/state';
 import { find, registerCustomProtocol, reset, test } from 'linkifyjs';
@@ -82,7 +81,7 @@ export const LinkMark = Mark.create<LinkOptions>({
   exitable: true,
 
   onCreate() {
-    this.options.protocols.forEach((protocol) => {
+    this.options.protocols.forEach(protocol => {
       if (typeof protocol === 'string') {
         registerCustomProtocol(protocol);
         return;
@@ -136,7 +135,7 @@ export const LinkMark = Mark.create<LinkOptions>({
   addCommands() {
     return {
       setLink:
-        (attributes) =>
+        attributes =>
         ({ chain }) => {
           return chain()
             .setMark(this.name, attributes)
@@ -152,7 +151,7 @@ export const LinkMark = Mark.create<LinkOptions>({
 
                 if (
                   (empty && !!newMarkType.isInSet(currentMarks)) ||
-                  !currentMarks.some((mark) => mark.type.excludes(type))
+                  !currentMarks.some(mark => mark.type.excludes(type))
                 ) {
                   tr.setStoredMarks([type.create(attributes)]);
                 }
@@ -163,8 +162,8 @@ export const LinkMark = Mark.create<LinkOptions>({
         },
 
       toggleLink:
-        (attributes) =>
-        ({ chain, commands, state }) => {
+        attributes =>
+        ({ commands, state }) => {
           const isActive = isMarkActive(state, this.type, attributes);
           if (isActive) {
             return commands.unsetLink();
@@ -195,23 +194,23 @@ export const LinkMark = Mark.create<LinkOptions>({
   addPasteRules() {
     return [
       markPasteRule({
-        find: (text) =>
+        find: text =>
           find(text)
-            .filter((link) => {
+            .filter(link => {
               if (this.options.validate) {
                 return this.options.validate(link.value);
               }
 
               return true;
             })
-            .filter((link) => link.isLink)
-            .map((link) => ({
+            .filter(link => link.isLink)
+            .map(link => ({
               text: link.value,
               index: link.start,
               data: link,
             })),
         type: this.type,
-        getAttributes: (match) => ({
+        getAttributes: match => ({
           href: match.data?.href,
         }),
       }),
@@ -225,8 +224,11 @@ export const LinkMark = Mark.create<LinkOptions>({
             key: new PluginKey('autolink'),
             appendTransaction: (transactions, oldState, newState) => {
               const docChanges =
-                transactions.some((transaction) => transaction.docChanged) && !oldState.doc.eq(newState.doc);
-              const preventAutolink = transactions.some((transaction) => transaction.getMeta('preventAutolink'));
+                transactions.some(transaction => transaction.docChanged) &&
+                !oldState.doc.eq(newState.doc);
+              const preventAutolink = transactions.some(transaction =>
+                transaction.getMeta('preventAutolink')
+              );
 
               if (!docChanges || preventAutolink) {
                 return;
@@ -239,12 +241,12 @@ export const LinkMark = Mark.create<LinkOptions>({
 
               changes.forEach(({ oldRange, newRange }) => {
                 getMarksBetween(oldRange.from, oldRange.to, oldState.doc)
-                  .filter((item) => item.mark.type === this.type)
-                  .forEach((oldMark) => {
+                  .filter(item => item.mark.type === this.type)
+                  .forEach(oldMark => {
                     const newFrom = mapping.map(oldMark.from);
                     const newTo = mapping.map(oldMark.to);
                     const newMarks = getMarksBetween(newFrom, newTo, newState.doc).filter(
-                      (item) => item.mark.type === this.type,
+                      item => item.mark.type === this.type
                     );
 
                     if (!newMarks.length) {
@@ -252,8 +254,18 @@ export const LinkMark = Mark.create<LinkOptions>({
                     }
 
                     const newMark = newMarks[0];
-                    const oldLinkText = oldState.doc.textBetween(oldMark.from, oldMark.to, undefined, ' ');
-                    const newLinkText = newState.doc.textBetween(newMark.from, newMark.to, undefined, ' ');
+                    const oldLinkText = oldState.doc.textBetween(
+                      oldMark.from,
+                      oldMark.to,
+                      undefined,
+                      ' '
+                    );
+                    const newLinkText = newState.doc.textBetween(
+                      newMark.from,
+                      newMark.to,
+                      undefined,
+                      ' '
+                    );
                     const wasLink = test(oldLinkText);
                     const isLink = test(newLinkText);
 
@@ -262,7 +274,11 @@ export const LinkMark = Mark.create<LinkOptions>({
                     }
                   });
 
-                const nodesInChangedRanges = findChildrenInRange(newState.doc, newRange, (node) => node.isTextblock);
+                const nodesInChangedRanges = findChildrenInRange(
+                  newState.doc,
+                  newRange,
+                  node => node.isTextblock
+                );
 
                 let textBlock: NodeWithPos | undefined;
                 let textBeforeWhitespace: string | undefined;
@@ -273,50 +289,59 @@ export const LinkMark = Mark.create<LinkOptions>({
                     textBlock.pos,
                     textBlock.pos + textBlock.node.nodeSize,
                     undefined,
-                    ' ',
+                    ' '
                   );
                 } else if (
                   nodesInChangedRanges.length &&
                   newState.doc.textBetween(newRange.from, newRange.to, ' ', ' ').endsWith(' ')
                 ) {
                   textBlock = nodesInChangedRanges[0];
-                  textBeforeWhitespace = newState.doc.textBetween(textBlock.pos, newRange.to, undefined, ' ');
+                  textBeforeWhitespace = newState.doc.textBetween(
+                    textBlock.pos,
+                    newRange.to,
+                    undefined,
+                    ' '
+                  );
                 }
 
                 if (textBlock && textBeforeWhitespace) {
-                  const wordsBeforeWhitespace = textBeforeWhitespace.split(' ').filter((s) => s !== '');
+                  const wordsBeforeWhitespace = textBeforeWhitespace
+                    .split(' ')
+                    .filter(s => s !== '');
 
                   if (wordsBeforeWhitespace.length <= 0) {
                     return false;
                   }
 
-                  const lastWordBeforeSpace = wordsBeforeWhitespace[wordsBeforeWhitespace.length - 1];
-                  const lastWordAndBlockOffset = textBlock.pos + textBeforeWhitespace.lastIndexOf(lastWordBeforeSpace);
+                  const lastWordBeforeSpace =
+                    wordsBeforeWhitespace[wordsBeforeWhitespace.length - 1];
+                  const lastWordAndBlockOffset =
+                    textBlock.pos + textBeforeWhitespace.lastIndexOf(lastWordBeforeSpace);
 
                   if (!lastWordBeforeSpace) {
                     return false;
                   }
 
                   find(lastWordBeforeSpace)
-                    .filter((link) => link.isLink)
-                    .filter((link) => {
+                    .filter(link => link.isLink)
+                    .filter(link => {
                       if (this.options.validate) {
                         return this.options.validate(link.value);
                       }
                       return true;
                     })
-                    .map((link) => ({
+                    .map(link => ({
                       ...link,
                       from: lastWordAndBlockOffset + link.start + 1,
                       to: lastWordAndBlockOffset + link.end + 1,
                     }))
-                    .forEach((link) => {
+                    .forEach(link => {
                       tr.addMark(
                         link.from,
                         link.to,
                         this.type.create({
                           href: link.href,
-                        }),
+                        })
                       );
                     });
                 }
@@ -373,11 +398,13 @@ export const LinkMark = Mark.create<LinkOptions>({
 
                 let textContent = '';
 
-                slice.content.forEach((node) => {
+                slice.content.forEach(node => {
                   textContent += node.textContent;
                 });
 
-                const link = find(textContent).find((item) => item.isLink && item.value === textContent);
+                const link = find(textContent).find(
+                  item => item.isLink && item.value === textContent
+                );
 
                 if (!textContent || !link) {
                   return false;

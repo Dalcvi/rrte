@@ -1,7 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import FakeEditor from './editor.mock';
+import { render } from '@testing-library/react';
 import { BubbleMenuList } from '../bubble-menus';
+import FakeEditor from './editor.mock';
 jest.mock('./editor.mock', () => {
   return jest.fn().mockImplementation(() => {
     return {

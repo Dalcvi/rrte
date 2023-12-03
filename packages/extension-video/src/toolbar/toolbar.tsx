@@ -4,7 +4,11 @@ import { VideoNode } from '../node';
 import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
 import classes from './toolbar.module.scss';
-import { ExtensionControlledUploadConfig, UploadConfig, UserControlledUploadConfig } from '../upload-config';
+import {
+  ExtensionControlledUploadConfig,
+  UploadConfig,
+  UserControlledUploadConfig,
+} from '../upload-config';
 import { createTempVideo, handleFileVideo } from './toolbar.utils';
 
 const Button = ({ editor, config }: { editor: Editor; config: UploadConfig }) => {
@@ -14,7 +18,13 @@ const Button = ({ editor, config }: { editor: Editor; config: UploadConfig }) =>
   return <ExtensionControlledButton editor={editor} config={config} />;
 };
 
-const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config: ExtensionControlledUploadConfig }) => {
+const ExtensionControlledButton = ({
+  editor,
+  config,
+}: {
+  editor: Editor;
+  config: ExtensionControlledUploadConfig;
+}) => {
   const selected = editor.isActive('video');
   return (
     <div
@@ -30,7 +40,7 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
         accept={config.acceptedVideoFileTypes.join(', ')}
         className={classes.videoInput}
         value={''}
-        onChange={async (e) => {
+        onChange={async e => {
           const file = e.target.files?.[0];
           if (!file) {
             return;
@@ -38,7 +48,7 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
           const reader = new FileReader();
           reader.readAsDataURL(file);
 
-          reader.onload = async (e) => {
+          reader.onload = async e => {
             if (!e.target || !e.target.result) {
               return;
             }
@@ -72,7 +82,13 @@ const ExtensionControlledButton = ({ editor, config }: { editor: Editor; config:
   );
 };
 
-const UserControlledButton = ({ editor, config }: { editor: Editor; config: UserControlledUploadConfig }) => {
+const UserControlledButton = ({
+  editor,
+  config,
+}: {
+  editor: Editor;
+  config: UserControlledUploadConfig;
+}) => {
   const selected = editor.isActive('video');
   return (
     <button
