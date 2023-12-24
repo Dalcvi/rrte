@@ -60,7 +60,6 @@ export const Editor = ({
       : undefined,
   });
 
-  console.log(editor);
   useEffect(() => {
     if (editorRef && editorRef.current !== editor) {
       editorRef.current = editor;

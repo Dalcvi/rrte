@@ -139,10 +139,10 @@ export const IdExtension = Extension.create<IdOptions>({
                     });
                     newIds[i] = generatedId;
                   } catch (e) {
-                    console.log(e);
+                    console.error(e);
                   }
                 } catch (e) {
-                  console.log(e);
+                  console.error(e);
                 }
                 return tr;
               }
