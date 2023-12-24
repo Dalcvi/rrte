@@ -241,7 +241,7 @@ global.fetch = jest.fn(() =>
           response_id: 'abdixh8s922cko3ly6rljh5q3v3zxsk59ob34u9g',
         },
       }),
-  }),
+  })
 ) as any;
 
 describe('Gif', () => {
@@ -252,19 +252,19 @@ describe('Gif', () => {
         editorRef={editorRef}
         content={undefined}
         extensions={[Paragraph(), Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO')]}
-      />,
+      />
     );
     const button = screen.getByTestId('gif-button');
     await userEvent.click(button);
     const gifSearch = screen.getByTestId('gif-search');
     await userEvent.type(gifSearch, 't');
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 500));
     const firstImg = await screen.findByTestId(
       'gif-img-select',
       {},
       {
         timeout: 1000,
-      },
+      }
     );
     await userEvent.click(firstImg);
     const gifImgEl = await screen.findByTestId(
@@ -272,7 +272,7 @@ describe('Gif', () => {
       {},
       {
         timeout: 1000,
-      },
+      }
     );
 
     expect(gifImgEl).toBeInTheDocument();

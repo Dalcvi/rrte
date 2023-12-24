@@ -35,20 +35,21 @@ describe('Image', () => {
                 originalHeight: 200,
                 originalWidth: 300,
               };
-              const finalFile = new Promise<ImageAttributes>((resolve) =>
+              const finalFile = new Promise<ImageAttributes>(resolve =>
                 setTimeout(resolve, 1000, {
                   src: 'https://picsum.photos/200/300',
                   originalHeight: 300,
                   originalWidth: 200,
-                }),
+                })
               );
 
               return { tempFile, finalFile };
             },
-            onPaste: async (file, imgAttr) => new Promise((resolve) => setTimeout(resolve, 1000, imgAttr)),
+            onPaste: async (file, imgAttr) =>
+              new Promise(resolve => setTimeout(resolve, 1000, imgAttr)),
           }),
         ]}
-      />,
+      />
     );
 
     const button = screen.getByTestId('user-controlled-image-button');
@@ -95,20 +96,21 @@ describe('Image', () => {
                 originalHeight: 200,
                 originalWidth: 300,
               };
-              const finalFile = new Promise<ImageAttributes>((resolve) =>
+              const finalFile = new Promise<ImageAttributes>(resolve =>
                 setTimeout(resolve, 1000, {
                   src: 'https://picsum.photos/200/300',
                   originalHeight: 300,
                   originalWidth: 200,
-                }),
+                })
               );
 
               return { tempFile, finalFile };
             },
-            onPaste: async (file, imgAttr) => new Promise((resolve) => setTimeout(resolve, 1000, imgAttr)),
+            onPaste: async (file, imgAttr) =>
+              new Promise(resolve => setTimeout(resolve, 1000, imgAttr)),
           }),
         ]}
-      />,
+      />
     );
 
     const imgElement = screen.getByTestId('image-comp');

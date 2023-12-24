@@ -40,7 +40,13 @@ describe('Color', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Id(), Color(), TextStyle()]} />);
+    render(
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        extensions={[Paragraph(), Id(), Color(), TextStyle()]}
+      />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
     const textSpan = paragraph.querySelector('span');

@@ -69,7 +69,13 @@ describe('Ordered list', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), OrderedList(), ListItem()]} />);
+    render(
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        extensions={[Paragraph(), OrderedList(), ListItem()]}
+      />
+    );
 
     const orderedList = screen.getByTestId('orderedList');
 

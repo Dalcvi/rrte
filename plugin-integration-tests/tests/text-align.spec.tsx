@@ -13,7 +13,9 @@ import userEvent from '@testing-library/user-event';
 describe('Text align', () => {
   it('button should change paragraph text alignment to left', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), TextAlign()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), TextAlign()]} />
+    );
     const rightButton = screen.getByTestId('text-align-right-button');
     await userEvent.click(rightButton);
     const button = screen.getByTestId('text-align-left-button');
@@ -26,7 +28,9 @@ describe('Text align', () => {
 
   it('button should change paragraph text alignment to center', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), TextAlign()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), TextAlign()]} />
+    );
 
     const button = screen.getByTestId('text-align-center-button');
     await userEvent.click(button);
@@ -38,7 +42,9 @@ describe('Text align', () => {
 
   it('button should change paragraph text alignment to right', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), TextAlign()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), TextAlign()]} />
+    );
 
     const button = screen.getByTestId('text-align-right-button');
     await userEvent.click(button);
@@ -50,7 +56,9 @@ describe('Text align', () => {
 
   it('button should change paragraph text alignment to justify', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), TextAlign()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), TextAlign()]} />
+    );
 
     const button = screen.getByTestId('text-align-justify-button');
     await userEvent.click(button);
@@ -79,7 +87,9 @@ describe('Text align', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), TextAlign()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), TextAlign()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
 
@@ -107,7 +117,9 @@ describe('Text align', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), TextAlign()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), TextAlign()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
 
@@ -136,7 +148,9 @@ describe('Text align', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), TextAlign()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), TextAlign()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
 
@@ -165,7 +179,9 @@ describe('Text align', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), TextAlign()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), TextAlign()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
 

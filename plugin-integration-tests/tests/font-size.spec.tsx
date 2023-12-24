@@ -41,7 +41,11 @@ describe('Font size', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Id(), FontSize(), TextStyle()]} />,
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        extensions={[Paragraph(), Id(), FontSize(), TextStyle()]}
+      />
     );
 
     const paragraph = screen.getByTestId('paragraph');
