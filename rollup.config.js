@@ -36,74 +36,46 @@ const esOutput = {
 };
 
 export default [
-  // {
-  //   input: `${PACKAGE_NAME}/src/index.ts`,
-  //   external: moduleImport => {
-  //     return (
-  //       !includeExternals.some(notExternal => moduleImport.match(notExternal)) &&
-  //       externals.some(external => moduleImport.match(external))
-  //     );
-  //   },
-  //   output: [cjsOutput, esOutput],
-  //   plugins: [
-  //     nodeResolve({
-  //       preferBuiltins: true,
-  //       modulesOnly: true,
-  //     }),
-  //     commonjs({
-  //       sourceMap: true,
-  //       minify: process.env.NODE_ENV === 'production',
-  //       exclude: ['node_modules/**'],
-  //     }),
-  //     svgr({
-  //       minify: process.env.NODE_ENV === 'production',
-  //     }),
-  //     esbuild({
-  //       include: /\.[jt]sx?$/,
-  //       exclude: /node_modules/,
-  //       sourceMap: true,
-  //       minify: process.env.NODE_ENV === 'production',
-  //       jsx: 'automatic',
-  //       target: 'es2017',
-  //       define: {
-  //         __VERSION__: '"x.y.z"',
-  //       },
-  //     }),
-  //     postcss({
-  //       modules: true,
-  //       inject: true,
-  //       minimize: process.env.NODE_ENV === 'production',
-  //       use: ['sass'],
-  //       exclude: /node_modules/,
-  //     }),
-  //   ],
-  // },
   {
     input: `${PACKAGE_NAME}/src/index.ts`,
-    plugins: [
-      dts({
-        compilerOptions: {
-          // other options...
-          // incremental: true,
-          diagnostics: true,
-        },
-        respectExternal: true,
-      }),
-    ],
     external: moduleImport => {
       return (
         !includeExternals.some(notExternal => moduleImport.match(notExternal)) &&
         externals.some(external => moduleImport.match(external))
       );
     },
-    output: [
-      {
-        dir: 'dist/src',
-        format: 'es',
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        sourcemap: true,
-      },
+    output: [cjsOutput, esOutput],
+    plugins: [
+      nodeResolve({
+        preferBuiltins: true,
+        modulesOnly: true,
+      }),
+      commonjs({
+        sourceMap: true,
+        minify: process.env.NODE_ENV === 'production',
+        exclude: ['node_modules/**'],
+      }),
+      svgr({
+        minify: process.env.NODE_ENV === 'production',
+      }),
+      esbuild({
+        include: /\.[jt]sx?$/,
+        exclude: /node_modules/,
+        sourceMap: true,
+        minify: process.env.NODE_ENV === 'production',
+        jsx: 'automatic',
+        target: 'es2017',
+        define: {
+          __VERSION__: '"x.y.z"',
+        },
+      }),
+      postcss({
+        modules: true,
+        inject: true,
+        minimize: process.env.NODE_ENV === 'production',
+        use: ['sass'],
+        exclude: /node_modules/,
+      }),
     ],
   },
 ];
