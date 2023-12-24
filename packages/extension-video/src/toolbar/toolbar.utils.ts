@@ -1,7 +1,6 @@
 import { Editor } from '@tiptap/core';
-import { VideoReturn, VideoReturnValue } from '../upload-config';
-import { VideoAttributes } from '../node';
 import { NodeSelection } from '@tiptap/pm/state';
+import { VideoReturn, VideoReturnValue } from '../upload-config';
 
 export const getVideoValue = async (video: VideoReturn) => {
   if (typeof video === 'function') {
@@ -15,7 +14,7 @@ export const handleFileVideo = async (
   getVideo: VideoReturn,
   editor: Editor,
   videoId: string | false | undefined,
-  isLoading?: boolean,
+  isLoading?: boolean
 ) => {
   const video = await getVideoValue(getVideo);
   if (video === 'ERROR') {

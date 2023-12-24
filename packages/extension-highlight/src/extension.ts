@@ -1,6 +1,6 @@
 import type {} from '@rrte/extension-text-style';
 
-import { Extension, isMarkActive } from '@tiptap/core';
+import { Extension } from '@tiptap/core';
 
 export type HighlightOptions = {
   types: string[];
@@ -37,8 +37,8 @@ export const HighlightExtension = Extension.create<HighlightOptions>({
         attributes: {
           backgroundColor: {
             default: null,
-            parseHTML: (element) => element.style.backgroundColor?.replace(/['"]+/g, ''),
-            renderHTML: (attributes) => {
+            parseHTML: element => element.style.backgroundColor?.replace(/['"]+/g, ''),
+            renderHTML: attributes => {
               if (!attributes.backgroundColor) {
                 return {};
               }
@@ -56,7 +56,7 @@ export const HighlightExtension = Extension.create<HighlightOptions>({
   addCommands() {
     return {
       setHighlight:
-        (highlight) =>
+        highlight =>
         ({ chain }) => {
           return chain().setMark('textStyle', { backgroundColor: highlight }).run();
         },
@@ -64,7 +64,8 @@ export const HighlightExtension = Extension.create<HighlightOptions>({
         () =>
         ({ commands }) => {
           return (
-            commands.setMark('textStyle', { backgroundColor: null }) && commands.removeEmptyTextStyle('backgroundColor')
+            commands.setMark('textStyle', { backgroundColor: null }) &&
+            commands.removeEmptyTextStyle('backgroundColor')
           );
         },
     };

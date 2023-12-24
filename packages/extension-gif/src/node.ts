@@ -84,7 +84,7 @@ export const GifNode = Node.create({
     return [
       {
         tag: 'img[src]',
-        getAttrs: (dom) => {
+        getAttrs: dom => {
           if (!(dom instanceof HTMLElement)) {
             return false;
           }
@@ -108,7 +108,7 @@ export const GifNode = Node.create({
       },
       {
         tag: 'video[src]',
-        getAttrs: (dom) => {
+        getAttrs: dom => {
           if (!(dom instanceof HTMLElement)) {
             return false;
           }
@@ -134,13 +134,20 @@ export const GifNode = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id, ...restAttributes } = HTMLAttributes;
     const width = HTMLAttributes.customSize
-      ? `width: ${HTMLAttributes.customWidth === null ? HTMLAttributes.originalWidth : HTMLAttributes.customWidth}px;`
+      ? `width: ${
+          HTMLAttributes.customWidth === null
+            ? HTMLAttributes.originalWidth
+            : HTMLAttributes.customWidth
+        }px;`
       : '';
     const height = HTMLAttributes.customSize
       ? `height: ${
-          HTMLAttributes.customHeight === null ? HTMLAttributes.originalHeight : HTMLAttributes.customHeight
+          HTMLAttributes.customHeight === null
+            ? HTMLAttributes.originalHeight
+            : HTMLAttributes.customHeight
         }px;`
       : '';
     const src = HTMLAttributes.webp ? HTMLAttributes.webp : HTMLAttributes.mp4;

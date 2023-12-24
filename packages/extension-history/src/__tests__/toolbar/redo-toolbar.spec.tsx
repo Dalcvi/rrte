@@ -17,7 +17,7 @@ jest.mock('../editor.mock', () => {
   });
 });
 
-const UndoToolbar = ToolbarButtons.find((t) => t.name === 'Redo') as RegularButtonConfig;
+const UndoToolbar = ToolbarButtons.find(t => t.name === 'Redo') as RegularButtonConfig;
 
 describe('Redo toolbar button', () => {
   afterEach(() => {

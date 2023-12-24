@@ -45,8 +45,10 @@ export const OrderedListNode = Node.create<OrderedListOptions>({
     return {
       start: {
         default: 1,
-        parseHTML: (element) => {
-          return element.hasAttribute('start') ? parseInt(element.getAttribute('start') || '', 10) : 1;
+        parseHTML: element => {
+          return element.hasAttribute('start')
+            ? parseInt(element.getAttribute('start') || '', 10)
+            : 1;
         },
       },
     };
@@ -106,7 +108,7 @@ export const OrderedListNode = Node.create<OrderedListOptions>({
     let inputRule = wrappingInputRule({
       find: inputRegex,
       type: this.type,
-      getAttributes: (match) => ({ start: +match[1] }),
+      getAttributes: match => ({ start: +match[1] }),
       joinPredicate: (match, node) => node.childCount + node.attrs.start === +match[1],
     });
 
@@ -116,7 +118,7 @@ export const OrderedListNode = Node.create<OrderedListOptions>({
         type: this.type,
         keepMarks: this.options.keepMarks,
         keepAttributes: this.options.keepAttributes,
-        getAttributes: (match) => ({ start: +match[1], ...this.editor.getAttributes('textStyle') }),
+        getAttributes: match => ({ start: +match[1], ...this.editor.getAttributes('textStyle') }),
         joinPredicate: (match, node) => node.childCount + node.attrs.start === +match[1],
         editor: this.editor,
       });

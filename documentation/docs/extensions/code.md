@@ -35,9 +35,9 @@ pnpm add @rrte/extension-code
 
 ## Options
 
-| Option name    | Type                  | description                                        |
-| -------------- | --------------------- | -------------------------------------------------- |
-| HTMLAttributes | _Record<string, any>_ | HTML attributes to be applied to the code element. |
+| Option name    | Type                   | description                                        |
+| -------------- | ---------------------- | -------------------------------------------------- |
+| HTMLAttributes | _Record\<string, any>_ | HTML attributes to be applied to the code element. |
 
 ## Functions
 

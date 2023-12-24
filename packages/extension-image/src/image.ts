@@ -12,7 +12,8 @@ export const Image = (uploadConfig: UploadConfig) =>
     addOptions() {
       return {
         ...this.parent?.(),
-        upload: uploadConfig.type === 'user-controlled' ? uploadConfig.onPaste : uploadConfig.onImageAdd,
+        upload:
+          uploadConfig.type === 'user-controlled' ? uploadConfig.onPaste : uploadConfig.onImageAdd,
         maxFileSize: uploadConfig.maxFileSize,
         acceptedImageFileTypes: uploadConfig.acceptedImageFileTypes,
       };

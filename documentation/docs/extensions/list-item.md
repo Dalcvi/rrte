@@ -35,6 +35,6 @@ pnpm add @rrte/extension-list-item
 
 ## Options
 
-| Option name    | Type                  | description                                             |
-| -------------- | --------------------- | ------------------------------------------------------- |
-| HTMLAttributes | _Record<string, any>_ | HTML attributes to be applied to the list item element. |
+| Option name    | Type                   | description                                             |
+| -------------- | ---------------------- | ------------------------------------------------------- |
+| HTMLAttributes | _Record\<string, any>_ | HTML attributes to be applied to the list item element. |

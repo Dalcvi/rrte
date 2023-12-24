@@ -3,8 +3,6 @@ import classes from './toolbar.module.scss';
 import classNames from 'classnames';
 import { HeadingNode, Level } from '../node';
 
-const test = 'value';
-
 const createValue = (level: Level): DropdownValue => ({
   name: `heading ${level}`,
   priority: 7 - level,
@@ -24,5 +22,12 @@ export const ToolbarDropdown: DropdownConfig = {
   text: 'Text type',
   priority: 105,
   DropdownPriority: 1000,
-  values: [createValue(1), createValue(2), createValue(3), createValue(4), createValue(5), createValue(6)],
+  values: [
+    createValue(1),
+    createValue(2),
+    createValue(3),
+    createValue(4),
+    createValue(5),
+    createValue(6),
+  ],
 };

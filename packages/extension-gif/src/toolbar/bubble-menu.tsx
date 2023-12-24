@@ -12,7 +12,9 @@ import { GifSearch } from './gif-search.component';
 
 const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
   const [maxWidth, setMaxWidth] = useState(0);
-  const currentAttributes = editor.getAttributes(GifNode.name) as GifAttributes & { id: string | undefined };
+  const currentAttributes = editor.getAttributes(GifNode.name) as GifAttributes & {
+    id: string | undefined;
+  };
   const [isOpen, setIsOpen] = useState(false);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const close = useMemo(
@@ -24,7 +26,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
       document.removeEventListener('keydown', escapeClose);
       setIsOpen(false);
     },
-    [container],
+    [container]
   );
   const escapeClose = useMemo(
     () => (e: KeyboardEvent) => {
@@ -32,7 +34,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
         close();
       }
     },
-    [close],
+    [close]
   );
 
   useEffect(() => {
@@ -48,7 +50,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
     if (!editor) {
       return;
     }
-    const observer = new ResizeObserver((entries) => {
+    const observer = new ResizeObserver(entries => {
       const maxWidth = entries[0].contentRect.width;
       setMaxWidth(maxWidth);
     });
@@ -85,7 +87,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
         {isOpen && (
           <GifSearch
             sdk={config.sdkKey}
-            onGifSelect={(gifAttrs) => {
+            onGifSelect={gifAttrs => {
               close();
               editor.commands.setGif(gifAttrs);
             }}
@@ -173,9 +175,13 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
           className={classes.inputField}
           type="number"
           value={
-            currentAttributes.customWidth === null ? currentAttributes.originalWidth : currentAttributes.customWidth
+            currentAttributes.customWidth === null
+              ? currentAttributes.originalWidth
+              : currentAttributes.customWidth
           }
-          onChange={(e) => editor.commands.updateAttributes(GifNode.name, { customWidth: Number(e.target.value) })}
+          onChange={e =>
+            editor.commands.updateAttributes(GifNode.name, { customWidth: Number(e.target.value) })
+          }
         />
       </label>
       <label className={classes.inputContainer}>
@@ -187,9 +193,13 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
           className={classes.inputField}
           type="number"
           value={
-            currentAttributes.customHeight === null ? currentAttributes.originalHeight : currentAttributes.customHeight
+            currentAttributes.customHeight === null
+              ? currentAttributes.originalHeight
+              : currentAttributes.customHeight
           }
-          onChange={(e) => editor.commands.updateAttributes(GifNode.name, { customHeight: Number(e.target.value) })}
+          onChange={e =>
+            editor.commands.updateAttributes(GifNode.name, { customHeight: Number(e.target.value) })
+          }
         />
       </label>
     </div>

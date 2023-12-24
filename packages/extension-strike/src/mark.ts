@@ -40,7 +40,7 @@ export const StrikeMark = Mark.create<StrikeOptions>({
       },
       {
         style: 'text-decoration',
-        getAttrs: (value) => {
+        getAttrs: value => {
           if (typeof value === 'string' && value.includes('line-through')) {
             return {
               textDecoration: 'line-through',

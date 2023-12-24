@@ -36,13 +36,16 @@ export const Editor = ({
   const [contentHasBeenSet, setContentHasBeenSet] = useState(false);
   const allBubbleMenus = useMemo(
     () =>
-      extensions.reduce((acc, { extension, config }) => {
-        if (config.bubbleMenu) {
-          return [...acc, { name: extension.name, menu: config.bubbleMenu, config }];
-        }
-        return acc;
-      }, [] as { name: string; menu: BubbleMenuToolbar; config: Config }[]),
-    [extensions],
+      extensions.reduce(
+        (acc, { extension, config }) => {
+          if (config.bubbleMenu) {
+            return [...acc, { name: extension.name, menu: config.bubbleMenu, config }];
+          }
+          return acc;
+        },
+        [] as { name: string; menu: BubbleMenuToolbar; config: Config }[]
+      ),
+    [extensions]
   );
   const editor = useEditor({
     extensions: [Document, Text, ...extensions.map(({ extension }) => extension)],
@@ -57,7 +60,6 @@ export const Editor = ({
       : undefined,
   });
 
-  console.log(editor);
   useEffect(() => {
     if (editorRef && editorRef.current !== editor) {
       editorRef.current = editor;
@@ -113,15 +115,17 @@ export const Editor = ({
           wrapperClassName={toolbarClassName}
           items={
             extensions
-              .map((extension) => ({ toolbar: extension.config.toolbar, config: extension.config }))
-              .filter((toolbar) => !!toolbar.toolbar) as { toolbar: ToolbarItem<any>; config: any }[]
+              .map(extension => ({ toolbar: extension.config.toolbar, config: extension.config }))
+              .filter(toolbar => !!toolbar.toolbar) as { toolbar: ToolbarItem<any>; config: any }[]
           }
         />
       )}
       <div className={`${classes.editorContent}  ${contentWrapperClassName}`}>
         <EditorContent editor={editor} data-testid="rrte-editor" />
       </div>
-      {editor && !viewerMode && allBubbleMenus.length > 0 && <BubbleMenuList editor={editor} list={allBubbleMenus} />}
+      {editor && !viewerMode && allBubbleMenus.length > 0 && (
+        <BubbleMenuList editor={editor} list={allBubbleMenus} />
+      )}
     </div>
   );
 };

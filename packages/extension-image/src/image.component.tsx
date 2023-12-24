@@ -1,17 +1,29 @@
-import { Editor, EditorEvents } from '@tiptap/core';
+import { NodeView } from '@rrte/common';
+import { Editor } from '@tiptap/core';
+import classNames from 'classnames';
+import { useEffect, useRef, useState } from 'react';
 import classes from './image.component.module.scss';
 import { ImageAttributes } from './node';
-import { useEffect, useRef, useState } from 'react';
-import { NodeView } from '@rrte/common';
-import classNames from 'classnames';
 
 type ImageNode = {
   attrs: ImageAttributes & { id: string };
 };
 
-export const ImageComponent = ({ editor, node, selected }: { editor: Editor; node: ImageNode; selected: boolean }) => {
-  const [imageWidth, setWidth] = useState((node.attrs.customSize ? node.attrs.customWidth : undefined) ?? undefined);
-  const [imageHeight, setHeight] = useState((node.attrs.customSize ? node.attrs.customHeight : undefined) ?? undefined);
+export const ImageComponent = ({
+  editor,
+  node,
+  selected,
+}: {
+  editor: Editor;
+  node: ImageNode;
+  selected: boolean;
+}) => {
+  const [imageWidth, setWidth] = useState(
+    (node.attrs.customSize ? node.attrs.customWidth : undefined) ?? undefined
+  );
+  const [imageHeight, setHeight] = useState(
+    (node.attrs.customSize ? node.attrs.customHeight : undefined) ?? undefined
+  );
   const imageRef = useRef<HTMLImageElement>(null);
   const [canShowLoader, setCanShowLoader] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
@@ -21,7 +33,10 @@ export const ImageComponent = ({ editor, node, selected }: { editor: Editor; nod
   const isCustomSizeEnabled = !!node.attrs.customSize;
 
   useEffect(() => {
-    if (node.attrs.customSize && (imageWidth !== node.attrs.customWidth || imageHeight !== node.attrs.customHeight)) {
+    if (
+      node.attrs.customSize &&
+      (imageWidth !== node.attrs.customWidth || imageHeight !== node.attrs.customHeight)
+    ) {
       setWidth(node.attrs.customWidth ?? undefined);
       setHeight(node.attrs.customHeight ?? undefined);
     }

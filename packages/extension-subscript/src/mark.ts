@@ -37,7 +37,7 @@ export const SubscriptMark = Mark.create<SubscriptOptions>({
       },
       {
         style: 'vertical-align',
-        getAttrs: (value) => {
+        getAttrs: value => {
           if (typeof value === 'string' && value.includes('sub')) {
             return {
               verticalAlign: 'sub',
@@ -58,7 +58,7 @@ export const SubscriptMark = Mark.create<SubscriptOptions>({
       setSubscript:
         () =>
         ({ commands, editor }) => {
-          if (editor.extensionManager.extensions.some((val) => val.name === 'superscript')) {
+          if (editor.extensionManager.extensions.some(val => val.name === 'superscript')) {
             commands.unsetMark('superscript');
           }
           return commands.setMark('subscript');

@@ -6,8 +6,14 @@ import classes from './toolbar.module.scss';
 import AlignJustifyIcon from './align-justify.icon.svg';
 import { TextAlignConfig } from '../text-align-config';
 
-const TextAlignToolbarButton = ({ editor, config }: { editor: Editor; config: TextAlignConfig }) => {
-  const isActive = config.types.some((type) => editor.isActive(type, { textAlign: 'justify' }));
+const TextAlignToolbarButton = ({
+  editor,
+  config,
+}: {
+  editor: Editor;
+  config: TextAlignConfig;
+}) => {
+  const isActive = config.types.some(type => editor.isActive(type, { textAlign: 'justify' }));
   return (
     <button
       data-testid="text-align-justify-button"

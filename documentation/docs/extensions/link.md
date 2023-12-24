@@ -35,22 +35,22 @@ pnpm add @rrte/extension-link
 
 ## Options
 
-| Option name    | Type                                    | description                                                            |
-| -------------- | --------------------------------------- | ---------------------------------------------------------------------- |
-| HTMLAttributes | _Record<string, any>_                   | HTML attributes to be applied to the link element.                     |
-| autolink       | _boolean_                               | Checks for links when writing and automatically creates links for them |
-| protocols      | _Array<LinkProtocolOptions \| string\>_ | Linkifyjs protocols                                                    |
-| openOnClick    | _boolean_                               | Enables link clicking. Disabled in editing mode                        |
-| linkOnPaste    | _boolean_                               | Enables link creation on pasting                                       |
-| validate       | _(url: string) => boolean_              | validation function that is called when creating a link                |
+| Option name    | Type                                     | description                                                            |
+| -------------- | ---------------------------------------- | ---------------------------------------------------------------------- |
+| HTMLAttributes | _Record\<string, any>_                   | HTML attributes to be applied to the link element.                     |
+| autolink       | _boolean_                                | Checks for links when writing and automatically creates links for them |
+| protocols      | _Array\<LinkProtocolOptions \| string\>_ | Linkifyjs protocols                                                    |
+| openOnClick    | _boolean_                                | Enables link clicking. Disabled in editing mode                        |
+| linkOnPaste    | _boolean_                                | Enables link creation on pasting                                       |
+| validate       | _(url: string) => boolean_               | validation function that is called when creating a link                |
 
 ## Functions
 
-| Function name | Parameters                                              | Description                   |
-| ------------- | ------------------------------------------------------- | ----------------------------- |
-| setLink       | _attributes: { href: string; target?: string \| null }_ | Set the selection as link     |
-| toggleCode    | _attributes: { href: string; target?: string \| null }_ | Toggles the selection as link |
-| unsetLink     | -                                                       | Unset the selection as link   |
+| Function name | Parameters                                               | Description                   |
+| ------------- | -------------------------------------------------------- | ----------------------------- |
+| setLink       | _attributes:\{ href: string; target?: string \| null }_  | Set the selection as link     |
+| toggleCode    | _attributes: \{ href: string; target?: string \| null }_ | Toggles the selection as link |
+| unsetLink     | -                                                        | Unset the selection as link   |
 
 ## Example
 

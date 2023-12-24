@@ -1,4 +1,10 @@
-import { Extension, findChildren, findChildrenInRange, getChangedRanges, combineTransactionSteps } from '@tiptap/core';
+import {
+  Extension,
+  findChildren,
+  findChildrenInRange,
+  getChangedRanges,
+  combineTransactionSteps,
+} from '@tiptap/core';
 import { Plugin, PluginKey, Transaction } from '@tiptap/pm/state';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,7 +15,7 @@ export function findDuplicates(items: any[]): any[] {
 
 export function removeDuplicates<T>(array: T[]): T[] {
   const seen: Record<any, any> = {};
-  return array.filter((item) => {
+  return array.filter(item => {
     const key = JSON.stringify(item);
     const isNew = !seen[key];
     seen[key] = true;
@@ -40,8 +46,8 @@ export const IdExtension = Extension.create<IdOptions>({
         attributes: {
           [this.options.attributeName]: {
             default: null,
-            parseHTML: (element) => element.getAttribute(this.options.attributeName),
-            renderHTML: (attributes) => {
+            parseHTML: element => element.getAttribute(this.options.attributeName),
+            renderHTML: attributes => {
               if (!attributes[this.options.attributeName]) {
                 return {};
               }
@@ -55,13 +61,15 @@ export const IdExtension = Extension.create<IdOptions>({
     ];
   },
   onCreate() {
-    if (this.editor.extensionManager.extensions.find((extension) => extension.name === 'collaboration')) {
+    if (
+      this.editor.extensionManager.extensions.find(extension => extension.name === 'collaboration')
+    ) {
       return;
     }
     const { view, state } = this.editor;
     const { tr, doc } = state;
     const { attributeName, generateID } = this.options;
-    const nodesWithoutId = findChildren(doc, (node) => {
+    const nodesWithoutId = findChildren(doc, node => {
       return node.attrs[attributeName] === null;
     });
     nodesWithoutId.forEach(({ node, pos }) => {
@@ -81,9 +89,11 @@ export const IdExtension = Extension.create<IdOptions>({
         key: new PluginKey('ID'),
         appendTransaction: (transactions, oldState, newState) => {
           const docChanges =
-            transactions.some((transaction) => transaction.docChanged) && !oldState.doc.eq(newState.doc);
+            transactions.some(transaction => transaction.docChanged) &&
+            !oldState.doc.eq(newState.doc);
           const filterTransactions =
-            this.options.filterTransaction && transactions.some((tr) => !this.options.filterTransaction?.(tr));
+            this.options.filterTransaction &&
+            transactions.some(tr => !this.options.filterTransaction?.(tr));
           if (!docChanges || filterTransactions) {
             return;
           }
@@ -96,7 +106,9 @@ export const IdExtension = Extension.create<IdOptions>({
             const newNodes = findChildrenInRange(newState.doc, newRange, () => {
               return true;
             });
-            const newIds = newNodes.map(({ node }) => node.attrs[attributeName]).filter((id) => id === null);
+            const newIds = newNodes
+              .map(({ node }) => node.attrs[attributeName])
+              .filter(id => id === null);
             newNodes.forEach(({ node, pos }, i) => {
               const id = tr.doc.nodeAt(pos)?.attrs[attributeName];
               if (id === null) {
@@ -127,10 +139,10 @@ export const IdExtension = Extension.create<IdOptions>({
                     });
                     newIds[i] = generatedId;
                   } catch (e) {
-                    console.log(e);
+                    console.error(e);
                   }
                 } catch (e) {
-                  console.log(e);
+                  console.error(e);
                 }
                 return tr;
               }
@@ -166,7 +178,10 @@ export const IdExtension = Extension.create<IdOptions>({
         props: {
           handleDOMEvents: {
             drop: (view, event) => {
-              if (dragSourceElement !== view.dom.parentElement || event.dataTransfer?.effectAllowed === 'copy') {
+              if (
+                dragSourceElement !== view.dom.parentElement ||
+                event.dataTransfer?.effectAllowed === 'copy'
+              ) {
                 dragSourceElement = null;
               }
               return false;

@@ -1,10 +1,13 @@
 import { Editor, findParentNodeClosestToPos } from '@tiptap/core';
 import { CSSProperties } from 'react';
 
-export const getParentAttribute = (attribute: string, editor: Editor): AttributeValue | undefined => {
+export const getParentAttribute = (
+  attribute: string,
+  editor: Editor
+): AttributeValue | undefined => {
   const parent = findParentNodeClosestToPos(
     editor.state.selection.$from,
-    (node) => node.type.name !== 'textStyle',
+    node => node.type.name !== 'textStyle'
   )?.node;
   if (parent && parent.attrs?.id) {
     const parentElement = document.getElementById(parent.attrs.id);
@@ -19,7 +22,7 @@ export type AttributeValue = { value: string; id: string };
 
 export const currentSelectionAttributeValue = (
   attribute: keyof CSSProperties,
-  editor: Editor,
+  editor: Editor
 ): AttributeValue | undefined => {
   if (typeof attribute === 'symbol') {
     throw new Error('attribute must not be a symbol');
@@ -30,7 +33,7 @@ export const currentSelectionAttributeValue = (
       return undefined;
     }
 
-    const marksAttr = node.marks.find((mark) => mark?.attrs?.[attribute]);
+    const marksAttr = node.marks.find(mark => !!mark.attrs[attribute]);
     if (marksAttr) {
       return marksAttr.attrs[attribute];
     }

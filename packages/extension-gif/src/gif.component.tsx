@@ -9,27 +9,37 @@ type GifNode = {
   attrs: GifAttributes & { id: string };
 };
 
-export const GifComponent = ({ editor, node, selected }: { editor: Editor; node: GifNode; selected: boolean }) => {
+export const GifComponent = ({
+  editor,
+  node,
+  selected,
+}: {
+  editor: Editor;
+  node: GifNode;
+  selected: boolean;
+}) => {
   const [gifWidth, setWidth] = useState(
-    node.attrs.customSize ? node.attrs.customWidth ?? undefined : node.attrs.originalWidth ?? undefined,
+    node.attrs.customSize
+      ? node.attrs.customWidth ?? undefined
+      : node.attrs.originalWidth ?? undefined
   );
   const [gifHeight, setHeight] = useState(
-    node.attrs.customSize ? node.attrs.customHeight ?? undefined : node.attrs.originalHeight ?? undefined,
+    node.attrs.customSize
+      ? node.attrs.customHeight ?? undefined
+      : node.attrs.originalHeight ?? undefined
   );
   const gifRef = useRef<HTMLElement>(null);
 
   const [isSelected, setIsSelected] = useState(false);
   const showSelection = isSelected || selected;
   const alignment = node.attrs.alignment;
-  const isCustomSizeEnabled = !!node.attrs.customSize;
-  const customWidth = node.attrs.customWidth === null ? node.attrs.originalWidth : node.attrs.customWidth;
-  const customHeight = node.attrs.customHeight === null ? node.attrs.originalHeight : node.attrs.customHeight;
 
   useEffect(() => {
     if (
       gifRef.current &&
       (!node.attrs.customSize ||
-        (!node.attrs.customSize && (node.attrs.customWidth === null || node.attrs.customHeight === null)))
+        (!node.attrs.customSize &&
+          (node.attrs.customWidth === null || node.attrs.customHeight === null)))
     ) {
       const gif = gifRef.current;
       const { width, height } = gif.getBoundingClientRect();
@@ -38,7 +48,10 @@ export const GifComponent = ({ editor, node, selected }: { editor: Editor; node:
         setHeight(height);
       }
     }
-    if (node.attrs.customSize && (gifWidth !== node.attrs.customWidth || gifHeight !== node.attrs.customHeight)) {
+    if (
+      node.attrs.customSize &&
+      (gifWidth !== node.attrs.customWidth || gifHeight !== node.attrs.customHeight)
+    ) {
       setWidth(node.attrs.customWidth ?? undefined);
       setHeight(node.attrs.customHeight ?? undefined);
     }

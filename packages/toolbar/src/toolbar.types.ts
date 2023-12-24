@@ -17,8 +17,12 @@ export type SortedToolbarItems<T extends Record<string, any>> = {
   [ToolbarItemType.DROPDOWN]: DropdownConfig[];
 };
 
-export type ToolbarItem<T extends Record<string, any>> = SingleToolbarItem<T> | SingleToolbarItem<T>[];
-export type SingleToolbarItem<T extends Record<string, any>> = RegularButtonConfig<T> | DropdownConfig;
+export type ToolbarItem<T extends Record<string, any>> =
+  | SingleToolbarItem<T>
+  | SingleToolbarItem<T>[];
+export type SingleToolbarItem<T extends Record<string, any>> =
+  | RegularButtonConfig<T>
+  | DropdownConfig;
 
 export type BubbleMenuToolbarProps<T extends Record<string, any> = Record<string, any>> = {
   editor: Editor;

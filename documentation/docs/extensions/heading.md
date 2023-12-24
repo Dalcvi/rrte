@@ -33,17 +33,17 @@ pnpm add @rrte/extension-heading
 
 ## Options
 
-| Option name    | Type                  | description                                           |
-| -------------- | --------------------- | ----------------------------------------------------- |
-| HTMLAttributes | _Record<string, any>_ | HTML attributes to be applied to the heading element. |
-| Levels         | number[]              | Heading levels                                        |
+| Option name    | Type                   | description                                           |
+| -------------- | ---------------------- | ----------------------------------------------------- |
+| HTMLAttributes | _Record\<string, any>_ | HTML attributes to be applied to the heading element. |
+| Levels         | number[]               | Heading levels                                        |
 
 ## Functions
 
-| Function name | Parameters                   | Description                       |
-| ------------- | ---------------------------- | --------------------------------- |
-| setHeading    | attributes: { level: Level } | Sets the selected node to heading |
-| toggleHeading | attributes: { level: Level } | Toggles heading node              |
+| Function name | Parameters                    | Description                       |
+| ------------- | ----------------------------- | --------------------------------- |
+| setHeading    | attributes: \{ level: Level } | Sets the selected node to heading |
+| toggleHeading | attributes: \{ level: Level } | Toggles heading node              |
 
 ## Example
 

@@ -2,11 +2,10 @@ import {
   AttributeValue,
   currentSelectionAttributeValue,
   type RegularButtonConfig,
-  type RegularButtonWrapperProps,
 } from '@rrte/common';
+import { Editor } from '@tiptap/core';
 import { FontSizeExtension } from '../extension';
 import classes from './toolbar.module.scss';
-import { Editor } from '@tiptap/core';
 
 const getValue = (value: string | AttributeValue | undefined) => {
   if (!value) {
@@ -41,7 +40,7 @@ const Button = ({ editor }: { editor: Editor }) => {
       type="number"
       value={value}
       min={1}
-      onChange={(e) => {
+      onChange={e => {
         if (!e.target.value || Number(e.target.value) < 1) {
           editor.chain().setFontSize(`${1}px`).run();
           return;

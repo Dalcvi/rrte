@@ -1,4 +1,4 @@
-import { Extension, getMarkAttributes, Mark, mergeAttributes } from '@tiptap/core';
+import { Extension } from '@tiptap/core';
 
 type Alignment = 'left' | 'center' | 'right' | 'justify';
 
@@ -36,12 +36,12 @@ export const TextAlignExtension = Extension.create<TextAlignOptions>({
         attributes: {
           textAlign: {
             default: this.options.defaultAlignment,
-            parseHTML: (element) => {
+            parseHTML: element => {
               return {
                 textAlign: element.style.textAlign ?? this.options.defaultAlignment,
               };
             },
-            renderHTML: (attributes) => {
+            renderHTML: attributes => {
               return {
                 style: `text-align: ${attributes.textAlign}`,
               };
@@ -55,9 +55,9 @@ export const TextAlignExtension = Extension.create<TextAlignOptions>({
   addCommands() {
     return {
       setTextAlign:
-        (textAlign) =>
+        textAlign =>
         ({ commands }) => {
-          return this.options.types.some((type) => {
+          return this.options.types.some(type => {
             return commands.updateAttributes(type, { textAlign });
           });
         },

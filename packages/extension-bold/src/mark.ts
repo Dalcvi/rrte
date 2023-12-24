@@ -40,7 +40,7 @@ export const BoldMark = Mark.create<BoldOptions>({
       },
       {
         style: 'font-weight',
-        getAttrs: (value) => {
+        getAttrs: value => {
           if (typeof value === 'string' && /^(bold(er)?|[5-9]\d{2,})$/.test(value)) {
             return {
               fontWeight: 700,
@@ -93,7 +93,7 @@ export const BoldMark = Mark.create<BoldOptions>({
       markInputRule({
         find: regex,
         type: this.type,
-      })
+      }),
     ];
   },
 
@@ -102,7 +102,7 @@ export const BoldMark = Mark.create<BoldOptions>({
       markPasteRule({
         find: regex,
         type: this.type,
-      })
+      }),
     ];
   },
 });

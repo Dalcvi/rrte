@@ -37,8 +37,8 @@ export const ColorExtension = Extension.create<ColorOptions>({
         attributes: {
           color: {
             default: null,
-            parseHTML: (element) => element.style.color?.replace(/['"]+/g, ''),
-            renderHTML: (attributes) => {
+            parseHTML: element => element.style.color?.replace(/['"]+/g, ''),
+            renderHTML: attributes => {
               if (!attributes.color) {
                 return {};
               }
@@ -56,14 +56,16 @@ export const ColorExtension = Extension.create<ColorOptions>({
   addCommands() {
     return {
       setColor:
-        (color) =>
+        color =>
         ({ chain }) => {
           return chain().setMark('textStyle', { color }).run();
         },
       unsetColor:
         () =>
         ({ commands }) => {
-          return commands.setMark('textStyle', { color: null }) && commands.removeEmptyTextStyle('color');
+          return (
+            commands.setMark('textStyle', { color: null }) && commands.removeEmptyTextStyle('color')
+          );
         },
     };
   },

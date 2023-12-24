@@ -35,11 +35,11 @@ pnpm add @rrte/extension-code-block
 
 ## Options
 
-| Option name       | Type                  | description                                              |
-| ----------------- | --------------------- | -------------------------------------------------------- |
-| HTMLAttributes    | _Record<string, any>_ | HTML attributes to be applied to the code block element. |
-| exitOnTripleEnter | boolean               | Should the node be exited on triple enter.               |
-| exitOnArrowDown   | boolean               | Should the node be exited on arrow down.                 |
+| Option name       | Type                   | description                                              |
+| ----------------- | ---------------------- | -------------------------------------------------------- |
+| HTMLAttributes    | _Record\<string, any>_ | HTML attributes to be applied to the code block element. |
+| exitOnTripleEnter | boolean                | Should the node be exited on triple enter.               |
+| exitOnArrowDown   | boolean                | Should the node be exited on arrow down.                 |
 
 ## Functions
 

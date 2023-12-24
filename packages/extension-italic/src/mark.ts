@@ -40,7 +40,7 @@ export const ItalicMark = Mark.create<ItalicOptions>({
       },
       {
         style: 'font-style',
-        getAttrs: (value) => {
+        getAttrs: value => {
           if (typeof value === 'string' && /^(italic|oblique)$/.test(value)) {
             return {
               fontStyle: 'italic',

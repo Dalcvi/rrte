@@ -15,8 +15,13 @@ export const TextAlign = ({ attachToNodes }: { attachToNodes?: string[] } = {}) 
       types: types,
     }),
     {
-      toolbar: [LeftAlignToolbarButton, RightAlignToolbarButton, CenterAlignToolbarButton, JustifyAlignToolbarButton],
+      toolbar: [
+        LeftAlignToolbarButton,
+        RightAlignToolbarButton,
+        CenterAlignToolbarButton,
+        JustifyAlignToolbarButton,
+      ],
       types,
-    },
+    }
   );
 };

@@ -61,7 +61,7 @@ export const YoutubeNode = Node.create({
     return [
       {
         tag: 'iframe[url][videoId]',
-        getAttrs: (dom) => {
+        getAttrs: dom => {
           if (!(dom instanceof HTMLElement)) {
             return false;
           }
@@ -92,6 +92,7 @@ export const YoutubeNode = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id, ...restAttributes } = HTMLAttributes;
     const marginLeft = `margin-left: ${HTMLAttributes.alignment === 'left' ? '0' : 'auto'};`;
     const marginRight = `margin-right: ${HTMLAttributes.alignment === 'right' ? '0' : 'auto'};`;
@@ -99,17 +100,26 @@ export const YoutubeNode = Node.create({
       style: `${marginLeft} ${marginRight}`,
       src: `https://www.youtube.com/embed/${HTMLAttributes.videoId}`,
       frameBorder: '0',
-      allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+      allow:
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
       allowFullScreen: true,
-      width: HTMLAttributes.customSize && HTMLAttributes.customWidth ? `${HTMLAttributes.customWidth};` : '640',
+      width:
+        HTMLAttributes.customSize && HTMLAttributes.customWidth
+          ? `${HTMLAttributes.customWidth};`
+          : '640',
       height:
-        HTMLAttributes.customSize && HTMLAttributes.customWidth ? `${(9 * HTMLAttributes.customWidth) / 16};` : '360',
+        HTMLAttributes.customSize && HTMLAttributes.customWidth
+          ? `${(9 * HTMLAttributes.customWidth) / 16};`
+          : '360',
     };
     const wrapperStyle = `display:flex;justify-content:center;width:100%`;
     return [
       'div',
       { style: wrapperStyle },
-      ['iframe', mergeAttributes(this.options.HTMLAttributes, restAttributes, additionalAttributes)],
+      [
+        'iframe',
+        mergeAttributes(this.options.HTMLAttributes, restAttributes, additionalAttributes),
+      ],
     ];
   },
 

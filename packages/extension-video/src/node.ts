@@ -1,8 +1,8 @@
 import { Node, mergeAttributes } from '@tiptap/core';
-import { VideoComponent } from './video.component';
+import { Plugin, PluginKey } from '@tiptap/pm/state';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import { NeededVideoAttributes, VideoReturn } from './upload-config';
-import { Plugin, PluginKey } from '@tiptap/pm/state';
+import { VideoComponent } from './video.component';
 
 export interface VideoAttributes {
   src: string;
@@ -88,7 +88,7 @@ export const VideoNode = Node.create<VideoOptions>({
     return [
       {
         tag: 'video[src]',
-        getAttrs: (dom) => {
+        getAttrs: dom => {
           if (!(dom instanceof HTMLElement)) {
             return false;
           }
@@ -112,12 +112,16 @@ export const VideoNode = Node.create<VideoOptions>({
   },
 
   renderHTML({ HTMLAttributes }) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id, ...restAttributes } = HTMLAttributes;
     const width = HTMLAttributes.customSize ? `width: ${HTMLAttributes.customWidth}px;` : '';
     const height = HTMLAttributes.customSize ? `height: ${HTMLAttributes.customHeight}px;` : '';
     const marginLeft = `margin-left: ${HTMLAttributes.alignment === 'left' ? '0' : 'auto'};`;
     const marginRight = `margin-right: ${HTMLAttributes.alignment === 'right' ? '0' : 'auto'};`;
-    const additionalAttributes = { style: `${width} ${height} ${marginLeft} ${marginRight} object-fit: fill;`, controls: true  };
+    const additionalAttributes = {
+      style: `${width} ${height} ${marginLeft} ${marginRight} object-fit: fill;`,
+      controls: true,
+    };
     const wrapperStyle = `display:flex;justify-content:center;width:100%`;
     return [
       'div',
@@ -138,17 +142,25 @@ export const VideoNode = Node.create<VideoOptions>({
           handleDrop: (view, event, slice, moved) => {
             event.preventDefault();
             const upload = this.options.upload;
-            if (!moved && event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0]) {
+            if (
+              !moved &&
+              event.dataTransfer &&
+              event.dataTransfer.files &&
+              event.dataTransfer.files[0]
+            ) {
               let file = event.dataTransfer.files[0];
               if (!file) {
                 return false;
               }
-              if (file.size > this.options.maxFileSize || !this.options.acceptedVideoFileTypes.includes(file.type)) {
+              if (
+                file.size > this.options.maxFileSize ||
+                !this.options.acceptedVideoFileTypes.includes(file.type)
+              ) {
                 return false;
               }
               const reader = new FileReader();
               reader.readAsDataURL(file);
-              reader.onload = async (e) => {
+              reader.onload = async e => {
                 if (!e.target || !e.target.result) {
                   return;
                 }
@@ -184,7 +196,9 @@ export const VideoNode = Node.create<VideoOptions>({
                 }
                 const getUploadedAttributes = await upload(file, videoAttributes);
                 const uploadedAttributes =
-                  typeof getUploadedAttributes === 'function' ? await getUploadedAttributes() : getUploadedAttributes;
+                  typeof getUploadedAttributes === 'function'
+                    ? await getUploadedAttributes()
+                    : getUploadedAttributes;
                 if (!uploadedAttributes || uploadedAttributes === 'ERROR') {
                   return;
                 }
@@ -218,14 +232,17 @@ export const VideoNode = Node.create<VideoOptions>({
                 if (!file) {
                   continue;
                 }
-                if (file.size > this.options.maxFileSize || !this.options.acceptedVideoFileTypes.includes(file.type)) {
+                if (
+                  file.size > this.options.maxFileSize ||
+                  !this.options.acceptedVideoFileTypes.includes(file.type)
+                ) {
                   return false;
                 }
 
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
 
-                reader.onload = async (e) => {
+                reader.onload = async e => {
                   if (!e.target || !e.target.result) {
                     return;
                   }
@@ -261,7 +278,9 @@ export const VideoNode = Node.create<VideoOptions>({
                   }
                   const getUploadedAttributes = await upload(file, videoAttributes);
                   const uploadedAttributes =
-                    typeof getUploadedAttributes === 'function' ? await getUploadedAttributes() : getUploadedAttributes;
+                    typeof getUploadedAttributes === 'function'
+                      ? await getUploadedAttributes()
+                      : getUploadedAttributes;
                   if (!uploadedAttributes || uploadedAttributes === 'ERROR') {
                     return;
                   }
@@ -295,7 +314,7 @@ export const VideoNode = Node.create<VideoOptions>({
   addCommands() {
     return {
       setVideo:
-        (attrs) =>
+        attrs =>
         ({ commands }) => {
           return commands.insertContent({
             type: this.name,
@@ -319,7 +338,7 @@ export const VideoNode = Node.create<VideoOptions>({
           return true;
         },
       removeVideo:
-        (id) =>
+        id =>
         ({ tr }) => {
           tr.doc.descendants((node, pos) => {
             if (node.type.name === this.name && node.attrs.id === id) {

@@ -1,4 +1,8 @@
-import { AttributeValue, currentSelectionAttributeValue, type RegularButtonConfig } from '@rrte/common';
+import {
+  AttributeValue,
+  currentSelectionAttributeValue,
+  type RegularButtonConfig,
+} from '@rrte/common';
 import { ColorExtension } from '../extension';
 import classes from './toolbar.module.scss';
 import classNames from 'classnames';
@@ -33,7 +37,7 @@ const Button = ({ editor }: { editor: Editor }) => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       editor.chain().focus().setColor(e.target.value).run();
     },
-    [editor],
+    [editor]
   );
 
   const handleReset = useCallback(() => {

@@ -1,9 +1,9 @@
 import { Node, mergeAttributes } from '@tiptap/core';
-import { ImageComponent } from './image.component';
-import { ReactNodeViewRenderer } from '@tiptap/react';
 import { Plugin, PluginKey } from '@tiptap/pm/state';
-import { ImageReturn, NeededImageAttributes } from './upload-config';
+import { ReactNodeViewRenderer } from '@tiptap/react';
+import { ImageComponent } from './image.component';
 import { fileUpload } from './node.utils';
+import { ImageReturn, NeededImageAttributes } from './upload-config';
 
 export interface ImageAttributes {
   src: string;
@@ -100,7 +100,7 @@ export const ImageNode = Node.create<ImageOptions>({
     return [
       {
         tag: 'img[src]',
-        getAttrs: (dom) => {
+        getAttrs: dom => {
           if (!(dom instanceof HTMLElement)) {
             return false;
           }
@@ -126,13 +126,20 @@ export const ImageNode = Node.create<ImageOptions>({
   },
 
   renderHTML({ HTMLAttributes }) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id, ...restAttributes } = HTMLAttributes;
     const width = HTMLAttributes.customSize
-      ? `width: ${HTMLAttributes.customWidth === null ? HTMLAttributes.originalWidth : HTMLAttributes.customWidth}px;`
+      ? `width: ${
+          HTMLAttributes.customWidth === null
+            ? HTMLAttributes.originalWidth
+            : HTMLAttributes.customWidth
+        }px;`
       : '';
     const height = HTMLAttributes.customSize
       ? `height: ${
-          HTMLAttributes.customHeight === null ? HTMLAttributes.originalHeight : HTMLAttributes.customHeight
+          HTMLAttributes.customHeight === null
+            ? HTMLAttributes.originalHeight
+            : HTMLAttributes.customHeight
         }px;`
       : '';
     const marginLeft = `margin-left: ${HTMLAttributes.alignment === 'left' ? '0' : 'auto'};`;
@@ -158,7 +165,12 @@ export const ImageNode = Node.create<ImageOptions>({
         props: {
           handleDrop: (view, event, slice, moved) => {
             event.preventDefault();
-            if (!moved && event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0]) {
+            if (
+              !moved &&
+              event.dataTransfer &&
+              event.dataTransfer.files &&
+              event.dataTransfer.files[0]
+            ) {
               let file = event.dataTransfer.files[0];
               if (!file) {
                 return false;
@@ -190,7 +202,7 @@ export const ImageNode = Node.create<ImageOptions>({
   addCommands() {
     return {
       setImage:
-        (attrs) =>
+        attrs =>
         ({ commands }) => {
           return commands.insertContent({
             type: this.name,
@@ -214,7 +226,7 @@ export const ImageNode = Node.create<ImageOptions>({
           return true;
         },
       removeImage:
-        (id) =>
+        id =>
         ({ tr }) => {
           tr.doc.descendants((node, pos) => {
             if (node.type.name === this.name && node.attrs.id === id) {

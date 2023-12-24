@@ -21,7 +21,7 @@ const Button = ({ editor, config }: { editor: Editor; config: GifConfig }) => {
       document.removeEventListener('keydown', escapeClose);
       setIsOpen(false);
     },
-    [container],
+    [container]
   );
   const escapeClose = useMemo(
     () => (e: KeyboardEvent) => {
@@ -29,7 +29,7 @@ const Button = ({ editor, config }: { editor: Editor; config: GifConfig }) => {
         close();
       }
     },
-    [close],
+    [close]
   );
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const Button = ({ editor, config }: { editor: Editor; config: GifConfig }) => {
       {isOpen && (
         <GifSearch
           sdk={config.sdkKey}
-          onGifSelect={(gifAttrs) => {
+          onGifSelect={gifAttrs => {
             close();
             editor.commands.setGif(gifAttrs);
           }}

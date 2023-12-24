@@ -1,4 +1,8 @@
-import type { Extension as TiptapExtension, Node as TiptapNode, Mark as TiptapMark } from '@tiptap/core';
+import type {
+  Extension as TiptapExtension,
+  Node as TiptapNode,
+  Mark as TiptapMark,
+} from '@tiptap/core';
 import { Config } from './config';
 import { cloneDeep } from 'lodash';
 export type {
@@ -23,8 +27,11 @@ export type Extension<
 > = {
   extension: TiptapExtensionType;
   config: Config<ConfigType>;
-  extend: <ExtendedOriginalType extends OriginalType & Extend, ExtendedSubType extends SubType & Extend>(
-    ext: Record<string, any>,
+  extend: <
+    ExtendedOriginalType extends OriginalType & Extend,
+    ExtendedSubType extends SubType & Extend,
+  >(
+    ext: Record<string, any>
   ) => Extension<
     ConfigType,
     AllExtension<ExtendedOriginalType, ExtendedSubType>,
@@ -32,7 +39,7 @@ export type Extension<
     ExtendedSubType
   >;
   extendConfig: <NewConfigType extends Record<string, any>>(
-    getConfig: (config: Config<ConfigType>) => Config<NewConfigType>,
+    getConfig: (config: Config<ConfigType>) => Config<NewConfigType>
   ) => Extension<NewConfigType, AllExtension<OriginalType, SubType>, OriginalType, SubType>;
 };
 
@@ -45,13 +52,16 @@ export const createExtension = <
   SubType = any,
 >(
   extension: TiptapExtensionType,
-  config: Config<ConfigType>,
+  config: Config<ConfigType>
 ): Extension<ConfigType, TiptapExtensionType, OriginalType, SubType> => {
   return {
     extension,
     config,
-    extend: <ExtendedOriginalType extends OriginalType & Extend, ExtendedSubType extends SubType & Extend>(
-      ext: Record<string, any>,
+    extend: <
+      ExtendedOriginalType extends OriginalType & Extend,
+      ExtendedSubType extends SubType & Extend,
+    >(
+      ext: Record<string, any>
     ) => {
       return createExtension<
         ConfigType,
@@ -61,12 +71,14 @@ export const createExtension = <
       >(extension.extend<ExtendedOriginalType, ExtendedSubType>(ext), config);
     },
     extendConfig: <NewConfigType extends Record<string, any>>(
-      getConfig: (config: Config<ConfigType>) => Config<NewConfigType>,
+      getConfig: (config: Config<ConfigType>) => Config<NewConfigType>
     ) => {
-      return createExtension<NewConfigType, AllExtension<OriginalType, SubType>, OriginalType, SubType>(
-        extension,
-        getConfig(cloneDeep(config)),
-      );
+      return createExtension<
+        NewConfigType,
+        AllExtension<OriginalType, SubType>,
+        OriginalType,
+        SubType
+      >(extension, getConfig(cloneDeep(config)));
     },
   };
 };

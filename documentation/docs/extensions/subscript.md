@@ -31,9 +31,9 @@ pnpm add @rrte/extension-subscript
 
 ## Options
 
-| Option name    | Type                  | description                                             |
-| -------------- | --------------------- | ------------------------------------------------------- |
-| HTMLAttributes | _Record<string, any>_ | HTML attributes to be applied to the subscript element. |
+| Option name    | Type                   | description                                             |
+| -------------- | ---------------------- | ------------------------------------------------------- |
+| HTMLAttributes | _Record\<string, any>_ | HTML attributes to be applied to the subscript element. |
 
 ## Functions
 

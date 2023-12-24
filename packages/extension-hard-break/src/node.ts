@@ -61,13 +61,16 @@ export const HardBreakNode = Node.create<HardBreakOptions>({
 
                 const { keepMarks } = this.options;
                 const { splittableMarks } = editor.extensionManager;
-                const marks = storedMarks || (selection.$to.parentOffset && selection.$from.marks());
+                const marks =
+                  storedMarks || (selection.$to.parentOffset && selection.$from.marks());
 
                 return chain()
                   .insertContent({ type: this.name })
                   .command(({ tr, dispatch }) => {
                     if (dispatch && marks && keepMarks) {
-                      const filteredMarks = marks.filter((mark) => splittableMarks.includes(mark.type.name));
+                      const filteredMarks = marks.filter(mark =>
+                        splittableMarks.includes(mark.type.name)
+                      );
 
                       tr.ensureMarks(filteredMarks);
                     }
