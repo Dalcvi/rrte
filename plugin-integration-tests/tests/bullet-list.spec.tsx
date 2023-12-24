@@ -14,7 +14,13 @@ import userEvent from '@testing-library/user-event';
 describe('Bullet list', () => {
   it('button press should add bullet list', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), BulletList(), ListItem()]} />);
+    render(
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        extensions={[Paragraph(), BulletList(), ListItem()]}
+      />
+    );
 
     const button = screen.getByTestId('bullet-list-button');
     await userEvent.click(button);
@@ -78,7 +84,13 @@ describe('Bullet list', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), BulletList(), ListItem()]} />);
+    render(
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        extensions={[Paragraph(), BulletList(), ListItem()]}
+      />
+    );
 
     const bulletList = screen.getByTestId('bulletList');
 

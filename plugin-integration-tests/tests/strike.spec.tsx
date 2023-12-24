@@ -13,7 +13,9 @@ import React from 'react';
 describe('Strike', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Strike()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Strike()]} />
+    );
 
     const strikeButton = screen.getByTestId('strike-button');
     await userEvent.click(strikeButton);

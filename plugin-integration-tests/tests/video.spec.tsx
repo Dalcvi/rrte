@@ -31,20 +31,21 @@ describe('Video', () => {
               const tempFile = {
                 src: 'https://www.w3schools.com/html/mov_bbb.mp4',
               };
-              const finalFile = new Promise<VideoAttributes>((resolve) =>
+              const finalFile = new Promise<VideoAttributes>(resolve =>
                 setTimeout(resolve, 1000, {
                   src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-                }),
+                })
               );
 
               return { tempFile, finalFile };
             },
-            onPaste: async (file, videoAttr) => new Promise((resolve) => setTimeout(resolve, 1000, videoAttr)),
+            onPaste: async (file, videoAttr) =>
+              new Promise(resolve => setTimeout(resolve, 1000, videoAttr)),
             maxFileSize: 100000000,
             acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
           }),
         ]}
-      />,
+      />
     );
 
     const button = screen.getByTestId('user-controlled-video-button');
@@ -84,20 +85,21 @@ describe('Video', () => {
               const tempFile = {
                 src: 'https://www.w3schools.com/html/mov_bbb.mp4',
               };
-              const finalFile = new Promise<VideoAttributes>((resolve) =>
+              const finalFile = new Promise<VideoAttributes>(resolve =>
                 setTimeout(resolve, 1000, {
                   src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-                }),
+                })
               );
 
               return { tempFile, finalFile };
             },
-            onPaste: async (file, videoAttr) => new Promise((resolve) => setTimeout(resolve, 1000, videoAttr)),
+            onPaste: async (file, videoAttr) =>
+              new Promise(resolve => setTimeout(resolve, 1000, videoAttr)),
             maxFileSize: 100000000,
             acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
           }),
         ]}
-      />,
+      />
     );
 
     const vidElement = screen.getByTestId('video-comp');

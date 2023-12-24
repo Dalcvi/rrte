@@ -37,7 +37,7 @@ import Head from 'next/head';
 
 export default function Web() {
   const [content, setContent] = useState<JSONContent | undefined>(undefined);
-  const [htmlContent, setHtmlContent] = useState<HTMLContent | undefined>(undefined);
+  const [, setHtmlContent] = useState<HTMLContent | undefined>(undefined);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setContent(JSON.parse(window.localStorage.getItem('rrte-content') ?? '{}'));
@@ -54,13 +54,13 @@ export default function Web() {
       <div className={classes.siteContainer}>
         <Editor
           content={content}
-          onUpdateJson={(jsonContent) => {
+          onUpdateJson={jsonContent => {
             if (typeof window !== 'undefined') {
               window.localStorage.setItem('rrte-content', JSON.stringify(jsonContent));
             }
             setContent(jsonContent);
           }}
-          onUpdateHtml={(htmlC) => {
+          onUpdateHtml={htmlC => {
             setHtmlContent(htmlC);
             if (typeof window !== 'undefined') {
               window.localStorage.setItem('rrte-content-html', JSON.stringify(htmlC));
@@ -103,18 +103,18 @@ export default function Web() {
                   originalHeight: 200,
                   originalWidth: 300,
                 };
-                const finalFile = new Promise<ImageAttributes>((resolve) =>
+                const finalFile = new Promise<ImageAttributes>(resolve =>
                   setTimeout(resolve, 1000, {
                     src: 'https://picsum.photos/200/300',
                     originalHeight: 300,
                     originalWidth: 200,
-                  }),
+                  })
                 );
 
                 return { tempFile, finalFile };
               },
               onPaste: async (file, imgAttr) =>
-                new Promise<ImageAttributes>((resolve) => setTimeout(resolve, 1000, imgAttr)),
+                new Promise<ImageAttributes>(resolve => setTimeout(resolve, 1000, imgAttr)),
               // type: 'extension-controlled',
               // maxFileSize: 100000000,
               // onImageAdd: async (file, imgAttr) => {
@@ -129,16 +129,16 @@ export default function Web() {
                   // src to a video
                   src: 'https://www.w3schools.com/html/mov_bbb.mp4',
                 };
-                const finalFile = new Promise<VideoAttributes>((resolve) =>
+                const finalFile = new Promise<VideoAttributes>(resolve =>
                   setTimeout(resolve, 1000, {
                     src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-                  }),
+                  })
                 );
 
                 return { tempFile, finalFile };
               },
               onPaste: async (file, videoAttr) =>
-                new Promise<VideoAttributes>((resolve) => setTimeout(resolve, 1000, videoAttr)),
+                new Promise<VideoAttributes>(resolve => setTimeout(resolve, 1000, videoAttr)),
               maxFileSize: 100000000,
               acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
 

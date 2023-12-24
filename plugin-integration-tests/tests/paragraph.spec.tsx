@@ -13,7 +13,9 @@ import userEvent from '@testing-library/user-event';
 describe('Paragraph', () => {
   it('button press should change back to paragraph', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Heading()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Heading()]} />
+    );
 
     const button = screen.getByTestId('text type');
     await userEvent.click(button);

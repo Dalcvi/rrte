@@ -13,7 +13,9 @@ import userEvent from '@testing-library/user-event';
 describe('Superscript', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Superscript()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Superscript()]} />
+    );
 
     const button = screen.getByTestId('superscript-button');
     await userEvent.click(button);
@@ -43,7 +45,9 @@ describe('Superscript', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Superscript()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Superscript()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
     const superscriptTag = paragraph.querySelector('sup');

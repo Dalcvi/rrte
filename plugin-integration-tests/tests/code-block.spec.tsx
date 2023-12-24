@@ -13,7 +13,9 @@ import userEvent from '@testing-library/user-event';
 describe('Code block', () => {
   it('button press should add code block', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), CodeBlock()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), CodeBlock()]} />
+    );
 
     const button = screen.getByTestId('codeblock-button');
     await userEvent.click(button);
@@ -41,7 +43,9 @@ describe('Code block', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), CodeBlock()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), CodeBlock()]} />
+    );
 
     const preTag = screen.getByTestId('codeBlock');
     const codeTag = preTag?.querySelector('code');

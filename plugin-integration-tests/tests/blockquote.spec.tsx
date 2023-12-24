@@ -13,7 +13,9 @@ import userEvent from '@testing-library/user-event';
 describe('Blockquote', () => {
   it('button press should add blockquote', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Blockquote()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Blockquote()]} />
+    );
 
     const button = screen.getByTestId('blockquote-button');
     await userEvent.click(button);
@@ -45,7 +47,9 @@ describe('Blockquote', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Blockquote()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Blockquote()]} />
+    );
 
     const blockquoteTag = screen.getByTestId('blockquote');
 

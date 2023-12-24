@@ -13,7 +13,9 @@ import userEvent from '@testing-library/user-event';
 describe('Subscript', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Subscript()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Subscript()]} />
+    );
 
     const button = screen.getByTestId('subscript-button');
     await userEvent.click(button);
@@ -43,7 +45,9 @@ describe('Subscript', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Subscript()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Subscript()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
     const subscriptTag = paragraph.querySelector('sub');

@@ -13,7 +13,9 @@ import userEvent from '@testing-library/user-event';
 describe('Underline', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Underline()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Underline()]} />
+    );
 
     const underlineButton = screen.getByTestId('underline-button');
     await userEvent.click(underlineButton);
@@ -42,7 +44,9 @@ describe('Underline', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Underline()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Underline()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
     const underlineTag = paragraph.querySelector('u');

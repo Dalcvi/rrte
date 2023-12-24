@@ -19,7 +19,9 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
 describe('Youtube', () => {
   it('button press should add youtube', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Youtube()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Youtube()]} />
+    );
     const button = screen.getByTestId('youtube-button');
     await userEvent.click(button);
     const ytInput = screen.getByTestId('youtube-input');
@@ -31,7 +33,7 @@ describe('Youtube', () => {
       {},
       {
         timeout: 1000,
-      },
+      }
     );
 
     expect(ytElement).toBeInTheDocument();

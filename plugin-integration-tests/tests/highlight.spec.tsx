@@ -41,7 +41,11 @@ describe('Highlight', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Id(), Highlight(), TextStyle()]} />,
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        extensions={[Paragraph(), Id(), Highlight(), TextStyle()]}
+      />
     );
 
     const paragraph = screen.getByTestId('paragraph');
