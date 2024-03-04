@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-text-align
+npm install @rrte/text-align
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-text-align
+yarn add  @rrte/text-align
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-text-align
+pnpm add @rrte/text-align
 ```
 
   </TabItem>
@@ -51,12 +51,12 @@ pnpm add @rrte/extension-text-align
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { TextAlign } from "@rrte/extension-text-align";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Editor } from '@rrte/editor';
+import { TextAlign } from '@rrte/text-align';
+import { Paragraph } from '@rrte/paragraph';
 
 function MyComponent() {
-  return <Editor content={undefined} extensions={[Paragraph(), TextAlign()]} />;
+  return <Editor content={undefined} editorExtensions={[Paragraph(), TextAlign()]} />;
 }
 
 export default MyComponent;

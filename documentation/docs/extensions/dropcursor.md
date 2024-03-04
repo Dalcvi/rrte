@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-dropcursor
+npm install @rrte/dropcursor
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-dropcursor
+yarn add  @rrte/dropcursor
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-dropcursor
+pnpm add @rrte/dropcursor
 ```
 
   </TabItem>
@@ -42,14 +42,12 @@ pnpm add @rrte/extension-dropcursor
 To see dropcursor working, type in some text, select it, and try dragging it somewhere else in text.
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Dropcursor } from "@rrte/extension-drop-cursor";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { Dropcursor } from '@rrte/drop-cursor';
 
 function MyComponent() {
-  return (
-    <Editor content={undefined} extensions={[Paragraph(), Dropcursor()]} />
-  );
+  return <Editor content={undefined} editorExtensions={[Paragraph(), Dropcursor()]} />;
 }
 
 export default MyComponent;

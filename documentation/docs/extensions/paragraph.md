@@ -15,21 +15,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-paragraph
+npm install @rrte/paragraph
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-paragraph
+yarn add  @rrte/paragraph
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-paragraph
+pnpm add @rrte/paragraph
 ```
 
   </TabItem>
@@ -52,11 +52,11 @@ pnpm add @rrte/extension-paragraph
 import ParagraphExample from '@site/src/components/extension-paragraph';
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
 
 function MyComponent() {
-  return <Editor content={undefined} extensions={[Paragraph()]} />;
+  return <Editor content={undefined} editorExtensions={[Paragraph()]} />;
 }
 
 export default MyComponent;

@@ -36,7 +36,7 @@ describe('Link', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Link()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Link()]} />);
 
     const paragraph = screen.getByTestId('paragraph');
     const linkTag = paragraph.querySelector('a');

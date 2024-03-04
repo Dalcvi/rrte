@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-hard-break
+npm install @rrte/hard-break
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-hard-break
+yarn add  @rrte/hard-break
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-hard-break
+pnpm add @rrte/hard-break
 ```
 
   </TabItem>
@@ -51,17 +51,17 @@ pnpm add @rrte/extension-hard-break
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { HardBreak } from "@rrte/extension-hard-break";
-import { BulletList } from "@rrte/extension-bullet-list";
-import { ListItem } from "@rrte/extension-list-item";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { HardBreak } from '@rrte/hard-break';
+import { BulletList } from '@rrte/bullet-list';
+import { ListItem } from '@rrte/list-item';
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[Paragraph(), HardBreak(), BulletList(), ListItem()]}
+      editorExtensions={[Paragraph(), HardBreak(), BulletList(), ListItem()]}
     />
   );
 }

@@ -1,84 +1,127 @@
 import type {
-  Extension as TiptapExtension,
-  Node as TiptapNode,
+  ExtensionConfig,
+  MarkConfig,
+  NodeConfig,
   Mark as TiptapMark,
+  Node as TiptapNode,
+  Extension as TiptapExtension,
 } from '@tiptap/core';
 import { Config } from './config';
-import { cloneDeep } from 'lodash';
 export type {
   Extension as TiptapExtension,
-  Node as TiptapNode,
   Mark as TiptapMark,
-  AnyExtension as TiptapAnyExtension,
+  Node as TiptapNode,
 } from '@tiptap/core';
 
-export type AllExtension<ExtensionConfig, ExtensionType> =
-  | TiptapExtension<ExtensionConfig, ExtensionType>
-  | TiptapNode<ExtensionConfig, ExtensionType>
-  | TiptapMark<ExtensionConfig, ExtensionType>;
+export type UnknownExtension = Node<any> | Mark<any> | Extension<any>;
 
-export type UnknownExtension = Extension<Config<any>, AllExtension<any, any>, any, any>;
-
-export type Extension<
-  ConfigType extends Record<string, any>,
-  TiptapExtensionType extends AllExtension<OriginalType, SubType>,
-  OriginalType = any,
-  SubType = any,
-> = {
-  extension: TiptapExtensionType;
+export type Node<ConfigType extends object, Options = any, Storage = any> = {
+  node: TiptapNode<Options, Storage>;
   config: Config<ConfigType>;
-  extend: <
-    ExtendedOriginalType extends OriginalType & Extend,
-    ExtendedSubType extends SubType & Extend,
-  >(
-    ext: Record<string, any>
-  ) => Extension<
-    ConfigType,
-    AllExtension<ExtendedOriginalType, ExtendedSubType>,
-    ExtendedOriginalType,
-    ExtendedSubType
-  >;
-  extendConfig: <NewConfigType extends Record<string, any>>(
-    getConfig: (config: Config<ConfigType>) => Config<NewConfigType>
-  ) => Extension<NewConfigType, AllExtension<OriginalType, SubType>, OriginalType, SubType>;
+  extend: <ExtendedOptions extends Options, ExtendedStorage extends Storage>({
+    nodeExtension,
+    createConfigExtension,
+  }: {
+    nodeExtension?: Partial<NodeConfig<ExtendedOptions, ExtendedStorage>>;
+    createConfigExtension?: (previousConfig: Config<ConfigType>) => Config<ConfigType>;
+  }) => Node<ConfigType, ExtendedOptions, ExtendedStorage>;
 };
 
-type Extend = {};
-
-export const createExtension = <
-  ConfigType extends Record<string, any>,
-  TiptapExtensionType extends AllExtension<OriginalType, SubType>,
-  OriginalType = any,
-  SubType = any,
->(
-  extension: TiptapExtensionType,
+export const createNode = <ConfigType extends object, Options = any, Storage = any>(
+  node: TiptapNode<Options, Storage>,
   config: Config<ConfigType>
-): Extension<ConfigType, TiptapExtensionType, OriginalType, SubType> => {
+): Node<ConfigType, Options, Storage> => {
+  return {
+    node,
+    config,
+    extend: <ExtendedOptions extends Options, ExtendedStorage extends Storage>({
+      nodeExtension,
+      createConfigExtension,
+    }: {
+      nodeExtension?: Partial<NodeConfig<ExtendedOptions, ExtendedStorage>>;
+      createConfigExtension?: (previousConfig: Config<ConfigType>) => Config<ConfigType>;
+    }) => {
+      return createNode<ConfigType, ExtendedOptions, ExtendedStorage>(
+        node.extend<ExtendedOptions, ExtendedStorage>(nodeExtension),
+        {
+          ...config,
+          ...createConfigExtension,
+        }
+      );
+    },
+  };
+};
+
+export type Mark<ConfigType extends object, Options = any, Storage = any> = {
+  mark: TiptapMark<Options, Storage>;
+  config: Config<ConfigType>;
+  extend: <ExtendedOptions extends Options, ExtendedStorage extends Storage>({
+    markExtension,
+    createConfigExtension,
+  }: {
+    markExtension?: Partial<MarkConfig<ExtendedOptions, ExtendedStorage>>;
+    createConfigExtension?: (previousConfig: Config<ConfigType>) => Config<ConfigType>;
+  }) => Mark<ConfigType, ExtendedOptions, ExtendedStorage>;
+};
+
+export const createMark = <ConfigType extends object, Options = any, Storage = any>(
+  mark: TiptapMark<Options, Storage>,
+  config: Config<ConfigType>
+): Mark<ConfigType, Options, Storage> => {
+  return {
+    mark,
+    config,
+    extend: <ExtendedOptions extends Options, ExtendedStorage extends Storage>({
+      markExtension,
+      createConfigExtension,
+    }: {
+      markExtension?: Partial<MarkConfig<ExtendedOptions, ExtendedStorage>>;
+      createConfigExtension?: (previousConfig: Config<ConfigType>) => Config<ConfigType>;
+    }) => {
+      return createMark<ConfigType, ExtendedOptions, ExtendedStorage>(
+        mark.extend<ExtendedOptions, ExtendedStorage>(markExtension),
+        {
+          ...config,
+          ...createConfigExtension,
+        }
+      );
+    },
+  };
+};
+
+export type Extension<ConfigType extends object, Options = any, Storage = any> = {
+  extension: TiptapExtension<Options, Storage>;
+  config: Config<ConfigType>;
+  extend: <ExtendedOptions extends Options, ExtendedStorage extends Storage>({
+    extension,
+    createConfigExtension,
+  }: {
+    extension?: Partial<ExtensionConfig<ExtendedOptions, ExtendedStorage>>;
+    createConfigExtension?: (previousConfig: Config<ConfigType>) => Config<ConfigType>;
+  }) => Extension<ConfigType, ExtendedOptions, ExtendedStorage>;
+};
+
+export const createExtension = <ConfigType extends object, Options = any, Storage = any>(
+  extension: TiptapExtension<Options, Storage>,
+  config: Config<ConfigType>
+): Extension<ConfigType, Options, Storage> => {
   return {
     extension,
     config,
-    extend: <
-      ExtendedOriginalType extends OriginalType & Extend,
-      ExtendedSubType extends SubType & Extend,
-    >(
-      ext: Record<string, any>
-    ) => {
-      return createExtension<
-        ConfigType,
-        AllExtension<ExtendedOriginalType, ExtendedSubType>,
-        ExtendedOriginalType,
-        ExtendedSubType
-      >(extension.extend<ExtendedOriginalType, ExtendedSubType>(ext), config);
-    },
-    extendConfig: <NewConfigType extends Record<string, any>>(
-      getConfig: (config: Config<ConfigType>) => Config<NewConfigType>
-    ) => {
-      return createExtension<
-        NewConfigType,
-        AllExtension<OriginalType, SubType>,
-        OriginalType,
-        SubType
-      >(extension, getConfig(cloneDeep(config)));
+    extend: <ExtendedOptions extends Options, ExtendedStorage extends Storage>({
+      extension: nodeExtension,
+      createConfigExtension,
+    }: {
+      extension?: Partial<ExtensionConfig<ExtendedOptions, ExtendedStorage>>;
+      createConfigExtension?: (previousConfig: Config<ConfigType>) => Config<ConfigType>;
+    }) => {
+      return createExtension<ConfigType, ExtendedOptions, ExtendedStorage>(
+        extension.extend<ExtendedOptions, ExtendedStorage>(nodeExtension),
+        {
+          ...config,
+          ...createConfigExtension,
+        }
+      );
     },
   };
 };

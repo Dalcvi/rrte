@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-ordered-list
+npm install @rrte/ordered-list
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-ordered-list
+yarn add  @rrte/ordered-list
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-ordered-list
+pnpm add @rrte/ordered-list
 ```
 
   </TabItem>
@@ -58,18 +58,13 @@ pnpm add @rrte/extension-ordered-list
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { OrderedList } from "@rrte/extension-ordered-list";
-import { ListItem } from "@rrte/extension-list-item";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { OrderedList } from '@rrte/ordered-list';
+import { ListItem } from '@rrte/list-item';
 
 function MyComponent() {
-  return (
-    <Editor
-      content={undefined}
-      extensions={[OrderedList(), ListItem(), Paragraph()]}
-    />
-  );
+  return <Editor content={undefined} editorExtensions={[OrderedList(), ListItem(), Paragraph()]} />;
 }
 
 export default MyComponent;

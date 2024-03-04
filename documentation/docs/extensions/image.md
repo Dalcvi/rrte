@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-image
+npm install @rrte/image
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-image
+yarn add  @rrte/image
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-image
+pnpm add @rrte/image
 ```
 
   </TabItem>
@@ -90,33 +90,33 @@ pnpm add @rrte/extension-image
 ### User controlled
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Image } from "@rrte/extension-image";
-import { Id } from "@rrte/extension-id";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { Image } from '@rrte/image';
+import { Id } from '@rrte/id';
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[
+      editorExtensions={[
         Id(),
         Image({
-          type: "user-controlled",
+          type: 'user-controlled',
           maxFileSize: 100000000,
-          acceptedImageFileTypes: ["image/jpeg", "image/png"],
+          acceptedImageFileTypes: ['image/jpeg', 'image/png'],
           onImageAddClick: async () => {
             const tempFile = {
-              src: "https://picsum.photos/300/200",
+              src: 'https://picsum.photos/300/200',
               originalHeight: 200,
               originalWidth: 300,
             };
             const finalFile =
               new Promise() <
               ImageAttributes >
-              ((resolve) =>
+              (resolve =>
                 setTimeout(resolve, 1000, {
-                  src: "https://picsum.photos/200/300",
+                  src: 'https://picsum.photos/200/300',
                   originalHeight: 300,
                   originalWidth: 200,
                 }));
@@ -124,9 +124,7 @@ function MyComponent() {
             return { tempFile, finalFile };
           },
           onPaste: async (file, imgAttr) =>
-            new Promise() <
-            ImageAttributes >
-            ((resolve) => setTimeout(resolve, 1000, imgAttr)),
+            new Promise() < ImageAttributes > (resolve => setTimeout(resolve, 1000, imgAttr)),
         }),
         Paragraph(),
       ]}
@@ -144,24 +142,24 @@ import { UserControlledImage, ExtensionControlledImage} from '@site/src/componen
 ### Extension controlled
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Image } from "@rrte/extension-image";
-import { Id } from "@rrte/extension-id";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { Image } from '@rrte/image';
+import { Id } from '@rrte/id';
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[
+      editorExtensions={[
         Id(),
         Image({
-          type: "extension-controlled",
+          type: 'extension-controlled',
           maxFileSize: 100000000,
           onImageAdd: async (file, imgAttr) => {
             return imgAttr;
           },
-          acceptedImageFileTypes: ["image/jpeg", "image/png"],
+          acceptedImageFileTypes: ['image/jpeg', 'image/png'],
         }),
         Paragraph(),
       ]}

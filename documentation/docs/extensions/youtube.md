@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-gif
+npm install @rrte/gif
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-gif
+yarn add  @rrte/gif
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-gif
+pnpm add @rrte/gif
 ```
 
   </TabItem>
@@ -56,12 +56,12 @@ alignment: 'left' | 'center' | 'right';
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Youtube } from "@rrte/extension-youtube";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { Youtube } from '@rrte/youtube';
 
 function MyComponent() {
-  return <Editor content={undefined} extensions={[Youtube(), Paragraph()]} />;
+  return <Editor content={undefined} editorExtensions={[Youtube(), Paragraph()]} />;
 }
 
 export default MyComponent;

@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-id
+npm install @rrte/id
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-id
+yarn add  @rrte/id
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-id
+pnpm add @rrte/id
 ```
 
   </TabItem>
@@ -50,7 +50,7 @@ function MyComponent() {
       <Editor
         content={content}
         onUpdateJson={setContent}
-        extensions={[Paragraph(), Id()]}
+        editorExtensions={[Paragraph(), Id()]}
         contentWrapperClassName={classes.contentWrapper}
       />
       <pre>{JSON.stringify(content, null, 2)}</pre>

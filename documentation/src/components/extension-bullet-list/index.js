@@ -1,15 +1,15 @@
 import React from "react";
 import { Editor } from "@rrte/editor";
-import { BulletList } from "@rrte/extension-bullet-list";
-import { ListItem } from "@rrte/extension-list-item";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { BulletList } from "@rrte/bullet-list";
+import { ListItem } from "@rrte/list-item";
+import { Paragraph } from "@rrte/paragraph";
 import classes from "./styles.module.css";
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[ListItem(), BulletList(), Paragraph()]}
+      editorExtensions={[ListItem(), BulletList(), Paragraph()]}
       contentWrapperClassName={classes.contentWrapper}
     />
   );

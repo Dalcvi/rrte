@@ -32,7 +32,7 @@ describe('Italic', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Italic()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Italic()]} />);
 
     const paragraph = screen.getByTestId('paragraph');
     const italicTag = paragraph.querySelector('em');

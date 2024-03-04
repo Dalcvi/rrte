@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-superscript
+npm install @rrte/superscript
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-superscript
+yarn add  @rrte/superscript
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-superscript
+pnpm add @rrte/superscript
 ```
 
   </TabItem>
@@ -54,14 +54,12 @@ pnpm add @rrte/extension-superscript
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Superscript } from "@rrte/extension-superscript";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Editor } from '@rrte/editor';
+import { Superscript } from '@rrte/superscript';
+import { Paragraph } from '@rrte/paragraph';
 
 function MyComponent() {
-  return (
-    <Editor content={undefined} extensions={[Paragraph(), Superscript()]} />
-  );
+  return <Editor content={undefined} editorExtensions={[Paragraph(), Superscript()]} />;
 }
 
 export default MyComponent;

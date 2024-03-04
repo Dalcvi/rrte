@@ -73,7 +73,7 @@ describe('Ordered list', () => {
       <Editor
         editorRef={editorRef}
         content={content}
-        extensions={[Paragraph(), OrderedList(), ListItem()]}
+        editorExtensions={[Paragraph(), OrderedList(), ListItem()]}
       />
     );
 

@@ -14,7 +14,7 @@ describe('Paragraph', () => {
   it('button press should change back to paragraph', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Heading()]} />
+      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Heading()]} />
     );
 
     const button = screen.getByTestId('text type');
@@ -48,7 +48,7 @@ describe('Paragraph', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph()]} />);
 
     const paragraph = screen.getByTestId('paragraph');
 

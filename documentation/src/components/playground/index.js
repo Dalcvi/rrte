@@ -20,7 +20,7 @@ export default function Web() {
                 setContent(content);
               }}
               editorRef={editor}
-              extensions={extensions}
+              editorExtensions={extensions}
               editorWrapperClassName={classes.editor}
               contentClassName={classes.editorContent}
               contentWrapperClassName={classes.editorContentWrapper}
@@ -56,7 +56,7 @@ export default function Web() {
                 <Editor
                   content={comments}
                   viewerMode={true}
-                  extensions={extensions}
+                  editorExtensions={extensions}
                   editorWrapperClassName={classes.viewerWrapper}
                   contentClassName={classes.viewerContent}
                   contentWrapperClassName={classes.contentWrapper}

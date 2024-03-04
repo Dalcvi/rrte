@@ -14,7 +14,7 @@ describe('Superscript', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Superscript()]} />
+      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Superscript()]} />
     );
 
     const button = screen.getByTestId('superscript-button');
@@ -46,7 +46,7 @@ describe('Superscript', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Superscript()]} />
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Superscript()]} />
     );
 
     const paragraph = screen.getByTestId('paragraph');

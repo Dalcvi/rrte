@@ -1,8 +1,8 @@
 import React from "react";
 import { Editor } from "@rrte/editor";
-import { Link } from "@rrte/extension-link";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Gapcursor } from "@rrte/extension-gapcursor";
+import { Link } from "@rrte/link";
+import { Paragraph } from "@rrte/paragraph";
+import { Gapcursor } from "@rrte/gapcursor";
 import classes from "./styles.module.css";
 import { useState } from "react";
 
@@ -14,14 +14,14 @@ function MyComponent() {
       <Editor
         onUpdateJson={setContent}
         content={content}
-        extensions={[Paragraph(), Link(), Gapcursor()]}
+        editorExtensions={[Paragraph(), Link(), Gapcursor()]}
         contentWrapperClassName={classes.contentWrapper}
       />
 
       <Editor
         content={content}
         viewerMode
-        extensions={[Paragraph(), Link(), Gapcursor()]}
+        editorExtensions={[Paragraph(), Link(), Gapcursor()]}
         contentWrapperClassName={classes.contentWrapper}
       />
     </div>

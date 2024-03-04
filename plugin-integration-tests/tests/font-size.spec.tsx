@@ -44,7 +44,7 @@ describe('Font size', () => {
       <Editor
         editorRef={editorRef}
         content={content}
-        extensions={[Paragraph(), Id(), FontSize(), TextStyle()]}
+        editorExtensions={[Paragraph(), Id(), FontSize(), TextStyle()]}
       />
     );
 

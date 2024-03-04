@@ -12,7 +12,7 @@ import userEvent from '@testing-library/user-event';
 describe('Heading', () => {
   it('button press should add heading', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} extensions={[Heading()]} />);
+    render(<Editor editorRef={editorRef} content={undefined} editorExtensions={[Heading()]} />);
 
     const button = screen.getByTestId('text type');
     await userEvent.click(button);
@@ -39,7 +39,7 @@ describe('Heading', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Heading()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
   });
@@ -58,7 +58,7 @@ describe('Heading', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Heading()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
   });
@@ -77,7 +77,7 @@ describe('Heading', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Heading()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
   });
@@ -96,7 +96,7 @@ describe('Heading', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Heading()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
   });
@@ -115,7 +115,7 @@ describe('Heading', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Heading()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
   });
@@ -134,7 +134,7 @@ describe('Heading', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Heading()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
   });

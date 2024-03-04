@@ -14,7 +14,7 @@ describe('Subscript', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Subscript()]} />
+      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Subscript()]} />
     );
 
     const button = screen.getByTestId('subscript-button');
@@ -46,7 +46,7 @@ describe('Subscript', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Subscript()]} />
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Subscript()]} />
     );
 
     const paragraph = screen.getByTestId('paragraph');

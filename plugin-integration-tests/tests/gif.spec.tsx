@@ -251,7 +251,7 @@ describe('Gif', () => {
       <Editor
         editorRef={editorRef}
         content={undefined}
-        extensions={[Paragraph(), Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO')]}
+        editorExtensions={[Paragraph(), Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO')]}
       />
     );
     const button = screen.getByTestId('gif-button');
@@ -299,7 +299,7 @@ describe('Gif', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Gif('')]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Gif('')]} />);
 
     const gifImgEl = screen.getByTestId('gif-comp-img');
 
@@ -329,7 +329,7 @@ describe('Gif', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Gif('')]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Gif('')]} />);
 
     const gifVidEl = screen.getByTestId('gif-comp-vid');
 

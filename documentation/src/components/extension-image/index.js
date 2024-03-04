@@ -1,7 +1,7 @@
 import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Image } from "@rrte/extension-image";
-import { Id } from "@rrte/extension-id";
+import { Paragraph } from "@rrte/paragraph";
+import { Image } from "@rrte/image";
+import { Id } from "@rrte/id";
 import React from "react";
 import classes from "./styles.module.css";
 
@@ -10,7 +10,7 @@ export const UserControlledImage = () => {
     <Editor
       content={undefined}
       contentWrapperClassName={classes.contentWrapper}
-      extensions={[
+      editorExtensions={[
         Id(),
         Image({
           type: "user-controlled",
@@ -48,7 +48,7 @@ export const ExtensionControlledImage = () => {
     <Editor
       content={undefined}
       contentWrapperClassName={classes.contentWrapper}
-      extensions={[
+      editorExtensions={[
         Image({
           type: "extension-controlled",
           maxFileSize: 100000000,

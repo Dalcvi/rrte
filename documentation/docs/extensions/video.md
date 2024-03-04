@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-video
+npm install @rrte/video
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-video
+yarn add  @rrte/video
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-video
+pnpm add @rrte/video
 ```
 
   </TabItem>
@@ -88,38 +88,36 @@ pnpm add @rrte/extension-video
 ### User controlled
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Video } from "@rrte/extension-video";
-import { Id } from "@rrte/extension-id";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { Video } from '@rrte/video';
+import { Id } from '@rrte/id';
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[
+      editorExtensions={[
         Id(),
         Video({
-          type: "user-controlled",
+          type: 'user-controlled',
           maxFileSize: 100000000,
-          acceptedVideoFileTypes: ["video/jpeg", "video/png"],
+          acceptedVideoFileTypes: ['video/jpeg', 'video/png'],
           onVideoAddClick: async () => {
             const tempFile = {
               // src to a video
-              src: "https://www.w3schools.com/html/mov_bbb.mp4",
+              src: 'https://www.w3schools.com/html/mov_bbb.mp4',
             };
-            const finalFile = new Promise((resolve) =>
+            const finalFile = new Promise(resolve =>
               setTimeout(resolve, 1000, {
-                src: "https://www.w3schools.com/html/mov_bbb.mp4",
+                src: 'https://www.w3schools.com/html/mov_bbb.mp4',
               })
             );
 
             return { tempFile, finalFile };
           },
           onPaste: async (file, videoAttr) =>
-            new Promise() <
-            VideoAttributes >
-            ((resolve) => setTimeout(resolve, 1000, videoAttr)),
+            new Promise() < VideoAttributes > (resolve => setTimeout(resolve, 1000, videoAttr)),
         }),
         Paragraph(),
       ]}
@@ -137,24 +135,24 @@ import { UserControlledVideo, ExtensionControlledVideo} from '@site/src/componen
 ### Extension controlled
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Video } from "@rrte/extension-video";
-import { Id } from "@rrte/extension-id";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { Video } from '@rrte/video';
+import { Id } from '@rrte/id';
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[
+      editorExtensions={[
         Id(),
         Video({
-          type: "extension-controlled",
+          type: 'extension-controlled',
           maxFileSize: 100000000,
           onVideoAdd: async (file, videoAttr) => {
             return videoAttr;
           },
-          acceptedVideoFileTypes: ["video/jpeg", "video/png"],
+          acceptedVideoFileTypes: ['video/jpeg', 'video/png'],
         }),
         Paragraph(),
       ]}

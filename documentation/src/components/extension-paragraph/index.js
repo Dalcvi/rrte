@@ -1,13 +1,13 @@
 import React from "react";
 import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Paragraph } from "@rrte/paragraph";
 import classes from "./styles.module.css";
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[Paragraph()]}
+      editorExtensions={[Paragraph()]}
       contentWrapperClassName={classes.contentWrapper}
     />
   );

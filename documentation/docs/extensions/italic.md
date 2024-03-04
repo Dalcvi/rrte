@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-italic
+npm install @rrte/italic
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-italic
+yarn add  @rrte/italic
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-italic
+pnpm add @rrte/italic
 ```
 
   </TabItem>
@@ -54,12 +54,12 @@ pnpm add @rrte/extension-italic
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Italic } from "@rrte/extension-italic";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Editor } from '@rrte/editor';
+import { Italic } from '@rrte/italic';
+import { Paragraph } from '@rrte/paragraph';
 
 function MyComponent() {
-  return <Editor content={undefined} extensions={[Paragraph(), Italic()]} />;
+  return <Editor content={undefined} editorExtensions={[Paragraph(), Italic()]} />;
 }
 
 export default MyComponent;

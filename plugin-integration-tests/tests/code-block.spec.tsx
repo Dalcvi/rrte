@@ -14,7 +14,7 @@ describe('Code block', () => {
   it('button press should add code block', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), CodeBlock()]} />
+      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), CodeBlock()]} />
     );
 
     const button = screen.getByTestId('codeblock-button');
@@ -44,7 +44,7 @@ describe('Code block', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), CodeBlock()]} />
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), CodeBlock()]} />
     );
 
     const preTag = screen.getByTestId('codeBlock');

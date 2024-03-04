@@ -11,26 +11,28 @@ You can change the config of the extension. You can either extend the extension 
 ## Example
 
 ```jsx
-import React from "react";
-import { Editor } from "@rrte/editor";
-import { Bold } from "@rrte/extension-bold";
-import { TextAlign } from "@rrte/extension-text-align";
-import { Paragraph } from "@rrte/extension-paragraph";
-import classes from "./styles.module.css";
+import React from 'react';
+import { Editor } from '@rrte/editor';
+import { Bold } from '@rrte/bold';
+import { TextAlign } from '@rrte/text-align';
+import { Paragraph } from '@rrte/paragraph';
+import classes from './styles.module.css';
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[
-        TextAlign().extendConfig((currentConfig) => {
-          return {
-            ...currentConfig,
-            toolbar: currentConfig.toolbar.map((toolbarItem, index) => ({
-              ...toolbarItem,
-              priority: index,
-            })),
-          };
+      editorExtensions={[
+        TextAlign().extend({
+          createConfigExtension: currentConfig => {
+            return {
+              ...currentConfig,
+              toolbar: currentConfig.toolbar.map((toolbarItem, index) => ({
+                ...toolbarItem,
+                priority: index,
+              })),
+            };
+          },
         }),
         Paragraph(),
         Bold(),
@@ -341,7 +343,7 @@ Here is how overriding would look like:
 ```
 
 ```jsx title="editor.jsx"
-import classes from "./styles.module.css";
+import classes from './styles.module.css';
 
 function MyComponent() {
   return (
@@ -350,7 +352,7 @@ function MyComponent() {
       contentClassName={classes.content}
       contentWrapperClassName={classes.editorContentWrapper}
       content={undefined}
-      extensions={[
+      editorExtensions={[
         Blockquote(),
         Bold(),
         Color(),
@@ -375,21 +377,21 @@ function MyComponent() {
         Highlight(),
         History(),
         Gapcursor(),
-        Gif("your SDK key"),
+        Gif('your SDK key'),
         Dropcursor(),
         ImageExtension({
-          type: "user-controlled",
+          type: 'user-controlled',
           maxFileSize: 100000000,
-          acceptedImageFileTypes: ["image/jpeg", "image/png"],
+          acceptedImageFileTypes: ['image/jpeg', 'image/png'],
           onImageAddClick: async () => {
             const tempFile = {
-              src: "https://picsum.photos/300/200",
+              src: 'https://picsum.photos/300/200',
               originalHeight: 200,
               originalWidth: 300,
             };
-            const finalFile = new Promise((resolve) =>
+            const finalFile = new Promise(resolve =>
               setTimeout(resolve, 1000, {
-                src: "https://picsum.photos/200/300",
+                src: 'https://picsum.photos/200/300',
                 originalHeight: 300,
                 originalWidth: 200,
               })
@@ -398,27 +400,27 @@ function MyComponent() {
             return { tempFile, finalFile };
           },
           onPaste: async (file, imgAttr) =>
-            new Promise((resolve) => setTimeout(resolve, 1000, imgAttr)),
+            new Promise(resolve => setTimeout(resolve, 1000, imgAttr)),
         }),
         Video({
-          type: "user-controlled",
+          type: 'user-controlled',
           onVideoAddClick: async () => {
             const tempFile = {
               // src to a video
-              src: "https://www.w3schools.com/html/mov_bbb.mp4",
+              src: 'https://www.w3schools.com/html/mov_bbb.mp4',
             };
-            const finalFile = new Promise((resolve) =>
+            const finalFile = new Promise(resolve =>
               setTimeout(resolve, 1000, {
-                src: "https://www.w3schools.com/html/mov_bbb.mp4",
+                src: 'https://www.w3schools.com/html/mov_bbb.mp4',
               })
             );
 
             return { tempFile, finalFile };
           },
           onPaste: async (file, videoAttr) =>
-            new Promise((resolve) => setTimeout(resolve, 1000, videoAttr)),
+            new Promise(resolve => setTimeout(resolve, 1000, videoAttr)),
           maxFileSize: 100000000,
-          acceptedVideoFileTypes: ["video/mp4", "video/quicktime"],
+          acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
         }),
         Youtube(),
       ]}

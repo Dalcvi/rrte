@@ -9,7 +9,7 @@ export type {
 } from '@rrte/toolbar';
 export { ToolbarItemType } from '@rrte/toolbar';
 
-export type Config<T extends Record<string, any> = Record<string, any>> = Partial<{
+export type Config<T extends object> = Partial<{
   toolbar: ToolbarItem<T>;
   bubbleMenu: BubbleMenuToolbar<T>;
 }> &

@@ -1,14 +1,14 @@
 import React from "react";
 import { Editor } from "@rrte/editor";
-import { Subscript } from "@rrte/extension-subscript";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Subscript } from "@rrte/subscript";
+import { Paragraph } from "@rrte/paragraph";
 import classes from "./styles.module.css";
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[Paragraph(), Subscript()]}
+      editorExtensions={[Paragraph(), Subscript()]}
       contentWrapperClassName={classes.contentWrapper}
     />
   );

@@ -1,7 +1,7 @@
 import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Video } from "@rrte/extension-video";
-import { Id } from "@rrte/extension-id";
+import { Paragraph } from "@rrte/paragraph";
+import { Video } from "@rrte/video";
+import { Id } from "@rrte/id";
 import React from "react";
 import classes from "./styles.module.css";
 
@@ -10,7 +10,7 @@ export const UserControlledVideo = () => {
     <Editor
       content={undefined}
       contentWrapperClassName={classes.contentWrapper}
-      extensions={[
+      editorExtensions={[
         Id(),
         Video({
           type: "user-controlled",
@@ -45,7 +45,7 @@ export const ExtensionControlledVideo = () => {
     <Editor
       content={undefined}
       contentWrapperClassName={classes.contentWrapper}
-      extensions={[
+      editorExtensions={[
         Video({
           type: "extension-controlled",
           maxFileSize: 100000000,

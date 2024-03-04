@@ -18,7 +18,7 @@ describe('Bullet list', () => {
       <Editor
         editorRef={editorRef}
         content={undefined}
-        extensions={[Paragraph(), BulletList(), ListItem()]}
+        editorExtensions={[Paragraph(), BulletList(), ListItem()]}
       />
     );
 
@@ -88,7 +88,7 @@ describe('Bullet list', () => {
       <Editor
         editorRef={editorRef}
         content={content}
-        extensions={[Paragraph(), BulletList(), ListItem()]}
+        editorExtensions={[Paragraph(), BulletList(), ListItem()]}
       />
     );
 

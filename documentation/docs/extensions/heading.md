@@ -11,21 +11,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-heading
+npm install @rrte/heading
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-heading
+yarn add  @rrte/heading
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-heading
+pnpm add @rrte/heading
 ```
 
   </TabItem>
@@ -48,11 +48,11 @@ pnpm add @rrte/extension-heading
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Heading } from "@rrte/extension-heading";
+import { Editor } from '@rrte/editor';
+import { Heading } from '@rrte/heading';
 
 function MyComponent() {
-  return <Editor content={undefined} extensions={[Heading()]} />;
+  return <Editor content={undefined} editorExtensions={[Heading()]} />;
 }
 
 export default MyComponent;

@@ -23,7 +23,7 @@ describe('Video', () => {
       <Editor
         editorRef={editorRef}
         content={undefined}
-        extensions={[
+        editorExtensions={[
           Paragraph(),
           Video({
             type: 'user-controlled',
@@ -78,7 +78,7 @@ describe('Video', () => {
       <Editor
         editorRef={editorRef}
         content={content}
-        extensions={[
+        editorExtensions={[
           Video({
             type: 'user-controlled',
             onVideoAddClick: async () => {

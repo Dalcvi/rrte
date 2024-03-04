@@ -1,41 +1,41 @@
 import { Editor } from "@rrte/editor";
-import { Blockquote } from "@rrte/extension-blockquote";
-import { BulletList } from "@rrte/extension-bullet-list";
-import { CodeBlock } from "@rrte/extension-code-block";
-import { HardBreak } from "@rrte/extension-hard-break";
-import { Heading } from "@rrte/extension-heading";
-import { ListItem } from "@rrte/extension-list-item";
-import { OrderedList } from "@rrte/extension-ordered-list";
-import { Bold } from "@rrte/extension-bold";
-import { Italic } from "@rrte/extension-italic";
-import { Link } from "@rrte/extension-link";
-import { Video } from "@rrte/extension-video";
-import { Underline } from "@rrte/extension-underline";
-import { Gif } from "@rrte/extension-gif";
-import { Strike } from "@rrte/extension-strike";
-import { Image as ImageExtension } from "@rrte/extension-image";
-import { Code } from "@rrte/extension-code";
-import { Subscript } from "@rrte/extension-subscript";
-import { Superscript } from "@rrte/extension-superscript";
-import { TextStyle } from "@rrte/extension-text-style";
-import { Highlight } from "@rrte/extension-highlight";
-import { History } from "@rrte/extension-history";
-import { Gapcursor } from "@rrte/extension-gapcursor";
-import { Dropcursor } from "@rrte/extension-dropcursor";
-import { Color } from "@rrte/extension-color";
-import { FontSize } from "@rrte/extension-font-size";
-import { Id } from "@rrte/extension-id";
-import { Youtube } from "@rrte/extension-youtube";
+import { Blockquote } from "@rrte/blockquote";
+import { BulletList } from "@rrte/bullet-list";
+import { CodeBlock } from "@rrte/code-block";
+import { HardBreak } from "@rrte/hard-break";
+import { Heading } from "@rrte/heading";
+import { ListItem } from "@rrte/list-item";
+import { OrderedList } from "@rrte/ordered-list";
+import { Bold } from "@rrte/bold";
+import { Italic } from "@rrte/italic";
+import { Link } from "@rrte/link";
+import { Video } from "@rrte/video";
+import { Underline } from "@rrte/underline";
+import { Gif } from "@rrte/gif";
+import { Strike } from "@rrte/strike";
+import { Image as ImageExtension } from "@rrte/image";
+import { Code } from "@rrte/code";
+import { Subscript } from "@rrte/subscript";
+import { Superscript } from "@rrte/superscript";
+import { TextStyle } from "@rrte/text-style";
+import { Highlight } from "@rrte/highlight";
+import { History } from "@rrte/history";
+import { Gapcursor } from "@rrte/gapcursor";
+import { Dropcursor } from "@rrte/dropcursor";
+import { Color } from "@rrte/color";
+import { FontSize } from "@rrte/font-size";
+import { Id } from "@rrte/id";
+import { Youtube } from "@rrte/youtube";
 import classes from "./styles.module.css";
 import React from "react";
-import { TextAlign } from "@rrte/extension-text-align";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { TextAlign } from "@rrte/text-align";
+import { Paragraph } from "@rrte/paragraph";
 
 export default function Web() {
   return (
     <Editor
       content={undefined}
-      extensions={[
+      editorExtensions={[
         Blockquote(),
         Bold(),
         Color(),

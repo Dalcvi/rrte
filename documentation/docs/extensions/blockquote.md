@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-blockquote
+npm install @rrte/blockquote
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-blockquote
+yarn add  @rrte/blockquote
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-blockquote
+pnpm add @rrte/blockquote
 ```
 
   </TabItem>
@@ -56,14 +56,12 @@ pnpm add @rrte/extension-blockquote
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Blockquote } from "@rrte/extension-blockquote";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { Blockquote } from '@rrte/blockquote';
 
 function MyComponent() {
-  return (
-    <Editor content={undefined} extensions={[Blockquote(), Paragraph()]} />
-  );
+  return <Editor content={undefined} editorExtensions={[Blockquote(), Paragraph()]} />;
 }
 
 export default MyComponent;

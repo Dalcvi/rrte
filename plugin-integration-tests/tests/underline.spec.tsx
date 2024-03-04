@@ -14,7 +14,7 @@ describe('Underline', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Underline()]} />
+      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Underline()]} />
     );
 
     const underlineButton = screen.getByTestId('underline-button');
@@ -45,7 +45,7 @@ describe('Underline', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Underline()]} />
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Underline()]} />
     );
 
     const paragraph = screen.getByTestId('paragraph');

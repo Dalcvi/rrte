@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-underline
+npm install @rrte/underline
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-underline
+yarn add  @rrte/underline
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-underline
+pnpm add @rrte/underline
 ```
 
   </TabItem>
@@ -54,12 +54,12 @@ pnpm add @rrte/extension-underline
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Underline } from "@rrte/extension-underline";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Editor } from '@rrte/editor';
+import { Underline } from '@rrte/underline';
+import { Paragraph } from '@rrte/paragraph';
 
 function MyComponent() {
-  return <Editor content={undefined} extensions={[Paragraph(), Underline()]} />;
+  return <Editor content={undefined} editorExtensions={[Paragraph(), Underline()]} />;
 }
 
 export default MyComponent;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Editor } from "@rrte/editor";
-import { Heading } from "@rrte/extension-heading";
+import { Heading } from "@rrte/heading";
 // Add react-live imports you need here
 const ReactLiveScope = {
   React,

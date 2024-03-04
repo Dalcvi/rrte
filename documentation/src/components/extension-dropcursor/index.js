@@ -1,14 +1,14 @@
 import React from "react";
 import { Editor } from "@rrte/editor";
-import { Dropcursor } from "@rrte/extension-dropcursor";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Dropcursor } from "@rrte/dropcursor";
+import { Paragraph } from "@rrte/paragraph";
 import classes from "./styles.module.css";
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[Paragraph(), Dropcursor()]}
+      editorExtensions={[Paragraph(), Dropcursor()]}
       contentWrapperClassName={classes.contentWrapper}
     />
   );

@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-bullet-list
+npm install @rrte/bullet-list
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-bullet-list
+yarn add  @rrte/bullet-list
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-bullet-list
+pnpm add @rrte/bullet-list
 ```
 
   </TabItem>
@@ -58,18 +58,13 @@ pnpm add @rrte/extension-bullet-list
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { BulletList } from "@rrte/extension-bullet-list";
-import { ListItem } from "@rrte/extension-list-item";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { BulletList } from '@rrte/bullet-list';
+import { ListItem } from '@rrte/list-item';
 
 function MyComponent() {
-  return (
-    <Editor
-      content={undefined}
-      extensions={[BulletList(), ListItem(), Paragraph()]}
-    />
-  );
+  return <Editor content={undefined} editorExtensions={[BulletList(), ListItem(), Paragraph()]} />;
 }
 
 export default MyComponent;

@@ -1,14 +1,14 @@
 import React from "react";
 import { Editor } from "@rrte/editor";
-import { TextAlign } from "@rrte/extension-text-align";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { TextAlign } from "@rrte/text-align";
+import { Paragraph } from "@rrte/paragraph";
 import classes from "./styles.module.css";
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[Paragraph(), TextAlign()]}
+      editorExtensions={[Paragraph(), TextAlign()]}
       contentWrapperClassName={classes.contentWrapper}
     />
   );

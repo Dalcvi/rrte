@@ -1,14 +1,14 @@
 import React from "react";
 import { Editor } from "@rrte/editor";
-import { Underline } from "@rrte/extension-underline";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Underline } from "@rrte/underline";
+import { Paragraph } from "@rrte/paragraph";
 import classes from "./styles.module.css";
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[Paragraph(), Underline()]}
+      editorExtensions={[Paragraph(), Underline()]}
       contentWrapperClassName={classes.contentWrapper}
     />
   );

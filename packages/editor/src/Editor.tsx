@@ -1,6 +1,6 @@
 import { useEditor, EditorContent, JSONContent, HTMLContent } from '@tiptap/react';
-import { Document } from '@rrte/extension-document';
-import { Text } from '@rrte/extension-text';
+import { Document } from '@rrte/document';
+import { Text } from '@rrte/text';
 import type { UnknownExtension, BubbleMenuToolbar, Config } from '@rrte/common';
 import { Toolbar } from '@rrte/toolbar';
 import type { ToolbarItem } from '@rrte/toolbar';
@@ -10,8 +10,19 @@ import { BubbleMenuList } from './bubble-menus';
 
 export type EditorRef = ReturnType<typeof useEditor>;
 
+const getEditorExtensionType = (extension: UnknownExtension) => {
+  if ('node' in extension) {
+    return extension.node;
+  }
+  if ('mark' in extension) {
+    return extension.mark;
+  }
+
+  return extension.extension;
+};
+
 export const Editor = ({
-  extensions = [],
+  editorExtensions = [],
   editorWrapperClassName,
   toolbarClassName,
   editorRef,
@@ -28,7 +39,7 @@ export const Editor = ({
   contentClassName?: string;
   contentWrapperClassName?: string;
   viewerMode?: boolean;
-  extensions?: UnknownExtension[];
+  editorExtensions?: UnknownExtension[];
   content: JSONContent | HTMLContent | undefined;
   onUpdateJson?: (content: JSONContent | undefined) => void;
   onUpdateHtml?: (content: HTMLContent | undefined) => void;
@@ -36,19 +47,25 @@ export const Editor = ({
   const [contentHasBeenSet, setContentHasBeenSet] = useState(false);
   const allBubbleMenus = useMemo(
     () =>
-      extensions.reduce(
-        (acc, { extension, config }) => {
+      editorExtensions.reduce(
+        (acc, editorExtension) => {
+          const extensionType = getEditorExtensionType(editorExtension);
+          const { config } = editorExtension;
           if (config.bubbleMenu) {
-            return [...acc, { name: extension.name, menu: config.bubbleMenu, config }];
+            return [...acc, { name: extensionType.name, menu: config.bubbleMenu, config }];
           }
           return acc;
         },
-        [] as { name: string; menu: BubbleMenuToolbar; config: Config }[]
+        [] as { name: string; menu: BubbleMenuToolbar; config: Config<any> }[]
       ),
-    [extensions]
+    [editorExtensions]
   );
   const editor = useEditor({
-    extensions: [Document, Text, ...extensions.map(({ extension }) => extension)],
+    extensions: [
+      Document,
+      Text,
+      ...editorExtensions.map(editorExtension => getEditorExtensionType(editorExtension)),
+    ],
     content,
     editable: !viewerMode,
     editorProps: contentClassName
@@ -114,8 +131,11 @@ export const Editor = ({
           editor={editor}
           wrapperClassName={toolbarClassName}
           items={
-            extensions
-              .map(extension => ({ toolbar: extension.config.toolbar, config: extension.config }))
+            editorExtensions
+              .map(editorExtension => ({
+                toolbar: editorExtension.config.toolbar,
+                config: editorExtension.config,
+              }))
               .filter(toolbar => !!toolbar.toolbar) as { toolbar: ToolbarItem<any>; config: any }[]
           }
         />

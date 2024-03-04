@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-text-style
+npm install @rrte/text-style
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-text-style
+yarn add  @rrte/text-style
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-text-style
+pnpm add @rrte/text-style
 ```
 
   </TabItem>
@@ -44,12 +44,12 @@ pnpm add @rrte/extension-text-style
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { TextStyle } from "@rrte/extension-text-style";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Editor } from '@rrte/editor';
+import { TextStyle } from '@rrte/text-style';
+import { Paragraph } from '@rrte/paragraph';
 
 function MyComponent() {
-  return <Editor content={undefined} extensions={[Paragraph(), TextStyle()]} />;
+  return <Editor content={undefined} editorExtensions={[Paragraph(), TextStyle()]} />;
 }
 
 export default MyComponent;

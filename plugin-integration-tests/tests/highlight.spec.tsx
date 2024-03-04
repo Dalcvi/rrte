@@ -44,7 +44,7 @@ describe('Highlight', () => {
       <Editor
         editorRef={editorRef}
         content={content}
-        extensions={[Paragraph(), Id(), Highlight(), TextStyle()]}
+        editorExtensions={[Paragraph(), Id(), Highlight(), TextStyle()]}
       />
     );
 

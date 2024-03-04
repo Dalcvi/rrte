@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-gif
+npm install @rrte/gif
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-gif
+yarn add  @rrte/gif
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-gif
+pnpm add @rrte/gif
 ```
 
   </TabItem>
@@ -64,14 +64,12 @@ pnpm add @rrte/extension-gif
 ## Example
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { Gif } from "@rrte/extension-gif";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { Gif } from '@rrte/gif';
 
 function MyComponent() {
-  return (
-    <Editor content={undefined} extensions={[Gif("your SDK"), Paragraph()]} />
-  );
+  return <Editor content={undefined} editorExtensions={[Gif('your SDK'), Paragraph()]} />;
 }
 
 export default MyComponent;

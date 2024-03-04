@@ -9,21 +9,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-history
+npm install @rrte/history
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-history
+yarn add  @rrte/history
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-history
+pnpm add @rrte/history
 ```
 
   </TabItem>
@@ -48,12 +48,12 @@ pnpm add @rrte/extension-history
 To see dropcursor working, type in some text, select it, and try dragging it somewhere else in text.
 
 ```jsx
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
-import { History } from "@rrte/extension-history";
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { History } from '@rrte/history';
 
 function MyComponent() {
-  return <Editor content={undefined} extensions={[Paragraph(), History()]} />;
+  return <Editor content={undefined} editorExtensions={[Paragraph(), History()]} />;
 }
 
 export default MyComponent;

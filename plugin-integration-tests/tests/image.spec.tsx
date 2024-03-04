@@ -23,7 +23,7 @@ describe('Image', () => {
       <Editor
         editorRef={editorRef}
         content={undefined}
-        extensions={[
+        editorExtensions={[
           Paragraph(),
           Image({
             type: 'user-controlled',
@@ -85,7 +85,7 @@ describe('Image', () => {
       <Editor
         editorRef={editorRef}
         content={content}
-        extensions={[
+        editorExtensions={[
           Image({
             type: 'user-controlled',
             maxFileSize: 100000000,

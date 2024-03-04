@@ -41,7 +41,7 @@ To use the editor, follow these steps:
 
 ```jsx
 import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Paragraph } from "@rrte/paragraph";
 
 
 const MyComponent = () => {
@@ -81,7 +81,7 @@ You can enhance the functionality of the editor by adding extensions. Adding ext
 
 ```jsx
 import { Editor } from '@rrte/editor';
-import { Heading } from '@rrte/extension-heading';
+import { Heading } from '@rrte/heading';
 
 const MyComponent = () => {
   return <Editor content={undefined} extensions=[Heading()] />;

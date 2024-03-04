@@ -11,21 +11,21 @@ import TabItem from '@theme/TabItem';
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install @rrte/extension-gapcursor
+npm install @rrte/gapcursor
 ```
 
   </TabItem>
   <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add  @rrte/extension-gapcursor
+yarn add  @rrte/gapcursor
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add @rrte/extension-gapcursor
+pnpm add @rrte/gapcursor
 ```
 
   </TabItem>

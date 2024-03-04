@@ -14,7 +14,7 @@ describe('Strike', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} extensions={[Paragraph(), Strike()]} />
+      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Strike()]} />
     );
 
     const strikeButton = screen.getByTestId('strike-button');
@@ -44,7 +44,7 @@ describe('Strike', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} extensions={[Paragraph(), Strike()]} />);
+    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Strike()]} />);
 
     const paragraph = screen.getByTestId('paragraph');
     const strikeTag = paragraph.querySelector('del');

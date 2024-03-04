@@ -1,14 +1,14 @@
 import React from "react";
 import { Editor } from "@rrte/editor";
-import { Strike } from "@rrte/extension-strike";
-import { Paragraph } from "@rrte/extension-paragraph";
+import { Strike } from "@rrte/strike";
+import { Paragraph } from "@rrte/paragraph";
 import classes from "./styles.module.css";
 
 function MyComponent() {
   return (
     <Editor
       content={undefined}
-      extensions={[Paragraph(), Strike()]}
+      editorExtensions={[Paragraph(), Strike()]}
       contentWrapperClassName={classes.contentWrapper}
     />
   );
