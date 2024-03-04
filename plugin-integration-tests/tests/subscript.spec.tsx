@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Subscript } from '../../packages/extension-subscript/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Subscript } from '../../packages/subscript/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';

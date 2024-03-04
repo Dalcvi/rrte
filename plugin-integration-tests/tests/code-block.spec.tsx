@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { CodeBlock } from '../../packages/extension-code-block/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { CodeBlock } from '../../packages/code-block/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';

@@ -3,7 +3,7 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Heading } from '../../packages/extension-heading/src';
+import { Heading } from '../../packages/heading/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';

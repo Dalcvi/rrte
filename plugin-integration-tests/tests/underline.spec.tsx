@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Underline } from '../../packages/extension-underline/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Underline } from '../../packages/underline/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';

@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Strike } from '../../packages/extension-strike/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Strike } from '../../packages/strike/src';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';

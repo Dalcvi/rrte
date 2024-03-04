@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { TextAlign } from '../../packages/extension-text-align/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
+import { TextAlign } from '../../packages/text-align/src';
+import { Paragraph } from '../../packages/paragraph/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
