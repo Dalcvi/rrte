@@ -30,7 +30,9 @@ describe('Id', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Id()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Id()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
 

@@ -14,7 +14,11 @@ describe('Blockquote', () => {
   it('button press should add blockquote', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Blockquote()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), Blockquote()]}
+      />
     );
 
     const button = screen.getByTestId('blockquote-button');
@@ -48,7 +52,11 @@ describe('Blockquote', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Blockquote()]} />
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        editorExtensions={[Paragraph(), Blockquote()]}
+      />
     );
 
     const blockquoteTag = screen.getByTestId('blockquote');

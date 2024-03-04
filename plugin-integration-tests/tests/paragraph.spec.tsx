@@ -14,7 +14,11 @@ describe('Paragraph', () => {
   it('button press should change back to paragraph', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Heading()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), Heading()]}
+      />
     );
 
     const button = screen.getByTestId('text type');

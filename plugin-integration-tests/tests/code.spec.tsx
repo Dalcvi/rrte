@@ -13,7 +13,9 @@ import userEvent from '@testing-library/user-event';
 describe('Code', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Code()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Code()]} />
+    );
 
     const button = screen.getByTestId('code-button');
     await userEvent.click(button);
@@ -46,7 +48,9 @@ describe('Code', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Code()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Code()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
     const codeTag = paragraph.querySelector('code');

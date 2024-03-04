@@ -13,7 +13,9 @@ import userEvent from '@testing-library/user-event';
 describe('Bold', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Bold()]} />);
+    render(
+      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Bold()]} />
+    );
 
     const button = screen.getByTestId('bold-button');
     await userEvent.click(button);
@@ -42,7 +44,9 @@ describe('Bold', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Bold()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Bold()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
     const boldTag = paragraph.querySelector('strong');

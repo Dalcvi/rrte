@@ -20,7 +20,11 @@ describe('Youtube', () => {
   it('button press should add youtube', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Youtube()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), Youtube()]}
+      />
     );
     const button = screen.getByTestId('youtube-button');
     await userEvent.click(button);

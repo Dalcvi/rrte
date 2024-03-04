@@ -11,6 +11,7 @@ import { Italic } from '@rrte/italic';
 import { Link } from '@rrte/link';
 import { Video, VideoAttributes } from '@rrte/video';
 import { Underline } from '@rrte/underline';
+import { Placeholder } from '@rrte/placeholder';
 import { Gif } from '@rrte/gif';
 import { Strike } from '@rrte/strike';
 import { ImageAttributes, Image as ImageExtension } from '@rrte/image';
@@ -92,6 +93,9 @@ export default function Web() {
             Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO'),
             Dropcursor(),
             TextAlign(),
+            Placeholder({
+              placeholderText: 'You can type whatever you want!',
+            }),
             Paragraph(),
             ImageExtension({
               type: 'user-controlled',
