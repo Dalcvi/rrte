@@ -3,10 +3,10 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Id } from '../../packages/extension-id/src';
-import { Highlight } from '../../packages/extension-highlight/src';
-import { TextStyle } from '../../packages/extension-text-style/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Id } from '../../packages/id/src';
+import { Highlight } from '../../packages/highlight/src';
+import { TextStyle } from '../../packages/text-style/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';

@@ -3,9 +3,9 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { OrderedList } from '../../packages/extension-ordered-list/src';
-import { ListItem } from '../../packages/extension-list-item/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { OrderedList } from '../../packages/ordered-list/src';
+import { ListItem } from '../../packages/list-item/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';

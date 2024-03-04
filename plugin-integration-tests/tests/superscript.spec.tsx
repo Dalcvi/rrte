@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Superscript } from '../../packages/extension-superscript/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Superscript } from '../../packages/superscript/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
@@ -14,7 +14,11 @@ describe('Superscript', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Superscript()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), Superscript()]}
+      />
     );
 
     const button = screen.getByTestId('superscript-button');
@@ -46,7 +50,11 @@ describe('Superscript', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Superscript()]} />
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        editorExtensions={[Paragraph(), Superscript()]}
+      />
     );
 
     const paragraph = screen.getByTestId('paragraph');

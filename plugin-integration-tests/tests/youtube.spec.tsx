@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Youtube } from '../../packages/extension-youtube/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
+import { Youtube } from '../../packages/youtube/src';
+import { Paragraph } from '../../packages/paragraph/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
@@ -20,7 +20,11 @@ describe('Youtube', () => {
   it('button press should add youtube', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Youtube()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), Youtube()]}
+      />
     );
     const button = screen.getByTestId('youtube-button');
     await userEvent.click(button);

@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Subscript } from '../../packages/extension-subscript/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Subscript } from '../../packages/subscript/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
@@ -14,7 +14,11 @@ describe('Subscript', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Subscript()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), Subscript()]}
+      />
     );
 
     const button = screen.getByTestId('subscript-button');
@@ -46,7 +50,11 @@ describe('Subscript', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Subscript()]} />
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        editorExtensions={[Paragraph(), Subscript()]}
+      />
     );
 
     const paragraph = screen.getByTestId('paragraph');

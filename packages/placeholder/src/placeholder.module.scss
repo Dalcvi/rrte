@@ -1,0 +1,9 @@
+.placeholder::before {
+  content: attr(data-rrte-placeholder);
+  // as a fallback, set color to be as a placeholder color, something grayish
+  color: rgb(var(--rrte-placeholder-color, 128 128 128));
+  font-style: var(--rrte-placeholder-style);
+  height: 0;
+  pointer-events: none;
+  position: absolute;
+}

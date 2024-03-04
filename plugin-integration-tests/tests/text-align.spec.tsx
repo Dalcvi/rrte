@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { TextAlign } from '../../packages/extension-text-align/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
+import { TextAlign } from '../../packages/text-align/src';
+import { Paragraph } from '../../packages/paragraph/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
@@ -14,7 +14,11 @@ describe('Text align', () => {
   it('button should change paragraph text alignment to left', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), TextAlign()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), TextAlign()]}
+      />
     );
     const rightButton = screen.getByTestId('text-align-right-button');
     await userEvent.click(rightButton);
@@ -29,7 +33,11 @@ describe('Text align', () => {
   it('button should change paragraph text alignment to center', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), TextAlign()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), TextAlign()]}
+      />
     );
 
     const button = screen.getByTestId('text-align-center-button');
@@ -43,7 +51,11 @@ describe('Text align', () => {
   it('button should change paragraph text alignment to right', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), TextAlign()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), TextAlign()]}
+      />
     );
 
     const button = screen.getByTestId('text-align-right-button');
@@ -57,7 +69,11 @@ describe('Text align', () => {
   it('button should change paragraph text alignment to justify', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), TextAlign()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), TextAlign()]}
+      />
     );
 
     const button = screen.getByTestId('text-align-justify-button');
@@ -88,7 +104,11 @@ describe('Text align', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), TextAlign()]} />
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        editorExtensions={[Paragraph(), TextAlign()]}
+      />
     );
 
     const paragraph = screen.getByTestId('paragraph');
@@ -118,7 +138,11 @@ describe('Text align', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), TextAlign()]} />
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        editorExtensions={[Paragraph(), TextAlign()]}
+      />
     );
 
     const paragraph = screen.getByTestId('paragraph');
@@ -149,7 +173,11 @@ describe('Text align', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), TextAlign()]} />
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        editorExtensions={[Paragraph(), TextAlign()]}
+      />
     );
 
     const paragraph = screen.getByTestId('paragraph');
@@ -180,7 +208,11 @@ describe('Text align', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), TextAlign()]} />
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        editorExtensions={[Paragraph(), TextAlign()]}
+      />
     );
 
     const paragraph = screen.getByTestId('paragraph');

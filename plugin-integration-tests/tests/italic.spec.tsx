@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Italic } from '../../packages/extension-italic/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Italic } from '../../packages/italic/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
@@ -32,7 +32,9 @@ describe('Italic', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Italic()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Italic()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
     const italicTag = paragraph.querySelector('em');

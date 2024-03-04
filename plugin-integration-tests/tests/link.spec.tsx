@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Link } from '../../packages/extension-link/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Link } from '../../packages/link/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
@@ -36,7 +36,9 @@ describe('Link', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Link()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Link()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
     const linkTag = paragraph.querySelector('a');

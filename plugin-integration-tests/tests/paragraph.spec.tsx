@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Heading } from '../../packages/extension-heading/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Heading } from '../../packages/heading/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
@@ -14,7 +14,11 @@ describe('Paragraph', () => {
   it('button press should change back to paragraph', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Heading()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), Heading()]}
+      />
     );
 
     const button = screen.getByTestId('text type');

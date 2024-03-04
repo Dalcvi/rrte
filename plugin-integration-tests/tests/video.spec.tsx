@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Video, VideoAttributes } from '../../packages/extension-video/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
+import { Video, VideoAttributes } from '../../packages/video/src';
+import { Paragraph } from '../../packages/paragraph/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';

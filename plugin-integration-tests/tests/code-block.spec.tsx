@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { CodeBlock } from '../../packages/extension-code-block/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { CodeBlock } from '../../packages/code-block/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
@@ -14,7 +14,11 @@ describe('Code block', () => {
   it('button press should add code block', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), CodeBlock()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), CodeBlock()]}
+      />
     );
 
     const button = screen.getByTestId('codeblock-button');
@@ -44,7 +48,11 @@ describe('Code block', () => {
 
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), CodeBlock()]} />
+      <Editor
+        editorRef={editorRef}
+        content={content}
+        editorExtensions={[Paragraph(), CodeBlock()]}
+      />
     );
 
     const preTag = screen.getByTestId('codeBlock');

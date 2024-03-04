@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Strike } from '../../packages/extension-strike/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Strike } from '../../packages/strike/src';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
@@ -14,7 +14,11 @@ describe('Strike', () => {
   it('button should start storedmark', async () => {
     const editorRef = {} as any;
     render(
-      <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Strike()]} />
+      <Editor
+        editorRef={editorRef}
+        content={undefined}
+        editorExtensions={[Paragraph(), Strike()]}
+      />
     );
 
     const strikeButton = screen.getByTestId('strike-button');
@@ -44,7 +48,9 @@ describe('Strike', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Strike()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Strike()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
     const strikeTag = paragraph.querySelector('del');

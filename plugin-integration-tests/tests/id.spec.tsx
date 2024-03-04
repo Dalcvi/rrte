@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
-import { Id } from '../../packages/extension-id/src';
+import { Paragraph } from '../../packages/paragraph/src';
+import { Id } from '../../packages/id/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
@@ -30,7 +30,9 @@ describe('Id', () => {
     };
 
     const editorRef = {} as any;
-    render(<Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Id()]} />);
+    render(
+      <Editor editorRef={editorRef} content={content} editorExtensions={[Paragraph(), Id()]} />
+    );
 
     const paragraph = screen.getByTestId('paragraph');
 

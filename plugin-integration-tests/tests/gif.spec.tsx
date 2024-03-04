@@ -3,8 +3,8 @@
  */
 
 import { Editor } from '../../packages/editor/src';
-import { Gif } from '../../packages/extension-gif/src';
-import { Paragraph } from '../../packages/extension-paragraph/src';
+import { Gif } from '../../packages/gif/src';
+import { Paragraph } from '../../packages/paragraph/src';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
