@@ -1,15 +1,14 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import CodeIcon from './code.icon.svg';
-import { CodeMark } from '../mark';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { CodeMark } from '../mark';
+import CodeIcon from './code.icon.svg';
 import classes from './toolbar.module.scss';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive(CodeMark.name);
   return (
     <button
-      aria-label="code"
+      aria-label={t('code-button.text')}
       data-testid="code-button"
       className={classNames(classes.codeButton, {
         [classes.active]: isActive,
@@ -33,7 +32,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: CodeMark.name,
-  text: 'Code',
+  text: 'code-button.text',
   type: 'icon' as const,
   priority: 86,
 };

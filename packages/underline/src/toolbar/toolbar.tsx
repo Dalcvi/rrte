@@ -1,16 +1,15 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import UnderlineIcon from './underline.icon.svg';
-import { UnderlineMark } from '../mark';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { UnderlineMark } from '../mark';
 import classes from './toolbar.module.scss';
+import UnderlineIcon from './underline.icon.svg';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive('underline');
   return (
     <button
       data-testid="underline-button"
-      aria-label="underline"
+      aria-label={t('underline-button.text')}
       className={classNames(classes.underlineButton, {
         [classes.active]: isActive,
       })}
@@ -33,7 +32,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: UnderlineMark.name,
-  text: 'Underline',
+  text: 'underline-button.text',
   type: 'icon' as const,
   priority: 95,
 };

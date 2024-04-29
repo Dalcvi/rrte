@@ -31,6 +31,21 @@ export const historyExtension = Extension.create<HistoryOptions>({
     };
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.history'),
+      activationKeyword: t('voice-command.undo'),
+      command: 'undo',
+      description: 'Undo recent changes',
+    },
+    {
+      group: t('voice-group.history'),
+      activationKeyword: t('voice-command.redo'),
+      command: 'redo',
+      description: 'Reapply reverted changes',
+    },
+  ],
+
   addCommands() {
     return {
       undo:

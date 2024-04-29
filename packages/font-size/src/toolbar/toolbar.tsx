@@ -3,7 +3,6 @@ import {
   currentSelectionAttributeValue,
   type RegularButtonConfig,
 } from '@rrte/common';
-import { Editor } from '@tiptap/core';
 import { FontSizeExtension } from '../extension';
 import classes from './toolbar.module.scss';
 
@@ -29,13 +28,13 @@ const getValue = (value: string | AttributeValue | undefined) => {
   return Number(fontSize.replace(/\D/g, ''));
 };
 
-const Button = ({ editor }: { editor: Editor }) => {
-  const value = getValue(currentSelectionAttributeValue('fontSize', editor));
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
+  const value = getValue(currentSelectionAttributeValue('fontSize', editor, 'font-size'));
 
   return (
     <input
       data-testid="font-size-input"
-      aria-label="Font size"
+      aria-label={t('font-size-selector.text')}
       className={classes.numberInput}
       type="number"
       value={value}
@@ -54,7 +53,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: FontSizeExtension.name,
-  text: 'Color',
+  text: 'font-size-selector.text',
   type: 'icon' as const,
   priority: 104,
 };

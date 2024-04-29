@@ -1,0 +1,153 @@
+.bubbleMenu {
+  border: 1px solid rgb(var(--rrte-color-2));
+  border-radius: 12px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgb(var(--rrte-color-1));
+  font-family: var(--rrte-p-font-family);
+  font-size: 14px;
+  font-weight: var(--rrte-p-font-weight);
+  color: rgb(var(--rrte-color-2));
+  z-index: 100;
+  flex-wrap: wrap;
+
+  & * {
+    box-sizing: border-box;
+  }
+}
+
+.gifContainer {
+  position: relative;
+}
+
+.inputContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgb(var(--rrte-color-2));
+
+  .inputField {
+    max-width: 100%;
+    width: 100px;
+    height: 30px;
+    border: 1px solid rgb(var(--rrte-color-2));
+    border-radius: 5px;
+    background: rgb(var(--rrte-color-1));
+    color: rgb(var(--rrte-color-2));
+
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+}
+
+.inputLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgb(var(--rrte-color-2));
+  font-family: var(--rrte-p-font-family);
+  font-size: 14px;
+
+  .input {
+    background: rgb(var(--rrte-color-1));
+    border: 1px solid rgb(var(--rrte-color-2));
+    color: rgb(var(--rrte-color-2));
+    width: 100%;
+    height: 30px;
+    border-radius: 6px;
+  }
+}
+
+.button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0px 2px;
+  border: 1px solid rgb(var(--rrte-color-2));
+  border-radius: 5px;
+  overflow: hidden;
+  background: transparent;
+
+  &:focus-within {
+    outline: -webkit-focus-ring-color auto 1px;
+  }
+
+  .imageInput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  &:hover {
+    background: rgb(var(--rrte-color-4), 0.3);
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:disabled:hover {
+    background: none;
+  }
+
+  & .icon {
+    & * {
+      fill: rgb(var(--rrte-color-2));
+      stroke: rgb(var(--rrte-color-2));
+    }
+  }
+
+  & .horizontallyFlippedIcon {
+    transform: scaleX(-1);
+
+    & * {
+      fill: rgb(var(--rrte-color-2));
+      stroke: rgb(var(--rrte-color-2));
+    }
+  }
+
+  & .verticallyFlippedIcon {
+    transform: scaleY(-1);
+
+    & * {
+      fill: rgb(var(--rrte-color-2));
+      stroke: rgb(var(--rrte-color-2));
+    }
+  }
+
+  & .removeIcon {
+    & * {
+      fill: rgb(var(--rrte-color-10));
+      stroke: rgb(var(--rrte-color-10));
+    }
+  }
+}
+
+.buttonActive {
+  background: rgb(var(--rrte-color-4), 0.8);
+
+  .icon {
+    &.active {
+      & * {
+        fill: rgb(var(--rrte-color-1));
+        stroke: rgb(var(--rrte-color-1));
+      }
+    }
+  }
+}

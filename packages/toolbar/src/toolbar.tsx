@@ -12,14 +12,18 @@ import {
 import { Dropdown } from './dropdown';
 import classes from './toolbar.module.scss';
 import classNames from 'classnames';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 export const Toolbar = ({
   editor,
   items,
+  editorContainerRef,
   wrapperClassName,
 }: {
   editor: Editor;
   items: { toolbar: ToolbarItem<any>; config: any }[];
+  editorContainerRef: HTMLElement | null;
   wrapperClassName?: string;
 }) => {
   const configsByName = useMemo(() => getConfigsMapByName(items), [items]);
@@ -33,27 +37,41 @@ export const Toolbar = ({
 
   const sortedButtons = useMemo(
     () => sortByPriority([...itemsSortedByType[ToolbarItemType.ICON], ...reducedDropdowns]),
-    []
+    [itemsSortedByType]
   );
   return (
-    <div className={classNames(classes.toolbarList, wrapperClassName)}>
+    <ul
+      // role="toolbar"
+      // aria-orientation="horizontal"
+      className={classNames(classes.toolbarList, wrapperClassName)}
+    >
+      {sortedButtons.length > 0 && (
+        <Tooltip className={classes.toolbarTooltip} id="toolbar-buttons-tooltip" />
+      )}
       {sortedButtons.map(item => {
         switch (item.type) {
           case ToolbarItemType.ICON:
             return (
-              <RegularButton
-                key={item.name}
-                editor={editor}
-                {...item}
-                config={configsByName[item.name]}
-              />
+              <li>
+                <RegularButton
+                  key={item.name}
+                  editor={editor}
+                  {...item}
+                  config={configsByName[item.name]}
+                  editorContainerRef={editorContainerRef}
+                />
+              </li>
             );
           case ToolbarItemType.DROPDOWN:
-            return <Dropdown key={item.name} editor={editor} {...item} />;
+            return (
+              <li>
+                <Dropdown key={item.name} editor={editor} {...item} />
+              </li>
+            );
           default:
             console.warn(`${JSON.stringify(item)} is not implemented yet`);
         }
       })}
-    </div>
+    </ul>
   );
 };

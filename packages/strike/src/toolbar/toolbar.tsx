@@ -1,16 +1,15 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import StrikeIcon from './strike.icon.svg';
-import { StrikeMark } from '../mark';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { StrikeMark } from '../mark';
+import StrikeIcon from './strike.icon.svg';
 import classes from './toolbar.module.scss';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive('strike');
   return (
     <button
       data-testid="strike-button"
-      aria-label="strike"
+      aria-label={t('strike-button.text')}
       className={classNames(classes.strikeButton, {
         [classes.active]: isActive,
       })}
@@ -33,7 +32,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: StrikeMark.name,
-  text: 'Strike',
+  text: 'strike-button.text',
   type: 'icon' as const,
   priority: 96,
 };

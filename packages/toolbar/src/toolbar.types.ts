@@ -27,8 +27,10 @@ export type SingleToolbarItem<T extends Record<string, any>> =
 export type BubbleMenuToolbarProps<T extends Record<string, any> = Record<string, any>> = {
   editor: Editor;
   config: T;
+  t: (key: string) => string;
 };
 
 export type BubbleMenuToolbar<T extends Record<string, any> = Record<string, any>> = {
   Menu: (props: BubbleMenuToolbarProps<T>) => JSX.Element;
-} & Omit<BubbleMenuProps, 'editor' | 'children'>;
+  tippyOptions?: (editor: Editor) => BubbleMenuProps['tippyOptions'];
+} & Omit<BubbleMenuProps, 'editor' | 'children' | 'tippyOptions'>;

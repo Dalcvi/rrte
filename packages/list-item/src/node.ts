@@ -17,6 +17,27 @@ export const ListItemNode = Node.create<ListItemOptions>({
 
   defining: true,
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.split-list-item'),
+      command: 'splitListItem',
+      description: 'Set a list item',
+    },
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.sink-list-item'),
+      command: 'sinkListItem',
+      description: 'Sink a list item',
+    },
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.lift-list-item'),
+      command: 'liftListItem',
+      description: 'Lift a list item',
+    },
+  ],
+
   parseHTML() {
     return [
       {

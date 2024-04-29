@@ -1,15 +1,14 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import BulletListIcon from './bulletlist.icon.svg';
-import { BulletListNode } from '../node';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { BulletListNode } from '../node';
+import BulletListIcon from './bulletlist.icon.svg';
 import classes from './toolbar.module.scss';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive(BulletListNode.name);
   return (
     <button
-      aria-label="bullet list"
+      aria-label={t('bullet-list-button.text')}
       data-testid="bullet-list-button"
       className={classNames(classes.bulletListButton, {
         [classes.active]: isActive,
@@ -33,7 +32,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: BulletListNode.name,
-  text: 'Bullet list',
+  text: 'bullet-list-button.text',
   type: 'icon' as const,
   priority: 82,
 };

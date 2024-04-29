@@ -27,13 +27,7 @@ export const NodeView = ({
         })}
         style={style}
       >
-        {draggable ? (
-          <div data-drag-handle className={classes.drag}>
-            {children}
-          </div>
-        ) : (
-          children
-        )}
+        {draggable ? <div data-drag-handle>{children}</div> : children}
       </div>
     </NodeViewWrapper>
   );

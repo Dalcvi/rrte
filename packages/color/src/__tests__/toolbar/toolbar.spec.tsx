@@ -1,3 +1,4 @@
+import React from 'react';
 import { ToolbarButton } from '../../toolbar';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -30,7 +31,7 @@ describe('Color toolbar button', () => {
   });
   it('should set color on color change', () => {
     const editor = new FakeEditor() as any;
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
 
     const colorInput = screen.getByTestId('color-input');
 
@@ -45,7 +46,7 @@ describe('Color toolbar button', () => {
   it('should have a reset button when color is set', () => {
     const editor = new FakeEditor() as any;
     (currentSelectionAttributeValue as jest.Mock).mockReturnValue('#00000A');
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
 
     const resetButton = screen.getByTestId('color-reset');
     expect(resetButton).toBeInTheDocument();
@@ -54,7 +55,7 @@ describe('Color toolbar button', () => {
   it('should unset color on reset click', () => {
     const editor = new FakeEditor() as any;
     (currentSelectionAttributeValue as jest.Mock).mockReturnValue('#00000B');
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
 
     const resetButton = screen.getByTestId('color-reset');
     fireEvent.click(resetButton);
@@ -68,7 +69,7 @@ describe('Color toolbar button', () => {
   it('letter color should be the same as selected color', () => {
     const editor = new FakeEditor() as any;
     (currentSelectionAttributeValue as jest.Mock).mockReturnValue('#AAAAAA');
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
 
     const colorInput = screen.getByTestId<HTMLInputElement>('color-input');
     const colorLetter = screen.getByTestId('color-letter');
@@ -79,7 +80,7 @@ describe('Color toolbar button', () => {
   it('bar color should be the same as selected color', () => {
     const editor = new FakeEditor() as any;
     (currentSelectionAttributeValue as jest.Mock).mockReturnValue('#AAAAAA');
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
 
     const colorInput = screen.getByTestId<HTMLInputElement>('color-input');
     const colorBar = screen.getByTestId('color-bar');

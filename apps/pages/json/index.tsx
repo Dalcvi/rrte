@@ -7,6 +7,7 @@ import { Code } from '@rrte/code';
 import { CodeBlock } from '@rrte/code-block';
 import { Color } from '@rrte/color';
 import { Dropcursor } from '@rrte/dropcursor';
+import { Voice } from '@rrte/voice';
 import { FontSize } from '@rrte/font-size';
 import { Gapcursor } from '@rrte/gapcursor';
 import { Gif } from '@rrte/gif';
@@ -62,10 +63,11 @@ export default function Web() {
           }}
           editorExtensions={[
             Blockquote(),
-            Bold(),
+            Voice(),
             Color(),
             FontSize(),
             Id(),
+            Bold(),
             BulletList(),
             CodeBlock(),
             HardBreak(),

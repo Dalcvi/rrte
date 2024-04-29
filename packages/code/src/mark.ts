@@ -24,7 +24,7 @@ declare module '@tiptap/core' {
   }
 }
 
-export const regex = /(?:^|\s)((?:`)((?:[^`]+))(?:`))$/;
+export const regex = /(?:^|\s)((?:`)((?:[^`]+))(?:`))$/g;
 
 export const CodeMark = Mark.create<CodeOptions>({
   name: 'code',
@@ -56,6 +56,15 @@ export const CodeMark = Mark.create<CodeOptions>({
   renderHTML({ HTMLAttributes }) {
     return ['code', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
+
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.toggle-code'),
+      command: 'toggleCode',
+      description: 'Toggle inline code',
+    },
+  ],
 
   addCommands() {
     return {

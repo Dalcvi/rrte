@@ -132,6 +132,20 @@ export const LinkMark = Mark.create<LinkOptions>({
     return ['a', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.toggle-link'),
+      command: 'toggleLink',
+      params: [
+        {
+          href: '',
+        },
+      ],
+      description: 'Toggle a link',
+    },
+  ],
+
   addCommands() {
     return {
       setLink:

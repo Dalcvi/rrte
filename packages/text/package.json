@@ -26,8 +26,9 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@tiptap/extension-text": "^2.0.3",
-    "@tiptap/core": "^2.0.3",
-    "@tiptap/pm": "^2.0.3"
+    "@rrte/common": "workspace:^",
+    "@tiptap/core": "^2.3.0",
+    "@tiptap/extension-text": "^2.3.0",
+    "@tiptap/pm": "^2.3.0"
   }
 }

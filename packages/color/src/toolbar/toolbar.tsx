@@ -3,12 +3,11 @@ import {
   currentSelectionAttributeValue,
   type RegularButtonConfig,
 } from '@rrte/common';
-import { ColorExtension } from '../extension';
-import classes from './toolbar.module.scss';
 import classNames from 'classnames';
-import { Editor } from '@tiptap/core';
-import CloseIcon from './close.icon.svg';
 import { useCallback } from 'react';
+import { ColorExtension } from '../extension';
+import CloseIcon from './close.icon.svg';
+import classes from './toolbar.module.scss';
 
 const getColor = (value: string | AttributeValue) => {
   if (typeof value === 'string') {
@@ -26,11 +25,11 @@ const getColor = (value: string | AttributeValue) => {
   return window.getComputedStyle(element).color;
 };
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const currentValue = currentSelectionAttributeValue('color', editor);
   const color = currentValue ? getColor(currentValue) : undefined;
 
-  const isResetEnabled = color && color.startsWith('#');
+  const isResetEnabled = color && typeof currentValue === 'string' && currentValue.length > 0;
   const iconDimensions = { width: '15px', height: '15px' };
 
   const handleColorChange = useCallback(
@@ -56,7 +55,7 @@ const Button = ({ editor }: { editor: Editor }) => {
       >
         <input
           data-testid="color-input"
-          aria-label="Text color"
+          aria-label={t('color-button.text')}
           disabled={!editor.can().setColor(null)}
           type="color"
           value={color}
@@ -71,7 +70,7 @@ const Button = ({ editor }: { editor: Editor }) => {
       {isResetEnabled && (
         <button
           data-testid="color-reset"
-          aria-label="reset text color"
+          aria-label={t('color-remove.text')}
           className={classes.colorReset}
           onClick={handleReset}
         >
@@ -85,7 +84,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: ColorExtension.name,
-  text: 'Color',
+  text: 'color-button.text',
   type: 'icon',
   priority: 103,
 };

@@ -53,6 +53,15 @@ export const UnderlineMark = Mark.create<UnderlineOptions>({
     return ['u', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
 
+  speechCommands: t => [
+    {
+      activationKeyword: t('voice-command.toggle-underline'),
+      group: t('voice-group.text-formatting'),
+      command: 'toggleUnderline',
+      description: 'Toggle underline',
+    },
+  ],
+
   addCommands() {
     return {
       setUnderline:

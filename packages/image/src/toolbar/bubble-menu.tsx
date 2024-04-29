@@ -16,7 +16,7 @@ import classes from './image-bubble-menu.module.scss';
 import ReplaceIcon from './replace.icon.svg';
 import { handleFileImage } from './toolbar.utils';
 
-const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config }) => {
+const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t }) => {
   const [maxWidth, setMaxWidth] = useState(0);
   const currentAttributes = editor.getAttributes(ImageNode.name) as ImageAttributes & {
     id: string | undefined;
@@ -46,10 +46,10 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
   const alignment = currentAttributes.alignment;
   return (
     <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
-      <ChangeImageButton config={config} editor={editor} imgId={imgId} />
+      <ChangeImageButton config={config} editor={editor} imgId={imgId} t={t} />
       <button
         data-testid="image-bubble-menu-align-left"
-        aria-label="align left"
+        aria-label={t('image.align-left')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'left',
         })}
@@ -66,7 +66,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
-        aria-label="align center"
+        aria-label={t('image.align-center')}
         data-testid="image-bubble-menu-align-center"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'center',
@@ -84,7 +84,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
-        aria-label="align right"
+        aria-label={t('image.align-right')}
         data-testid="image-bubble-menu-align-right"
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'right',
@@ -102,7 +102,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <button
-        aria-label="custom size"
+        aria-label={t('image.custom-size')}
         data-testid="image-bubble-menu-custom-size"
         className={classNames(classes.button, {
           [classes.buttonActive]: isCustomSizeEnabled,
@@ -120,7 +120,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <label className={classes.inputContainer}>
-        Alt:
+        {t('image.alt')}
         <input
           aria-label="image alt"
           data-testid="image-bubble-menu-input-alt"
@@ -131,7 +131,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </label>
       <label className={classes.inputContainer}>
-        Width:
+        {t('image.width')}
         <input
           aria-label="image width"
           data-testid="image-bubble-menu-input-width"
@@ -151,7 +151,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </label>
       <label className={classes.inputContainer}>
-        Height:
+        {t('image.height')}
         <input
           aria-label="image height"
           data-testid="image-bubble-menu-input-height"
@@ -178,31 +178,35 @@ const ChangeImageButton = ({
   editor,
   config,
   imgId,
+  t,
 }: {
   editor: Editor;
   config: UploadConfig;
   imgId: string;
+  t: (key: string) => string;
 }) => {
   if (config.type === 'user-controlled') {
-    return <UserControlledChangeButton editor={editor} config={config} imgId={imgId} />;
+    return <UserControlledChangeButton editor={editor} config={config} imgId={imgId} t={t} />;
   }
 
-  return <ExtensionControlledChangeButton editor={editor} config={config} imgId={imgId} />;
+  return <ExtensionControlledChangeButton editor={editor} config={config} imgId={imgId} t={t} />;
 };
 
 const ExtensionControlledChangeButton = ({
   editor,
   config,
   imgId,
+  t,
 }: {
   editor: Editor;
   config: ExtensionControlledUploadConfig;
   imgId: string;
+  t: (key: string) => string;
 }) => {
   return (
     <div className={classes.button}>
       <input
-        aria-label="change image"
+        aria-label={t('image-change.text')}
         type="file"
         accept={config.acceptedImageFileTypes.join(', ')}
         className={classes.imageInput}
@@ -260,14 +264,16 @@ const UserControlledChangeButton = ({
   editor,
   config,
   imgId,
+  t,
 }: {
   editor: Editor;
   config: UserControlledUploadConfig;
   imgId: string;
+  t: (key: string) => string;
 }) => {
   return (
     <button
-      aria-label="change image"
+      aria-label={t('image-change.text')}
       data-testid="user-controlled-image-button"
       className={classNames(classes.button)}
       onClick={async () => {

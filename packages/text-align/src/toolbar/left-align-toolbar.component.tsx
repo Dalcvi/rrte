@@ -1,23 +1,20 @@
 import { RegularButtonConfig } from '@rrte/common';
-import { TextAlignExtension } from '../extension';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
-import classes from './toolbar.module.scss';
-import AlignLeftIcon from './align-left.icon.svg';
+import { TextAlignExtension } from '../extension';
 import { TextAlignConfig } from '../text-align-config';
+import AlignLeftIcon from './align-left.icon.svg';
+import classes from './toolbar.module.scss';
 
-const TextAlignToolbarButton = ({
+const TextAlignToolbarButton: RegularButtonConfig<TextAlignConfig>['Button'] = ({
   editor,
   config,
-}: {
-  editor: Editor;
-  config: TextAlignConfig;
+  t,
 }) => {
   const isActive = config.types.some(type => editor.isActive(type, { textAlign: 'left' }));
   return (
     <button
       data-testid="text-align-left-button"
-      aria-label="text align left"
+      aria-label={t('left-align-button.text')}
       className={classNames(classes.textAlignButton, {
         [classes.active]: isActive,
       })}
@@ -40,7 +37,7 @@ const TextAlignToolbarButton = ({
 export const LeftAlignToolbarButton: RegularButtonConfig<TextAlignConfig> = {
   Button: TextAlignToolbarButton,
   name: `${TextAlignExtension.name}-left`,
-  text: 'Text align left',
+  text: 'left-align-button.text',
   type: 'icon' as const,
   priority: 92,
 };

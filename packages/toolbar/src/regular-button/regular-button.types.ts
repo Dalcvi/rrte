@@ -1,5 +1,6 @@
 import { Editor } from '@tiptap/react';
 import { ToolbarItemType } from '../toolbar.types';
+import { Translate } from '@rrte/i18n';
 
 export type RegularButtonConfig<T extends Record<string, any> = Record<string, any>> = {
   name: string;
@@ -12,4 +13,6 @@ export type RegularButtonConfig<T extends Record<string, any> = Record<string, a
 export type RegularButtonWrapperProps<T extends Record<string, any>> = {
   editor: Editor;
   config: T;
+  t: Translate;
+  editorContainerRef: HTMLElement | null;
 };

@@ -1,4 +1,5 @@
 import { Extension } from '@tiptap/core';
+import type {} from '@rrte/common';
 
 type Alignment = 'left' | 'center' | 'right' | 'justify';
 
@@ -37,9 +38,7 @@ export const TextAlignExtension = Extension.create<TextAlignOptions>({
           textAlign: {
             default: this.options.defaultAlignment,
             parseHTML: element => {
-              return {
-                textAlign: element.style.textAlign ?? this.options.defaultAlignment,
-              };
+              return element.style.textAlign ?? this.options.defaultAlignment;
             },
             renderHTML: attributes => {
               return {
@@ -52,14 +51,47 @@ export const TextAlignExtension = Extension.create<TextAlignOptions>({
     ];
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-alignment'),
+      activationKeyword: t('voice-command.align-left'),
+      command: 'setTextAlign',
+      params: [{ textAlign: 'left' }],
+      description: 'Align left',
+    },
+    {
+      group: t('voice-group.text-alignment'),
+      activationKeyword: t('voice-command.align-center'),
+      command: 'setTextAlign',
+      params: [{ textAlign: 'center' }],
+      description: 'Align center',
+    },
+    {
+      group: t('voice-group.text-alignment'),
+      activationKeyword: t('voice-command.align-right'),
+      command: 'setTextAlign',
+      params: [{ textAlign: 'right' }],
+      description: 'Align right',
+    },
+    {
+      group: t('voice-group.text-alignment'),
+      activationKeyword: t('voice-command.justify'),
+      command: 'setTextAlign',
+      params: [{ textAlign: 'justify' }],
+      description: 'Align justify',
+    },
+  ],
+
   addCommands() {
     return {
       setTextAlign:
         textAlign =>
         ({ commands }) => {
-          return this.options.types.some(type => {
+          this.options.types.forEach(type => {
             return commands.updateAttributes(type, { textAlign });
           });
+
+          return true;
         },
     };
   },

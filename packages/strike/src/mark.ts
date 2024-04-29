@@ -56,6 +56,15 @@ export const StrikeMark = Mark.create<StrikeOptions>({
     return ['del', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
 
+  speechCommands: t => [
+    {
+      activationKeyword: t('voice-command.toggle-strike'),
+      group: t('voice-group.text-formatting'),
+      command: 'toggleStrike',
+      description: 'Toggle strike',
+    },
+  ],
+
   addCommands() {
     return {
       setStrike:

@@ -12,6 +12,10 @@ declare module '@tiptap/core' {
        * Toggle a paragraph
        */
       setParagraph: () => ReturnType;
+      /**
+       * Adds a new paragraph below available selection
+       */
+      addParagraphBelow: () => ReturnType;
     };
   }
 }
@@ -46,6 +50,21 @@ export const ParagraphNode = Node.create<ParagraphOptions>({
       0,
     ];
   },
+
+  speechCommands: t => [
+    {
+      group: t('voice-group.document-formatting'),
+      activationKeyword: t('voice-command.set-paragraph'),
+      command: 'createParagraphNear',
+      description: 'Set a paragraph',
+    },
+    {
+      group: t('voice-group.text-navigation'),
+      activationKeyword: t('voice-command.create-near-paragraph'),
+      command: 'createParagraphNear',
+      description: 'Create a paragraph near',
+    },
+  ],
 
   addCommands() {
     return {

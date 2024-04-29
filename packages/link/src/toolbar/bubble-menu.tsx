@@ -2,13 +2,13 @@ import type { BubbleMenuToolbar } from '@rrte/common';
 import classes from './link-bubble-menu.module.scss';
 import { LinkMark } from '../mark';
 
-const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
+const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
   const currentAttributes = editor.getAttributes(LinkMark.name) as { href?: string };
 
   return (
     <div className={classes.bubbleMenu}>
       <label className={classes.inputContainer}>
-        URL:
+        {t('link-address.label')}
         <input
           aria-label="link url"
           data-testid="link-input"

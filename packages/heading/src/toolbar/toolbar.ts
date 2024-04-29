@@ -13,13 +13,13 @@ const createValue = (level: Level): DropdownValue => ({
     return editor.isActive(HeadingNode.name, { level });
   },
   className: classNames(classes.toolbarItem, classes[`h${level}`]),
-  text: `Heading ${level}`,
+  text: `heading-${level}-option`,
 });
 
 export const ToolbarDropdown: DropdownConfig = {
   name: 'text type',
   type: ToolbarItemType.DROPDOWN,
-  text: 'Text type',
+  text: 'text-styles-dropdown.text',
   priority: 105,
   DropdownPriority: 1000,
   values: [

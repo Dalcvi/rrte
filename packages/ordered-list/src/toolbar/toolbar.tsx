@@ -1,16 +1,15 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import OrderedListIcon from './orderedlist.icon.svg';
-import { OrderedListNode } from '../node';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { OrderedListNode } from '../node';
+import OrderedListIcon from './orderedlist.icon.svg';
 import classes from './toolbar.module.scss';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive(OrderedListNode.name);
   return (
     <button
       data-testid="ordered-list-button"
-      aria-label="ordered-list"
+      aria-label={t('ordered-list-button.text')}
       className={classNames(classes.orderedListButton, {
         [classes.active]: isActive,
       })}
@@ -33,7 +32,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: OrderedListNode.name,
-  text: 'Ordered list',
+  text: 'ordered-list-button.text',
   type: 'icon' as const,
   priority: 80,
 };

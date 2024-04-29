@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import esbuild from 'rollup-plugin-esbuild';
 import svgr from '@svgr/rollup';
 import * as fs from 'fs';
@@ -6,7 +5,6 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import path from 'path';
 import postcss from 'rollup-plugin-postcss';
 import commonjs from '@rollup/plugin-commonjs';
-import { dts } from 'rollup-plugin-dts';
 
 const PACKAGE_NAME = process.cwd();
 const pkg = JSON.parse(fs.readFileSync(path.join(PACKAGE_NAME, 'package.json'), 'utf-8'));
@@ -70,7 +68,8 @@ export default [
         },
       }),
       postcss({
-        modules: true,
+        modules: false,
+        autoModules: true,
         inject: true,
         minimize: process.env.NODE_ENV === 'production',
         use: ['sass'],

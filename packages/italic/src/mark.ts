@@ -56,6 +56,15 @@ export const ItalicMark = Mark.create<ItalicOptions>({
     return ['em', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.toggle-italic'),
+      command: 'toggleItalic',
+      description: 'Toggle italic',
+    },
+  ],
+
   addCommands() {
     return {
       setItalic:

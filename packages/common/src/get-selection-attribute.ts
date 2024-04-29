@@ -22,11 +22,13 @@ export type AttributeValue = { value: string; id: string };
 
 export const currentSelectionAttributeValue = (
   attribute: keyof CSSProperties,
-  editor: Editor
-): AttributeValue | undefined => {
+  editor: Editor,
+  computedStyleAttributeName?: string
+): AttributeValue | undefined | string => {
   if (typeof attribute === 'symbol') {
-    throw new Error('attribute must not be a symbol');
+    return undefined;
   }
+
   if (editor.state.selection.$from.pos !== editor.state.selection.$to.pos) {
     const node = editor.state.doc.nodeAt(editor.state.selection.$from.pos);
     if (node === null) {
@@ -46,5 +48,5 @@ export const currentSelectionAttributeValue = (
   }
 
   const textStyleAttribute = editor.getAttributes('textStyle')[attribute];
-  return textStyleAttribute ?? getParentAttribute(attribute, editor);
+  return textStyleAttribute ?? getParentAttribute(computedStyleAttributeName ?? attribute, editor);
 };

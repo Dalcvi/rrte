@@ -12,13 +12,13 @@ export const Header = () => {
             </Link>
           </li>
           <li>
-            <Link className={styles.link} href="/json">
-              JSON turinys
+            <Link className={styles.link} href="/lithuanian">
+              Lietuvių kalba
             </Link>
           </li>
           <li>
-            <Link className={styles.link} href="/html">
-              HTML turinys
+            <Link className={styles.link} href="/json">
+              JSON turinys
             </Link>
           </li>
           <li>

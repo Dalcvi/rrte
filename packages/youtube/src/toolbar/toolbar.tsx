@@ -1,13 +1,12 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import YoutubeIcon from './youtube.icon.svg';
-import { YoutubeNode } from '../node';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
-import classes from './toolbar.module.scss';
 import { useEffect, useMemo, useState } from 'react';
+import { YoutubeNode } from '../node';
+import classes from './toolbar.module.scss';
 import { getYouTubeID } from './toolbar.utils';
+import YoutubeIcon from './youtube.icon.svg';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [url, setUrl] = useState('');
   const videoId = getYouTubeID(url);
@@ -46,7 +45,7 @@ const Button = ({ editor }: { editor: Editor }) => {
     <div className={classes.container} ref={setContainer}>
       <button
         data-testid="youtube-button"
-        aria-label="YouTube"
+        aria-label={t('youtube-button.text')}
         disabled={!editor.can().setYoutube({ url: '', id: 'video' })}
         className={classNames(classes.youtubeButton, {
           [classes.active]: isActive,
@@ -68,9 +67,8 @@ const Button = ({ editor }: { editor: Editor }) => {
       {isOpen && (
         <div className={classes.inputContainer}>
           <label className={classes.inputLabel}>
-            YouTube URL:
+            {t('youtube-url-input.label')}
             <input
-              aria-label="youtube url"
               data-testid="youtube-input"
               type="text"
               value={url}
@@ -79,6 +77,7 @@ const Button = ({ editor }: { editor: Editor }) => {
             />
           </label>
           <button
+            aria-label={t('youtube-add')}
             data-testid="youtube-add-button"
             onClick={() => {
               if (!videoId) {
@@ -90,7 +89,7 @@ const Button = ({ editor }: { editor: Editor }) => {
             disabled={!videoId}
             className={classes.inputButton}
           >
-            Add
+            {t('youtube-add')}
           </button>
         </div>
       )}
@@ -101,7 +100,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: YoutubeNode.name,
-  text: 'Youtube',
+  text: 'youtube-button.text',
   type: 'icon' as const,
   priority: 1,
 };

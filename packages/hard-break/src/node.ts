@@ -44,6 +44,15 @@ export const HardBreakNode = Node.create<HardBreakOptions>({
     return '\n';
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-navigation'),
+      activationKeyword: t('voice-command.new-line'),
+      command: 'setHardBreak',
+      description: 'Add a new line',
+    },
+  ],
+
   addCommands() {
     return {
       setHardBreak:

@@ -1,16 +1,15 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import SuperscriptIcon from './superscript.icon.svg';
-import { SuperscriptMark } from '../mark';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { SuperscriptMark } from '../mark';
+import SuperscriptIcon from './superscript.icon.svg';
 import classes from './toolbar.module.scss';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive('superscript');
   return (
     <button
       data-testid="superscript-button"
-      aria-label="superscript"
+      aria-label={t('superscript-button.text')}
       className={classNames(classes.superscriptButton, {
         [classes.active]: isActive,
       })}
@@ -33,7 +32,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: SuperscriptMark.name,
-  text: 'Superscript',
+  text: 'superscript-button.text',
   type: 'icon' as const,
   priority: 94,
 };

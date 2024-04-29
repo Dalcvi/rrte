@@ -56,6 +56,15 @@ export const BoldMark = Mark.create<BoldOptions>({
     return ['strong', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.toggle-bold'),
+      command: 'toggleBold',
+      description: 'Toggle bold',
+    },
+  ],
+
   addCommands() {
     return {
       setBold:

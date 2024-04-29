@@ -1,12 +1,15 @@
-import { useEditor, EditorContent, JSONContent, HTMLContent } from '@tiptap/react';
+import { type BubbleMenuToolbar, type Config, type UnknownExtension } from '@rrte/common';
 import { Document } from '@rrte/document';
+import { I18nProvider, Resources, supportedLanguages } from '@rrte/i18n';
 import { Text } from '@rrte/text';
-import type { UnknownExtension, BubbleMenuToolbar, Config } from '@rrte/common';
-import { Toolbar } from '@rrte/toolbar';
 import type { ToolbarItem } from '@rrte/toolbar';
+import { Toolbar } from '@rrte/toolbar';
+import { HTMLContent, JSONContent, useEditor } from '@tiptap/react';
 import { useEffect, useMemo, useState } from 'react';
+import { EditorSlotProvider } from '@rrte/common';
 import classes from './Editor.module.scss';
 import { BubbleMenuList } from './bubble-menus';
+import { RrteEditorContent } from './rrte-editor-content';
 
 export type EditorRef = ReturnType<typeof useEditor>;
 
@@ -23,6 +26,7 @@ const getEditorExtensionType = (extension: UnknownExtension) => {
 
 export const Editor = ({
   editorExtensions = [],
+  language = 'en',
   editorWrapperClassName,
   toolbarClassName,
   editorRef,
@@ -34,6 +38,7 @@ export const Editor = ({
   onUpdateHtml,
 }: {
   toolbarClassName?: string;
+  language?: 'lt' | 'en';
   editorWrapperClassName?: string;
   editorRef?: React.MutableRefObject<EditorRef>;
   contentClassName?: string;
@@ -45,9 +50,14 @@ export const Editor = ({
   onUpdateHtml?: (content: HTMLContent | undefined) => void;
 }) => {
   const [contentHasBeenSet, setContentHasBeenSet] = useState(false);
+  const [editorContainerRef, setEditorContainerRef] = useState<HTMLDivElement | null>(null);
+  const allExtensions = useMemo(
+    () => [Text() as UnknownExtension, ...editorExtensions],
+    [editorExtensions, language]
+  );
   const allBubbleMenus = useMemo(
     () =>
-      editorExtensions.reduce(
+      allExtensions.reduce(
         (acc, editorExtension) => {
           const extensionType = getEditorExtensionType(editorExtension);
           const { config } = editorExtension;
@@ -58,13 +68,12 @@ export const Editor = ({
         },
         [] as { name: string; menu: BubbleMenuToolbar; config: Config<any> }[]
       ),
-    [editorExtensions]
+    [allExtensions]
   );
   const editor = useEditor({
     extensions: [
       Document,
-      Text,
-      ...editorExtensions.map(editorExtension => getEditorExtensionType(editorExtension)),
+      ...allExtensions.map(editorExtension => getEditorExtensionType(editorExtension)),
     ],
     content,
     editable: !viewerMode,
@@ -109,10 +118,17 @@ export const Editor = ({
       }
     };
 
+    if (window) {
+      // @ts-expect-error
+      window.editor = editor;
+    }
+
     editor.on('update', updateFunc);
 
     return () => {
       editor.off('update', updateFunc);
+      // @ts-expect-error
+      window.editor = undefined;
     };
   }, [editor, onUpdateHtml, onUpdateJson]);
 
@@ -124,28 +140,57 @@ export const Editor = ({
     editor.commands.setContent(content);
   }, [content]);
 
+  const toolbarItems = useMemo(() => {
+    return allExtensions
+      .map(editorExtension => ({
+        toolbar: editorExtension.config.toolbar,
+        config: editorExtension.config,
+      }))
+      .filter(toolbar => !!toolbar.toolbar) as { toolbar: ToolbarItem<any>; config: any }[];
+  }, [allExtensions]);
+
+  const translationResources = useMemo(() => {
+    const translations = allExtensions
+      .map(editorExtension => editorExtension.config.translations)
+      .filter(languageResource => !!languageResource) as Resources[];
+    if (!translations) {
+      return {};
+    }
+
+    return translations.reduce((acc, translation) => {
+      supportedLanguages.forEach(language => {
+        if (!acc[language]) {
+          acc[language] = {};
+        }
+        acc[language] = { ...acc[language], ...translation[language] };
+      });
+
+      return acc;
+    }, {} as Resources);
+  }, [allExtensions]) as Resources;
+
   return (
-    <div className={`${classes.editorWrapper} ${editorWrapperClassName}`}>
-      {editor && !viewerMode && (
-        <Toolbar
-          editor={editor}
-          wrapperClassName={toolbarClassName}
-          items={
-            editorExtensions
-              .map(editorExtension => ({
-                toolbar: editorExtension.config.toolbar,
-                config: editorExtension.config,
-              }))
-              .filter(toolbar => !!toolbar.toolbar) as { toolbar: ToolbarItem<any>; config: any }[]
-          }
-        />
-      )}
-      <div className={`${classes.editorContent}  ${contentWrapperClassName}`}>
-        <EditorContent editor={editor} data-testid="rrte-editor" />
-      </div>
-      {editor && !viewerMode && allBubbleMenus.length > 0 && (
-        <BubbleMenuList editor={editor} list={allBubbleMenus} />
-      )}
+    <div className={`${classes.editorWrapper} ${editorWrapperClassName}`} data-hook="rrte-editor">
+      <I18nProvider language={language} resources={translationResources}>
+        <EditorSlotProvider>
+          {editor && !viewerMode && toolbarItems.length > 0 && (
+            <Toolbar
+              editor={editor}
+              wrapperClassName={toolbarClassName}
+              items={toolbarItems}
+              editorContainerRef={editorContainerRef}
+            />
+          )}
+          <RrteEditorContent
+            editor={editor}
+            ref={setEditorContainerRef}
+            contentWrapperClassName={contentWrapperClassName}
+          />
+          {editor && !viewerMode && allBubbleMenus.length > 0 && (
+            <BubbleMenuList editor={editor} list={allBubbleMenus} />
+          )}
+        </EditorSlotProvider>
+      </I18nProvider>
     </div>
   );
 };

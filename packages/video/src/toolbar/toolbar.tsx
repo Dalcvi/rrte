@@ -1,40 +1,35 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import VideoIcon from './video.icon.svg';
-import { VideoNode } from '../node';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
-import classes from './toolbar.module.scss';
+import { VideoNode } from '../node';
 import {
   ExtensionControlledUploadConfig,
   UploadConfig,
   UserControlledUploadConfig,
 } from '../upload-config';
+import classes from './toolbar.module.scss';
 import { createTempVideo, handleFileVideo } from './toolbar.utils';
+import VideoIcon from './video.icon.svg';
 
-const Button = ({ editor, config }: { editor: Editor; config: UploadConfig }) => {
+const Button: RegularButtonConfig<UploadConfig>['Button'] = ({ config, ...rest }) => {
   if (config.type === 'user-controlled') {
-    return <UserControlledButton editor={editor} config={config} />;
+    return <UserControlledButton config={config} {...rest} />;
   }
-  return <ExtensionControlledButton editor={editor} config={config} />;
+  return <ExtensionControlledButton config={config} {...rest} />;
 };
 
-const ExtensionControlledButton = ({
+const ExtensionControlledButton: RegularButtonConfig<ExtensionControlledUploadConfig>['Button'] = ({
   editor,
   config,
-}: {
-  editor: Editor;
-  config: ExtensionControlledUploadConfig;
+  t,
 }) => {
-  const selected = editor.isActive('video');
   return (
     <div
       className={classNames(classes.videoButton, {
         [classes.disabledButton]: !editor.can().setVideo({ src: '' }),
-        [classes.buttonActive]: selected,
       })}
     >
       <input
-        aria-label="add video"
+        aria-label={t('video-button.text')}
         type="file"
         disabled={!editor.can().setVideo({ src: '' })}
         accept={config.acceptedVideoFileTypes.join(', ')}
@@ -71,33 +66,23 @@ const ExtensionControlledButton = ({
           };
         }}
       />
-      <VideoIcon
-        className={classNames(classes.icon, {
-          [classes.active]: selected,
-        })}
-        width={'15px'}
-        height={'15px'}
-      />
+      <VideoIcon className={classNames(classes.icon)} width={'15px'} height={'15px'} />
     </div>
   );
 };
 
-const UserControlledButton = ({
+const UserControlledButton: RegularButtonConfig<UserControlledUploadConfig>['Button'] = ({
   editor,
   config,
-}: {
-  editor: Editor;
-  config: UserControlledUploadConfig;
+  t,
 }) => {
-  const selected = editor.isActive('video');
   return (
     <button
-      aria-label="add video"
+      aria-label={t('video-button.text')}
       data-testid="user-controlled-video-button"
       disabled={!editor.can().setVideo({ src: '' })}
       className={classNames(classes.videoButton, {
         [classes.disabledButton]: !editor.can().setVideo({ src: '' }),
-        [classes.buttonActive]: selected,
       })}
       onClick={async () => {
         const uploadValue = await config.onVideoAddClick();
@@ -105,13 +90,7 @@ const UserControlledButton = ({
         await handleFileVideo(await uploadValue.finalFile, editor, tempImgId);
       }}
     >
-      <VideoIcon
-        className={classNames(classes.icon, {
-          [classes.active]: selected,
-        })}
-        width={'15px'}
-        height={'15px'}
-      />
+      <VideoIcon className={classNames(classes.icon)} width={'15px'} height={'15px'} />
     </button>
   );
 };
@@ -119,7 +98,7 @@ const UserControlledButton = ({
 export const ToolbarButton: RegularButtonConfig<UploadConfig> = {
   Button,
   name: VideoNode.name,
-  text: 'Video',
+  text: 'video-button.text',
   type: 'icon' as const,
   priority: 1,
 };

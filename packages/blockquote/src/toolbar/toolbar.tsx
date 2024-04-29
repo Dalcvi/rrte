@@ -1,16 +1,15 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import BlockquoteIcon from './blockquote.icon.svg';
-import { BlockquoteNode } from '../node';
 import type {} from '@rrte/paragraph';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { BlockquoteNode } from '../node';
+import BlockquoteIcon from './blockquote.icon.svg';
 import classes from './toolbar.module.scss';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive(BlockquoteNode.name);
   return (
     <button
-      aria-label="blockquote"
+      aria-label={t('blockquote-button.text')}
       data-testid="blockquote-button"
       disabled={!editor.can().toggleBlockquote()}
       className={classNames(classes.blockquoteButton, {
@@ -34,7 +33,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: BlockquoteNode.name,
-  text: 'Blockquote',
+  text: 'blockquote-button.text',
   type: 'icon' as const,
   priority: 88,
 };

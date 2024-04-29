@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from 'react';
 import ReplaceIcon from './replace.icon.svg';
 import { GifSearch } from './gif-search.component';
 
-const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
+const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config, t }) => {
   const [maxWidth, setMaxWidth] = useState(0);
   const currentAttributes = editor.getAttributes(GifNode.name) as GifAttributes & {
     id: string | undefined;
@@ -68,7 +68,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
       <div className={classes.gifContainer} ref={setContainer}>
         <button
           data-testid="gif-replace"
-          aria-label="replace gif"
+          aria-label={t('gif.replace')}
           className={classNames(classes.button)}
           onClick={() => {
             document.addEventListener('click', close);
@@ -96,7 +96,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
       </div>
       <button
         data-testid="gif-align-left"
-        aria-label="align left"
+        aria-label={t('gif.align-left')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'left',
         })}
@@ -114,7 +114,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
       </button>
       <button
         data-testid="gif-align-center"
-        aria-label="align center"
+        aria-label={t('gif.align-center')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'center',
         })}
@@ -132,7 +132,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
       </button>
       <button
         data-testid="gif-align-right"
-        aria-label="align right"
+        aria-label={t('gif.align-right')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'right',
         })}
@@ -150,7 +150,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
       </button>
       <button
         data-testid="gif-custom-size"
-        aria-label="custom size"
+        aria-label={t('gif.custom-size')}
         className={classNames(classes.button, {
           [classes.buttonActive]: isCustomSizeEnabled,
         })}
@@ -167,7 +167,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
         />
       </button>
       <label className={classes.inputContainer}>
-        Width:
+        {t('gif.width')}:
         <input
           data-testid="gif-width"
           aria-label="gif width"
@@ -185,7 +185,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config }) => {
         />
       </label>
       <label className={classes.inputContainer}>
-        Hight:
+        {t('gif.height')}:
         <input
           data-testid="gif-height"
           aria-label="gif height"

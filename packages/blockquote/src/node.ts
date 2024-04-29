@@ -57,6 +57,15 @@ export const BlockquoteNode = Node.create<BlockquoteOptions>({
     ];
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.toggle-blockquote'),
+      command: 'toggleBlockquote',
+      description: 'Toggle a blockquote',
+    },
+  ],
+
   addCommands() {
     return {
       setBlockquote:

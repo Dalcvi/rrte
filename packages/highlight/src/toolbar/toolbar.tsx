@@ -3,11 +3,10 @@ import {
   currentSelectionAttributeValue,
   type RegularButtonConfig,
 } from '@rrte/common';
-import { HighlightExtension } from '../extension';
-import classes from './toolbar.module.scss';
-import { Editor } from '@tiptap/core';
-import CloseIcon from './close.icon.svg';
 import classNames from 'classnames';
+import { HighlightExtension } from '../extension';
+import CloseIcon from './close.icon.svg';
+import classes from './toolbar.module.scss';
 
 const getBackgroundHighlight = (value: string | AttributeValue) => {
   if (typeof value === 'string') {
@@ -25,28 +24,34 @@ const getBackgroundHighlight = (value: string | AttributeValue) => {
   return window.getComputedStyle(element).backgroundColor;
 };
 
-const Button = ({ editor }: { editor: Editor }) => {
-  const currentValue = currentSelectionAttributeValue('backgroundColor', editor);
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
+  const currentValue = currentSelectionAttributeValue(
+    'backgroundColor',
+    editor,
+    'background-color'
+  );
   const highlight = currentValue ? getBackgroundHighlight(currentValue) : undefined;
+
+  const isResetEnabled = highlight && typeof currentValue === 'string' && currentValue.length > 0;
 
   return (
     <div className={classes.highlightContainer}>
       <input
         data-testid="highlight-input"
-        aria-label="highlight"
+        aria-label={t('highlight-button.text')}
         disabled={!editor.can().setHighlight(null)}
         type="color"
         value={highlight}
         className={classNames(classes.highlightInput, {
-          [classes.withReset]: highlight && highlight.startsWith('#'),
+          [classes.withReset]: isResetEnabled,
         })}
         onChange={e => {
           editor.chain().focus().setHighlight(e.target.value).run();
         }}
       />
-      {highlight && highlight.startsWith('#') && (
+      {isResetEnabled && (
         <button
-          aria-label="reset highlight"
+          aria-label={t('highlight-button.remove')}
           data-testid="highlight-reset"
           className={classes.highlightReset}
           onClick={() => {
@@ -63,7 +68,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: HighlightExtension.name,
-  text: 'Highlight',
+  text: 'highlight-button.text',
   type: 'icon' as const,
   priority: 102,
 };

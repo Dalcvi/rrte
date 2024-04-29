@@ -82,6 +82,15 @@ export const OrderedListNode = Node.create<OrderedListOptions>({
         ];
   },
 
+  speechCommands: t => [
+    {
+      activationKeyword: t('voice-command.toggle-ordered-list'),
+      group: t('voice-group.text-formatting'),
+      command: 'toggleOrderedList',
+      description: 'Toggle an ordered list',
+    },
+  ],
+
   addCommands() {
     return {
       toggleOrderedList:

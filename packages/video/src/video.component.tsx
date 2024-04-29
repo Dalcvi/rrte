@@ -86,6 +86,7 @@ export const VideoComponent = ({
       })}
     >
       <div data-testid="video-comp" className={classes.videoContainer}>
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
           ref={videoRef}
           controls={!isEditable}

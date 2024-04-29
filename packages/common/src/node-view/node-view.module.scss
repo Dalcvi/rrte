@@ -1,17 +1,16 @@
 .container {
-    position: relative;
-    width: max-content;
-    cursor: pointer;
-    max-width: 100%;
+  position: relative;
+  width: max-content;
+  cursor: pointer;
+  max-width: 100%;
 }
 
 .editable {
-    &:hover {
-        outline: 3px solid rgb(var(--rrte-color-4));
-    }
+  &:hover {
+    outline: 1px solid rgb(var(--rrte-color-4));
+  }
 }
 
-
 .selected {
-    outline: 3px solid rgb(var(--rrte-color-4));
+  outline: 3px solid rgb(var(--rrte-color-4));
 }

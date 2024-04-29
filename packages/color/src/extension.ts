@@ -53,6 +53,15 @@ export const ColorExtension = Extension.create<ColorOptions>({
     ];
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.remove-color'),
+      command: 'unsetColor',
+      description: 'Remove color',
+    },
+  ],
+
   addCommands() {
     return {
       setColor:

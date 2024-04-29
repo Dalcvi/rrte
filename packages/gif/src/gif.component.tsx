@@ -43,8 +43,10 @@ export const GifComponent = ({
     ) {
       const gif = gifRef.current;
       const { width, height } = gif.getBoundingClientRect();
-      if (width !== gifWidth || height !== gifHeight) {
+      if (!!width && width !== gifWidth) {
         setWidth(width);
+      }
+      if (!!height && height !== gifHeight) {
         setHeight(height);
       }
     }
@@ -101,20 +103,20 @@ export const GifComponent = ({
             alt={node.attrs.alt ?? undefined}
             width={gifWidth}
             height={gifHeight}
-            // style={style}
           />
         </div>
       ) : (
+        // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
           data-testid="gif-comp-vid"
           ref={gifRef as React.RefObject<HTMLVideoElement>}
           className={classes.gif}
+          title={node.attrs.alt ?? undefined}
           autoPlay
           loop
           src={node.attrs.mp4}
           width={gifWidth}
           height={gifHeight}
-          // style={style}
         />
       )}
       <div className={classes.videoContainer}></div>

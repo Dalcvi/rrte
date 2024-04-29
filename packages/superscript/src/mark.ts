@@ -53,6 +53,15 @@ export const SuperscriptMark = Mark.create<SuperscriptOptions>({
     return ['sup', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
 
+  speechCommands: t => [
+    {
+      activationKeyword: t('voice-command.toggle-superscript'),
+      group: t('voice-group.text-formatting'),
+      command: 'toggleSuperscript',
+      description: 'Toggle superscript',
+    },
+  ],
+
   addCommands() {
     return {
       setSuperscript:

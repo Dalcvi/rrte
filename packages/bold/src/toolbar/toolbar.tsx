@@ -1,15 +1,14 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import BoldIcon from './bold.icon.svg';
-import { BoldMark } from '../mark';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { BoldMark } from '../mark';
+import BoldIcon from './bold.icon.svg';
 import classes from './toolbar.module.scss';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive('bold');
   return (
     <button
-      aria-label="bold"
+      aria-label={t('bold-button.text')}
       data-testid="bold-button"
       className={classNames(classes.boldButton, {
         [classes.active]: isActive,
@@ -33,7 +32,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: BoldMark.name,
-  text: 'Bold',
+  text: 'bold-button.text',
   type: 'icon' as const,
   priority: 98,
 };

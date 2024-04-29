@@ -2,6 +2,7 @@ import { Extension } from '@tiptap/core';
 import { Plugin, PluginKey } from '@tiptap/pm/state';
 import { Decoration, DecorationSet } from '@tiptap/pm/view';
 import classes from './placeholder.module.scss';
+import { i18next } from '@rrte/i18n';
 
 export type PlaceholderOptions = {
   initialChildName?: string;
@@ -14,7 +15,7 @@ export const PlaceholderExtension = Extension.create<PlaceholderOptions>({
   addOptions() {
     return {
       initialChildName: 'paragraph',
-      placeholderText: 'This is a placeholder',
+      placeholderText: 'placeholder.text',
     };
   },
 
@@ -40,7 +41,12 @@ export const PlaceholderExtension = Extension.create<PlaceholderOptions>({
             return DecorationSet.create(doc, [
               Decoration.node(0, docFirstChild.nodeSize, {
                 class: classes.placeholder,
-                'data-rrte-placeholder': this.options.placeholderText,
+                'data-rrte-placeholder':
+                  i18next.isInitialized &&
+                  !!this.options.placeholderText &&
+                  i18next.exists(this.options.placeholderText)
+                    ? i18next.t(this.options.placeholderText)
+                    : this.options.placeholderText,
               }),
             ]);
           },

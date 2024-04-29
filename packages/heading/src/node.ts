@@ -2,6 +2,7 @@ import { mergeAttributes, Node, textblockTypeInputRule } from '@tiptap/core';
 import classes from './heading.module.scss';
 
 export type Level = 1 | 2 | 3 | 4 | 5 | 6;
+export const name = 'heading';
 
 export interface HeadingOptions {
   levels: Level[];
@@ -66,6 +67,51 @@ export const HeadingNode = Node.create<HeadingOptions>({
       0,
     ];
   },
+
+  speechCommands: t => [
+    {
+      group: t('voice-group.document-formatting'),
+      activationKeyword: t('voice-command.set-heading-one'),
+      command: 'setHeading',
+      params: [{ level: 1 }],
+      description: 'Set a heading',
+    },
+    {
+      group: t('voice-group.document-formatting'),
+      activationKeyword: t('voice-command.set-heading-two'),
+      command: 'setHeading',
+      params: [{ level: 2 }],
+      description: 'Set a heading',
+    },
+    {
+      group: t('voice-group.document-formatting'),
+      activationKeyword: t('voice-command.set-heading-three'),
+      command: 'setHeading',
+      params: [{ level: 3 }],
+      description: 'Set a heading',
+    },
+    {
+      group: t('voice-group.document-formatting'),
+      activationKeyword: t('voice-command.set-heading-four'),
+      command: 'setHeading',
+      params: [{ level: 4 }],
+      description: 'Set a heading',
+    },
+    {
+      group: t('voice-group.document-formatting'),
+      activationKeyword: t('voice-command.set-heading-five'),
+      command: 'setHeading',
+      params: [{ level: 5 }],
+      description: 'Set a heading',
+    },
+    {
+      group: t('voice-group.document-formatting'),
+      activationKeyword: t('voice-command.set-heading-six'),
+      command: 'setHeading',
+      params: [{ level: 6 }],
+      description: 'Set a heading',
+    },
+  ],
 
   addCommands() {
     return {

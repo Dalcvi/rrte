@@ -53,6 +53,15 @@ export const HighlightExtension = Extension.create<HighlightOptions>({
     ];
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.remove-highlight'),
+      command: 'unsetHighlight',
+      description: 'Remove highlight',
+    },
+  ],
+
   addCommands() {
     return {
       setHighlight:

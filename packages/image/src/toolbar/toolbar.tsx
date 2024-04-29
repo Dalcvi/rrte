@@ -1,5 +1,4 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
 import { extractImageInfo } from '../image.utils';
 import { ImageNode } from '../node';
@@ -12,19 +11,17 @@ import ImageIcon from './image.icon.svg';
 import classes from './toolbar.module.scss';
 import { createTempImage, handleFileImage } from './toolbar.utils';
 
-const Button = ({ editor, config }: { editor: Editor; config: UploadConfig }) => {
+const Button: RegularButtonConfig<UploadConfig>['Button'] = ({ config, ...rest }) => {
   if (config.type === 'user-controlled') {
-    return <UserControlledButton editor={editor} config={config} />;
+    return <UserControlledButton config={config} {...rest} />;
   }
-  return <ExtensionControlledButton editor={editor} config={config} />;
+  return <ExtensionControlledButton config={config} {...rest} />;
 };
 
-const ExtensionControlledButton = ({
+const ExtensionControlledButton: RegularButtonConfig<ExtensionControlledUploadConfig>['Button'] = ({
   editor,
   config,
-}: {
-  editor: Editor;
-  config: ExtensionControlledUploadConfig;
+  t,
 }) => {
   return (
     <div
@@ -37,7 +34,7 @@ const ExtensionControlledButton = ({
     >
       <input
         data-testid="extension-controlled-input"
-        aria-label="image"
+        aria-label={t('image-button.text')}
         type="file"
         disabled={!editor.can().setImage({ src: '', originalHeight: 0, originalWidth: 0 })}
         accept={config.acceptedImageFileTypes.join(', ')}
@@ -69,17 +66,15 @@ const ExtensionControlledButton = ({
   );
 };
 
-const UserControlledButton = ({
+const UserControlledButton: RegularButtonConfig<UserControlledUploadConfig>['Button'] = ({
   editor,
   config,
-}: {
-  editor: Editor;
-  config: UserControlledUploadConfig;
+  t,
 }) => {
   return (
     <button
       data-testid="user-controlled-image-button"
-      aria-label="add image"
+      aria-label={t('image-button.text')}
       disabled={!editor.can().setImage({ src: '', originalHeight: 0, originalWidth: 0 })}
       className={classNames(classes.imageButton)}
       onClick={async () => {
@@ -97,7 +92,7 @@ const UserControlledButton = ({
 export const ToolbarButton: RegularButtonConfig<UploadConfig> = {
   Button,
   name: ImageNode.name,
-  text: 'Image',
+  text: 'image-button.text',
   type: 'icon' as const,
   priority: 1,
 };

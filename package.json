@@ -13,6 +13,7 @@
     "dev": "turbo run dev",
     "watch": "turbo run watch",
     "lint": "turbo run lint",
+    "lint:packages": "turbo run lint --filter='./packages/*'",
     "docs:start": "pnpm --filter '@rrte/documentation' start",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "build:dev": "turbo run build:dev",

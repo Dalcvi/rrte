@@ -26,12 +26,14 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@tiptap/core": "^2.0.3",
-    "@tiptap/pm": "^2.0.3",
-    "@tiptap/react": "^2.0.3",
+    "@rrte/i18n": "workspace:^",
+    "@tiptap/core": "^2.3.0",
+    "@tiptap/pm": "^2.3.0",
+    "@tiptap/react": "^2.3.0",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-tooltip": "^5.26.4"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",

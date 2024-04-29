@@ -1,90 +1,111 @@
-import { useEffect, useMemo, useState } from 'react';
-import { DropdownConfig } from './dropdown.types';
+import { useTranslations } from '@rrte/i18n';
 import type { Editor } from '@tiptap/react';
-import { sortByPriority } from '../toolbar.utils';
-import classes from './dropdown.module.scss';
-import ChevronDown from './chevron-down.svg';
 import classNames from 'classnames';
+import { useCallback, useEffect, useState } from 'react';
+import { sortByPriority } from '../toolbar.utils';
+import ChevronDown from './chevron-down.svg';
+import classes from './dropdown.module.scss';
+import { DropdownConfig } from './dropdown.types';
 
-export const Dropdown = (props: DropdownConfig & { editor: Editor }) => {
-  const { editor, ...dropdown } = props;
+export const Dropdown = ({ editor, ...dropdown }: DropdownConfig & { editor: Editor }) => {
+  const { t } = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownButton, setDropdownButton] = useState<HTMLDivElement | null>(null);
+  const [dropdownButton, setDropdownButton] = useState<HTMLButtonElement | null>(null);
+
   const valuesByPriority = sortByPriority(dropdown.values);
-  const close = useMemo(
-    () => (e?: MouseEvent) => {
+  const closeModal = useCallback(
+    (e?: MouseEvent) => {
       if (e && dropdownButton && dropdownButton.contains(e.target as Node)) {
         return;
       }
-      document.removeEventListener('click', close);
+      document.removeEventListener('click', closeModal);
       document.removeEventListener('keydown', escapeClose);
       setIsOpen(false);
     },
     [dropdownButton]
   );
-  const escapeClose = useMemo(
-    () => (e: KeyboardEvent) => {
+  const escapeClose = useCallback(
+    (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        close();
+        closeModal();
       }
     },
-    [close]
+    [closeModal]
   );
+
+  useEffect(() => {
+    return () => {
+      document.removeEventListener('click', closeModal);
+      document.removeEventListener('keydown', escapeClose);
+    };
+  }, [dropdownButton]);
+
   const selectedValue = valuesByPriority.find(value => value.isActive({ editor }))?.text;
 
   useEffect(() => {
     return () => {
-      document.removeEventListener('click', close);
+      document.removeEventListener('click', closeModal);
       document.removeEventListener('keydown', escapeClose);
     };
   }, [dropdownButton]);
 
   return (
     <div className={classes.container}>
-      <div
+      <button
         data-testid={dropdown.name}
         ref={setDropdownButton}
+        role="combobox"
+        aria-controls={dropdown.name}
+        aria-expanded={isOpen}
         className={classNames(classes.select, {
           [classes.open]: isOpen,
         })}
         onClick={() => {
           setIsOpen(true);
-          document.addEventListener('click', close);
+          document.addEventListener('click', closeModal);
           document.addEventListener('keydown', escapeClose);
         }}
       >
-        <div className={classes.value}>{selectedValue}</div>
+        {!!selectedValue && <div className={classes.value}>{t(selectedValue)}</div>}
         <ChevronDown
           className={classNames(classes.arrow, {
             [classes.arrowOpen]: isOpen,
           })}
         />
-        <input
-          aria-label={dropdown.name}
-          className={classes.input}
-          value={selectedValue}
-          readOnly
-        />
-      </div>
+      </button>
       {isOpen && (
-        <div className={classNames(classes.dropdownItemsContainer, classes.openDropdown)}>
-          {valuesByPriority.map((value, index) => {
+        <ul
+          id={dropdown.name}
+          role="listbox"
+          aria-label={t(dropdown.name)}
+          className={classNames(classes.dropdownItemsContainer)}
+          onBlur={e => {
+            if (e.currentTarget.contains(e.relatedTarget)) {
+              return;
+            }
+            closeModal();
+          }}
+        >
+          {valuesByPriority.map(value => {
             return (
-              <button
-                aria-label={value.name}
-                data-testid={value.name}
-                autoFocus={index === 0}
-                className={classNames(classes.dropdownItem, value.className)}
-                key={value.name}
-                onClick={() => {
-                  value.onClick({ editor });
-                }}
-              >
-                {value.text}
-              </button>
+              <li>
+                <button
+                  role="option"
+                  aria-selected={selectedValue === value.text}
+                  data-testid={value.name}
+                  className={classNames(classes.dropdownItem, value.className)}
+                  key={value.name}
+                  onClick={() => {
+                    closeModal();
+                    value.onClick({ editor });
+                  }}
+                >
+                  {t(value.text)}
+                </button>
+              </li>
             );
           })}
-        </div>
+        </ul>
       )}
     </div>
   );

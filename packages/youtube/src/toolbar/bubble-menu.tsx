@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { getYouTubeID } from './toolbar.utils';
 
-const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
+const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
   const [maxWidth, setMaxWidth] = useState(0);
   const currentAttributes = editor.getAttributes(YoutubeNode.name) as YoutubeAttributes & {
     id: string | undefined;
@@ -36,10 +36,9 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
   return (
     <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
       <label className={classes.inputLabel}>
-        YouTube URL:
+        {t('youtube-input.label')}
         <input
           data-testid="youtube-url-input"
-          aria-label="youtube url"
           type="text"
           value={currentAttributes.url}
           onChange={e => {
@@ -53,7 +52,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
       </label>
       <button
         data-testid="youtube-align-left"
-        aria-label="align left"
+        aria-label={t('youtube-align-left.label')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'left',
         })}
@@ -71,7 +70,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
       </button>
       <button
         data-testid="youtube-align-center"
-        aria-label="align center"
+        aria-label={t('youtube-align-center.label')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'center',
         })}
@@ -89,7 +88,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
       </button>
       <button
         data-testid="youtube-align-right"
-        aria-label="align right"
+        aria-label={t('youtube-align-right.label')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'right',
         })}
@@ -107,7 +106,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
       </button>
       <button
         data-testid="youtube-custom-size"
-        aria-label="custom size"
+        aria-label={t('youtube-custom-size.label')}
         className={classNames(classes.button, {
           [classes.buttonActive]: isCustomSizeEnabled,
         })}
@@ -124,9 +123,8 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor }) => {
         />
       </button>
       <label className={classes.inputContainer}>
-        Width:
+        {t('youtube-width.label')}
         <input
-          aria-label="youtube width"
           disabled={!isCustomSizeEnabled}
           className={classes.inputField}
           type="number"

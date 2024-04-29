@@ -53,6 +53,15 @@ export const SubscriptMark = Mark.create<SubscriptOptions>({
     return ['sub', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
 
+  speechCommands: t => [
+    {
+      activationKeyword: t('voice-command.toggle-subscript'),
+      group: t('voice-group.text-formatting'),
+      command: 'toggleSubscript',
+      description: 'Toggle subscript',
+    },
+  ],
+
   addCommands() {
     return {
       setSubscript:

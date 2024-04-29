@@ -101,3 +101,8 @@
   border-top: none;
   padding: 12px 18px;
 }
+
+.editor,
+.editorWrapper {
+  width: 100%;
+}

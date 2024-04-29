@@ -163,7 +163,7 @@ export const ImageNode = Node.create<ImageOptions>({
       new Plugin({
         key: new PluginKey('imagePastePlugin'),
         props: {
-          handleDrop: (view, event, slice, moved) => {
+          handleDrop: (view, event, _, moved) => {
             event.preventDefault();
             if (
               !moved &&

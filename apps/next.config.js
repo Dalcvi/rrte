@@ -6,7 +6,7 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   transpilePackages: ['ui'],
   i18n: {
-    locales: ['en'],
+    locales: ['en', 'lt'],
     defaultLocale: 'en',
   },
 });

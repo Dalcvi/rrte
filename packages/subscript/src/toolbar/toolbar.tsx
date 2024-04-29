@@ -33,7 +33,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: SubscriptMark.name,
-  text: 'Subscript',
+  text: 'subscript-button.text',
   type: 'icon' as const,
   priority: 93,
 };

@@ -27,11 +27,13 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
+    "@rrte/i18n": "workspace:^",
     "@rrte/toolbar": "^1.0.0",
-    "@tiptap/core": "^2.0.3",
-    "@tiptap/react": "^2.0.3",
-    "@tiptap/pm": "^2.0.3",
+    "@tiptap/core": "^2.3.0",
+    "@tiptap/pm": "^2.3.0",
+    "@tiptap/react": "^2.3.0",
     "classnames": "^2.3.2",
+    "i18next": "^23.11.2",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

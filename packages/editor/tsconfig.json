@@ -1,6 +1,6 @@
 {
   "extends": "tsconfig/react-library.json",
-  "include": ["./src"],
+  "include": ["./src", "../common/src/editor-slot.provider.tsx"],
   "exclude": ["dist", "build", "node_modules", "./src/__tests__"],
   "compilerOptions": {
     "outDir": "./dist/src"

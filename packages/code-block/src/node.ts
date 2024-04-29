@@ -75,6 +75,15 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
     ];
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.toggle-codeblock'),
+      command: 'toggleCodeBlock',
+      description: 'Toggle a code block',
+    },
+  ],
+
   addCommands() {
     return {
       setCodeBlock:
@@ -212,8 +221,6 @@ export const CodeBlockNode = Node.create<CodeBlockOptions>({
             tr.setSelection(TextSelection.near(tr.doc.resolve(Math.max(0, tr.selection.from - 2))));
 
             tr.insertText(text.replace(/\r\n?/g, '\n'));
-
-            tr.setMeta('paste', true);
 
             view.dispatch(tr);
 

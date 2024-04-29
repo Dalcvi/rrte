@@ -36,6 +36,7 @@ export const createTempVideo = async (editor: Editor, tempVideo: VideoReturnValu
     editor
       .chain()
       .focus()
+      .setMeta('addToHistory', false)
       .setVideo({ ...tempVideo, isLoading: true })
       .run();
     const videoId = (editor.state.selection as NodeSelection).node?.attrs.id as string | undefined;

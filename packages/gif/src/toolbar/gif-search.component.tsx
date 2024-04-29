@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import classes from './gif-search.component.module.scss';
 import { IGif } from '@giphy/js-types';
+import { useTranslations } from '@rrte/i18n';
 
 interface ResultMeta {
   msg: string;
@@ -42,12 +43,14 @@ export const GifSearch = ({
     alt?: string;
   }) => void;
 }) => {
+  const { t } = useTranslations();
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [observedGif, setObservedGif] = useState<HTMLVideoElement | HTMLImageElement | null>(null);
   const [gifs, setGifs] = useState<IGif[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [gifGrid, setGifGrid] = useState<HTMLUListElement | null>(null);
 
   useEffect(() => {
     if (search === '') {
@@ -62,6 +65,12 @@ export const GifSearch = ({
       return;
     }
     fetchMore(0, search);
+  }, [search]);
+
+  useEffect(() => {
+    if (gifGrid !== null) {
+      gifGrid.scrollTop = 0;
+    }
   }, [search]);
 
   useEffect(() => {
@@ -104,26 +113,22 @@ export const GifSearch = ({
 
   return (
     <div className={classes.gifGridContainer}>
-      <input
-        data-testid="gif-search"
-        aria-label="gif search"
-        type="search"
-        className={classes.gifSearch}
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-      />
-      <div className={classes.gifGrid}>
+      <label>
+        {t('gif-search.text')}
+        <input
+          data-testid="gif-search"
+          type="search"
+          className={classes.gifSearch}
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+      </label>
+      <ul role="listbox" className={classes.gifGrid} ref={setGifGrid}>
         {gifs.map((gif, index) => {
           const addRef = gifs.length - 4 === index && search !== '' && gifs.length !== totalCount;
-          if (gif.images.fixed_width.webp) {
-            return (
-              <img
-                data-testid="gif-img-select"
-                key={gif.id}
-                ref={addRef ? setObservedGif : null}
-                className={classes.gif}
-                src={gif.images.fixed_width.webp}
-                alt={gif.title}
+          return (
+            <li role="option" aria-selected={false} className={classes.gifItem}>
+              <button
                 onClick={() => {
                   onGifSelect({
                     webp: gif.images.original.webp,
@@ -133,19 +138,32 @@ export const GifSearch = ({
                     alt: gif.title,
                   });
                 }}
-              />
-            );
-          }
-          return (
-            <video
-              data-testid="gif-vid-select"
-              key={gif.id}
-              ref={addRef ? setObservedGif : null}
-              className={classes.gif}
-              autoPlay
-              loop
-              src={gif.images.fixed_width.mp4}
-            />
+                className={classes.gifButton}
+              >
+                {!!gif.images.fixed_width.webp ? (
+                  <img
+                    data-testid="gif-img-select"
+                    key={gif.id}
+                    ref={addRef ? setObservedGif : null}
+                    className={classes.gif}
+                    src={gif.images.fixed_width.webp}
+                    alt={gif.title}
+                  />
+                ) : (
+                  // eslint-disable-next-line jsx-a11y/media-has-caption
+                  <video
+                    data-testid="gif-vid-select"
+                    key={gif.id}
+                    ref={addRef ? setObservedGif : null}
+                    className={classes.gif}
+                    autoPlay
+                    loop
+                    src={gif.images.fixed_width.mp4}
+                    title={gif.title}
+                  />
+                )}
+              </button>
+            </li>
           );
         })}
         {isLoading && (
@@ -153,7 +171,7 @@ export const GifSearch = ({
             <div className={classes.loading} />
           </div>
         )}
-      </div>
+      </ul>
     </div>
   );
 };

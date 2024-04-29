@@ -16,7 +16,7 @@ import { Editor } from '@tiptap/core';
 import { handleFileVideo } from './toolbar.utils';
 import { useEffect, useState } from 'react';
 
-const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config }) => {
+const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t }) => {
   const [maxWidth, setMaxWidth] = useState(0);
   const currentAttributes = editor.getAttributes(VideoNode.name) as VideoAttributes & {
     id: string | undefined;
@@ -46,10 +46,10 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
   const alignment = currentAttributes.alignment;
   return (
     <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
-      <ChangeVideoButton config={config} editor={editor} videoId={videoId} />
+      <ChangeVideoButton config={config} editor={editor} videoId={videoId} t={t} />
       <button
         data-testid="video-align-left"
-        aria-label="align left"
+        aria-label={t('video-align-left.label')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'left',
         })}
@@ -67,7 +67,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       </button>
       <button
         data-testid="video-align-center"
-        aria-label="align center"
+        aria-label={t('video-align-center.label')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'center',
         })}
@@ -85,7 +85,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
       </button>
       <button
         data-testid="video-align-right"
-        aria-label="align right"
+        aria-label={t('video-align-right.label')}
         className={classNames(classes.button, {
           [classes.buttonActive]: alignment === 'right',
         })}
@@ -120,7 +120,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </button>
       <label className={classes.inputContainer}>
-        Width:
+        {t('video-width.label')}
         <input
           aria-label="video width"
           disabled={!isCustomSizeEnabled}
@@ -135,7 +135,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config })
         />
       </label>
       <label className={classes.inputContainer}>
-        Height:
+        {t('video-height.label')}
         <input
           aria-label="video height"
           disabled={!isCustomSizeEnabled}
@@ -157,34 +157,39 @@ const ChangeVideoButton = ({
   editor,
   config,
   videoId,
+  t,
 }: {
   editor: Editor;
   config: UploadConfig;
   videoId: string;
+  t: (key: string) => string;
 }) => {
   if (config.type === 'user-controlled') {
-    return <UserControlledChangeButton editor={editor} config={config} videoId={videoId} />;
+    return <UserControlledChangeButton editor={editor} config={config} videoId={videoId} t={t} />;
   }
 
-  return <ExtensionControlledChangeButton editor={editor} config={config} videoId={videoId} />;
+  return (
+    <ExtensionControlledChangeButton editor={editor} config={config} videoId={videoId} t={t} />
+  );
 };
 
 const ExtensionControlledChangeButton = ({
   editor,
   config,
   videoId,
+  t,
 }: {
   editor: Editor;
   config: ExtensionControlledUploadConfig;
   videoId: string;
+  t: (key: string) => string;
 }) => {
   return (
     <div className={classes.button}>
       <input
-        aria-label="change video"
+        aria-label={t('video-changel.label')}
         type="file"
         accept={config.acceptedVideoFileTypes.join(', ')}
-        className={classes.videoInput}
         value={''}
         onChange={async e => {
           const file = e.target.files?.[0];
@@ -231,14 +236,16 @@ const UserControlledChangeButton = ({
   editor,
   config,
   videoId,
+  t,
 }: {
   editor: Editor;
   config: UserControlledUploadConfig;
   videoId: string;
+  t: (key: string) => string;
 }) => {
   return (
     <button
-      aria-label="change video"
+      aria-label={t('video-changel.label')}
       data-testid="user-controlled-video-button"
       className={classNames(classes.button)}
       onClick={async () => {

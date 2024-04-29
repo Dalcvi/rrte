@@ -1,17 +1,16 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import LinkIcon from './link.icon.svg';
-import { LinkMark } from '../mark';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { LinkMark } from '../mark';
+import LinkIcon from './link.icon.svg';
 import classes from './toolbar.module.scss';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive(LinkMark.name);
   const currentHref = editor.getAttributes(LinkMark.name)?.href ?? '';
   return (
     <button
       data-testid="link-button"
-      aria-label="link"
+      aria-label={t('link-button.text')}
       disabled={!editor.can().toggleLink({ href: currentHref })}
       className={classNames(classes.linkButton, {
         [classes.active]: isActive,
@@ -34,7 +33,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: LinkMark.name,
-  text: 'Link',
+  text: 'link-button.text',
   type: 'icon' as const,
   priority: 85,
 };

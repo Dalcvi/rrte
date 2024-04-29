@@ -1,14 +1,12 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import UndoIcon from './undo.icon.svg';
-import RedoIcon from './undo.icon.svg';
-import { Editor } from '@tiptap/core';
-import classes from './toolbar.module.scss';
 import classNames from 'classnames';
+import classes from './toolbar.module.scss';
+import { default as RedoIcon, default as UndoIcon } from './undo.icon.svg';
 
-const UndoButton = ({ editor }: { editor: Editor }) => {
+const UndoButton: RegularButtonConfig['Button'] = ({ editor, t }) => {
   return (
     <button
-      aria-label="undo"
+      aria-label={t('undo-button.text')}
       data-testid="undo-button"
       disabled={!editor.can().undo()}
       className={classes.historyButton}
@@ -21,10 +19,10 @@ const UndoButton = ({ editor }: { editor: Editor }) => {
   );
 };
 
-const RedoButton = ({ editor }: { editor: Editor }) => {
+const RedoButton: RegularButtonConfig['Button'] = ({ editor, t }) => {
   return (
     <button
-      aria-label="redo"
+      aria-label={t('redo-button.text')}
       data-testid="redo-button"
       disabled={!editor.can().redo()}
       className={classes.historyButton}
@@ -41,14 +39,14 @@ export const ToolbarButtons: RegularButtonConfig[] = [
   {
     Button: UndoButton,
     name: 'Undo',
-    text: 'Undo',
+    text: 'undo-button.text',
     type: 'icon' as const,
     priority: -1,
   },
   {
     Button: RedoButton,
     name: 'Redo',
-    text: 'Redo',
+    text: 'redo-button.text',
     type: 'icon' as const,
     priority: 0,
   },

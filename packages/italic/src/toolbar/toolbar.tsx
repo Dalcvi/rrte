@@ -1,15 +1,14 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import ItalicIcon from './italic.icon.svg';
-import { ItalicMark } from '../mark';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
+import { ItalicMark } from '../mark';
+import ItalicIcon from './italic.icon.svg';
 import classes from './toolbar.module.scss';
 
-const Button = ({ editor }: { editor: Editor }) => {
+const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
   const isActive = editor.isActive('italic');
   return (
     <button
-      aria-label="italic"
+      aria-label={t('italic-button.text')}
       data-testid="italic-button"
       className={classNames(classes.italicButton, {
         [classes.active]: isActive,
@@ -33,7 +32,7 @@ const Button = ({ editor }: { editor: Editor }) => {
 export const ToolbarButton: RegularButtonConfig = {
   Button,
   name: ItalicMark.name,
-  text: 'Italic',
+  text: 'italic-button.text',
   type: 'icon' as const,
   priority: 97,
 };

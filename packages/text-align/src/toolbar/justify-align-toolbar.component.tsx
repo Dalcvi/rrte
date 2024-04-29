@@ -1,23 +1,19 @@
 import { RegularButtonConfig } from '@rrte/common';
-import { TextAlignExtension } from '../extension';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
-import classes from './toolbar.module.scss';
-import AlignJustifyIcon from './align-justify.icon.svg';
+import { TextAlignExtension } from '../extension';
 import { TextAlignConfig } from '../text-align-config';
+import AlignJustifyIcon from './align-justify.icon.svg';
+import classes from './toolbar.module.scss';
 
-const TextAlignToolbarButton = ({
+const TextAlignToolbarButton: RegularButtonConfig<TextAlignConfig>['Button'] = ({
   editor,
   config,
-}: {
-  editor: Editor;
-  config: TextAlignConfig;
 }) => {
   const isActive = config.types.some(type => editor.isActive(type, { textAlign: 'justify' }));
   return (
     <button
       data-testid="text-align-justify-button"
-      name="text align justify"
+      aria-label={'justify-align-button.text'}
       className={classNames(classes.textAlignButton, {
         [classes.active]: isActive,
       })}
@@ -40,7 +36,7 @@ const TextAlignToolbarButton = ({
 export const JustifyAlignToolbarButton: RegularButtonConfig<TextAlignConfig> = {
   Button: TextAlignToolbarButton,
   name: `${TextAlignExtension.name}-justify`,
-  text: 'Text align justify',
+  text: 'justify-align-button.text',
   type: 'icon' as const,
   priority: 89,
 };

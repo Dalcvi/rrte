@@ -42,8 +42,8 @@ export default function Web() {
     <div>
       <Header />
       <div className={classes.commentsContainer}>
-        <div className={classes.commentBoxContainer}>
-          <div className={classes.commentBox}>
+        <div>
+          <div>
             <Editor
               content={content}
               onUpdateJson={content => {
@@ -51,6 +51,7 @@ export default function Web() {
               }}
               editorRef={editor}
               editorExtensions={[
+                Paragraph(),
                 Blockquote(),
                 Bold(),
                 Color(),
@@ -132,7 +133,7 @@ export default function Web() {
               disabled={editor.current?.isEmpty}
               onClick={() => {
                 if (editor.current && content) {
-                  setComments(comments => [...comments, content]);
+                  setComments(comments => [content, ...comments]);
                   editor.current.commands.clearContent(true);
                 }
               }}

@@ -1,14 +1,13 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import GifIcon from './gif.icon.svg';
-import { GifNode } from '../node';
-import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
-import classes from './toolbar.module.scss';
 import { useEffect, useMemo, useState } from 'react';
 import { GifConfig } from '../gif-config';
+import { GifNode } from '../node';
 import { GifSearch } from './gif-search.component';
+import GifIcon from './gif.icon.svg';
+import classes from './toolbar.module.scss';
 
-const Button = ({ editor, config }: { editor: Editor; config: GifConfig }) => {
+const Button: RegularButtonConfig<GifConfig>['Button'] = ({ editor, config, t }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const isActive = editor.isActive(GifNode.name);
@@ -43,7 +42,7 @@ const Button = ({ editor, config }: { editor: Editor; config: GifConfig }) => {
     <div className={classes.container} ref={setContainer}>
       <button
         data-testid="gif-button"
-        aria-label="Gif"
+        aria-label={t('gif-button.text')}
         disabled={!editor.can().setGif({ originalHeight: 0, originalWidth: 0 })}
         className={classNames(classes.gifButton, {
           [classes.active]: isActive,
@@ -78,7 +77,7 @@ const Button = ({ editor, config }: { editor: Editor; config: GifConfig }) => {
 export const ToolbarButton: RegularButtonConfig<GifConfig> = {
   Button,
   name: GifNode.name,
-  text: 'Gif',
+  text: 'gif-button.text',
   type: 'icon' as const,
   priority: 1,
 };

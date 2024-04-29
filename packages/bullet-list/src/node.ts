@@ -55,6 +55,15 @@ export const BulletListNode = Node.create<BulletListOptions>({
     ];
   },
 
+  speechCommands: t => [
+    {
+      group: t('voice-group.text-formatting'),
+      activationKeyword: t('voice-command.toggle-bullet-list'),
+      command: 'toggleBulletList',
+      description: 'Toggle a bullet list',
+    },
+  ],
+
   addCommands() {
     return {
       toggleBulletList:

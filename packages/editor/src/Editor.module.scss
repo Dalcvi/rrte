@@ -1,141 +1,217 @@
 .editorWrapper {
-    --rrte-color-1: var(--rrte-color-1-ovr, 255, 255, 255);
-    --rrte-color-2: var(--rrte-color-2-ovr, 0, 0, 0);
-    --rrte-color-3: var(--rrte-color-3-ovr, 222, 222, 222);
-    --rrte-color-4: var(--rrte-color-4-ovr, 15, 95, 255);
-    --rrte-color-5: var(--rrte-color-5-ovr, 253, 86, 225);
-    --rrte-color-6: var(--rrte-color-6-ovr, 253, 197, 86);
-    --rrte-color-7: var(--rrte-color-7-ovr, 86, 253, 114);
-    --rrte-color-8: var(--rrte-color-8-ovr, 153, 187, 253);
-    --rrte-color-9: var(--rrte-color-9-ovr, 0, 0, 0);
+  --rrte-color-1: var(--rrte-color-1-ovr, 255, 255, 255);
+  --rrte-color-2: var(--rrte-color-2-ovr, 0, 0, 0);
+  --rrte-color-3: var(--rrte-color-3-ovr, 222, 222, 222);
+  --rrte-color-4: var(--rrte-color-4-ovr, 15, 95, 255);
+  --rrte-color-5: var(--rrte-color-5-ovr, 253, 86, 225);
+  --rrte-color-6: var(--rrte-color-6-ovr, 253, 197, 86);
+  --rrte-color-7: var(--rrte-color-7-ovr, 86, 253, 114);
+  --rrte-color-8: var(--rrte-color-8-ovr, 153, 187, 253);
+  --rrte-color-9: var(--rrte-color-9-ovr, 0, 0, 0);
+  --rrte-color-10: var(--rrte-color-9-ovr, 255, 0, 0);
 
-    --rrte-blockquote-color: var(--rrte-blockquote-color-ovr, var(--rrte-color-2));
-    --rrte-blockquote-font-family: var(--rrte-blockquote-font-family-ovr, "Times New Roman", Times, serif);
-    --rrte-blockquote-line-height: var(--rrte-blockquote-line-height-ovr, 1.5);
-    --rrte-blockquote-font-weight: var(--rrte-blockquote-font-weight-ovr, 400);
-    --rrte-blockquote-text-decoration: var(--rrte-blockquote-text-decoration-ovr, none);
-    --rrte-blockquote-font-style: var(--rrte-blockquote-font-style-ovr, normal);
-    --rrte-blockquote-font-size: var(--rrte-blockquote-font-size-ovr, 14px);
-    --rrte-blockquote-padding-start: var(--rrte-blockquote-padding-start-ovr, 12px);
-    --rrte-blockquote-background: var(--rrte-blockquote-background-ovr, var(--rrte-color-3));
-    --rrte-blockquote-border-start: var(--rrte-blockquote-border-start-ovr, 2px solid rgb(var(--rrte-color-2)));
-    --rrte-blockquote-margin: var(--rrte-blockquote-margin-ovr, 0 0 0 30px);
-    --rrte-blockquote-width: var(--rrte-blockquote-width-ovr, calc(100% - 30px));
+  --rrte-blockquote-color: var(--rrte-blockquote-color-ovr, var(--rrte-color-2));
+  --rrte-blockquote-font-family: var(
+    --rrte-blockquote-font-family-ovr,
+    'Times New Roman',
+    Times,
+    serif
+  );
+  --rrte-blockquote-line-height: var(--rrte-blockquote-line-height-ovr, 1.5);
+  --rrte-blockquote-font-weight: var(--rrte-blockquote-font-weight-ovr, 400);
+  --rrte-blockquote-text-decoration: var(--rrte-blockquote-text-decoration-ovr, none);
+  --rrte-blockquote-font-style: var(--rrte-blockquote-font-style-ovr, normal);
+  --rrte-blockquote-font-size: var(--rrte-blockquote-font-size-ovr, 14px);
+  --rrte-blockquote-padding-start: var(--rrte-blockquote-padding-start-ovr, 12px);
+  --rrte-blockquote-background: var(--rrte-blockquote-background-ovr, var(--rrte-color-3));
+  --rrte-blockquote-border-start: var(
+    --rrte-blockquote-border-start-ovr,
+    2px solid rgb(var(--rrte-color-2))
+  );
+  --rrte-blockquote-margin: var(--rrte-blockquote-margin-ovr, 0 0 0 30px);
+  --rrte-blockquote-width: var(--rrte-blockquote-width-ovr, calc(100% - 30px));
 
-    --rrte-code-font-family: var(--rrte-code-font-family-ovr, 'Fira Code', 'Courier New', Courier, monospace);
-    --rrte-code-font-size: var(--rrte-code-font-size-ovr, 0.875rem);
-    --rrte-code-line-height: var(--rrte-code-line-height-ovr, 1.5);
-    --rrte-code-font-weight: var(--rrte-code-font-weight-ovr, 400);
-    --rrte-code-text-decoration: var(--rrte-code-text-decoration-ovr, none);
-    --rrte-code-font-style: var(--rrte-code-font-style-ovr, normal);
-    --rrte-code-background: var(--rrte-code-background-ovr, var(--rrte-color-3), 0.3);
-    --rrte-code-color: var(--rrte-code-color-ovr, var(--rrte-color-4));
-    --rrte-code-border: var(--rrte-code-border-ovr, 1px solid rgb(var(--rrte-color-4)));
-    --rrte-code-border-radius: var(--rrte-code-border-radius-ovr, 5px);
-    --rrte-code-padding: var(--rrte-code-padding-ovr, 0 3px);
-    --rrte-code-width: var(--rrte-code-width-ovr, 100%);
+  --rrte-code-font-family: var(
+    --rrte-code-font-family-ovr,
+    'Fira Code',
+    'Courier New',
+    Courier,
+    monospace
+  );
+  --rrte-code-font-size: var(--rrte-code-font-size-ovr, 0.875rem);
+  --rrte-code-line-height: var(--rrte-code-line-height-ovr, 1.5);
+  --rrte-code-font-weight: var(--rrte-code-font-weight-ovr, 400);
+  --rrte-code-text-decoration: var(--rrte-code-text-decoration-ovr, none);
+  --rrte-code-font-style: var(--rrte-code-font-style-ovr, normal);
+  --rrte-code-background: var(--rrte-code-background-ovr, var(--rrte-color-3), 0.3);
+  --rrte-code-color: var(--rrte-code-color-ovr, var(--rrte-color-4));
+  --rrte-code-border: var(--rrte-code-border-ovr, 1px solid rgb(var(--rrte-color-4)));
+  --rrte-code-border-radius: var(--rrte-code-border-radius-ovr, 5px);
+  --rrte-code-padding: var(--rrte-code-padding-ovr, 0 3px);
+  --rrte-code-width: var(--rrte-code-width-ovr, 100%);
 
-    --rrte-codeblock-color: var(--rrte-codeblock-color-ovr, var(--rrte-color-2));
-    --rrte-codeblock-font-family: var(--rrte-codeblock-font-family-ovr, 'Fira Code', 'Courier New', Courier, monospace);
-    --rrte-codeblock-font-size: var(--rrte-codeblock-font-size-ovr, 0.875rem);
-    --rrte-codeblock-line-height: var(--rrte-codeblock-line-height-ovr, 1.5);
-    --rrte-codeblock-font-weight: var(--rrte-codeblock-font-weight-ovr, 400);
-    --rrte-codeblock-text-decoration: var(--rrte-codeblock-text-decoration-ovr, none);
-    --rrte-codeblock-font-style: var(--rrte-codeblock-font-style-ovr, normal);
-    --rrte-codeblock-padding-start: var(--rrte-codeblock-padding-start-ovr, 12px);
-    --rrte-codeblock-background: var(--rrte-codeblock-background-ovr, var(--rrte-color-3), 0.4);
-    --rrte-codeblock-border-start: var(--rrte-codeblock-border-start-ovr, 2px solid rgb(var(--rrte-color-3)));
+  --rrte-codeblock-color: var(--rrte-codeblock-color-ovr, var(--rrte-color-2));
+  --rrte-codeblock-font-family: var(
+    --rrte-codeblock-font-family-ovr,
+    'Fira Code',
+    'Courier New',
+    Courier,
+    monospace
+  );
+  --rrte-codeblock-font-size: var(--rrte-codeblock-font-size-ovr, 0.875rem);
+  --rrte-codeblock-line-height: var(--rrte-codeblock-line-height-ovr, 1.5);
+  --rrte-codeblock-font-weight: var(--rrte-codeblock-font-weight-ovr, 400);
+  --rrte-codeblock-text-decoration: var(--rrte-codeblock-text-decoration-ovr, none);
+  --rrte-codeblock-font-style: var(--rrte-codeblock-font-style-ovr, normal);
+  --rrte-codeblock-padding-start: var(--rrte-codeblock-padding-start-ovr, 12px);
+  --rrte-codeblock-background: var(--rrte-codeblock-background-ovr, var(--rrte-color-3), 0.4);
+  --rrte-codeblock-border-start: var(
+    --rrte-codeblock-border-start-ovr,
+    2px solid rgb(var(--rrte-color-3))
+  );
 
-    --rrte-h1-color: var(--rrte-h1-color-ovr, var(--rrte-color-2));
-    --rrte-h1-font-family: var(--rrte-h1-font-family-ovr, 'Roboto', sans-serif);
-    --rrte-h1-font-size: var(--rrte-h1-font-size-ovr, 2.5rem);
-    --rrte-h1-line-height: var(--rrte-h1-line-height-ovr, 1.2);
-    --rrte-h1-font-weight: var(--rrte-h1-font-weight-ovr, 400);
-    --rrte-h1-text-decoration: var(--rrte-h1-text-decoration-ovr, none);
-    --rrte-h1-font-style: var(--rrte-h1-font-style-ovr, normal);
+  --rrte-h1-color: var(--rrte-h1-color-ovr, var(--rrte-color-2));
+  --rrte-h1-font-family: var(--rrte-h1-font-family-ovr, 'Roboto', sans-serif);
+  --rrte-h1-font-size: var(--rrte-h1-font-size-ovr, 2.5rem);
+  --rrte-h1-line-height: var(--rrte-h1-line-height-ovr, 1.2);
+  --rrte-h1-font-weight: var(--rrte-h1-font-weight-ovr, 400);
+  --rrte-h1-text-decoration: var(--rrte-h1-text-decoration-ovr, none);
+  --rrte-h1-font-style: var(--rrte-h1-font-style-ovr, normal);
 
-    --rrte-h2-color: var(--rrte-h2-color-ovr, var(--rrte-color-2));
-    --rrte-h2-font-family: var(--rrte-h2-font-family-ovr, 'Roboto', sans-serif);
-    --rrte-h2-font-size: var(--rrte-h2-font-size-ovr, 2rem);
-    --rrte-h2-line-height: var(--rrte-h2-line-height-ovr, 1.2);
-    --rrte-h2-font-weight: var(--rrte-h2-font-weight-ovr, 400);
-    --rrte-h2-text-decoration: var(--rrte-h2-text-decoration-ovr, none);
-    --rrte-h2-font-style: var(--rrte-h2-font-style-ovr, normal);
+  --rrte-h2-color: var(--rrte-h2-color-ovr, var(--rrte-color-2));
+  --rrte-h2-font-family: var(--rrte-h2-font-family-ovr, 'Roboto', sans-serif);
+  --rrte-h2-font-size: var(--rrte-h2-font-size-ovr, 2rem);
+  --rrte-h2-line-height: var(--rrte-h2-line-height-ovr, 1.2);
+  --rrte-h2-font-weight: var(--rrte-h2-font-weight-ovr, 400);
+  --rrte-h2-text-decoration: var(--rrte-h2-text-decoration-ovr, none);
+  --rrte-h2-font-style: var(--rrte-h2-font-style-ovr, normal);
 
-    --rrte-h3-color: var(--rrte-h3-color-ovr, var(--rrte-color-2));
-    --rrte-h3-font-family: var(--rrte-h3-font-family-ovr, 'Roboto', sans-serif);
-    --rrte-h3-font-size: var(--rrte-h3-font-size-ovr, 1.75rem);
-    --rrte-h3-line-height: var(--rrte-h3-line-height-ovr, 1.2);
-    --rrte-h3-font-weight: var(--rrte-h3-font-weight-ovr, 400);
-    --rrte-h3-text-decoration: var(--rrte-h3-text-decoration-ovr, none);
-    --rrte-h3-font-style: var(--rrte-h3-font-style-ovr, normal);
+  --rrte-h3-color: var(--rrte-h3-color-ovr, var(--rrte-color-2));
+  --rrte-h3-font-family: var(--rrte-h3-font-family-ovr, 'Roboto', sans-serif);
+  --rrte-h3-font-size: var(--rrte-h3-font-size-ovr, 1.75rem);
+  --rrte-h3-line-height: var(--rrte-h3-line-height-ovr, 1.2);
+  --rrte-h3-font-weight: var(--rrte-h3-font-weight-ovr, 400);
+  --rrte-h3-text-decoration: var(--rrte-h3-text-decoration-ovr, none);
+  --rrte-h3-font-style: var(--rrte-h3-font-style-ovr, normal);
 
-    --rrte-h4-color: var(--rrte-h4-color-ovr, var(--rrte-color-2));
-    --rrte-h4-font-family: var(--rrte-h4-font-family-ovr, 'Roboto', sans-serif);
-    --rrte-h4-font-size: var(--rrte-h4-font-size-ovr, 1.5rem);
-    --rrte-h4-line-height: var(--rrte-h4-line-height-ovr, 1.2);
-    --rrte-h4-font-weight: var(--rrte-h4-font-weight-ovr, 400);
-    --rrte-h4-text-decoration: var(--rrte-h4-text-decoration-ovr, none);
-    --rrte-h4-font-style: var(--rrte-h4-font-style-ovr, normal);
+  --rrte-h4-color: var(--rrte-h4-color-ovr, var(--rrte-color-2));
+  --rrte-h4-font-family: var(--rrte-h4-font-family-ovr, 'Roboto', sans-serif);
+  --rrte-h4-font-size: var(--rrte-h4-font-size-ovr, 1.5rem);
+  --rrte-h4-line-height: var(--rrte-h4-line-height-ovr, 1.2);
+  --rrte-h4-font-weight: var(--rrte-h4-font-weight-ovr, 400);
+  --rrte-h4-text-decoration: var(--rrte-h4-text-decoration-ovr, none);
+  --rrte-h4-font-style: var(--rrte-h4-font-style-ovr, normal);
 
-    --rrte-h5-color: var(--rrte-h5-color-ovr, var(--rrte-color-2));
-    --rrte-h5-font-family: var(--rrte-h5-font-family-ovr, 'Roboto', sans-serif);
-    --rrte-h5-font-size: var(--rrte-h5-font-size-ovr, 1.25rem);
-    --rrte-h5-line-height: var(--rrte-h5-line-height-ovr, 1.2);
-    --rrte-h5-font-weight: var(--rrte-h5-font-weight-ovr, 400);
-    --rrte-h5-text-decoration: var(--rrte-h5-text-decoration-ovr, none);
-    --rrte-h5-font-style: var(--rrte-h5-font-style-ovr, normal);
+  --rrte-h5-color: var(--rrte-h5-color-ovr, var(--rrte-color-2));
+  --rrte-h5-font-family: var(--rrte-h5-font-family-ovr, 'Roboto', sans-serif);
+  --rrte-h5-font-size: var(--rrte-h5-font-size-ovr, 1.25rem);
+  --rrte-h5-line-height: var(--rrte-h5-line-height-ovr, 1.2);
+  --rrte-h5-font-weight: var(--rrte-h5-font-weight-ovr, 400);
+  --rrte-h5-text-decoration: var(--rrte-h5-text-decoration-ovr, none);
+  --rrte-h5-font-style: var(--rrte-h5-font-style-ovr, normal);
 
-    --rrte-h6-color: var(--rrte-h6-color-ovr, var(--rrte-color-2));
-    --rrte-h6-font-family: var(--rrte-h6-font-family-ovr, 'Roboto', sans-serif);
-    --rrte-h6-font-size: var(--rrte-h6-font-size-ovr, 1rem);
-    --rrte-h6-line-height: var(--rrte-h6-line-height-ovr, 1.2);
-    --rrte-h6-font-weight: var(--rrte-h6-font-weight-ovr, 400);
-    --rrte-h6-text-decoration: var(--rrte-h6-text-decoration-ovr, none);
-    --rrte-h6-font-style: var(--rrte-h6-font-style-ovr, normal);
+  --rrte-h6-color: var(--rrte-h6-color-ovr, var(--rrte-color-2));
+  --rrte-h6-font-family: var(--rrte-h6-font-family-ovr, 'Roboto', sans-serif);
+  --rrte-h6-font-size: var(--rrte-h6-font-size-ovr, 1rem);
+  --rrte-h6-line-height: var(--rrte-h6-line-height-ovr, 1.2);
+  --rrte-h6-font-weight: var(--rrte-h6-font-weight-ovr, 400);
+  --rrte-h6-text-decoration: var(--rrte-h6-text-decoration-ovr, none);
+  --rrte-h6-font-style: var(--rrte-h6-font-style-ovr, normal);
 
-    --rrte-link-color: var(--rrte-link-color-ovr, rgb(0, 123, 255));
-    --rrte-link-font: var(--rrte-link-font-ovr, inherit);
-    --rrte-link-font-size: var(--rrte-link-font-size-ovr, inherit);
-    --rrte-link-font-weight: var(--rrte-link-font-weight-ovr, inherit);
-    --rrte-link-text-decoration: var(--rrte-link-text-decoration-ovr, underline var(--rrte-link-color) solid 2px);
-    --rrte-link-visited-color: var(--rrte-link-visited-color-ovr, rgb(0, 123, 255));
+  --rrte-link-color: var(--rrte-link-color-ovr, rgb(0, 123, 255));
+  --rrte-link-font: var(--rrte-link-font-ovr, inherit);
+  --rrte-link-font-size: var(--rrte-link-font-size-ovr, inherit);
+  --rrte-link-font-weight: var(--rrte-link-font-weight-ovr, inherit);
+  --rrte-link-text-decoration: var(
+    --rrte-link-text-decoration-ovr,
+    underline var(--rrte-link-color) solid 2px
+  );
+  --rrte-link-visited-color: var(--rrte-link-visited-color-ovr, rgb(0, 123, 255));
 
-    --rrte-p-color: var(--rrte-p-color-ovr, var(--rrte-color-2));
-    --rrte-p-font-family: var(--rrte-p-font-family-ovr, 'Roboto', sans-serif);
-    --rrte-p-font-size: var(--rrte-p-font-size-ovr, 16px);
-    --rrte-p-line-height: var(--rrte-p-line-height-ovr, 1.5);
-    --rrte-p-font-weight: var(--rrte-p-font-weight-ovr, 400);
-    --rrte-p-text-decoration: var(--rrte-p-text-decoration-ovr, none);
-    --rrte-p-font-style: var(--rrte-p-font-style-ovr, normal);
+  --rrte-p-color: var(--rrte-p-color-ovr, var(--rrte-color-2));
+  --rrte-p-font-family: var(--rrte-p-font-family-ovr, 'Roboto', sans-serif);
+  --rrte-p-font-size: var(--rrte-p-font-size-ovr, 16px);
+  --rrte-p-line-height: var(--rrte-p-line-height-ovr, 1.5);
+  --rrte-p-font-weight: var(--rrte-p-font-weight-ovr, 400);
+  --rrte-p-text-decoration: var(--rrte-p-text-decoration-ovr, none);
+  --rrte-p-font-style: var(--rrte-p-font-style-ovr, normal);
 
-    --rrte-bullet-list-style-type: var(--rrte-bullet-list-style-type-ovr, disc);
-    --rrte-bullet-list-style-position: var(--rrte-bullet-list-style-position-ovr, outside);
-    --rrte-bullet-list-style-image: var(--rrte-bullet-list-style-image-ovr, none);
-    --rrte-bullet-list-margin: var(--rrte-bullet-list-margin-ovr, 1rem 0);
-    --rrte-bullet-list-padding: var(--rrte-bullet-list-padding-ovr, 0 0 0 1.5rem);
-    --rrte-bullet-list-color: var(--rrte-bullet-list-color-ovr, var(--rrte-color-2));
-    --rrte-bullet-list-font-family: var(--rrte-bullet-list-font-family-ovr, var(--rrte-p-font-family));
-    --rrte-bullet-list-font-size: var(--rrte-bullet-list-font-size-ovr, var(--rrte-p-font-size));
-    --rrte-bullet-list-line-height: var(--rrte-bullet-list-line-height-ovr, var(--rrte-p-font-height));
-    --rrte-bullet-list-font-weight: var(--rrte-bullet-list-font-weight-ovr, var(--rrte-p-font-weight));
-    --rrte-bullet-list-text-decoration: var(--rrte-bullet-list-text-decoration-ovr, var(--rrte-p-font-decoration));
-    --rrte-bullet-list-font-style: var(--rrte-bullet-list-font-style-ovr, var(--rrte-p-font-style));
+  --rrte-bullet-list-style-type: var(--rrte-bullet-list-style-type-ovr, disc);
+  --rrte-bullet-list-style-position: var(--rrte-bullet-list-style-position-ovr, outside);
+  --rrte-bullet-list-style-image: var(--rrte-bullet-list-style-image-ovr, none);
+  --rrte-bullet-list-margin: var(--rrte-bullet-list-margin-ovr, 1rem 0);
+  --rrte-bullet-list-padding: var(--rrte-bullet-list-padding-ovr, 0 0 0 1.5rem);
+  --rrte-bullet-list-color: var(--rrte-bullet-list-color-ovr, var(--rrte-color-2));
+  --rrte-bullet-list-font-family: var(
+    --rrte-bullet-list-font-family-ovr,
+    var(--rrte-p-font-family)
+  );
+  --rrte-bullet-list-font-size: var(--rrte-bullet-list-font-size-ovr, var(--rrte-p-font-size));
+  --rrte-bullet-list-line-height: var(
+    --rrte-bullet-list-line-height-ovr,
+    var(--rrte-p-font-height)
+  );
+  --rrte-bullet-list-font-weight: var(
+    --rrte-bullet-list-font-weight-ovr,
+    var(--rrte-p-font-weight)
+  );
+  --rrte-bullet-list-text-decoration: var(
+    --rrte-bullet-list-text-decoration-ovr,
+    var(--rrte-p-font-decoration)
+  );
+  --rrte-bullet-list-font-style: var(--rrte-bullet-list-font-style-ovr, var(--rrte-p-font-style));
 
-    --rrte-ordered-list-style-type: var(--rrte-ordered-list-style-type-ovr, decimal);
-    --rrte-ordered-list-style-position: var(--rrte-ordered-list-style-position-ovr, outside);
-    --rrte-ordered-list-style-image: var(--rrte-ordered-list-style-image-ovr, none);
-    --rrte-ordered-list-margin: var(--rrte-ordered-list-margin-ovr, 1rem 0);
-    --rrte-ordered-list-padding: var(--rrte-ordered-list-padding-ovr, 0 0 0 1.5rem);
-    --rrte-ordered-list-color: var(--rrte-ordered-list-color-ovr, var(--rrte-color-2));
-    --rrte-ordered-list-font-family: var(--rrte-ordered-list-font-family-ovr, var(--rrte-p-font-family));
-    --rrte-ordered-list-font-size: var(--rrte-ordered-list-font-size-ovr, var(--rrte-p-font-size));
-    --rrte-ordered-list-line-height: var(--rrte-ordered-list-line-height-ovr, var(--rrte-p-font-height));
-    --rrte-ordered-list-font-weight: var(--rrte-ordered-list-font-weight-ovr, var(--rrte-p-font-weight));
-    --rrte-ordered-list-text-decoration: var(--rrte-ordered-list-text-decoration-ovr, var(--rrte-p-font-decoration));
-    --rrte-ordered-list-font-style: var(--rrte-ordered-list-font-style-ovr, var(--rrte-p-font-style));
+  --rrte-ordered-list-style-type: var(--rrte-ordered-list-style-type-ovr, decimal);
+  --rrte-ordered-list-style-position: var(--rrte-ordered-list-style-position-ovr, outside);
+  --rrte-ordered-list-style-image: var(--rrte-ordered-list-style-image-ovr, none);
+  --rrte-ordered-list-margin: var(--rrte-ordered-list-margin-ovr, 1rem 0);
+  --rrte-ordered-list-padding: var(--rrte-ordered-list-padding-ovr, 0 0 0 1.5rem);
+  --rrte-ordered-list-color: var(--rrte-ordered-list-color-ovr, var(--rrte-color-2));
+  --rrte-ordered-list-font-family: var(
+    --rrte-ordered-list-font-family-ovr,
+    var(--rrte-p-font-family)
+  );
+  --rrte-ordered-list-font-size: var(--rrte-ordered-list-font-size-ovr, var(--rrte-p-font-size));
+  --rrte-ordered-list-line-height: var(
+    --rrte-ordered-list-line-height-ovr,
+    var(--rrte-p-font-height)
+  );
+  --rrte-ordered-list-font-weight: var(
+    --rrte-ordered-list-font-weight-ovr,
+    var(--rrte-p-font-weight)
+  );
+  --rrte-ordered-list-text-decoration: var(
+    --rrte-ordered-list-text-decoration-ovr,
+    var(--rrte-p-font-decoration)
+  );
+  --rrte-ordered-list-font-style: var(--rrte-ordered-list-font-style-ovr, var(--rrte-p-font-style));
+
+  --rrte-table-of-contents-background: var(--rrte-table-of-contents-background-ovr, transparent);
+
+  --rrte-voice-over-dictation-mode-color: var(
+    --rrte-voice-over-dictation-mode-color-ovr,
+    100,
+    136,
+    234
+  );
+
+  --rrte-voice-over-command-mode-color: var(
+    --rrte-voice-over-command-mode-color-ovr,
+    191,
+    227,
+    180
+  );
 }
 
 .editorContent {
-    background: rgb(var(--rrte-color-1));
+  position: relative;
+  background: rgb(var(--rrte-color-1));
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.editorContentWithSlot {
+  display: grid;
+  grid-template-columns: calc(100% - 280px) 280px;
 }
