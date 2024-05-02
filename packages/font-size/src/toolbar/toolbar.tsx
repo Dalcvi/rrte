@@ -1,10 +1,5 @@
-import {
-  AttributeValue,
-  currentSelectionAttributeValue,
-  type RegularButtonConfig,
-} from '@rrte/common';
+import { AttributeValue, currentSelectionAttributeValue, NumberControlConfig } from '@rrte/common';
 import { FontSizeExtension } from '../extension';
-import classes from './toolbar.module.scss';
 
 const getValue = (value: string | AttributeValue | undefined) => {
   if (!value) {
@@ -28,32 +23,21 @@ const getValue = (value: string | AttributeValue | undefined) => {
   return Number(fontSize.replace(/\D/g, ''));
 };
 
-const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
-  const value = getValue(currentSelectionAttributeValue('fontSize', editor, 'font-size'));
-
-  return (
-    <input
-      data-testid="font-size-input"
-      aria-label={t('font-size-selector.text')}
-      className={classes.numberInput}
-      type="number"
-      value={value}
-      min={1}
-      onChange={e => {
-        if (!e.target.value || Number(e.target.value) < 1) {
-          editor.chain().setFontSize(`${1}px`).run();
-          return;
-        }
-        editor.chain().setFontSize(`${e.target.value}px`).run();
-      }}
-    />
-  );
-};
-
-export const ToolbarButton: RegularButtonConfig = {
-  Button,
+export const ToolbarButton: NumberControlConfig = {
   name: FontSizeExtension.name,
   text: 'font-size-selector.text',
-  type: 'icon' as const,
+  increaseText: 'font-size-selector.increase',
+  decreaseText: 'font-size-selector.decrease',
+  type: 'number-control' as const,
+  getValue: ({ editor }) =>
+    getValue(currentSelectionAttributeValue('fontSize', editor, 'font-size')),
+  getIsDisabled: ({ editor }) => !editor.can().setFontSize(`${1}px`),
+  onChange: ({ editor, value }) => editor.chain().setFontSize(`${value}px`).run(),
   priority: 104,
+  group: {
+    name: 'typography',
+    text: 'typography.text',
+    priority: 100,
+    toolbar: 'main',
+  },
 };

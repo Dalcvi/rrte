@@ -12,6 +12,7 @@ export const Text = () => {
         'voice-command.select-next-sentence-also': 'select next sentence also',
         'voice-command.select-previous-sentence': 'select previous sentence',
         'voice-command.select-next-sentence': 'select next sentence',
+        'voice-command.deselect-sentence': 'deselect sentence',
       },
       lt: {
         'voice-command.select-sentence': 'pažymėti sakinį',
@@ -19,6 +20,7 @@ export const Text = () => {
         'voice-command.select-next-sentence-also': 'pažymėti kitą sakinį kartu',
         'voice-command.select-previous-sentence': 'pažymėti ankstesnį sakinį',
         'voice-command.select-next-sentence': 'pažymėti kitą sakinį',
+        'voice-command.deselect-sentence': 'nuimti sakinio pažymėjimą',
       },
     },
   });

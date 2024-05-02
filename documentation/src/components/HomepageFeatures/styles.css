@@ -1,0 +1,3 @@
+.markdown [data-hook='rrte-editor'] li + li {
+  margin-top: 0 !important;
+}

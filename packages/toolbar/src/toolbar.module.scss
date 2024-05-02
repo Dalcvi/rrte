@@ -1,3 +1,24 @@
+.groupedToolbars {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  align-items: center;
+  justify-content: left;
+  flex-wrap: wrap;
+  background: rgb(var(--rrte-color-3), 0.1);
+  border-bottom: var(--rrte-editor-border);
+  gap: 3px;
+  padding: 3px 6px;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+
+  .group:not(:first-child) {
+    border-left: var(--rrte-editor-border);
+    padding-left: 3px;
+  }
+}
+
 .toolbarList {
   display: flex;
   list-style: none;
@@ -5,12 +26,8 @@
   align-items: center;
   justify-content: left;
   flex-wrap: wrap;
-  background: rgb(var(--rrte-color-1));
-  gap: 6px;
+  gap: 3px;
   padding: 6px;
-  border: 1px solid rgb(var(--rrte-color-2));
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;

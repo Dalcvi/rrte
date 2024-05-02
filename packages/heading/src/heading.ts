@@ -20,6 +20,7 @@ export const Heading = () =>
         'voice-command.set-heading-four': 'set heading four',
         'voice-command.set-heading-five': 'set heading five',
         'voice-command.set-heading-six': 'set heading six',
+        'typography.text': 'Typography',
       },
       lt: {
         'text-styles-dropdown.text': 'Teksto stiliai',
@@ -35,6 +36,7 @@ export const Heading = () =>
         'voice-command.set-heading-four': 'nustatyti ketvirto lygio antraštę',
         'voice-command.set-heading-five': 'nustatyti penkto lygio antraštę',
         'voice-command.set-heading-six': 'nustatyti šešto lygio antraštę',
+        'typography.text': 'Tipografija',
       },
     },
   });

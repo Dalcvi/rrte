@@ -8,11 +8,13 @@ export const Blockquote = () =>
     translations: {
       en: {
         'blockquote-button.text': 'Toggle blockquote',
-        'voice-command.toggle-blockquote': 'toggle bold',
+        'voice-command.toggle-blockquote': 'toggle blockquote',
+        'text-styling-group.text': 'Text styling',
       },
       lt: {
         'blockquote-button.text': 'Perjungti citatą',
         'voice-command.toggle-blockquote': 'pakeisti citata',
+        'text-styling-group.text': 'Teksto stiliavimas',
       },
     },
   });

@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@rrte/common": "^1.0.0",
+    "@rrte/toolbar": "workspace:^",
     "@tiptap/core": "^2.3.0",
     "@tiptap/pm": "^2.3.0",
     "classnames": "^2.3.2",

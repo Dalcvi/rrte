@@ -1,13 +1,34 @@
 import type { BubbleMenuToolbar } from '@rrte/common';
 import classes from './link-bubble-menu.module.scss';
 import { LinkMark } from '../mark';
+import { TextInput } from '@rrte/toolbar';
 
 const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
   const currentAttributes = editor.getAttributes(LinkMark.name) as { href?: string };
 
   return (
     <div className={classes.bubbleMenu}>
-      <label className={classes.inputContainer}>
+      <TextInput
+        label={t('link-address.label')}
+        value={currentAttributes.href ?? ''}
+        onChange={val => {
+          editor
+            .chain()
+            .extendMarkRange(LinkMark.name)
+            .updateAttributes(LinkMark.name, {
+              href: val,
+            })
+            .run();
+        }}
+        onKeyDown={e => {
+          if (e.key === 'Enter' || e.key === 'Escape') {
+            const focusTo = editor.state.selection.$to.pos;
+
+            editor.commands.focus(focusTo);
+          }
+        }}
+      />
+      {/* <label className={classes.inputContainer}>
         {t('link-address.label')}
         <input
           aria-label="link url"
@@ -32,7 +53,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
             }
           }}
         />
-      </label>
+      </label> */}
     </div>
   );
 };

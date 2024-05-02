@@ -381,6 +381,9 @@ importers:
       '@rrte/paragraph':
         specifier: workspace:*
         version: link:../packages/paragraph
+      '@rrte/placeholder':
+        specifier: workspace:^
+        version: link:../packages/placeholder
       '@rrte/strike':
         specifier: workspace:*
         version: link:../packages/strike
@@ -390,6 +393,12 @@ importers:
       '@rrte/superscript':
         specifier: workspace:*
         version: link:../packages/superscript
+      '@rrte/table':
+        specifier: workspace:^
+        version: link:../packages/table
+      '@rrte/table-of-contents':
+        specifier: workspace:^
+        version: link:../packages/table-of-contents
       '@rrte/text-align':
         specifier: workspace:*
         version: link:../packages/text-align
@@ -402,6 +411,9 @@ importers:
       '@rrte/video':
         specifier: workspace:*
         version: link:../packages/video
+      '@rrte/voice':
+        specifier: workspace:^
+        version: link:../packages/voice
       '@rrte/youtube':
         specifier: workspace:*
         version: link:../packages/youtube
@@ -814,6 +826,9 @@ importers:
       '@rrte/i18n':
         specifier: workspace:^
         version: link:../i18n
+      '@rrte/toolbar':
+        specifier: workspace:^
+        version: link:../toolbar
       '@tiptap/core':
         specifier: ^2.3.0
         version: 2.3.0(@tiptap/pm@2.3.0)
@@ -1010,6 +1025,9 @@ importers:
       '@rrte/common':
         specifier: ^1.0.0
         version: link:../common
+      '@rrte/toolbar':
+        specifier: workspace:^
+        version: link:../toolbar
       '@tiptap/core':
         specifier: ^2.3.0
         version: 2.3.0(@tiptap/pm@2.3.0)
@@ -1091,6 +1109,9 @@ importers:
       '@rrte/common':
         specifier: ^1.0.0
         version: link:../common
+      '@rrte/toolbar':
+        specifier: workspace:^
+        version: link:../toolbar
       '@tiptap/core':
         specifier: ^2.3.0
         version: 2.3.0(@tiptap/pm@2.3.0)
@@ -1312,6 +1333,9 @@ importers:
       '@rrte/heading':
         specifier: workspace:^
         version: link:../heading
+      '@rrte/toolbar':
+        specifier: workspace:^
+        version: link:../toolbar
       '@tiptap/core':
         specifier: ^2.3.0
         version: 2.3.0(@tiptap/pm@2.3.0)
@@ -1513,6 +1537,9 @@ importers:
       '@rrte/common':
         specifier: ^1.0.0
         version: link:../common
+      '@rrte/toolbar':
+        specifier: workspace:^
+        version: link:../toolbar
       '@tiptap/core':
         specifier: ^2.3.0
         version: 2.3.0(@tiptap/pm@2.3.0)
@@ -1547,6 +1574,9 @@ importers:
       '@rrte/i18n':
         specifier: workspace:^
         version: link:../i18n
+      '@rrte/toolbar':
+        specifier: workspace:^1.0.0
+        version: link:../toolbar
       '@tiptap/core':
         specifier: ^2.3.0
         version: 2.3.0(@tiptap/pm@2.3.0)
@@ -1590,6 +1620,12 @@ importers:
       '@rrte/common':
         specifier: ^1.0.0
         version: link:../common
+      '@rrte/i18n':
+        specifier: workspace:^
+        version: link:../i18n
+      '@rrte/toolbar':
+        specifier: workspace:^
+        version: link:../toolbar
       '@tiptap/core':
         specifier: ^2.3.0
         version: 2.3.0(@tiptap/pm@2.3.0)

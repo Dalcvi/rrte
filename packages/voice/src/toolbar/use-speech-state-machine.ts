@@ -4,6 +4,7 @@ import { Editor } from '@tiptap/core';
 import levenshtein from 'fast-levenshtein';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createWordsToChange, createWordsToReplaceRegex } from './words-to-replace-regex';
+import {} from '@rrte/text';
 
 const Modes = {
   OFF: 'off',
@@ -41,9 +42,9 @@ type SpeechMachineStateDictation = {
   previousState: typeof Modes.COMMAND | typeof Modes.OFF;
 };
 
-type ExitCommand = {
+type EnterDictationModeCommand = {
   activationKeyword: string;
-  command: (previousState: typeof Modes.DICTATION | typeof Modes.OFF) => void;
+  command: (previousState: typeof Modes.COMMAND | typeof Modes.OFF) => void;
   description: string;
 };
 
@@ -76,7 +77,7 @@ export const useSpeechStateMachine = (
     };
   }, [language, t]);
 
-  const { commands, exitCommand } = useMemo(() => {
+  const { commands, enterDictationMode } = useMemo(() => {
     const editorCommands = editor.extensionManager.extensions
       .map(({ config }) => {
         return config.speechCommands?.(t) ?? [];
@@ -84,13 +85,13 @@ export const useSpeechStateMachine = (
       .flat()
       .sort((a, b) => b.activationKeyword.length - a.activationKeyword.length) as SpeechCommand[];
 
-    const exitCommand: ExitCommand = {
-      activationKeyword: t('exit-commands'),
+    const enterDictationMode: EnterDictationModeCommand = {
+      activationKeyword: t('begin-dictation-mode'),
       command: previousStateMode => {
         tearDownCommandMode();
 
         switch (previousStateMode) {
-          case Modes.DICTATION:
+          case Modes.COMMAND:
             turnOnDictationMode();
             break;
           case Modes.OFF:
@@ -104,7 +105,7 @@ export const useSpeechStateMachine = (
       description: 'Exit voice mode',
     };
 
-    return { commands: editorCommands, exitCommand };
+    return { commands: editorCommands, enterDictationMode };
   }, [language, t]);
 
   // ----------------- STATE MANAGEMENT -----------------
@@ -242,21 +243,22 @@ export const useSpeechStateMachine = (
 
       const trimmedText = longestInterpretedResult[0].transcript
         .trim()
+        .toLocaleLowerCase()
         .replace(wordsToReplaceRegex, match => {
           const lowerCaseMatch = match.toLowerCase() as keyof typeof wordsToChange;
           const foundWord = wordsToChange[lowerCaseMatch];
 
           return foundWord ?? match;
         });
-      const commandModeStartKeyword = t('begin-commands');
-      const beginCommandsRegexp = new RegExp(`\\s*${commandModeStartKeyword}`, 'gi');
-      const commandModeStarted = trimmedText.match(beginCommandsRegexp) !== null;
+      const exitDictationModeStartKeyword = t('exit-dictation-mode');
+      const exitDictationRegexp = new RegExp(`\\s*${exitDictationModeStartKeyword}`, 'gi');
+      const commandModeStarted = trimmedText.match(exitDictationRegexp) !== null;
       if (commandModeStarted) {
         tearDownDictationMode();
       }
 
       const isFinal = longestInterpretedResult.isFinal;
-      const text = commandModeStarted ? trimmedText.replace(beginCommandsRegexp, '') : trimmedText;
+      const text = commandModeStarted ? trimmedText.replace(exitDictationRegexp, '') : trimmedText;
 
       const editorChain = editor
         .chain()
@@ -303,8 +305,12 @@ export const useSpeechStateMachine = (
 
       currentState.lastTriedCommand = text;
 
-      if (exitCommand.activationKeyword === text) {
-        return exitCommand.command(currentState.previousState);
+      if (
+        levenshtein.get(enterDictationMode.activationKeyword, text, {
+          useCollator: true,
+        }) < 3
+      ) {
+        return enterDictationMode.command(currentState.mode);
       }
 
       const commandFromText = commands.find(({ activationKeyword }) => text === activationKeyword);
@@ -443,6 +449,7 @@ export const useSpeechStateMachine = (
 
   return {
     turnOnDictationMode,
+    turnOnCommandMode,
     turnOffMode,
     getCurrentMode,
     getCurrentSuggestedCommands,

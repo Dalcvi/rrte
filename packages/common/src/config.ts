@@ -2,9 +2,17 @@ import { Resources } from '@rrte/i18n';
 import type { ToolbarItem, BubbleMenuToolbar } from '@rrte/toolbar';
 export type {
   RegularButtonConfig,
-  RegularButtonWrapperProps,
+  RegularButtonParams,
   DropdownConfig,
   DropdownValue,
+  ColorSelectionButtonConfig,
+  ColorSelectionButtonParams,
+  ModalButtonConfig,
+  ModalButtonParams,
+  InputIconButtonConfig,
+  InputIconButtonParams,
+  NumberControlConfig,
+  NumberControlParams,
   ToolbarItem,
   BubbleMenuToolbar,
 } from '@rrte/toolbar';

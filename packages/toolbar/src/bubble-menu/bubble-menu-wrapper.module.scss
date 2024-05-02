@@ -1,0 +1,11 @@
+.bubbleMenuWrapper {
+  width: min-content;
+  margin: 0;
+  z-index: 1000;
+  border-radius: 3px;
+  box-shadow:
+    0 0 2px 0 rgba(34, 47, 62, 0.2),
+    0 4px 8px 0 rgba(34, 47, 62, 0.15);
+  flex-direction: column;
+  background-color: rgb(var(--rrte-color-1));
+}

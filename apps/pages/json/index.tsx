@@ -1,13 +1,12 @@
-import { HTMLContent, JSONContent } from '@rrte/common';
-import { Editor } from '@rrte/editor';
 import { Blockquote } from '@rrte/blockquote';
 import { Bold } from '@rrte/bold';
 import { BulletList } from '@rrte/bullet-list';
 import { Code } from '@rrte/code';
 import { CodeBlock } from '@rrte/code-block';
 import { Color } from '@rrte/color';
+import { HTMLContent, JSONContent } from '@rrte/common';
 import { Dropcursor } from '@rrte/dropcursor';
-import { Voice } from '@rrte/voice';
+import { Editor } from '@rrte/editor';
 import { FontSize } from '@rrte/font-size';
 import { Gapcursor } from '@rrte/gapcursor';
 import { Gif } from '@rrte/gif';
@@ -22,13 +21,17 @@ import { Link } from '@rrte/link';
 import { ListItem } from '@rrte/list-item';
 import { OrderedList } from '@rrte/ordered-list';
 import { Paragraph } from '@rrte/paragraph';
+import { Placeholder } from '@rrte/placeholder';
 import { Strike } from '@rrte/strike';
 import { Subscript } from '@rrte/subscript';
 import { Superscript } from '@rrte/superscript';
+import { Table, TableCell, TableHeader, TableRow } from '@rrte/table';
+import { TableOfContents } from '@rrte/table-of-contents';
 import { TextAlign } from '@rrte/text-align';
 import { TextStyle } from '@rrte/text-style';
 import { Underline } from '@rrte/underline';
 import { Video, VideoAttributes } from '@rrte/video';
+import { Voice } from '@rrte/voice';
 import { Youtube } from '@rrte/youtube';
 import { useEffect, useState } from 'react';
 import { Header } from '../../components/header';
@@ -62,6 +65,14 @@ export default function Web() {
             }
           }}
           editorExtensions={[
+            Placeholder({
+              placeholderText: 'Write something...',
+            }),
+            Table(),
+            TableCell(),
+            TableHeader(),
+            TableRow(),
+            TableOfContents(),
             Blockquote(),
             Voice(),
             Color(),

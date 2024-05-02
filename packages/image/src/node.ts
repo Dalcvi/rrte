@@ -10,6 +10,7 @@ export interface ImageAttributes {
   originalWidth: number;
   originalHeight: number;
   alt: string | null;
+  caption: string | null;
   customSize: boolean | null;
   customWidth: number | null;
   customHeight: number | null;
@@ -65,6 +66,9 @@ export const ImageNode = Node.create<ImageOptions>({
         default: null,
       },
       originalHeight: {
+        default: null,
+      },
+      caption: {
         default: null,
       },
       alt: {

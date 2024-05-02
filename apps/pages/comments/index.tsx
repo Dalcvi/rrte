@@ -1,12 +1,12 @@
-import { JSONContent } from '@rrte/common';
-import { Editor, EditorRef } from '@rrte/editor';
 import { Blockquote } from '@rrte/blockquote';
 import { Bold } from '@rrte/bold';
 import { BulletList } from '@rrte/bullet-list';
 import { Code } from '@rrte/code';
 import { CodeBlock } from '@rrte/code-block';
 import { Color } from '@rrte/color';
+import { JSONContent } from '@rrte/common';
 import { Dropcursor } from '@rrte/dropcursor';
+import { Editor, EditorRef } from '@rrte/editor';
 import { FontSize } from '@rrte/font-size';
 import { Gapcursor } from '@rrte/gapcursor';
 import { Gif } from '@rrte/gif';

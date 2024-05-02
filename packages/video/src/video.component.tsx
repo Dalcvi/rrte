@@ -92,6 +92,7 @@ export const VideoComponent = ({
           controls={!isEditable}
           src={node.attrs.src}
           width={videoWidth}
+          title={node.attrs.title ?? undefined}
           height={videoHeight}
           className={classNames(classes.video, {
             [classes.customSize]: isCustomSizeEnabled,

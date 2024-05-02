@@ -9,10 +9,12 @@ export const Italic = () =>
       en: {
         'italic-button.text': 'Toggle italic',
         'voice-command.toggle-italic': 'toggle italic',
+        'text-styling-group.text': 'Text styling',
       },
       lt: {
         'italic-button.text': 'Perjungti kursyvą',
         'voice-command.toggle-italic': 'pakeisti kursyvą',
+        'text-styling-group.text': 'Teksto stiliavimas',
       },
     },
   });

@@ -1,7 +1,7 @@
 import { NodeView } from '@rrte/common';
 import { Editor } from '@tiptap/core';
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import classes from './image.component.module.scss';
 import { ImageAttributes } from './node';
 
@@ -24,7 +24,7 @@ export const ImageComponent = ({
   const [imageHeight, setHeight] = useState(
     (node.attrs.customSize ? node.attrs.customHeight : undefined) ?? undefined
   );
-  const imageRef = useRef<HTMLImageElement>(null);
+  const [imageRef, setImageRef] = useState<HTMLImageElement | null>(null);
   const [canShowLoader, setCanShowLoader] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const showLoader = !!node.attrs.isLoading && canShowLoader;
@@ -40,7 +40,7 @@ export const ImageComponent = ({
       setWidth(node.attrs.customWidth ?? undefined);
       setHeight(node.attrs.customHeight ?? undefined);
     }
-  }, [imageRef.current, node.attrs.customSize, node.attrs.customWidth, node.attrs.customHeight]);
+  }, [imageRef, node.attrs.customSize, node.attrs.customWidth, node.attrs.customHeight]);
 
   useEffect(() => {
     const func = ({ editor }: { editor: Editor }) => {
@@ -77,9 +77,9 @@ export const ImageComponent = ({
         [classes.right]: alignment === 'right',
       })}
     >
-      <div className={classes.imageContainer} data-testid="image-comp">
+      <figure className={classes.imageContainer} data-testid="image-comp">
         <img
-          ref={imageRef}
+          ref={setImageRef}
           className={classNames(classes.image, {
             [classes.customSize]: isCustomSizeEnabled,
           })}
@@ -96,7 +96,19 @@ export const ImageComponent = ({
             <div className={classes.loadingCircle} />
           </div>
         )}
-      </div>
+        {!!node.attrs.caption && !!imageRef && (
+          <figcaption
+            className={classes.caption}
+            // @ts-expect-error
+            styles={{
+              maxWidth: `${!!imageWidth ? imageWidth : imageRef?.width}px`,
+              maxHeight: `${!!imageHeight ? imageHeight : imageRef?.height}px`,
+            }}
+          >
+            {node.attrs.caption}
+          </figcaption>
+        )}
+      </figure>
     </NodeView>
   );
 };

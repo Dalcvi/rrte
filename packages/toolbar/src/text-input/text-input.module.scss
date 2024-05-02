@@ -1,0 +1,20 @@
+.textInput {
+  height: 25px;
+  border: none;
+  border-bottom: 2px solid rgb(var(--rrte-color-3));
+  border-radius: 3px;
+  background-color: rgb(var(--rrte-color-3), 0.6);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.label {
+  color: rgb(var(--rrte-color-2));
+  font-size: 14px;
+  font-family: var(--rrte-p-font-family);
+  display: flex;
+  gap: 2px;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}

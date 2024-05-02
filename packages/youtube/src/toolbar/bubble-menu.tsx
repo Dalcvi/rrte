@@ -1,40 +1,110 @@
 import type { BubbleMenuToolbar } from '@rrte/common';
-import classes from './youtube-bubble-menu.module.scss';
+import { BubbleMenuWrapper, NumberInput, RegularButton, TextInput } from '@rrte/toolbar';
+import { YoutubeAttributes, YoutubeNode } from '../node';
+import AlignCenter from './align-center.icon.svg';
 import AlignLeft from './align-left.icon.svg';
 import AlignRight from './align-right.icon.svg';
-import AlignCenter from './align-center.icon.svg';
 import CustomSize from './custom-size.icon.svg';
-import { YoutubeAttributes, YoutubeNode } from '../node';
-import classNames from 'classnames';
-import { useEffect, useState } from 'react';
 import { getYouTubeID } from './toolbar.utils';
+import classes from './youtube-bubble-menu.module.scss';
 
 const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
-  const [maxWidth, setMaxWidth] = useState(0);
   const currentAttributes = editor.getAttributes(YoutubeNode.name) as YoutubeAttributes & {
     id: string | undefined;
   };
 
-  useEffect(() => {
-    const editor = document.querySelector("[data-testid='rrte-editor']") as HTMLElement;
-    if (!editor) {
-      return;
-    }
-    const observer = new ResizeObserver(entries => {
-      const maxWidth = entries[0].contentRect.width;
-      setMaxWidth(maxWidth);
-    });
-    observer.observe(editor);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   const isCustomSizeEnabled = !!currentAttributes.customSize;
   const alignment = currentAttributes.alignment;
   return (
-    <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
+    <BubbleMenuWrapper>
+      <div className={classes.bubbleMenu}>
+        <div className={classes.row}>
+          <TextInput
+            value={currentAttributes.url}
+            onChange={val => {
+              editor.commands.updateAttributes(YoutubeNode.name, {
+                url: val,
+                videoId: getYouTubeID(val),
+              });
+            }}
+            label={t('youtube-input.label')}
+          />
+        </div>
+        <hr className={classes.divider} />
+        <div className={classes.row}>
+          <RegularButton
+            Icon={({ className }) => <AlignLeft className={className} height="15px" width="15px" />}
+            text={'gif.align-left'}
+            getIsActive={() => alignment === 'left'}
+            getIsDisabled={() => false}
+            iconStyling="stroke"
+            onClick={() => {
+              editor.commands.updateAttributes(YoutubeNode.name, { alignment: 'left' });
+            }}
+            editor={editor}
+            config={{}}
+          />
+          <RegularButton
+            Icon={({ className }) => (
+              <AlignCenter className={className} height="15px" width="15px" />
+            )}
+            text={'gif.align-center'}
+            getIsActive={() => alignment === 'center'}
+            getIsDisabled={() => false}
+            iconStyling="stroke"
+            onClick={() => {
+              editor.commands.updateAttributes(YoutubeNode.name, { alignment: 'center' });
+            }}
+            editor={editor}
+            config={{}}
+          />
+          <RegularButton
+            Icon={({ className }) => (
+              <AlignRight className={className} height="15px" width="15px" />
+            )}
+            text={'gif.align-right'}
+            getIsActive={() => alignment === 'right'}
+            getIsDisabled={() => false}
+            iconStyling="stroke"
+            onClick={() => {
+              editor.commands.updateAttributes(YoutubeNode.name, { alignment: 'right' });
+            }}
+            editor={editor}
+            config={{}}
+          />
+          <RegularButton
+            Icon={({ className }) => (
+              <CustomSize className={className} height="15px" width="15px" />
+            )}
+            text={'gif.align-size'}
+            getIsActive={() => isCustomSizeEnabled}
+            getIsDisabled={() => false}
+            iconStyling="fill"
+            onClick={() => {
+              editor.commands.updateAttributes(YoutubeNode.name, {
+                customSize: !isCustomSizeEnabled,
+              });
+            }}
+            editor={editor}
+            config={{}}
+          />
+        </div>
+        <hr className={classes.divider} />
+        <div className={classes.row}>
+          <NumberInput
+            label={t('gif.width')}
+            value={currentAttributes.customWidth === null ? 320 : currentAttributes.customWidth}
+            isDisabled={!isCustomSizeEnabled}
+            onChange={value =>
+              editor.commands.updateAttributes(YoutubeNode.name, { customWidth: value })
+            }
+          />
+        </div>
+      </div>
+    </BubbleMenuWrapper>
+  );
+  {
+    /* <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
       <label className={classes.inputLabel}>
         {t('youtube-input.label')}
         <input
@@ -136,8 +206,8 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
           }
         />
       </label>
-    </div>
-  );
+    </div> */
+  }
 };
 
 export const YoutubeBubbleMenu: BubbleMenuToolbar = {

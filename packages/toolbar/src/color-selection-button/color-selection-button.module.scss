@@ -1,0 +1,117 @@
+.colorContainer {
+  background: transparent;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+
+  &.disabled {
+    opacity: 0.1;
+    cursor: not-allowed;
+  }
+
+  .colorMainButton {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    gap: 2px;
+    padding: 6px;
+    background: none;
+    border: var(--rrte-editor-border);
+    border-radius: var(--toolbar-button-border-radius);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    .icon {
+      height: 15px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus-within,
+    &:hover,
+    &:focus {
+      background-color: rgb(
+        var(--rrte-toolbar-item-focus-background),
+        var(--rrte-toolbar-item-focus-background-alpha)
+      );
+      outline: var(--rrte-toolbar-item-focus-outline);
+    }
+
+    .colorInput {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .colorBar {
+      width: 70%;
+      height: 3px;
+      border: 1px solid rgb(var(--rrte-color-2));
+      flex-shrink: 0;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .colorReset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: var(--rrte-editor-border);
+    border-left: none;
+    border-top-right-radius: var(--toolbar-button-border-radius);
+    border-bottom-right-radius: var(--toolbar-button-border-radius);
+
+    &:focus-within,
+    &:hover,
+    &:focus {
+      background-color: rgb(
+        var(--rrte-toolbar-item-focus-background),
+        var(--rrte-toolbar-item-focus-background-alpha)
+      );
+      outline: var(--rrte-toolbar-item-focus-outline);
+    }
+
+    & > svg {
+      & > path {
+        fill: rgb(var(--rrte-color-2));
+      }
+    }
+
+    &:focus-within {
+      outline: -webkit-focus-ring-color auto 1px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      background: none;
+    }
+  }
+}

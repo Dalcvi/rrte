@@ -44,9 +44,9 @@ pnpm add @rrte/text-align
 
 ## Functions
 
-| Function name | Parameters                                 | Description                  |
-| ------------- | ------------------------------------------ | ---------------------------- |
-| setTextAlign  | "left" \| "center" \| "right" \| "justify" | Sets the selection alignment |
+| Function name | Parameters                                                             | Description                  |
+| ------------- | ---------------------------------------------------------------------- | ---------------------------- |
+| setTextAlign  | attributes: \{ textAlign: "left" \| "center" \| "right" \| "justify" } | Sets the selection alignment |
 
 ## Example
 

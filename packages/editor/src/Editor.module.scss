@@ -1,14 +1,45 @@
 .editorWrapper {
+  --rrte-editor-border: 2px solid rgb(var(--rrte-color-3));
+}
+
+.editorWrapperEditMode {
+  border: var(--rrte-editor-border);
+}
+
+.editorWrapper {
   --rrte-color-1: var(--rrte-color-1-ovr, 255, 255, 255);
   --rrte-color-2: var(--rrte-color-2-ovr, 0, 0, 0);
-  --rrte-color-3: var(--rrte-color-3-ovr, 222, 222, 222);
-  --rrte-color-4: var(--rrte-color-4-ovr, 15, 95, 255);
+  --rrte-color-3: var(--rrte-color-3-ovr, 238, 238, 238);
+  --rrte-color-4: var(--rrte-color-4-ovr, 0, 108, 231);
   --rrte-color-5: var(--rrte-color-5-ovr, 253, 86, 225);
-  --rrte-color-6: var(--rrte-color-6-ovr, 253, 197, 86);
+  --rrte-color-6: var(--rrte-color-6-ovr, 231, 123, 0);
   --rrte-color-7: var(--rrte-color-7-ovr, 86, 253, 114);
   --rrte-color-8: var(--rrte-color-8-ovr, 153, 187, 253);
   --rrte-color-9: var(--rrte-color-9-ovr, 0, 0, 0);
   --rrte-color-10: var(--rrte-color-9-ovr, 255, 0, 0);
+
+  --rrte-dropdown-unfocused-background: var(
+    --rrte-dropdown-unfocused-background-ovr,
+    var(--rrte-color-3)
+  );
+  --rrte-dropdown-unfocused-background-alpha: var(
+    --rrte-dropdown-unfocused-background-alpha-ovr,
+    0.7
+  );
+  --rrte-color-select-reset-mode: var(--rrte-color-select-reset-mode-ovr, var(--rrte-color-3));
+  --rrte-color-select-reset-mode-alpha: var(--rrte-color-select-reset-mode-alpha-ovr, 0.7);
+  --rrte-toolbar-item-focus-background: var(
+    --rrte-toolbar-item-focus-background-ovr,
+    var(--rrte-color-3)
+  );
+  --rrte-toolbar-item-focus-background-alpha: var(
+    --rrte-toolbar-item-focus-background-alpha-ovr,
+    1
+  );
+  --rrte-toolbar-item-focus-outline: var(
+    --rrte-toolbar-item-focus-outline-ovr,
+    -webkit-focus-ring-color auto 2px
+  );
 
   --rrte-blockquote-color: var(--rrte-blockquote-color-ovr, var(--rrte-color-2));
   --rrte-blockquote-font-family: var(
@@ -201,6 +232,31 @@
     227,
     180
   );
+  --toolbar-button-border-radius: var(--toolbar-button-border-radius-ovr, 3px);
+
+  --rrte-table-border-color: var(--rrte-table-border-color-ovr, 50, 168, 82);
+  --rrte-table-header-background-color: var(
+    --rrte-table-header-background-color-ovr,
+    241,
+    243,
+    245
+  );
+  --rrte-table-cell-resize-handle-background-color: var(
+    --rrte-table-cell-resize-handle-background-color-ovr,
+    170,
+    221,
+    255
+  );
+  --rrte-table-selected-cell-background-color: var(
+    --rrte-table-selected-cell-background-color-ovr,
+    200,
+    200,
+    255,
+    0.4
+  );
+
+  --rrte-placeholder-color: var(--rrte-placeholder-color-ovr, 128 128 128);
+  --rrte-placeholder-style: var(--rrte-placeholder-style-ovr, italic);
 }
 
 .editorContent {

@@ -9,10 +9,12 @@ export const Strike = () =>
       en: {
         'strike-button.text': 'Toggle strike',
         'voice-command.toggle-strike': 'toggle strike',
+        'text-styling-group.text': 'Text styling',
       },
       lt: {
         'strike-button.text': 'Perjungti perbraukimą',
         'voice-command.toggle-strike': 'pakeisti perbraukimą',
+        'text-styling-group.text': 'Teksto stiliavimas',
       },
     },
   });

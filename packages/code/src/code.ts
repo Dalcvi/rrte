@@ -9,10 +9,12 @@ export const Code = () =>
       en: {
         'code-button.text': 'Toggle inline code',
         'voice-command.toggle-code': 'toggle inline code',
+        'text-styling-group.text': 'Text styling',
       },
       lt: {
         'code-button.text': 'Perjungti eilutinį kodą',
         'voice-command.toggle-code': 'pakeisti eilutinį kodą',
+        'text-styling-group.text': 'Teksto stiliavimas',
       },
     },
   });

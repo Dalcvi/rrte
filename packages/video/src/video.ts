@@ -1,11 +1,17 @@
 import { createNode } from '@rrte/common';
 import { VideoNode } from './node';
-import { VideoBubbleMenu, ToolbarButton } from './toolbar';
+import {
+  ExtensionControlledToolbarButton,
+  UserControlledToolbarButton,
+  VideoBubbleMenu,
+} from './toolbar';
 import { UploadConfig } from './upload-config';
 
 export const Video = (uploadConfig: UploadConfig) =>
   createNode(VideoNode, {
-    toolbar: ToolbarButton,
+    toolbar: (uploadConfig.type === 'extension-controlled'
+      ? ExtensionControlledToolbarButton
+      : UserControlledToolbarButton) as any,
     bubbleMenu: VideoBubbleMenu,
     translations: {
       en: {
@@ -18,6 +24,8 @@ export const Video = (uploadConfig: UploadConfig) =>
         'video-custom-size.label': 'custom size',
         'video-width.label': 'Width',
         'video-height.label': 'Height',
+        'media-group.text': 'Footer toolbar',
+        'video.title': 'Title',
       },
       lt: {
         'video-button.text': 'Pridėti vaizdo įrašą',
@@ -28,6 +36,8 @@ export const Video = (uploadConfig: UploadConfig) =>
         'video-custom-size.label': 'Pasirinktinis dydis',
         'video-width.label': 'Plotis',
         'video-height.label': 'Aukštis',
+        'media-group.text': 'Apatinis įrankių juostelės elementas',
+        'video.title': 'Pavadinimas',
       },
     },
     ...uploadConfig,

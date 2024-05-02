@@ -1,11 +1,10 @@
 import {
   AttributeValue,
+  ColorSelectionButtonConfig,
   currentSelectionAttributeValue,
-  type RegularButtonConfig,
 } from '@rrte/common';
-import classNames from 'classnames';
 import { HighlightExtension } from '../extension';
-import CloseIcon from './close.icon.svg';
+import PaintBucket from './paint-bucket.icon.svg';
 import classes from './toolbar.module.scss';
 
 const getBackgroundHighlight = (value: string | AttributeValue) => {
@@ -24,51 +23,38 @@ const getBackgroundHighlight = (value: string | AttributeValue) => {
   return window.getComputedStyle(element).backgroundColor;
 };
 
-const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
-  const currentValue = currentSelectionAttributeValue(
-    'backgroundColor',
-    editor,
-    'background-color'
-  );
-  const highlight = currentValue ? getBackgroundHighlight(currentValue) : undefined;
-
-  const isResetEnabled = highlight && typeof currentValue === 'string' && currentValue.length > 0;
-
-  return (
-    <div className={classes.highlightContainer}>
-      <input
-        data-testid="highlight-input"
-        aria-label={t('highlight-button.text')}
-        disabled={!editor.can().setHighlight(null)}
-        type="color"
-        value={highlight}
-        className={classNames(classes.highlightInput, {
-          [classes.withReset]: isResetEnabled,
-        })}
-        onChange={e => {
-          editor.chain().focus().setHighlight(e.target.value).run();
-        }}
-      />
-      {isResetEnabled && (
-        <button
-          aria-label={t('highlight-button.remove')}
-          data-testid="highlight-reset"
-          className={classes.highlightReset}
-          onClick={() => {
-            editor.chain().focus().unsetHighlight().run();
-          }}
-        >
-          <CloseIcon height={'15px'} width={'15px'} />
-        </button>
-      )}
-    </div>
-  );
-};
-
-export const ToolbarButton: RegularButtonConfig = {
-  Button,
+export const ToolbarButton: ColorSelectionButtonConfig = {
   name: HighlightExtension.name,
   text: 'highlight-button.text',
-  type: 'icon' as const,
+  removeText: 'highlight-button.remove',
+  type: 'color-selection',
   priority: 102,
+  onChange: (e, { editor }) => {
+    editor.chain().focus().setHighlight(e.target.value).run();
+  },
+  onReset: ({ editor }) => {
+    editor.chain().focus().unsetHighlight().run();
+  },
+  getValue: ({ editor }) => {
+    const value = currentSelectionAttributeValue('backgroundColor', editor, 'background-color');
+    return value ? getBackgroundHighlight(value) : undefined;
+  },
+  getCanReset: (_, value) => {
+    const color = value ? getBackgroundHighlight(value) : undefined;
+
+    return !!color && typeof value === 'string' && value.length > 0;
+  },
+  getIsDisabled: ({ editor }) => !editor.can().setHighlight(null),
+  Icon: ({ value }) => (
+    // @ts-ignore
+    <span className={classes.bucketContainer} style={{ '--rrte-current-highlight-color': value }}>
+      <PaintBucket height="15px" width="15px" />
+    </span>
+  ),
+  group: {
+    name: 'text-colouring',
+    text: 'text-colouring-group.text',
+    priority: 5,
+    toolbar: 'main',
+  },
 };

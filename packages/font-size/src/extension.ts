@@ -16,6 +16,15 @@ declare module '@tiptap/core' {
        * Unset the text font size
        */
       unsetFontSize: () => ReturnType;
+      /**
+       * Increase the text font size by 1px
+       *
+       */
+      increaseFontSize: () => ReturnType;
+      /**
+       * Decrease the text font size by 1px
+       */
+      decreaseFontSize: () => ReturnType;
     };
   }
 }

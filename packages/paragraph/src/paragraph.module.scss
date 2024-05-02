@@ -1,20 +1,19 @@
 .base {
-    margin: 0;
-    margin-block-start: 4px;
-    color: rgb(var(--rrte-p-color));
-    font-family: var(--rrte-p-font-family);
-    font-size: var(--rrte-p-font-size);
-    line-height: var(--rrte-p-line-height);
-    font-weight: var(--rrte-p-font-weight);
-    text-decoration: var(--rrte-p-text-decoration);
-    font-style: var(--rrte-p-font-style);
+  margin: 0;
+  margin-block-start: 4px;
+  color: rgb(var(--rrte-p-color));
+  font-family: var(--rrte-p-font-family);
+  font-size: var(--rrte-p-font-size);
+  line-height: var(--rrte-p-line-height);
+  font-weight: var(--rrte-p-font-weight);
+  text-decoration: var(--rrte-p-text-decoration);
+  font-style: var(--rrte-p-font-style);
 }
 
 .toolbarItem {
-    color: rgb(var(--rrte-p-color));
-    font-family: var(--rrte-p-font-family);
-    font-size: var(--rrte-p-font-size);
-    font-weight: var(--rrte-p-font-weight);
-    text-decoration: var(--rrte-p-text-decoration);
-    font-style: var(--rrte-p-font-style);
+  font-family: var(--rrte-p-font-family);
+  font-size: var(--rrte-p-font-size);
+  font-weight: var(--rrte-p-font-weight);
+  text-decoration: var(--rrte-p-text-decoration);
+  font-style: var(--rrte-p-font-style);
 }

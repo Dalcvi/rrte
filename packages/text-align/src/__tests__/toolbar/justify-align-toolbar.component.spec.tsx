@@ -1,6 +1,7 @@
 import { JustifyAlignToolbarButton } from '../../toolbar';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import React from 'react';
 import FakeEditor from '../editor.mock';
 jest.mock('../editor.mock', () => {
   return jest.fn().mockImplementation(() => {

@@ -18,6 +18,7 @@ export const Youtube = () =>
         'youtube-width.label': 'Width',
         'youtube-button.placeholder': 'Enter Youtube URL',
         'youtube-add': 'Add',
+        'media-group.text': 'Footer toolbar',
       },
       lt: {
         'youtube-input.label': 'Youtube adresas',
@@ -30,6 +31,7 @@ export const Youtube = () =>
         'youtube-width.label': 'Plotis',
         'youtube-button.placeholder': 'Įveskite Youtube adresą',
         'youtube-add': 'Pridėti',
+        'media-group.text': 'Apatinis įrankių juostelės elementas',
       },
     },
   });

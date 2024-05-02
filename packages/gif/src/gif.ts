@@ -17,6 +17,7 @@ export const Gif = (sdkKey: string) =>
         'gif.custom-size': 'Custom size',
         'gif.width': 'Width',
         'gif.height': 'Height',
+        'media-group.text': 'Footer toolbar',
       },
       lt: {
         'gif-button.text': 'Pridėti GIF',
@@ -28,6 +29,7 @@ export const Gif = (sdkKey: string) =>
         'gif.custom-size': 'Pasirinktinis dydis',
         'gif.width': 'Plotis',
         'gif.height': 'Aukštis',
+        'media-group.text': 'Apatinis įrankių juostelės elementas',
       },
     },
     sdkKey,

@@ -1,0 +1,56 @@
+.inputIconButton {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  background: none;
+  border: none;
+  border-radius: var(--toolbar-button-border-radius);
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.1;
+    cursor: not-allowed;
+  }
+
+  &:focus-within,
+  &:hover,
+  &:focus {
+    background-color: rgb(
+      var(--rrte-toolbar-item-focus-background),
+      var(--rrte-toolbar-item-focus-background-alpha)
+    );
+    outline: var(--rrte-toolbar-item-focus-outline);
+  }
+
+  .disabledButton {
+    opacity: 0.1;
+    cursor: not-allowed;
+  }
+}
+
+.input {
+  pointer-events: none;
+  visibility: hidden;
+  display: none;
+}
+
+.icon {
+  --toolbar-regular-button-icon-color: rgb(var(--rrte-color-2));
+
+  &.fill * {
+    fill: var(--toolbar-regular-button-icon-color);
+  }
+
+  &.stroke * {
+    stroke: var(--toolbar-regular-button-icon-color);
+  }
+}

@@ -3,51 +3,41 @@ import classNames from 'classnames';
 import classes from './toolbar.module.scss';
 import { default as RedoIcon, default as UndoIcon } from './undo.icon.svg';
 
-const UndoButton: RegularButtonConfig['Button'] = ({ editor, t }) => {
-  return (
-    <button
-      aria-label={t('undo-button.text')}
-      data-testid="undo-button"
-      disabled={!editor.can().undo()}
-      className={classes.historyButton}
-      onClick={() => {
-        editor.chain().undo().focus().run();
-      }}
-    >
-      <UndoIcon height={'10px'} width={'10px'} className={classes.icon} />
-    </button>
-  );
-};
-
-const RedoButton: RegularButtonConfig['Button'] = ({ editor, t }) => {
-  return (
-    <button
-      aria-label={t('redo-button.text')}
-      data-testid="redo-button"
-      disabled={!editor.can().redo()}
-      className={classes.historyButton}
-      onClick={() => {
-        editor.chain().redo().focus().run();
-      }}
-    >
-      <RedoIcon height={'10px'} width={'10px'} className={classNames(classes.icon, classes.flip)} />
-    </button>
-  );
-};
-
 export const ToolbarButtons: RegularButtonConfig[] = [
   {
-    Button: UndoButton,
     name: 'Undo',
     text: 'undo-button.text',
     type: 'icon' as const,
     priority: -1,
+    Icon: ({ className }) => <UndoIcon height={'15px'} width={'15px'} className={className} />,
+    getIsActive: () => false,
+    getIsDisabled: ({ editor }) => !editor.can().undo(),
+    onClick: ({ editor }) => editor.chain().undo().focus().run(),
+    iconStyling: 'fill',
+    group: {
+      name: 'history',
+      text: 'history-group.text',
+      priority: 1,
+      toolbar: 'main',
+    },
   },
   {
-    Button: RedoButton,
     name: 'Redo',
     text: 'redo-button.text',
     type: 'icon' as const,
     priority: 0,
+    Icon: ({ className }) => (
+      <RedoIcon height={'15px'} width={'15px'} className={classNames(className, classes.flip)} />
+    ),
+    getIsActive: () => false,
+    getIsDisabled: ({ editor }) => !editor.can().redo(),
+    onClick: ({ editor }) => editor.chain().redo().focus().run(),
+    iconStyling: 'fill',
+    group: {
+      name: 'history',
+      text: 'history-group.text',
+      priority: 1,
+      toolbar: 'main',
+    },
   },
 ];

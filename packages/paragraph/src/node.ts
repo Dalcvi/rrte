@@ -55,7 +55,7 @@ export const ParagraphNode = Node.create<ParagraphOptions>({
     {
       group: t('voice-group.document-formatting'),
       activationKeyword: t('voice-command.set-paragraph'),
-      command: 'createParagraphNear',
+      command: 'setParagraph',
       description: 'Set a paragraph',
     },
     {

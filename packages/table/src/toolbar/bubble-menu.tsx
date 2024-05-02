@@ -6,7 +6,8 @@ import AddColumn from './add-column.icon.svg';
 import AddRow from './add-row.icon.svg';
 import DeleteColumn from './delete-column.icon.svg';
 import DeleteRow from './delete-row.icon.svg';
-import classes from './gif-bubble-menu.module.scss';
+import classes from './table-bubble-menu.module.scss';
+import { BubbleMenuWrapper, RegularButton } from '@rrte/toolbar';
 
 const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
   const [maxWidth, setMaxWidth] = useState(0);
@@ -26,6 +27,109 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
       observer.disconnect();
     };
   }, []);
+
+  return (
+    <BubbleMenuWrapper>
+      <div className={classes.bubbleMenu}>
+        <RegularButton
+          Icon={({ className }) => (
+            <AddColumn
+              className={classNames(className, classes.horizontallyFlippedIcon)}
+              height="20px"
+              width="20px"
+            />
+          )}
+          text={'table-add-column-before'}
+          getIsActive={() => false}
+          getIsDisabled={({ editor }) => !editor.can().addColumnBefore()}
+          iconStyling="stroke"
+          onClick={() => {
+            editor.commands.addColumnBefore();
+          }}
+          editor={editor}
+          config={{}}
+        />
+        <RegularButton
+          Icon={({ className }) => <AddColumn className={className} height="20px" width="20px" />}
+          text={'table-add-column-before'}
+          getIsActive={() => false}
+          getIsDisabled={({ editor }) => !editor.can().addColumnBefore()}
+          iconStyling="stroke"
+          onClick={() => {
+            editor.commands.addColumnBefore();
+          }}
+          editor={editor}
+          config={{}}
+        />
+        <RegularButton
+          Icon={({ className }) => <AddRow className={className} height="20px" width="20px" />}
+          text={'table-add-row-above'}
+          getIsActive={() => false}
+          getIsDisabled={({ editor }) => !editor.can().addRowBefore()}
+          iconStyling="stroke"
+          onClick={() => {
+            editor.commands.addRowBefore();
+          }}
+          editor={editor}
+          config={{}}
+        />
+        <RegularButton
+          Icon={({ className }) => (
+            <AddRow
+              className={classNames(className, classes.verticallyFlippedIcon)}
+              height="20px"
+              width="20px"
+            />
+          )}
+          text={'table-add-row-below'}
+          getIsActive={() => false}
+          getIsDisabled={({ editor }) => !editor.can().addColumnAfter()}
+          iconStyling="stroke"
+          onClick={() => {
+            editor.commands.addColumnAfter();
+          }}
+          editor={editor}
+          config={{}}
+        />
+        <RegularButton
+          Icon={({ className }) => (
+            <DeleteColumn
+              className={classNames(className, classes.removeIcon)}
+              height="20px"
+              width="20px"
+            />
+          )}
+          text={'table-delete-column'}
+          getIsActive={() => false}
+          getIsDisabled={({ editor }) => !editor.can().deleteColumn()}
+          iconStyling="stroke"
+          onClick={() => {
+            editor.commands.deleteColumn();
+          }}
+          editor={editor}
+          config={{}}
+        />
+        <RegularButton
+          Icon={({ className }) => (
+            <DeleteRow
+              className={classNames(className, classes.removeIcon)}
+              height="20px"
+              width="20px"
+            />
+          )}
+          text={'table-delete-row'}
+          getIsActive={() => false}
+          getIsDisabled={({ editor }) => !editor.can().deleteRow()}
+          iconStyling="stroke"
+          onClick={() => {
+            editor.commands.deleteRow();
+          }}
+          editor={editor}
+          config={{}}
+        />
+      </div>
+    </BubbleMenuWrapper>
+  );
 
   return (
     <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>

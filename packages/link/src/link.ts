@@ -11,11 +11,13 @@ export const Link = () =>
         'link-button.text': 'Toggle link',
         'link-address.label': 'URL',
         'voice-command.toggle-link': 'toggle link',
+        'text-styling-group.text': 'Text styling',
       },
       lt: {
         'link-button.text': 'Perjungti nuorodą',
         'link-address.label': 'URL',
         'voice-command.toggle-link': 'pakeisti nuorodą',
+        'text-styling-group.text': 'Teksto stiliavimas',
       },
     },
   });

@@ -9,10 +9,12 @@ export const Subscript = () =>
       en: {
         'subscript-button.text': 'Toggle subscript',
         'voice-command.toggle-subscript': 'toggle subscript',
+        'text-styling-group.text': 'Text styling',
       },
       lt: {
         'subscript-button.text': 'Pakeisti apatinį indeksą',
         'voice-command.toggle-subscript': 'pakeisti apatinį indeksą',
+        'text-styling-group.text': 'Teksto stiliavimas',
       },
     },
   });

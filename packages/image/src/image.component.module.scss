@@ -1,53 +1,67 @@
 .imageContainer {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+
+  .image {
+    object-fit: contain;
+    max-width: 100%;
+    height: auto;
+
+    &.customSize {
+      object-fit: fill;
+    }
+  }
+
+  .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--rrte-color-2), 0.4);
 
-    .image {
-        object-fit: contain;
-        max-width: 100%;
-        height: auto;
-
-        &.customSize {
-            object-fit: fill;
-        }
+    .loadingCircle {
+      width: 20px;
+      height: 20px;
+      border: 4px solid rgb(var(--rrte-color-2));
+      border-top-color: rgb(var(--rrte-color-4));
+      border-radius: 50%;
+      animation: spin 1.25s linear infinite;
     }
 
-    .loading {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(var(--rrte-color-2), 0.4);
-
-        .loadingCircle {
-            width: 20px;
-            height: 20px;
-            border: 4px solid rgb(var(--rrte-color-2));
-            border-top-color: rgb(var(--rrte-color-4));
-            border-radius: 50%;
-            animation: spin 1.25s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
+  }
+
+  .caption {
+    box-sizing: border-box;
+    padding: 6px 12px;
+    padding-top: 0;
+    font-family: var(--rrte-p-font-family);
+    font-size: 14px;
+    color: rgb(var(--rrte-color-2));
+    margin-top: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .left {
-    margin-right: auto;
+  margin-right: auto;
 }
 
 .right {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .center {
-    margin: 0 auto;
+  margin: 0 auto;
 }

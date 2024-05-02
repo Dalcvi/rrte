@@ -10,11 +10,13 @@ export const Color = () =>
         'color-button.text': 'Color',
         'color-remove.text': 'Remove color',
         'voice-command.remove-color': 'remove color',
+        'text-colouring-group.text': 'Text colouring',
       },
       lt: {
         'color-button.text': 'Spalva',
         'color-remove.text': 'Pašalinti spalvą',
         'voice-command.remove-color': 'pašalinti spalvą',
+        'text-colouring-group.text': 'Teksto spalvos',
       },
     },
   });

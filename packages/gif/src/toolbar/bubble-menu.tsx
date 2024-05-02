@@ -1,208 +1,131 @@
 import type { BubbleMenuToolbar } from '@rrte/common';
-import classes from './gif-bubble-menu.module.scss';
+import { BubbleMenuWrapper, ModalButton, NumberInput, RegularButton } from '@rrte/toolbar';
+import { GifAttributes, GifNode } from '../node';
+import AlignCenter from './align-center.icon.svg';
 import AlignLeft from './align-left.icon.svg';
 import AlignRight from './align-right.icon.svg';
-import AlignCenter from './align-center.icon.svg';
 import CustomSize from './custom-size.icon.svg';
-import { GifAttributes, GifNode } from '../node';
-import classNames from 'classnames';
-import { useEffect, useMemo, useState } from 'react';
-import ReplaceIcon from './replace.icon.svg';
+import classes from './gif-bubble-menu.module.scss';
 import { GifSearch } from './gif-search.component';
+import ReplaceIcon from './replace.icon.svg';
 
 const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config, t }) => {
-  const [maxWidth, setMaxWidth] = useState(0);
   const currentAttributes = editor.getAttributes(GifNode.name) as GifAttributes & {
     id: string | undefined;
   };
-  const [isOpen, setIsOpen] = useState(false);
-  const [container, setContainer] = useState<HTMLDivElement | null>(null);
-  const close = useMemo(
-    () => (e?: MouseEvent) => {
-      if (e && container && container.contains(e.target as Node)) {
-        return;
-      }
-      document.removeEventListener('click', close);
-      document.removeEventListener('keydown', escapeClose);
-      setIsOpen(false);
-    },
-    [container]
-  );
-  const escapeClose = useMemo(
-    () => (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        close();
-      }
-    },
-    [close]
-  );
-
-  useEffect(() => {
-    return () => {
-      document.removeEventListener('click', close);
-      document.removeEventListener('keydown', escapeClose);
-      close();
-    };
-  }, [container]);
-
-  useEffect(() => {
-    const editor = document.querySelector("[data-testid='rrte-editor']") as HTMLElement;
-    if (!editor) {
-      return;
-    }
-    const observer = new ResizeObserver(entries => {
-      const maxWidth = entries[0].contentRect.width;
-      setMaxWidth(maxWidth);
-    });
-    observer.observe(editor);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
 
   const isCustomSizeEnabled = !!currentAttributes.customSize;
   const alignment = currentAttributes.alignment;
   return (
-    <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
-      <div className={classes.gifContainer} ref={setContainer}>
-        <button
-          data-testid="gif-replace"
-          aria-label={t('gif.replace')}
-          className={classNames(classes.button)}
-          onClick={() => {
-            document.addEventListener('click', close);
-            document.addEventListener('keydown', escapeClose);
-            setIsOpen(true);
-          }}
-        >
-          <ReplaceIcon
-            width="20px"
-            height="20px"
-            className={classNames(classes.icon, {
-              [classes.active]: alignment === 'left',
-            })}
+    <BubbleMenuWrapper>
+      <div className={classes.bubbleMenu}>
+        <div className={classes.row}>
+          <ModalButton
+            text="gif.replace"
+            Icon={({ className }) => (
+              <ReplaceIcon className={className} height="15px" width="15px" />
+            )}
+            editor={editor}
+            config={config}
+            name="gif-replace"
+            iconStyling="stroke"
+            getIsDisabled={() => false}
+            ModalContent={({ editor, config, setFirstItemRef, setLastItemRef, closeModal }) => (
+              <GifSearch
+                sdk={config.sdkKey}
+                setFirstItemRef={setFirstItemRef}
+                setLastItemRef={setLastItemRef}
+                onGifSelect={gifAttrs => {
+                  closeModal();
+                  editor.commands.setGif(gifAttrs);
+                }}
+              />
+            )}
           />
-        </button>
-        {isOpen && (
-          <GifSearch
-            sdk={config.sdkKey}
-            onGifSelect={gifAttrs => {
-              close();
-              editor.commands.setGif(gifAttrs);
+          <RegularButton
+            Icon={({ className }) => <AlignLeft className={className} height="15px" width="15px" />}
+            text={'gif.align-left'}
+            getIsActive={() => alignment === 'left'}
+            getIsDisabled={() => false}
+            iconStyling="stroke"
+            onClick={() => {
+              editor.commands.updateAttributes(GifNode.name, { alignment: 'left' });
             }}
+            editor={editor}
+            config={config}
           />
-        )}
+          <RegularButton
+            Icon={({ className }) => (
+              <AlignCenter className={className} height="15px" width="15px" />
+            )}
+            text={'gif.align-center'}
+            getIsActive={() => alignment === 'center'}
+            getIsDisabled={() => false}
+            iconStyling="stroke"
+            onClick={() => {
+              editor.commands.updateAttributes(GifNode.name, { alignment: 'center' });
+            }}
+            editor={editor}
+            config={config}
+          />
+          <RegularButton
+            Icon={({ className }) => (
+              <AlignRight className={className} height="15px" width="15px" />
+            )}
+            text={'gif.align-right'}
+            getIsActive={() => alignment === 'right'}
+            getIsDisabled={() => false}
+            iconStyling="stroke"
+            onClick={() => {
+              editor.commands.updateAttributes(GifNode.name, { alignment: 'right' });
+            }}
+            editor={editor}
+            config={config}
+          />
+          <RegularButton
+            Icon={({ className }) => (
+              <CustomSize className={className} height="15px" width="15px" />
+            )}
+            text={'gif.align-size'}
+            getIsActive={() => isCustomSizeEnabled}
+            getIsDisabled={() => false}
+            iconStyling="fill"
+            onClick={() => {
+              editor.commands.updateAttributes(GifNode.name, { customSize: !isCustomSizeEnabled });
+            }}
+            editor={editor}
+            config={config}
+          />
+        </div>
+        <hr className={classes.divider} />
+        <div className={classes.row}>
+          <NumberInput
+            label={t('gif.width')}
+            value={
+              currentAttributes.customWidth === null
+                ? currentAttributes.originalWidth
+                : currentAttributes.customWidth
+            }
+            isDisabled={!isCustomSizeEnabled}
+            onChange={value =>
+              editor.commands.updateAttributes(GifNode.name, { customWidth: value })
+            }
+          />
+          <NumberInput
+            label={t('gif.height')}
+            value={
+              currentAttributes.customHeight === null
+                ? currentAttributes.originalHeight
+                : currentAttributes.customHeight
+            }
+            isDisabled={!isCustomSizeEnabled}
+            onChange={value =>
+              editor.commands.updateAttributes(GifNode.name, { customHeight: value })
+            }
+          />
+        </div>
       </div>
-      <button
-        data-testid="gif-align-left"
-        aria-label={t('gif.align-left')}
-        className={classNames(classes.button, {
-          [classes.buttonActive]: alignment === 'left',
-        })}
-        onClick={() => {
-          editor.commands.updateAttributes(GifNode.name, { alignment: 'left' });
-        }}
-      >
-        <AlignLeft
-          width="20px"
-          height="20px"
-          className={classNames(classes.icon, {
-            [classes.active]: alignment === 'left',
-          })}
-        />
-      </button>
-      <button
-        data-testid="gif-align-center"
-        aria-label={t('gif.align-center')}
-        className={classNames(classes.button, {
-          [classes.buttonActive]: alignment === 'center',
-        })}
-        onClick={() => {
-          editor.commands.updateAttributes(GifNode.name, { alignment: 'center' });
-        }}
-      >
-        <AlignCenter
-          width="20px"
-          height="20px"
-          className={classNames(classes.icon, {
-            [classes.active]: alignment === 'center',
-          })}
-        />
-      </button>
-      <button
-        data-testid="gif-align-right"
-        aria-label={t('gif.align-right')}
-        className={classNames(classes.button, {
-          [classes.buttonActive]: alignment === 'right',
-        })}
-        onClick={() => {
-          editor.commands.updateAttributes(GifNode.name, { alignment: 'right' });
-        }}
-      >
-        <AlignRight
-          width="20px"
-          height="20px"
-          className={classNames(classes.icon, {
-            [classes.active]: alignment === 'right',
-          })}
-        />
-      </button>
-      <button
-        data-testid="gif-custom-size"
-        aria-label={t('gif.custom-size')}
-        className={classNames(classes.button, {
-          [classes.buttonActive]: isCustomSizeEnabled,
-        })}
-        onClick={() => {
-          editor.commands.updateAttributes(GifNode.name, { customSize: !isCustomSizeEnabled });
-        }}
-      >
-        <CustomSize
-          width="20px"
-          height="20px"
-          className={classNames(classes.icon, {
-            [classes.active]: isCustomSizeEnabled,
-          })}
-        />
-      </button>
-      <label className={classes.inputContainer}>
-        {t('gif.width')}:
-        <input
-          data-testid="gif-width"
-          aria-label="gif width"
-          disabled={!isCustomSizeEnabled}
-          className={classes.inputField}
-          type="number"
-          value={
-            currentAttributes.customWidth === null
-              ? currentAttributes.originalWidth
-              : currentAttributes.customWidth
-          }
-          onChange={e =>
-            editor.commands.updateAttributes(GifNode.name, { customWidth: Number(e.target.value) })
-          }
-        />
-      </label>
-      <label className={classes.inputContainer}>
-        {t('gif.height')}:
-        <input
-          data-testid="gif-height"
-          aria-label="gif height"
-          disabled={!isCustomSizeEnabled}
-          className={classes.inputField}
-          type="number"
-          value={
-            currentAttributes.customHeight === null
-              ? currentAttributes.originalHeight
-              : currentAttributes.customHeight
-          }
-          onChange={e =>
-            editor.commands.updateAttributes(GifNode.name, { customHeight: Number(e.target.value) })
-          }
-        />
-      </label>
-    </div>
+    </BubbleMenuWrapper>
   );
 };
 

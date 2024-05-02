@@ -27,6 +27,8 @@
   },
   "dependencies": {
     "@rrte/common": "^1.0.0",
+    "@rrte/i18n": "workspace:^",
+    "@rrte/toolbar": "workspace:^",
     "@tiptap/core": "^2.3.0",
     "@tiptap/pm": "^2.3.0",
     "@tiptap/react": "^2.3.0",

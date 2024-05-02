@@ -7,7 +7,7 @@ export type VideoReturnFunction = () => Promise<VideoReturnValue | VideoReturnEr
 export type VideoReturnValue = NeededVideoAttributes | false;
 export type NeededVideoAttributes = Omit<
   VideoAttributes,
-  'isLoading' | 'alignment' | 'customSize' | 'customWidth' | 'customHeight'
+  'isLoading' | 'alignment' | 'customSize' | 'customWidth' | 'customHeight' | 'title'
 > &
   Partial<VideoAttributes>;
 export type VideoReturnError = 'ERROR';

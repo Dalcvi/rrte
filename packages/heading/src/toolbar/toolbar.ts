@@ -5,6 +5,7 @@ import { HeadingNode, Level } from '../node';
 
 const createValue = (level: Level): DropdownValue => ({
   name: `heading ${level}`,
+  belongsTo: 'text-type-heading',
   priority: 7 - level,
   onClick: ({ editor }) => {
     editor.chain().focus().setHeading({ level }).run();
@@ -14,10 +15,14 @@ const createValue = (level: Level): DropdownValue => ({
   },
   className: classNames(classes.toolbarItem, classes[`h${level}`]),
   text: `heading-${level}-option`,
+  getIsDisabled: ({ editor }) => {
+    return !editor.can().setHeading({ level });
+  },
 });
 
 export const ToolbarDropdown: DropdownConfig = {
-  name: 'text type',
+  name: 'text-type-heading',
+  dropdownName: 'text type',
   type: ToolbarItemType.DROPDOWN,
   text: 'text-styles-dropdown.text',
   priority: 105,
@@ -30,4 +35,10 @@ export const ToolbarDropdown: DropdownConfig = {
     createValue(5),
     createValue(6),
   ],
+  group: {
+    name: 'typography',
+    text: 'typography.text',
+    priority: 100,
+    toolbar: 'main',
+  },
 };

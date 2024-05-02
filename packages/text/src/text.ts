@@ -1,6 +1,8 @@
 import { Node } from '@tiptap/core';
 import type {} from '@rrte/common';
 
+const shouldntAddSpace = ['.', ',', ':', ';', '?', '!', ')', ']', '}', '"', "'"];
+
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     text: {
@@ -16,6 +18,10 @@ declare module '@tiptap/core' {
        * Select sentence
        */
       selectSentence: () => ReturnType;
+      /**
+       * Deselect sentence
+       */
+      deselectSentence: () => ReturnType;
       /**
        * Finds the start of the current sentence and extends the selection to the start of the previous sentence
        */
@@ -61,6 +67,12 @@ export const TextNode = Node.create({
     },
     {
       group: t('voice-group.text-navigation'),
+      activationKeyword: t('voice-command.deselect-sentence'),
+      command: 'deselectSentence',
+      description: 'Deselect the current sentence',
+    },
+    {
+      group: t('voice-group.text-navigation'),
       activationKeyword: t('voice-command.select-previous-sentence'),
       command: 'selectPreviousSentence',
       description: 'Select the previous sentence',
@@ -81,11 +93,38 @@ export const TextNode = Node.create({
           const { tr } = view.state;
           const { selection } = tr;
           const letterBefore = tr.doc.textBetween(selection.$from.pos - 1, selection.$from.pos);
-          const shouldAddSpace = letterBefore && !letterBefore.match(/\s/);
+          const shouldAddSpace =
+            letterBefore && !letterBefore.match(/\s/) && !shouldntAddSpace.includes(text.charAt(0));
 
           const newText = shouldAddSpace ? ` ${text}` : text;
+          const getShouldCapitalizeLetter = () => {
+            let currentPos = selection.$from.pos - 1;
+            const parentOffset = selection.$from.parentOffset;
+            let movesLeft = parentOffset - 1;
 
-          tr.insertText(newText, selection.$from.pos, selection.$to.pos);
+            while (currentPos > 0 && movesLeft > 0) {
+              let letterBefore = tr.doc.textBetween(currentPos, currentPos + 1);
+              if (letterBefore.match(/[.!?]/)) {
+                return true;
+              }
+              if (!letterBefore.match(/\s/)) {
+                return false;
+              }
+              currentPos--;
+              movesLeft--;
+            }
+          };
+
+          const shouldCapitalize =
+            selection.$from.pos === 1 ||
+            selection.$from.parentOffset === 0 ||
+            getShouldCapitalizeLetter();
+
+          const newTextWithCapital = shouldCapitalize
+            ? newText.charAt(0).toUpperCase() + newText.slice(1)
+            : newText;
+
+          tr.insertText(newTextWithCapital, selection.$from.pos, selection.$to.pos);
 
           view.dispatch(tr);
           return true;
@@ -100,17 +139,75 @@ export const TextNode = Node.create({
         ) =>
         ({ view }) => {
           const { tr } = view.state;
+          const { selection } = tr;
 
           const letterBefore = tr.doc.textBetween(range.from - 1, range.from);
-          const shouldAddSpace = letterBefore && !letterBefore.match(/\s/);
+          const isThereALegalLetterInTextStart = shouldntAddSpace.includes(text.charAt(0));
+          const shouldAddSpace =
+            letterBefore && !letterBefore.match(/\s/) && !isThereALegalLetterInTextStart;
+          const textOneInFront = tr.doc.textBetween(range.to, range.to + 1);
+          const extendedTo =
+            isThereALegalLetterInTextStart &&
+            textOneInFront !== '\n' &&
+            textOneInFront !== ' ' &&
+            textOneInFront !== ''
+              ? range.to + 1
+              : range.to;
 
-          const to = range.to + (shouldAddSpace ? 1 : 0);
+          const to = extendedTo + (shouldAddSpace ? 1 : 0);
           const isTextEmpty = text.trim() === '';
-          const newText = shouldAddSpace && !isTextEmpty ? ` ${text}` : text;
+          const getShouldCapitalizeLetter = () => {
+            let currentPos = range.from - 1;
+            const parentOffset = selection.$from.parentOffset;
+            let movesLeft = parentOffset - 1;
+
+            while (currentPos > 0 && movesLeft > 0) {
+              let letterBefore = tr.doc.textBetween(currentPos, currentPos + 1);
+              if (letterBefore.match(/[.!?]/)) {
+                return true;
+              }
+              if (!letterBefore.match(/\s/)) {
+                return false;
+              }
+              currentPos--;
+              movesLeft--;
+            }
+          };
+
+          const movedLeft = selection.$from.pos - range.from;
+
+          const shouldCapitalizeFirstLetter =
+            range.from === 1 ||
+            movedLeft === selection.$from.parentOffset ||
+            getShouldCapitalizeLetter();
+
+          const newTextWithCapital = shouldCapitalizeFirstLetter
+            ? text.charAt(0).toUpperCase() + text.slice(1)
+            : text;
+
+          const newText =
+            shouldAddSpace && !isTextEmpty ? ` ${newTextWithCapital}` : newTextWithCapital;
 
           tr.insertText(newText, range.from, to);
 
           view.dispatch(tr);
+
+          return true;
+        },
+      deselectSentence:
+        () =>
+        ({ tr, commands }) => {
+          const { selection } = tr;
+          const { from, to } = selection;
+
+          if (!from || !to) {
+            return false;
+          }
+
+          commands.setTextSelection({
+            from: to,
+            to: to,
+          });
 
           return true;
         },
@@ -148,35 +245,6 @@ export const TextNode = Node.create({
           commands.setTextSelection({
             from: start,
             to: end,
-          });
-
-          return true;
-        },
-      selectPreviousSentence:
-        () =>
-        ({ tr, commands }) => {
-          const { selection } = tr;
-          const { from, to } = selection;
-
-          if (!from || !to) {
-            return false;
-          }
-
-          const minimumFrom = Math.max(selection.$from.pos - selection.$from.parentOffset - 1, 1);
-
-          // Find the start of the sentence. Either the start of the text in the parent node OR the first letter of the sentence
-          let start = from;
-          while (
-            start > minimumFrom &&
-            (!tr.doc.textBetween(start - 1, start).match(/[.!?]/) ||
-              (tr.doc.textBetween(start - 1, start).match(/[.!?]/) && start - 1 === from - 1))
-          ) {
-            start -= 1;
-          }
-
-          commands.setTextSelection({
-            from: start,
-            to: to,
           });
 
           return true;

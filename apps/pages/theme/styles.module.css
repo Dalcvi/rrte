@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
 .editor {
-  min-height: 100vh;
   margin: 12px 24px;
   width: 80%;
   max-width: 80%;
@@ -150,7 +149,7 @@
 .editorContent {
   min-height: 600px;
   outline: none;
-  padding: 6px;
+  padding: 12px 18px;
   width: 100%;
 }
 

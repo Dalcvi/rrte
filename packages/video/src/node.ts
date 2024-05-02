@@ -10,6 +10,7 @@ export interface VideoAttributes {
   customSize: boolean | null;
   customWidth: number;
   customHeight: number;
+  title: string | null;
   alignment: 'left' | 'center' | 'right';
 }
 
@@ -69,6 +70,9 @@ export const VideoNode = Node.create<VideoOptions>({
       },
       customWidth: {
         default: 320,
+      },
+      title: {
+        default: null,
       },
       customHeight: {
         default: 180,

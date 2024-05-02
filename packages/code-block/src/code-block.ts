@@ -9,10 +9,12 @@ export const CodeBlock = () =>
       en: {
         'codeblock-button.text': 'Toggle code block',
         'voice-command.toggle-codeblock': 'toggle code block',
+        'text-styling-group.text': 'Text styling',
       },
       lt: {
         'codeblock-button.text': 'Perjungti kodo bloką',
         'voice-command.toggle-codeblock': 'pakeisti kodo bloką',
+        'text-styling-group.text': 'Teksto stiliavimas',
       },
     },
   });

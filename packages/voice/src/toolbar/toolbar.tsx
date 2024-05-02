@@ -1,4 +1,4 @@
-import { useEditorSlot, type RegularButtonConfig } from '@rrte/common';
+import { useEditorSlot } from '@rrte/common';
 import { useTranslations } from '@rrte/i18n';
 import type {} from '@rrte/text';
 import classNames from 'classnames';
@@ -8,12 +8,13 @@ import { VoiceExtension } from '../extension';
 import VoiceIcon from './voice.icon.svg';
 import classes from './toolbar.module.scss';
 import { useSpeechStateMachine } from './use-speech-state-machine';
+import { CustomLogicButtonConfig, RegularButton } from '@rrte/toolbar';
 
-const Button: RegularButtonConfig['Button'] = ({ editor, editorContainerRef, t }) => {
-  const { language } = useTranslations();
-  const { setIsUsingSlot } = useEditorSlot();
+const Button: CustomLogicButtonConfig['Component'] = ({ editor, editorContainerRef }) => {
+  const { t, language } = useTranslations();
+  const { setIsUsingSlot, isUsingSlot } = useEditorSlot();
   const {
-    turnOnDictationMode,
+    turnOnCommandMode,
     turnOffMode,
     getCurrentMode,
     getCurrentSuggestedCommands,
@@ -50,13 +51,8 @@ const Button: RegularButtonConfig['Button'] = ({ editor, editorContainerRef, t }
 
   return (
     <>
-      <button
-        aria-label={getAriaLabel()}
-        data-testid="voice-button"
-        className={classNames(classes.voiceButton, {
-          [classes.dictation]: currentMode === 'dictation',
-          [classes.command]: currentMode === 'command',
-        })}
+      <RegularButton
+        text={getAriaLabel()}
         onClick={() => {
           const currentMode = getCurrentMode();
 
@@ -64,20 +60,20 @@ const Button: RegularButtonConfig['Button'] = ({ editor, editorContainerRef, t }
             return turnOffMode();
           }
 
-          turnOnDictationMode();
+          turnOnCommandMode();
         }}
-      >
-        {currentMode !== 'off' && <div className={classes.pulsatingCircle} />}
-        <VoiceIcon
-          height={'15px'}
-          width={'15px'}
-          className={classNames(classes.icon, {
-            [classes.dictation]: currentMode === 'dictation',
-            [classes.command]: currentMode === 'command',
-          })}
-        />
-      </button>
+        getIsActive={() => currentMode !== 'off'}
+        getIsDisabled={() => false}
+        iconStyling={'fill'}
+        secondaryTheme={currentMode === 'command'}
+        editor={editor}
+        config={{}}
+        Icon={({ className }) => (
+          <VoiceIcon height={'15px'} width={'15px'} className={classNames(className)} />
+        )}
+      />
       {currentMode === 'command' &&
+        isUsingSlot &&
         editorContainerRef &&
         ReactDOM.createPortal(
           <div>
@@ -145,10 +141,16 @@ const Button: RegularButtonConfig['Button'] = ({ editor, editorContainerRef, t }
   );
 };
 
-export const ToolbarButton: RegularButtonConfig = {
-  Button,
+export const ToolbarButton: CustomLogicButtonConfig = {
   name: VoiceExtension.name,
   text: 'voice-button.text',
-  type: 'icon' as const,
+  type: 'custom-logic' as const,
+  Component: Button,
   priority: 98,
+  group: {
+    name: 'accessibility',
+    text: 'accessibility.text',
+    priority: 2,
+    toolbar: 'main',
+  },
 };

@@ -1,42 +1,42 @@
-import type { BubbleMenuToolbar } from '@rrte/common';
-import { Editor } from '@tiptap/core';
-import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import type { BubbleMenuToolbar, InputIconButtonParams } from '@rrte/common';
+import {
+  BubbleMenuWrapper,
+  InputIconButton,
+  NumberInput,
+  RegularButton,
+  TextInput,
+} from '@rrte/toolbar';
+import { useEffect, useRef, useState } from 'react';
 import { ImageAttributes, ImageNode } from '../node';
 import {
   ExtensionControlledUploadConfig,
   UploadConfig,
   UserControlledUploadConfig,
 } from '../upload-config';
+import AccessibilityIcon from './accessibility.icon.svg';
 import AlignCenter from './align-center.icon.svg';
 import AlignLeft from './align-left.icon.svg';
 import AlignRight from './align-right.icon.svg';
+import BackIcon from './back.icon.svg';
 import CustomSize from './custom-size.icon.svg';
 import classes from './image-bubble-menu.module.scss';
 import ReplaceIcon from './replace.icon.svg';
 import { handleFileImage } from './toolbar.utils';
 
 const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t }) => {
-  const [maxWidth, setMaxWidth] = useState(0);
+  const [accessibilityMode, setAccessibilityMode] = useState(false);
+  const shouldFocusAccessibilityIcon = useRef(false);
+  const [accessibilityButton, setAccessibilityButton] = useState<HTMLButtonElement | null>(null);
   const currentAttributes = editor.getAttributes(ImageNode.name) as ImageAttributes & {
     id: string | undefined;
   };
 
   useEffect(() => {
-    const editor = document.querySelector("[data-testid='rrte-editor']") as HTMLElement;
-    if (!editor) {
-      return;
+    if (shouldFocusAccessibilityIcon.current && accessibilityButton) {
+      accessibilityButton.focus();
+      shouldFocusAccessibilityIcon.current = false;
     }
-    const observer = new ResizeObserver(entries => {
-      const maxWidth = entries[0].contentRect.width;
-      setMaxWidth(maxWidth);
-    });
-    observer.observe(editor);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  }, [accessibilityButton, shouldFocusAccessibilityIcon.current]);
 
   const imgId = currentAttributes.id;
   if (!imgId) {
@@ -44,247 +44,234 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
   }
   const isCustomSizeEnabled = !!currentAttributes.customSize;
   const alignment = currentAttributes.alignment;
-  return (
-    <div className={classes.bubbleMenu} style={{ maxWidth: `${maxWidth}px` }}>
-      <ChangeImageButton config={config} editor={editor} imgId={imgId} t={t} />
-      <button
-        data-testid="image-bubble-menu-align-left"
-        aria-label={t('image.align-left')}
-        className={classNames(classes.button, {
-          [classes.buttonActive]: alignment === 'left',
-        })}
-        onClick={() => {
-          editor.commands.updateAttributes(ImageNode.name, { alignment: 'left' });
-        }}
-      >
-        <AlignLeft
-          width="20px"
-          height="20px"
-          className={classNames(classes.icon, {
-            [classes.active]: alignment === 'left',
-          })}
-        />
-      </button>
-      <button
-        aria-label={t('image.align-center')}
-        data-testid="image-bubble-menu-align-center"
-        className={classNames(classes.button, {
-          [classes.buttonActive]: alignment === 'center',
-        })}
-        onClick={() => {
-          editor.commands.updateAttributes(ImageNode.name, { alignment: 'center' });
-        }}
-      >
-        <AlignCenter
-          width="20px"
-          height="20px"
-          className={classNames(classes.icon, {
-            [classes.active]: alignment === 'center',
-          })}
-        />
-      </button>
-      <button
-        aria-label={t('image.align-right')}
-        data-testid="image-bubble-menu-align-right"
-        className={classNames(classes.button, {
-          [classes.buttonActive]: alignment === 'right',
-        })}
-        onClick={() => {
-          editor.commands.updateAttributes(ImageNode.name, { alignment: 'right' });
-        }}
-      >
-        <AlignRight
-          width="20px"
-          height="20px"
-          className={classNames(classes.icon, {
-            [classes.active]: alignment === 'right',
-          })}
-        />
-      </button>
-      <button
-        aria-label={t('image.custom-size')}
-        data-testid="image-bubble-menu-custom-size"
-        className={classNames(classes.button, {
-          [classes.buttonActive]: isCustomSizeEnabled,
-        })}
-        onClick={() => {
-          editor.commands.updateAttributes(ImageNode.name, { customSize: !isCustomSizeEnabled });
-        }}
-      >
-        <CustomSize
-          width="20px"
-          height="20px"
-          className={classNames(classes.icon, {
-            [classes.active]: isCustomSizeEnabled,
-          })}
-        />
-      </button>
-      <label className={classes.inputContainer}>
-        {t('image.alt')}
-        <input
-          aria-label="image alt"
-          data-testid="image-bubble-menu-input-alt"
-          className={classes.inputField}
-          type="text"
-          value={currentAttributes.alt ?? undefined}
-          onChange={e => editor.commands.updateAttributes(ImageNode.name, { alt: e.target.value })}
-        />
-      </label>
-      <label className={classes.inputContainer}>
-        {t('image.width')}
-        <input
-          aria-label="image width"
-          data-testid="image-bubble-menu-input-width"
-          disabled={!isCustomSizeEnabled}
-          className={classes.inputField}
-          type="number"
-          value={
-            currentAttributes.customWidth === null
-              ? currentAttributes.originalWidth
-              : currentAttributes.customWidth
-          }
-          onChange={e =>
-            editor.commands.updateAttributes(ImageNode.name, {
-              customWidth: Number(e.target.value),
-            })
-          }
-        />
-      </label>
-      <label className={classes.inputContainer}>
-        {t('image.height')}
-        <input
-          aria-label="image height"
-          data-testid="image-bubble-menu-input-height"
-          disabled={!isCustomSizeEnabled}
-          className={classes.inputField}
-          type="number"
-          value={
-            currentAttributes.customHeight === null
-              ? currentAttributes.originalHeight
-              : currentAttributes.customHeight
-          }
-          onChange={e =>
-            editor.commands.updateAttributes(ImageNode.name, {
-              customHeight: Number(e.target.value),
-            })
-          }
-        />
-      </label>
-    </div>
-  );
-};
 
-const ChangeImageButton = ({
-  editor,
-  config,
-  imgId,
-  t,
-}: {
-  editor: Editor;
-  config: UploadConfig;
-  imgId: string;
-  t: (key: string) => string;
-}) => {
-  if (config.type === 'user-controlled') {
-    return <UserControlledChangeButton editor={editor} config={config} imgId={imgId} t={t} />;
+  if (accessibilityMode) {
+    return (
+      <BubbleMenuWrapper>
+        <div className={classes.bubbleMenu}>
+          <div className={classes.row}>
+            <RegularButton
+              Icon={({ className }) => (
+                <BackIcon className={className} height="15px" width="15px" />
+              )}
+              text={'gif.back'}
+              getIsActive={() => false}
+              getIsDisabled={() => false}
+              iconStyling="stroke"
+              onClick={() => {
+                shouldFocusAccessibilityIcon.current = true;
+                setAccessibilityMode(false);
+              }}
+              editor={editor}
+              config={config}
+            />
+          </div>
+          <hr className={classes.divider} />
+          <div className={classes.row}>
+            <TextInput
+              label={t('image.alt')}
+              value={currentAttributes.alt ?? ''}
+              onChange={value => editor.commands.updateAttributes(ImageNode.name, { alt: value })}
+            />
+          </div>
+          <hr className={classes.divider} />
+          <div className={classes.row}>
+            <TextInput
+              label={t('image.caption')}
+              value={currentAttributes.caption ?? ''}
+              onChange={value =>
+                editor.commands.updateAttributes(ImageNode.name, { caption: value })
+              }
+            />
+          </div>
+        </div>
+      </BubbleMenuWrapper>
+    );
   }
 
-  return <ExtensionControlledChangeButton editor={editor} config={config} imgId={imgId} t={t} />;
-};
-
-const ExtensionControlledChangeButton = ({
-  editor,
-  config,
-  imgId,
-  t,
-}: {
-  editor: Editor;
-  config: ExtensionControlledUploadConfig;
-  imgId: string;
-  t: (key: string) => string;
-}) => {
   return (
-    <div className={classes.button}>
-      <input
-        aria-label={t('image-change.text')}
-        type="file"
-        accept={config.acceptedImageFileTypes.join(', ')}
-        className={classes.imageInput}
-        value={''}
-        onChange={async e => {
-          const file = e.target.files?.[0];
-          if (!file) {
-            return;
-          }
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-
-          const image = new Image();
-          reader.onload = e => {
-            if (!e.target || !e.target.result) {
-              return;
-            }
-            const result = e.target.result;
-            if (typeof result === 'string') {
-              image.src = result;
-            } else {
-              const blob = new Blob([result], { type: file.type });
-              image.src = URL.createObjectURL(blob);
-            }
-            image.onload = async () => {
-              const originalWidth = image.naturalWidth;
-              const originalHeight = image.naturalHeight;
-              await handleFileImage(
-                {
-                  src: image.src,
-                  originalWidth,
-                  originalHeight,
-                },
-                editor,
-                imgId,
-                true
-              );
-
-              const finalImg = await config.onImageAdd(file, {
-                src: image.src,
-                originalWidth,
-                originalHeight,
+    <BubbleMenuWrapper>
+      <div className={classes.bubbleMenu}>
+        <div className={classes.row}>
+          <InputIconButton
+            text="image-change.text"
+            Icon={({ className }) => (
+              <ReplaceIcon className={className} height="15px" width="15px" />
+            )}
+            editor={editor}
+            config={config}
+            iconStyling="stroke"
+            getIsDisabled={() => false}
+            getAcceptableFiles={() => config.acceptedImageFileTypes.join(', ')}
+            onChange={async e => {
+              if (config.type === 'user-controlled') {
+                await userControlledOnChange(config, editor, imgId);
+              } else {
+                await extensionControlledOnChange(e, config, editor, imgId);
+              }
+            }}
+          />
+          <RegularButton
+            Icon={({ className }) => <AlignLeft className={className} height="15px" width="15px" />}
+            text={'image.align-left'}
+            getIsActive={() => alignment === 'left'}
+            getIsDisabled={() => false}
+            iconStyling="stroke"
+            onClick={() => {
+              editor.commands.updateAttributes(ImageNode.name, { alignment: 'left' });
+            }}
+            editor={editor}
+            config={config}
+          />
+          <RegularButton
+            Icon={({ className }) => (
+              <AlignCenter className={className} height="15px" width="15px" />
+            )}
+            text={'image.align-center'}
+            getIsActive={() => alignment === 'center'}
+            getIsDisabled={() => false}
+            iconStyling="stroke"
+            onClick={() => {
+              editor.commands.updateAttributes(ImageNode.name, { alignment: 'center' });
+            }}
+            editor={editor}
+            config={config}
+          />
+          <RegularButton
+            Icon={({ className }) => (
+              <AlignRight className={className} height="15px" width="15px" />
+            )}
+            text={'image.align-right'}
+            getIsActive={() => alignment === 'right'}
+            getIsDisabled={() => false}
+            iconStyling="stroke"
+            onClick={() => {
+              editor.commands.updateAttributes(ImageNode.name, { alignment: 'right' });
+            }}
+            editor={editor}
+            config={config}
+          />
+          <RegularButton
+            Icon={({ className }) => (
+              <AccessibilityIcon className={className} height="15px" width="15px" />
+            )}
+            text={'image.accessibility'}
+            getIsActive={() => false}
+            ref={setAccessibilityButton}
+            getIsDisabled={() => false}
+            iconStyling="fill"
+            onClick={() => {
+              setAccessibilityMode(true);
+            }}
+            editor={editor}
+            config={config}
+          />
+          <RegularButton
+            Icon={({ className }) => (
+              <CustomSize className={className} height="15px" width="15px" />
+            )}
+            text={'image.align-size'}
+            getIsActive={() => isCustomSizeEnabled}
+            getIsDisabled={() => false}
+            iconStyling="fill"
+            onClick={() => {
+              editor.commands.updateAttributes(ImageNode.name, {
+                customSize: !isCustomSizeEnabled,
               });
-              await handleFileImage(finalImg, editor, imgId);
-            };
-          };
-        }}
-      />
-      <ReplaceIcon className={classes.icon} width={'15px'} height={'15px'} />
-    </div>
+            }}
+            editor={editor}
+            config={config}
+          />
+        </div>
+        <hr className={classes.divider} />
+        <div className={classes.row}>
+          <NumberInput
+            label={t('image.width')}
+            value={
+              currentAttributes.customWidth === null
+                ? currentAttributes.originalWidth
+                : currentAttributes.customWidth
+            }
+            isDisabled={!isCustomSizeEnabled}
+            onChange={value =>
+              editor.commands.updateAttributes(ImageNode.name, { customWidth: value })
+            }
+          />
+          <NumberInput
+            label={t('image.height')}
+            value={
+              currentAttributes.customHeight === null
+                ? currentAttributes.originalHeight
+                : currentAttributes.customHeight
+            }
+            isDisabled={!isCustomSizeEnabled}
+            onChange={value =>
+              editor.commands.updateAttributes(ImageNode.name, { customHeight: value })
+            }
+          />
+        </div>
+      </div>
+    </BubbleMenuWrapper>
   );
 };
 
-const UserControlledChangeButton = ({
-  editor,
-  config,
-  imgId,
-  t,
-}: {
-  editor: Editor;
-  config: UserControlledUploadConfig;
-  imgId: string;
-  t: (key: string) => string;
-}) => {
-  return (
-    <button
-      aria-label={t('image-change.text')}
-      data-testid="user-controlled-image-button"
-      className={classNames(classes.button)}
-      onClick={async () => {
-        const uploadValue = await config.onImageAddClick();
-        await handleFileImage(uploadValue.tempFile, editor, imgId, true);
-        await handleFileImage(await uploadValue.finalFile, editor, imgId);
-      }}
-    >
-      <ReplaceIcon className={classes.icon} width={'15px'} height={'15px'} />
-    </button>
-  );
+const userControlledOnChange = async (
+  config: UserControlledUploadConfig,
+  editor: InputIconButtonParams<UserControlledUploadConfig>['editor'],
+  imgId: string
+) => {
+  const uploadValue = await config.onImageAddClick();
+  await handleFileImage(uploadValue.tempFile, editor, imgId, true);
+  await handleFileImage(await uploadValue.finalFile, editor, imgId);
+};
+
+const extensionControlledOnChange = async (
+  e: React.ChangeEvent<HTMLInputElement>,
+  config: ExtensionControlledUploadConfig,
+  editor: InputIconButtonParams<ExtensionControlledUploadConfig>['editor'],
+  imgId: string
+) => {
+  const file = e.target.files?.[0];
+  if (!file) {
+    return;
+  }
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+
+  const image = new Image();
+  reader.onload = e => {
+    if (!e.target || !e.target.result) {
+      return;
+    }
+    const result = e.target.result;
+    if (typeof result === 'string') {
+      image.src = result;
+    } else {
+      const blob = new Blob([result], { type: file.type });
+      image.src = URL.createObjectURL(blob);
+    }
+    image.onload = async () => {
+      const originalWidth = image.naturalWidth;
+      const originalHeight = image.naturalHeight;
+      await handleFileImage(
+        {
+          src: image.src,
+          originalWidth,
+          originalHeight,
+        },
+        editor,
+        imgId,
+        true
+      );
+
+      const finalImg = await config.onImageAdd(file, {
+        src: image.src,
+        originalWidth,
+        originalHeight,
+      });
+      await handleFileImage(finalImg, editor, imgId);
+    };
+  };
 };
 
 export const ImageBubbleMenu: BubbleMenuToolbar<UploadConfig> = {

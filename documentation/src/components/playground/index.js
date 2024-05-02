@@ -1,7 +1,8 @@
-import { Editor } from "@rrte/editor";
-import React, { useMemo, useRef, useState } from "react";
-import { getConfig } from "./extensions-config";
-import classes from "./styles.module.css";
+import { Editor } from '@rrte/editor';
+import React, { useMemo, useRef, useState } from 'react';
+import { getConfig } from './extensions-config';
+import classes from './styles.module.css';
+import './styles.css';
 
 export default function Web() {
   const [content, setContent] = useState(undefined);
@@ -16,7 +17,7 @@ export default function Web() {
           <div className={classes.commentBox}>
             <Editor
               content={content}
-              onUpdateJson={(content) => {
+              onUpdateJson={content => {
                 setContent(content);
               }}
               editorRef={editor}
@@ -33,7 +34,7 @@ export default function Web() {
               disabled={editor.current?.isEmpty}
               onClick={() => {
                 if (editor.current && content) {
-                  setComments((comments) => [...comments, content]);
+                  setComments(comments => [...comments, content]);
                   editor.current.commands.clearContent(true);
                 }
               }}

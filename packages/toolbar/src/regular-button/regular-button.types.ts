@@ -1,18 +1,20 @@
 import { Editor } from '@tiptap/react';
-import { ToolbarItemType } from '../toolbar.types';
-import { Translate } from '@rrte/i18n';
+import { ToolbarGroup, ToolbarItemType } from '../toolbar.types';
 
 export type RegularButtonConfig<T extends Record<string, any> = Record<string, any>> = {
   name: string;
   type: typeof ToolbarItemType.ICON;
   text: string;
-  Button: (props: RegularButtonWrapperProps<T>) => JSX.Element;
+  Icon: React.FC<{ className: string }>;
+  onClick: (params: RegularButtonParams<T>) => void;
+  getIsActive: (params: RegularButtonParams<T>) => boolean;
+  getIsDisabled: (params: RegularButtonParams<T>) => boolean;
   priority: number;
+  iconStyling: 'fill' | 'stroke';
+  group: ToolbarGroup;
 };
 
-export type RegularButtonWrapperProps<T extends Record<string, any>> = {
+export type RegularButtonParams<T extends Record<string, any>> = {
   editor: Editor;
   config: T;
-  t: Translate;
-  editorContainerRef: HTMLElement | null;
 };

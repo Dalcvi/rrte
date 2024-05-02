@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  max-width: 105px;
+}
+
+.numberControlButton {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 6px;
+  background: none;
+  border: var(--rrte-editor-border);
+
+  &.numberControlFirst {
+    border-top-left-radius: var(--toolbar-button-border-radius);
+    border-bottom-left-radius: var(--toolbar-button-border-radius);
+    border-right: none;
+  }
+
+  &.numberControlSecond {
+    border-top-right-radius: var(--toolbar-button-border-radius);
+    border-bottom-right-radius: var(--toolbar-button-border-radius);
+    border-left: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.1;
+    cursor: not-allowed;
+  }
+
+  &:focus-within,
+  &:hover,
+  &:focus {
+    background-color: rgb(
+      var(--rrte-toolbar-item-focus-background),
+      var(--rrte-toolbar-item-focus-background-alpha)
+    );
+    outline: var(--rrte-toolbar-item-focus-outline);
+  }
+  &.active {
+    background: rgb(var(--rrte-color-4));
+    &.secondaryTheme {
+      background: rgb(var(--rrte-color-6));
+    }
+
+    &:focus-within,
+    &:hover,
+    &:focus {
+      background-color: rgb(var(--rrte-color-4), var(--rrte-toolbar-item-focus-background-alpha));
+      &.secondaryTheme {
+        background: rgb(var(--rrte-color-6), var(--rrte-toolbar-item-focus-background-alpha));
+      }
+    }
+  }
+}
+
+.numberInput {
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-bottom: 2px solid rgb(var(--rrte-color-3));
+  background-color: rgb(var(--rrte-color-3), 0.6);
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.icon {
+  --toolbar-regular-button-icon-color: rgb(var(--rrte-color-2));
+
+  &.fill * {
+    fill: var(--toolbar-regular-button-icon-color);
+  }
+
+  &.stroke * {
+    stroke: var(--toolbar-regular-button-icon-color);
+  }
+
+  &.active {
+    --toolbar-regular-button-icon-color: rgb(var(--rrte-color-1));
+    background: rgb(var(--rrte-color-4));
+    &.secondaryTheme {
+      background: rgb(var(--rrte-color-6));
+    }
+
+    &.stroke * {
+      stroke: var(--toolbar-regular-button-icon-color);
+    }
+
+    &.fill * {
+      fill: var(--toolbar-regular-button-icon-color);
+    }
+  }
+}

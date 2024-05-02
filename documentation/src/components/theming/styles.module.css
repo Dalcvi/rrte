@@ -1,11 +1,9 @@
 .editor {
-  min-height: 100vh;
   margin: 12px 24px;
-  width: 80%;
   max-width: 80%;
   --rrte-color-1-ovr: 255, 123, 23;
   --rrte-color-2-ovr: 100, 25, 45;
-  --rrte-color-3-ovr: 45, 90, 190;
+  --rrte-color-3-ovr: 123, 255, 23;
   --rrte-color-4-ovr: 255, 255, 255;
   --rrte-color-5-ovr: 0, 0, 0;
   --rrte-color-6-ovr: 190, 190, 0;
@@ -146,8 +144,7 @@
 }
 
 .editorContent {
-  min-height: 600px;
   outline: none;
-  padding: 6px;
+  padding: 12px 18px;
   width: 100%;
 }

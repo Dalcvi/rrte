@@ -1,24 +1,41 @@
 import {
   DropdownConfig,
+  GroupedToolbars,
   SingleToolbarItem,
   SortedToolbarItems,
-  ToolbarItem,
   ToolbarItemType,
 } from './toolbar.types';
 
-export const spreadToolbarItems = (items: ToolbarItem<any>[]): SingleToolbarItem<any>[] => {
-  return items.flat();
-};
-
 export const getConfigsMapByName = (
-  toolbarInfos: { toolbar: ToolbarItem<any>; config: Record<string, any> }[]
+  toolbarInfos: { toolbar: SingleToolbarItem<any>; config: Record<string, any> }[]
 ): { [key: string]: Record<string, any> } => {
   return toolbarInfos
-    .flatMap(({ toolbar, config }) => {
-      const toolbars = Array.isArray(toolbar) ? toolbar : [toolbar];
-      return toolbars.map(({ name }) => ({ name, config }));
-    })
+    .map(({ toolbar, config }) => ({
+      name: toolbar.name,
+      config,
+    }))
     .reduce((acc, { name, config }) => ({ ...acc, [name]: config }), {});
+};
+
+export const groupToolbarItemsByGroup = (
+  items: SingleToolbarItem<any>[]
+): GroupedToolbars<any>[] => {
+  const groups = items.reduce(
+    (acc, item) => {
+      return {
+        ...acc,
+        [item.group.name]: [...(acc[item.group.name] || []), item],
+      };
+    },
+    {} as { [key: string]: SingleToolbarItem<any>[] }
+  );
+
+  return Object.values(groups)
+    .map(toolbars => ({
+      toolbars,
+      group: toolbars.sort((a, b) => b.group.priority - a.group.priority)[0].group,
+    }))
+    .sort((a, b) => b.group.priority - a.group.priority);
 };
 
 export const getDifferentToolbarTypes = (
@@ -48,7 +65,7 @@ export const getReducedMutliExtensions = (items: DropdownConfig[]): DropdownConf
   const dropdownsGroupedByName = items.reduce(
     (acc, item) => ({
       ...acc,
-      [item.name]: [...(acc[item.name] || []), item],
+      [item.dropdownName]: [...(acc[item.dropdownName] || []), item],
     }),
     {} as { [key: string]: DropdownConfig[] }
   );

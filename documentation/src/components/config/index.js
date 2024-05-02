@@ -4,6 +4,7 @@ import { Bold } from '@rrte/bold';
 import { TextAlign } from '@rrte/text-align';
 import { Paragraph } from '@rrte/paragraph';
 import classes from './styles.module.css';
+import './styles.css';
 
 function MyComponent() {
   return (

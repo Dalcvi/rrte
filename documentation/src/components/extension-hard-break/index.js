@@ -1,10 +1,11 @@
-import React from "react";
-import { Editor } from "@rrte/editor";
-import { Paragraph } from "@rrte/paragraph";
-import { HardBreak } from "@rrte/hard-break";
-import { BulletList } from "@rrte/bullet-list";
-import { ListItem } from "@rrte/list-item";
-import classes from "./styles.module.css";
+import React from 'react';
+import { Editor } from '@rrte/editor';
+import { Paragraph } from '@rrte/paragraph';
+import { HardBreak } from '@rrte/hard-break';
+import { BulletList } from '@rrte/bullet-list';
+import { ListItem } from '@rrte/list-item';
+import classes from './styles.module.css';
+import './styles.css';
 
 function MyComponent() {
   return (

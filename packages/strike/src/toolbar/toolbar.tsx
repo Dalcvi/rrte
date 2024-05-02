@@ -1,38 +1,21 @@
 import type { RegularButtonConfig } from '@rrte/common';
-import classNames from 'classnames';
 import { StrikeMark } from '../mark';
 import StrikeIcon from './strike.icon.svg';
-import classes from './toolbar.module.scss';
-
-const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
-  const isActive = editor.isActive('strike');
-  return (
-    <button
-      data-testid="strike-button"
-      aria-label={t('strike-button.text')}
-      className={classNames(classes.strikeButton, {
-        [classes.active]: isActive,
-      })}
-      onClick={() => {
-        editor.chain().focus().toggleStrike().run();
-      }}
-      disabled={!editor.can().toggleStrike()}
-    >
-      <StrikeIcon
-        height={'15px'}
-        width={'15px'}
-        className={classNames(classes.icon, {
-          [classes.active]: isActive,
-        })}
-      />
-    </button>
-  );
-};
 
 export const ToolbarButton: RegularButtonConfig = {
-  Button,
   name: StrikeMark.name,
   text: 'strike-button.text',
   type: 'icon' as const,
   priority: 96,
+  getIsActive: ({ editor }) => editor.isActive('strike'),
+  getIsDisabled: ({ editor }) => !editor.can().toggleStrike(),
+  iconStyling: 'fill',
+  Icon: ({ className }) => <StrikeIcon height={'15px'} width={'15px'} className={className} />,
+  onClick: ({ editor }) => editor.chain().focus().toggleStrike().run(),
+  group: {
+    name: 'text-styling',
+    text: 'text-styling-group.text',
+    priority: 3,
+    toolbar: 'main',
+  },
 };

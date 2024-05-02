@@ -1,106 +1,61 @@
-import type { RegularButtonConfig } from '@rrte/common';
-import classNames from 'classnames';
-import { useEffect, useMemo, useState } from 'react';
+import type { ModalButtonConfig } from '@rrte/common';
+import { useTranslations } from '@rrte/i18n';
+import { useState } from 'react';
 import { YoutubeNode } from '../node';
 import classes from './toolbar.module.scss';
 import { getYouTubeID } from './toolbar.utils';
 import YoutubeIcon from './youtube.icon.svg';
+import { Button, TextInput } from '@rrte/toolbar';
 
-const Button: RegularButtonConfig['Button'] = ({ editor, t }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const YoutubeModalContent: ModalButtonConfig['ModalContent'] = ({
+  editor,
+  setFirstItemRef,
+  setLastItemRef,
+  closeModal,
+}) => {
   const [url, setUrl] = useState('');
   const videoId = getYouTubeID(url);
-  const [container, setContainer] = useState<HTMLDivElement | null>(null);
-  const isActive = editor.isActive(YoutubeNode.name);
-  const close = useMemo(
-    () => (e?: MouseEvent) => {
-      if (e && container && container.contains(e.target as Node)) {
-        return;
-      }
-      document.removeEventListener('click', close);
-      document.removeEventListener('keydown', escapeClose);
-      setIsOpen(false);
-      setUrl('');
-    },
-    [container]
-  );
-
-  const escapeClose = useMemo(
-    () => (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        close();
-      }
-    },
-    [close]
-  );
-
-  useEffect(() => {
-    return () => {
-      document.removeEventListener('click', close);
-      document.removeEventListener('keydown', escapeClose);
-    };
-  }, [container]);
+  const { t } = useTranslations();
 
   return (
-    <div className={classes.container} ref={setContainer}>
-      <button
-        data-testid="youtube-button"
-        aria-label={t('youtube-button.text')}
-        disabled={!editor.can().setYoutube({ url: '', id: 'video' })}
-        className={classNames(classes.youtubeButton, {
-          [classes.active]: isActive,
-        })}
+    <div className={classes.inputContainer}>
+      <TextInput
+        label={t('youtube-url-input.label')}
+        onChange={setUrl}
+        value={url}
+        ref={setFirstItemRef}
+      />
+      <Button
+        aria-label={t('youtube-add')}
+        data-testid="youtube-add-button"
+        ref={setLastItemRef}
         onClick={() => {
-          setIsOpen(true);
-          document.addEventListener('click', close);
-          document.addEventListener('keydown', escapeClose);
+          if (!videoId) {
+            return;
+          }
+          editor.chain().focus().setYoutube({ url, id: videoId }).run();
+          closeModal();
         }}
-      >
-        <YoutubeIcon
-          height={'15px'}
-          width={'15px'}
-          className={classNames(classes.icon, {
-            [classes.active]: isActive,
-          })}
-        />
-      </button>
-      {isOpen && (
-        <div className={classes.inputContainer}>
-          <label className={classes.inputLabel}>
-            {t('youtube-url-input.label')}
-            <input
-              data-testid="youtube-input"
-              type="text"
-              value={url}
-              onChange={e => setUrl(e.target.value)}
-              className={classes.input}
-            />
-          </label>
-          <button
-            aria-label={t('youtube-add')}
-            data-testid="youtube-add-button"
-            onClick={() => {
-              if (!videoId) {
-                return;
-              }
-              editor.chain().focus().setYoutube({ url, id: videoId }).run();
-              close();
-            }}
-            disabled={!videoId}
-            className={classes.inputButton}
-          >
-            {t('youtube-add')}
-          </button>
-        </div>
-      )}
+        disabled={!videoId}
+        text={t('youtube-add')}
+      />
     </div>
   );
 };
 
-export const ToolbarButton: RegularButtonConfig = {
-  Button,
+export const ToolbarButton: ModalButtonConfig = {
   name: YoutubeNode.name,
   text: 'youtube-button.text',
-  type: 'icon' as const,
+  type: 'modal' as const,
   priority: 1,
+  Icon: ({ className }) => <YoutubeIcon height={'15px'} width={'15px'} className={className} />,
+  ModalContent: YoutubeModalContent,
+  getIsDisabled: ({ editor }) => !editor.can().setYoutube({ url: '', id: '' }),
+  iconStyling: 'fill',
+  group: {
+    name: 'media',
+    text: 'media-group.text',
+    priority: 3,
+    toolbar: 'footer',
+  },
 };

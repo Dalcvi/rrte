@@ -131,7 +131,9 @@ export const TableOfContents = ({
               classes[`tableOfContentsItemLevel${item.level}`]
             )}
           >
-            <a href={`#${item.id}`}>{item.text}</a>
+            <a target="_self" href={`#${item.id}`}>
+              {item.text}
+            </a>
           </li>
         ))}
       </ul>

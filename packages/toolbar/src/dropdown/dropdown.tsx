@@ -1,112 +1,151 @@
 import { useTranslations } from '@rrte/i18n';
 import type { Editor } from '@tiptap/react';
 import classNames from 'classnames';
-import { useCallback, useEffect, useState } from 'react';
 import { sortByPriority } from '../toolbar.utils';
 import ChevronDown from './chevron-down.svg';
 import classes from './dropdown.module.scss';
 import { DropdownConfig } from './dropdown.types';
+import { ToolbarModal, ToolbarModalContainer } from '../toolbar-modal';
+import { useModal } from '../modal-button/use-modal.hook';
 
-export const Dropdown = ({ editor, ...dropdown }: DropdownConfig & { editor: Editor }) => {
+export const Dropdown = ({
+  editor,
+  configs,
+  ...dropdown
+}: DropdownConfig<object> & { editor: Editor; configs: Record<string, Record<string, any>> }) => {
   const { t } = useTranslations();
-  const [isOpen, setIsOpen] = useState(false);
-  const [dropdownButton, setDropdownButton] = useState<HTMLButtonElement | null>(null);
+  const {
+    isOpen,
+    closeModal,
+    openDropdown,
+    setDropdownButton,
+    setDropdownList,
+    setFirstItem,
+    closeModalWithFocus,
+    setLastItem,
+  } = useModal();
 
   const valuesByPriority = sortByPriority(dropdown.values);
-  const closeModal = useCallback(
-    (e?: MouseEvent) => {
-      if (e && dropdownButton && dropdownButton.contains(e.target as Node)) {
-        return;
-      }
-      document.removeEventListener('click', closeModal);
-      document.removeEventListener('keydown', escapeClose);
-      setIsOpen(false);
-    },
-    [dropdownButton]
+  const selectedValue = valuesByPriority.find(value =>
+    value.isActive({ editor, config: configs[value.belongsTo] })
   );
-  const escapeClose = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
-    },
-    [closeModal]
-  );
+  const otherValues = valuesByPriority.filter(value => value.name !== selectedValue?.name);
 
-  useEffect(() => {
-    return () => {
-      document.removeEventListener('click', closeModal);
-      document.removeEventListener('keydown', escapeClose);
-    };
-  }, [dropdownButton]);
+  const Icon = selectedValue?.iconConfig?.Icon;
+  const text = selectedValue?.text;
 
-  const selectedValue = valuesByPriority.find(value => value.isActive({ editor }))?.text;
-
-  useEffect(() => {
-    return () => {
-      document.removeEventListener('click', closeModal);
-      document.removeEventListener('keydown', escapeClose);
-    };
-  }, [dropdownButton]);
+  const showIcon = !!Icon;
+  const showText = !!text && !showIcon;
 
   return (
-    <div className={classes.container}>
+    <ToolbarModalContainer>
       <button
         data-testid={dropdown.name}
         ref={setDropdownButton}
         role="combobox"
+        tabIndex={isOpen ? -1 : 0}
+        aria-label={t(dropdown.text)}
+        aria-activedescendant={selectedValue?.name}
         aria-controls={dropdown.name}
         aria-expanded={isOpen}
-        className={classNames(classes.select, {
-          [classes.open]: isOpen,
+        disabled={valuesByPriority.every(({ getIsDisabled }) => {
+          return getIsDisabled({ editor, config: configs[dropdown.name] });
         })}
-        onClick={() => {
-          setIsOpen(true);
-          document.addEventListener('click', closeModal);
-          document.addEventListener('keydown', escapeClose);
-        }}
+        className={classNames(classes.select)}
+        onClick={() => (isOpen ? closeModalWithFocus() : openDropdown())}
       >
-        {!!selectedValue && <div className={classes.value}>{t(selectedValue)}</div>}
-        <ChevronDown
-          className={classNames(classes.arrow, {
-            [classes.arrowOpen]: isOpen,
-          })}
-        />
-      </button>
-      {isOpen && (
-        <ul
-          id={dropdown.name}
-          role="listbox"
-          aria-label={t(dropdown.name)}
-          className={classNames(classes.dropdownItemsContainer)}
-          onBlur={e => {
-            if (e.currentTarget.contains(e.relatedTarget)) {
-              return;
+        <div className={classes.value}>
+          {showIcon && (
+            <span>
+              <Icon className={classNames(classes.icon, classes.shownValue)} />
+            </span>
+          )}
+          {showText && <span className={classes.shownValue}>{t(text)}</span>}
+          {otherValues.map(({ text, iconConfig }) => {
+            const OtherValueIcon = iconConfig?.Icon;
+
+            if (OtherValueIcon) {
+              return (
+                <span tabIndex={-1} key={text} className={classes.hidden} aria-hidden="true">
+                  <OtherValueIcon className={classes.hidden} />
+                </span>
+              );
             }
-            closeModal();
-          }}
-        >
-          {valuesByPriority.map(value => {
+
             return (
-              <li>
-                <button
-                  role="option"
-                  aria-selected={selectedValue === value.text}
-                  data-testid={value.name}
-                  className={classNames(classes.dropdownItem, value.className)}
-                  key={value.name}
-                  onClick={() => {
-                    closeModal();
-                    value.onClick({ editor });
-                  }}
-                >
-                  {t(value.text)}
-                </button>
-              </li>
+              <span key={text} className={classes.hidden} aria-hidden="true">
+                {t(text)}
+              </span>
             );
           })}
-        </ul>
+        </div>
+        <div className={classes.arrowContainer}>
+          <ChevronDown
+            className={classNames(classes.arrow, {
+              [classes.arrowOpen]: isOpen,
+            })}
+          />
+        </div>
+      </button>
+      {isOpen && (
+        <ToolbarModal>
+          <ul
+            id={dropdown.name}
+            role="listbox"
+            aria-label={t(dropdown.name)}
+            ref={setDropdownList}
+            className={classNames(classes.dropdownItemsContainer)}
+          >
+            {valuesByPriority.map(
+              ({ text, iconConfig, getIsDisabled, name, className, onClick, belongsTo }, index) => {
+                const isLastItem = index === valuesByPriority.length - 1;
+                const isFirstItem = index === 0;
+                const { Icon, type } = iconConfig || {};
+
+                const itemIcon = Icon ? (
+                  <Icon
+                    className={classNames({
+                      [classes.itemFill]: type === 'fill',
+                      [classes.itemStroke]: type === 'stroke',
+                    })}
+                  />
+                ) : null;
+
+                return (
+                  <li key={name} className={classes.dropdownItemContainer}>
+                    <button
+                      tabIndex={-1}
+                      role="option"
+                      aria-selected={selectedValue?.name === name}
+                      aria-label={t(text)}
+                      data-testid={name}
+                      disabled={getIsDisabled({ editor, config: configs[belongsTo] })}
+                      className={classNames(classes.dropdownItem, className, {
+                        [classes.iconItem]: !!itemIcon,
+                      })}
+                      ref={ref => {
+                        if (isFirstItem) {
+                          setFirstItem(ref);
+                        }
+                        if (isLastItem) {
+                          setLastItem(ref);
+                        }
+                      }}
+                      onClick={() => {
+                        closeModal();
+                        onClick({ editor, config: configs[belongsTo] });
+                      }}
+                    >
+                      {!!itemIcon && itemIcon}
+                      {!itemIcon && t(text)}
+                    </button>
+                  </li>
+                );
+              }
+            )}
+          </ul>
+        </ToolbarModal>
       )}
-    </div>
+    </ToolbarModalContainer>
   );
 };

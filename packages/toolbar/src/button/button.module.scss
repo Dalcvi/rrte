@@ -1,0 +1,14 @@
+.button {
+  height: 25px;
+  border-radius: 3px;
+  border: none;
+  background-color: rgb(var(--rrte-color-4));
+  color: rgb(var(--rrte-color-1));
+  font-family: var(--rrte-p-font-family);
+  width: 100%;
+  box-sizing: border-box;
+
+  &:disabled {
+    background-color: rgb(var(--rrte-color-4), 0.4);
+  }
+}

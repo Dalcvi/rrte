@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
-import classes from './gif-search.component.module.scss';
 import { IGif } from '@giphy/js-types';
 import { useTranslations } from '@rrte/i18n';
+import { useEffect, useMemo, useState } from 'react';
+import classes from './gif-search.component.module.scss';
+import { TextInput } from '@rrte/toolbar';
 
 interface ResultMeta {
   msg: string;
@@ -27,8 +28,12 @@ interface GifsResult extends Result {
 export const GifSearch = ({
   sdk,
   onGifSelect,
+  setFirstItemRef,
+  setLastItemRef,
 }: {
   sdk: string;
+  setFirstItemRef?: (element: HTMLElement | null) => void;
+  setLastItemRef?: (element: HTMLElement | null) => void;
   onGifSelect: ({
     webp,
     mp4,
@@ -113,22 +118,22 @@ export const GifSearch = ({
 
   return (
     <div className={classes.gifGridContainer}>
-      <label>
-        {t('gif-search.text')}
-        <input
-          data-testid="gif-search"
-          type="search"
-          className={classes.gifSearch}
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-      </label>
+      <TextInput
+        ref={setFirstItemRef}
+        value={search}
+        onChange={setSearch}
+        label={t('gif-search.text')}
+      />
       <ul role="listbox" className={classes.gifGrid} ref={setGifGrid}>
         {gifs.map((gif, index) => {
+          const setReference = gifs.length - 1 === index ? setLastItemRef : null;
           const addRef = gifs.length - 4 === index && search !== '' && gifs.length !== totalCount;
           return (
-            <li role="option" aria-selected={false} className={classes.gifItem}>
+            <li className={classes.gifItem}>
               <button
+                role="option"
+                aria-selected={false}
+                ref={setReference}
                 onClick={() => {
                   onGifSelect({
                     webp: gif.images.original.webp,

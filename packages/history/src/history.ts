@@ -11,12 +11,14 @@ export const History = () =>
         'undo-button.text': 'Undo',
         'voice-command.undo': 'undo',
         'voice-command.redo': 'redo',
+        'history-group.text': 'History',
       },
       lt: {
         'redo-button.text': 'Grąžinti',
         'undo-button.text': 'Anuliuoti',
         'voice-command.undo': 'anuliuoti',
         'voice-command.redo': 'grąžinti',
+        'history-group.text': 'Istorija',
       },
     },
   });

@@ -38,6 +38,7 @@ export const Table = () =>
         'voice-command.toggle-header-column': 'toggle header column',
         'voice-command.toggle-header-row': 'toggle header row',
         'voice-command.toggle-header-cell': 'toggle header cell',
+        'media-group.text': 'Footer toolbar',
       },
       lt: {
         'table-button.text': 'Pridėti lentelę',
@@ -60,6 +61,7 @@ export const Table = () =>
         'voice-command.toggle-header-column': 'pakeisti stulpelio antraštę',
         'voice-command.toggle-header-row': 'pakeisti eilutės antraštę',
         'voice-command.toggle-header-cell': 'pakeisti langelio antraštę',
+        'media-group.text': 'Apatinis įrankių juostelės elementas',
       },
     },
   });

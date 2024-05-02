@@ -1,12 +1,16 @@
-import { type BubbleMenuToolbar, type Config, type UnknownExtension } from '@rrte/common';
+import {
+  EditorSlotProvider,
+  type BubbleMenuToolbar,
+  type Config,
+  type UnknownExtension,
+} from '@rrte/common';
 import { Document } from '@rrte/document';
 import { I18nProvider, Resources, supportedLanguages } from '@rrte/i18n';
 import { Text } from '@rrte/text';
-import type { ToolbarItem } from '@rrte/toolbar';
+import type { SingleToolbarItem } from '@rrte/toolbar';
 import { Toolbar } from '@rrte/toolbar';
 import { HTMLContent, JSONContent, useEditor } from '@tiptap/react';
 import { useEffect, useMemo, useState } from 'react';
-import { EditorSlotProvider } from '@rrte/common';
 import classes from './Editor.module.scss';
 import { BubbleMenuList } from './bubble-menus';
 import { RrteEditorContent } from './rrte-editor-content';
@@ -140,14 +144,32 @@ export const Editor = ({
     editor.commands.setContent(content);
   }, [content]);
 
-  const toolbarItems = useMemo(() => {
-    return allExtensions
-      .map(editorExtension => ({
-        toolbar: editorExtension.config.toolbar,
-        config: editorExtension.config,
-      }))
-      .filter(toolbar => !!toolbar.toolbar) as { toolbar: ToolbarItem<any>; config: any }[];
+  const allToolbarItems = useMemo(() => {
+    return (
+      allExtensions.filter((editorExtension: any) => !!editorExtension.config) as {
+        config: Config<object>;
+      }[]
+    )
+      .map(editorExtension => {
+        if (Array.isArray(editorExtension.config.toolbar)) {
+          return editorExtension.config.toolbar.map(toolbar => ({
+            toolbar,
+            config: editorExtension.config,
+          }));
+        }
+        return [{ toolbar: editorExtension.config.toolbar, config: editorExtension.config }];
+      })
+      .flat()
+      .filter(toolbar => !!toolbar.toolbar) as { toolbar: SingleToolbarItem<any>; config: any }[];
   }, [allExtensions]);
+
+  const mainToolbarItems = useMemo(() => {
+    return allToolbarItems.filter(toolbar => !!toolbar.toolbar.group.toolbar);
+  }, [allToolbarItems]);
+
+  // const footerToolbarItems = useMemo(() => {
+  //   return allToolbarItems.filter(toolbar => toolbar.toolbar.group.toolbar === 'footer');
+  // }, [allToolbarItems]);
 
   const translationResources = useMemo(() => {
     const translations = allExtensions
@@ -170,14 +192,19 @@ export const Editor = ({
   }, [allExtensions]) as Resources;
 
   return (
-    <div className={`${classes.editorWrapper} ${editorWrapperClassName}`} data-hook="rrte-editor">
+    <div
+      className={`${classes.editorWrapper} ${
+        !viewerMode ? classes.editorWrapperEditMode : ''
+      } ${editorWrapperClassName}`}
+      data-hook="rrte-editor"
+    >
       <I18nProvider language={language} resources={translationResources}>
         <EditorSlotProvider>
-          {editor && !viewerMode && toolbarItems.length > 0 && (
+          {editor && !viewerMode && mainToolbarItems.length > 0 && (
             <Toolbar
               editor={editor}
               wrapperClassName={toolbarClassName}
-              items={toolbarItems}
+              items={mainToolbarItems}
               editorContainerRef={editorContainerRef}
             />
           )}
