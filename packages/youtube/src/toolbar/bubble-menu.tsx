@@ -7,19 +7,22 @@ import AlignRight from './align-right.icon.svg';
 import CustomSize from './custom-size.icon.svg';
 import { getYouTubeID } from './toolbar.utils';
 import classes from './youtube-bubble-menu.module.scss';
+import { useState } from 'react';
 
 const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
   const currentAttributes = editor.getAttributes(YoutubeNode.name) as YoutubeAttributes & {
     id: string | undefined;
   };
+  const [firstBubbleMenuItem, setFirstBubbleMenuItem] = useState<HTMLElement | null>(null);
 
   const isCustomSizeEnabled = !!currentAttributes.customSize;
   const alignment = currentAttributes.alignment;
   return (
-    <BubbleMenuWrapper>
+    <BubbleMenuWrapper firstChild={firstBubbleMenuItem}>
       <div className={classes.bubbleMenu}>
         <div className={classes.row}>
           <TextInput
+            ref={setFirstBubbleMenuItem}
             value={currentAttributes.url}
             onChange={val => {
               editor.commands.updateAttributes(YoutubeNode.name, {

@@ -43,6 +43,12 @@ pnpm add @rrte/underline
 | toggleUnderline | -          | Toggles the selection as underline |
 | unsetUnderline  | -          | Unset the selection as underline   |
 
+## Voice command translation keys
+
+| Translation key                | Explanation      |
+| ------------------------------ | ---------------- |
+| voice-command.toggle-underline | Toggle underline |
+
 ## Shortcuts
 
 - _Mod-U_: Toggle underline

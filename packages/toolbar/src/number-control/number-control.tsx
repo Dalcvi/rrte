@@ -8,7 +8,7 @@ import PlusIcon from './plus.icon.svg';
 import MinusIcon from './minus.icon.svg';
 
 export const NumberControl = forwardRef<
-  HTMLButtonElement,
+  HTMLInputElement,
   {
     text: NumberControlConfig['text'];
     decreaseText: NumberControlConfig['decreaseText'];
@@ -18,7 +18,7 @@ export const NumberControl = forwardRef<
     getIsDisabled: NumberControlConfig['getIsDisabled'];
     editor: Editor;
   }
->(props => {
+>((props, ref) => {
   const { editor, text, getValue, decreaseText, increaseText, onChange, getIsDisabled } = props;
   const { t } = useTranslations();
 
@@ -61,6 +61,7 @@ export const NumberControl = forwardRef<
         <MinusIcon className={classNames(classes.icon)} height={'30px'} width={'30px'} />
       </button>
       <input
+        ref={ref}
         disabled={isDisabled}
         data-tooltip-id="toolbar-buttons-tooltip"
         data-tooltip-content={t(text)}

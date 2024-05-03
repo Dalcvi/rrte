@@ -47,6 +47,12 @@ pnpm add @rrte/blockquote
 | toggleBlockquote | -          | Toggles blockquote node          |
 | unsetBlockquote  | -          | Removes blockquote node          |
 
+## Voice command translation keys
+
+| Translation key                 | Explanation         |
+| ------------------------------- | ------------------- |
+| voice-command.toggle-blockquote | Toggle a blockquote |
+
 ## Shortcuts
 
 - _Mod-Shift-b_: Toggle blockquote

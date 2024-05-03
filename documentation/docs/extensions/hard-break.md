@@ -42,6 +42,12 @@ pnpm add @rrte/hard-break
 | ------------- | ---------- | ---------------- |
 | setHardBreak  | -          | Adds a hardbreak |
 
+## Voice command translation keys
+
+| Translation key        | Explanation    |
+| ---------------------- | -------------- |
+| voice-command.new-line | Add a new line |
+
 ## Shortcuts
 
 - _Shift-enter_: Add hard break

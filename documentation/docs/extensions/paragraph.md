@@ -47,6 +47,12 @@ pnpm add @rrte/paragraph
 | ------------- | ---------- | ------------------------------- |
 | setParagraph  | -          | Sets selected node as paragraph |
 
+## Voice command translation keys
+
+| Translation key             | Explanation     |
+| --------------------------- | --------------- |
+| voice-command.set-paragraph | Set a paragraph |
+
 ## Example
 
 import ParagraphExample from '@site/src/components/extension-paragraph';

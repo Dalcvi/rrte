@@ -30,6 +30,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
   const currentAttributes = editor.getAttributes(ImageNode.name) as ImageAttributes & {
     id: string | undefined;
   };
+  const [firstBubbleMenuItem, setFirstBubbleMenuItem] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     if (shouldFocusAccessibilityIcon.current && accessibilityButton) {
@@ -47,10 +48,11 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
 
   if (accessibilityMode) {
     return (
-      <BubbleMenuWrapper>
+      <BubbleMenuWrapper firstChild={firstBubbleMenuItem}>
         <div className={classes.bubbleMenu}>
           <div className={classes.row}>
             <RegularButton
+              ref={setFirstBubbleMenuItem}
               Icon={({ className }) => (
                 <BackIcon className={className} height="15px" width="15px" />
               )}
@@ -89,28 +91,42 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
     );
   }
 
+  const replaceButton =
+    config.type === 'user-controlled' ? (
+      <RegularButton
+        ref={setFirstBubbleMenuItem}
+        Icon={({ className }) => <ReplaceIcon className={className} height="15px" width="15px" />}
+        text="image-change.text"
+        getIsActive={() => false}
+        getIsDisabled={() => false}
+        iconStyling="stroke"
+        onClick={async () => {
+          await userControlledOnChange(config, editor, imgId);
+        }}
+        editor={editor}
+        config={config}
+      />
+    ) : (
+      <InputIconButton
+        ref={setFirstBubbleMenuItem}
+        text="image-change.text"
+        Icon={({ className }) => <ReplaceIcon className={className} height="15px" width="15px" />}
+        editor={editor}
+        config={config}
+        iconStyling="stroke"
+        getIsDisabled={() => false}
+        getAcceptableFiles={() => config.acceptedImageFileTypes.join(', ')}
+        onChange={async e => {
+          await extensionControlledOnChange(e, config, editor, imgId);
+        }}
+      />
+    );
+
   return (
-    <BubbleMenuWrapper>
+    <BubbleMenuWrapper firstChild={firstBubbleMenuItem}>
       <div className={classes.bubbleMenu}>
         <div className={classes.row}>
-          <InputIconButton
-            text="image-change.text"
-            Icon={({ className }) => (
-              <ReplaceIcon className={className} height="15px" width="15px" />
-            )}
-            editor={editor}
-            config={config}
-            iconStyling="stroke"
-            getIsDisabled={() => false}
-            getAcceptableFiles={() => config.acceptedImageFileTypes.join(', ')}
-            onChange={async e => {
-              if (config.type === 'user-controlled') {
-                await userControlledOnChange(config, editor, imgId);
-              } else {
-                await extensionControlledOnChange(e, config, editor, imgId);
-              }
-            }}
-          />
+          {replaceButton}
           <RegularButton
             Icon={({ className }) => <AlignLeft className={className} height="15px" width="15px" />}
             text={'image.align-left'}

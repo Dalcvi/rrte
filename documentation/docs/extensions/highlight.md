@@ -50,6 +50,12 @@ pnpm add @rrte/highlight
 | setHighlight   | _color: string \| null_ | Set the background color of selection       |
 | unsetHighlight | -                       | Removes set background color from selection |
 
+## Voice command translation keys
+
+| Translation key                | Explanation      |
+| ------------------------------ | ---------------- |
+| voice-command.remove-highlight | Remove highlight |
+
 ## Example
 
 ```jsx

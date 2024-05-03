@@ -65,6 +65,24 @@ pnpm add @rrte/table
 | fixTables          | -                                                            | Fixes the tables           |
 | setCellSelection   | position: \{ anchorCell: number; headCell?: number \}        | Sets the cell selection    |
 
+## Voice command translation keys
+
+| Translation key                    | Explanation          |
+| ---------------------------------- | -------------------- |
+| voice-command.add-table            | Insert a table       |
+| voice-command.add-column-before    | Add a column before  |
+| voice-command.add-column-after     | Add a column after   |
+| voice-command.remove-column        | Delete a column      |
+| voice-command.add-row-before       | Add a row before     |
+| voice-command.add-row-after        | Add a row after      |
+| voice-command.remove-row           | Delete a row         |
+| voice-command.remove-table         | Delete the table     |
+| voice-command.merge-cells          | Merge cells          |
+| voice-command.split-cell           | Split a cell         |
+| voice-command.toggle-header-column | Toggle header column |
+| voice-command.toggle-header-row    | Toggle header row    |
+| voice-command.toggle-header-column | Toggle header cell   |
+
 ## Example
 
 ```jsx

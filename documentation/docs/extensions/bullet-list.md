@@ -49,6 +49,12 @@ pnpm add @rrte/bullet-list
 | ---------------- | ---------- | ------------------------ |
 | toggleBulletList | -          | Toggles bullet list node |
 
+## Voice command translation keys
+
+| Translation key                  | Explanation          |
+| -------------------------------- | -------------------- |
+| voice-command.toggle-bullet-list | Toggle a bullet list |
+
 ## Shortcuts
 
 - _Mod-Shift-8_: Toggle bullet list

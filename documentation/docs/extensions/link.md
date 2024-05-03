@@ -52,6 +52,12 @@ pnpm add @rrte/link
 | toggleCode    | _attributes: \{ href: string; target?: string \| null }_ | Toggles the selection as link |
 | unsetLink     | -                                                        | Unset the selection as link   |
 
+## Voice command translation keys
+
+| Translation key           | Explanation   |
+| ------------------------- | ------------- |
+| voice-command.toggle-link | Toggle a link |
+
 ## Example
 
 ```jsx

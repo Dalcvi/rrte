@@ -47,6 +47,12 @@ pnpm add @rrte/code
 | toggleCode    | -          | Toggles the selection as code |
 | unsetCode     | -          | Unset the selection as code   |
 
+## Voice command translation keys
+
+| Translation key           | Explanation        |
+| ------------------------- | ------------------ |
+| voice-command.toggle-code | Toggle inline code |
+
 ## Shortcuts
 
 - _Mod-Shift-c_: Toggle code

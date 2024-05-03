@@ -43,6 +43,12 @@ pnpm add @rrte/subscript
 | toggleSubscript | -          | Toggles the selection as subscript |
 | unsetSubscript  | -          | Unset the selection as subscript   |
 
+## Voice command translation keys
+
+| Translation key                | Explanation      |
+| ------------------------------ | ---------------- |
+| voice-command.toggle-subscript | Toggle subscript |
+
 ## Shortcuts
 
 - _Mod-shift-d_: Toggle subscript

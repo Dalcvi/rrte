@@ -43,6 +43,12 @@ pnpm add @rrte/italic
 | toggleItalic  | -          | Toggles the selection as italic |
 | unsetItalic   | -          | Unset the selection as italic   |
 
+## Voice command translation keys
+
+| Translation key             | Explanation   |
+| --------------------------- | ------------- |
+| voice-command.toggle-italic | Toggle italic |
+
 ## Shortcuts
 
 - _Mod-I_: Toggle italic

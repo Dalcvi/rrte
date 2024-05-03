@@ -30,6 +30,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
   const currentAttributes = editor.getAttributes(VideoNode.name) as VideoAttributes & {
     id: string | undefined;
   };
+  const [firstBubbleMenuItem, setFirstBubbleMenuItem] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     if (shouldFocusAccessibilityIcon.current && accessibilityButton) {
@@ -47,10 +48,11 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
 
   if (accessibilityMode) {
     return (
-      <BubbleMenuWrapper>
+      <BubbleMenuWrapper firstChild={firstBubbleMenuItem}>
         <div className={classes.bubbleMenu}>
           <div className={classes.row}>
             <RegularButton
+              ref={setFirstBubbleMenuItem}
               Icon={({ className }) => (
                 <BackIcon className={className} height="15px" width="15px" />
               )}
@@ -79,28 +81,42 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
     );
   }
 
+  const replaceButton =
+    config.type === 'user-controlled' ? (
+      <RegularButton
+        ref={setFirstBubbleMenuItem}
+        Icon={({ className }) => <ReplaceIcon className={className} height="15px" width="15px" />}
+        text="video-change.label"
+        getIsActive={() => false}
+        getIsDisabled={() => false}
+        iconStyling="stroke"
+        onClick={async () => {
+          await userControlledOnChange(config, editor, videoId);
+        }}
+        editor={editor}
+        config={config}
+      />
+    ) : (
+      <InputIconButton
+        ref={setFirstBubbleMenuItem}
+        text="video-change.label"
+        Icon={({ className }) => <ReplaceIcon className={className} height="15px" width="15px" />}
+        editor={editor}
+        config={config}
+        iconStyling="stroke"
+        getIsDisabled={() => false}
+        getAcceptableFiles={() => config.acceptedVideoFileTypes.join(', ')}
+        onChange={async e => {
+          await extensionControlledOnChange(e, config, editor, videoId);
+        }}
+      />
+    );
+
   return (
-    <BubbleMenuWrapper>
+    <BubbleMenuWrapper firstChild={firstBubbleMenuItem}>
       <div className={classes.bubbleMenu}>
         <div className={classes.row}>
-          <InputIconButton
-            text="video-change.label"
-            Icon={({ className }) => (
-              <ReplaceIcon className={className} height="15px" width="15px" />
-            )}
-            editor={editor}
-            config={config}
-            iconStyling="stroke"
-            getIsDisabled={() => false}
-            getAcceptableFiles={() => config.acceptedVideoFileTypes.join(', ')}
-            onChange={async e => {
-              if (config.type === 'user-controlled') {
-                await userControlledOnChange(config, editor, videoId);
-              } else {
-                await extensionControlledOnChange(e, config, editor, videoId);
-              }
-            }}
-          />
+          {replaceButton}
           <RegularButton
             Icon={({ className }) => <AlignLeft className={className} height="15px" width="15px" />}
             text={'gif.align-left'}

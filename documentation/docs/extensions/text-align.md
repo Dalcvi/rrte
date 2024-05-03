@@ -48,6 +48,15 @@ pnpm add @rrte/text-align
 | ------------- | ---------------------------------------------------------------------- | ---------------------------- |
 | setTextAlign  | attributes: \{ textAlign: "left" \| "center" \| "right" \| "justify" } | Sets the selection alignment |
 
+## Voice command translation keys
+
+| Translation key            | Explanation   |
+| -------------------------- | ------------- |
+| voice-command.align-left   | Align left    |
+| voice-command.align-center | Align center  |
+| voice-command.align-right  | Align right   |
+| voice-command.justify      | Align justify |
+
 ## Example
 
 ```jsx

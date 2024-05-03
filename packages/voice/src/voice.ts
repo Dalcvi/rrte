@@ -59,7 +59,7 @@ export const Voice = () =>
         'voice-buttond-dictation-mode-on.text': 'Diktavimo balsu režimas įjungtas',
         'voice-buttond-command-mode-on.text': 'Balso komandų režimas įjungtas',
         'commands.title': 'Komandos',
-        'suggested-commands.title': 'Siūlamos komandos:',
+        'suggested-commands.title': 'Siūlomos komandos:',
         'last-tried.label': 'Paskutinį kartą bandyta:',
         'begin-dictation-mode': 'pradėti diktavimo režimą',
         'exit-dictation-mode': 'išeiti iš diktavimo režimo',

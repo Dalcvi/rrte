@@ -43,6 +43,12 @@ pnpm add @rrte/superscript
 | toggleSuperscript | -          | Toggles the selection as superscript |
 | unsetSuperscript  | -          | Unset the selection as superscript   |
 
+## Voice command translation keys
+
+| Translation key                  | Explanation        |
+| -------------------------------- | ------------------ |
+| voice-command.toggle-superscript | Toggle superscript |
+
 ## Shortcuts
 
 - _Mod-shift-U_: Toggle superscript

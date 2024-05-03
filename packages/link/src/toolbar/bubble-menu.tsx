@@ -1,47 +1,26 @@
 import type { BubbleMenuToolbar } from '@rrte/common';
 import classes from './link-bubble-menu.module.scss';
 import { LinkMark } from '../mark';
-import { TextInput } from '@rrte/toolbar';
+import { BubbleMenuWrapper, TextInput } from '@rrte/toolbar';
+import { useState } from 'react';
 
 const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
   const currentAttributes = editor.getAttributes(LinkMark.name) as { href?: string };
+  const [firstBubbleMenuItem, setFirstBubbleMenuItem] = useState<HTMLElement | null>(null);
 
   return (
-    <div className={classes.bubbleMenu}>
-      <TextInput
-        label={t('link-address.label')}
-        value={currentAttributes.href ?? ''}
-        onChange={val => {
-          editor
-            .chain()
-            .extendMarkRange(LinkMark.name)
-            .updateAttributes(LinkMark.name, {
-              href: val,
-            })
-            .run();
-        }}
-        onKeyDown={e => {
-          if (e.key === 'Enter' || e.key === 'Escape') {
-            const focusTo = editor.state.selection.$to.pos;
-
-            editor.commands.focus(focusTo);
-          }
-        }}
-      />
-      {/* <label className={classes.inputContainer}>
-        {t('link-address.label')}
-        <input
-          aria-label="link url"
-          data-testid="link-input"
-          type="text"
-          className={classes.input}
-          value={currentAttributes.href}
-          onChange={e => {
+    <BubbleMenuWrapper firstChild={firstBubbleMenuItem}>
+      <div className={classes.bubbleMenu}>
+        <TextInput
+          ref={setFirstBubbleMenuItem}
+          label={t('link-address.label')}
+          value={currentAttributes.href ?? ''}
+          onChange={val => {
             editor
               .chain()
               .extendMarkRange(LinkMark.name)
               .updateAttributes(LinkMark.name, {
-                href: e.target.value,
+                href: val,
               })
               .run();
           }}
@@ -53,8 +32,8 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
             }
           }}
         />
-      </label> */}
-    </div>
+      </div>
+    </BubbleMenuWrapper>
   );
 };
 

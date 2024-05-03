@@ -48,6 +48,12 @@ pnpm add @rrte/code-block
 | setCodeBlock    | -          | Set the node as code block    |
 | toggleCodeBlock | -          | Toggles the node as codeblock |
 
+## Voice command translation keys
+
+| Translation key                | Explanation         |
+| ------------------------------ | ------------------- |
+| voice-command.toggle-codeblock | Toggle a code block |
+
 ## Shortcuts
 
 - _Mod-Alt-c_: Toggle code

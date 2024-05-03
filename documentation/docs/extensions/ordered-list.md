@@ -49,6 +49,14 @@ pnpm add @rrte/ordered-list
 | ----------------- | ---------- | ------------------------- |
 | toggleOrderedList | -          | Toggles ordered list node |
 
+## Voice command translation keys
+
+| Translation key               | Explanation      |
+| ----------------------------- | ---------------- |
+| voice-command.split-list-item | Set a list item  |
+| voice-command.sink-list-item  | Sink a list item |
+| voice-command.lift-list-item  | Lift a list item |
+
 ## Shortcuts
 
 - _Mod-Shift-8_: Toggle bullet list

@@ -38,3 +38,11 @@ pnpm add @rrte/list-item
 | Option name    | Type                   | description                                             |
 | -------------- | ---------------------- | ------------------------------------------------------- |
 | HTMLAttributes | _Record\<string, any>_ | HTML attributes to be applied to the list item element. |
+
+## Voice command translation keys
+
+| Translation key               | Explanation      |
+| ----------------------------- | ---------------- |
+| voice-command.split-list-item | Set a list item  |
+| voice-command.sink-list-item  | Sink a list item |
+| voice-command.lift-list-item  | Lift a list item |

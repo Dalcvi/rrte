@@ -45,6 +45,17 @@ pnpm add @rrte/heading
 | setHeading    | attributes: \{ level: Level } | Sets the selected node to heading |
 | toggleHeading | attributes: \{ level: Level } | Toggles heading node              |
 
+## Voice command translation keys
+
+| Translation key                 | Explanation           |
+| ------------------------------- | --------------------- |
+| voice-command.set-heading-one   | Set a level 1 heading |
+| voice-command.set-heading-two   | Set a level 2 heading |
+| voice-command.set-heading-three | Set a level 3 heading |
+| voice-command.set-heading-four  | Set a level 4 heading |
+| voice-command.set-heading-five  | Set a level 5 heading |
+| voice-command.set-heading-six   | Set a level 6 heading |
+
 ## Example
 
 ```jsx

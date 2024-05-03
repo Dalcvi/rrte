@@ -8,16 +8,18 @@ import CustomSize from './custom-size.icon.svg';
 import classes from './gif-bubble-menu.module.scss';
 import { GifSearch } from './gif-search.component';
 import ReplaceIcon from './replace.icon.svg';
+import { useState } from 'react';
 
 const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config, t }) => {
   const currentAttributes = editor.getAttributes(GifNode.name) as GifAttributes & {
     id: string | undefined;
   };
+  const [firstBubbleMenuItem, setFirstBubbleMenuItem] = useState<HTMLElement | null>(null);
 
   const isCustomSizeEnabled = !!currentAttributes.customSize;
   const alignment = currentAttributes.alignment;
   return (
-    <BubbleMenuWrapper>
+    <BubbleMenuWrapper firstChild={firstBubbleMenuItem}>
       <div className={classes.bubbleMenu}>
         <div className={classes.row}>
           <ModalButton
@@ -43,6 +45,7 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, config, t }) => {
             )}
           />
           <RegularButton
+            ref={setFirstBubbleMenuItem}
             Icon={({ className }) => <AlignLeft className={className} height="15px" width="15px" />}
             text={'gif.align-left'}
             getIsActive={() => alignment === 'left'}

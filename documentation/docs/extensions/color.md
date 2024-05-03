@@ -50,6 +50,12 @@ pnpm add @rrte/color
 | setColor      | _color: string \| null_ | Set the selection as given color |
 | unsetColor    | -                       | Removes set color from selection |
 
+## Voice command translation keys
+
+| Translation key            | Explanation  |
+| -------------------------- | ------------ |
+| voice-command.remove-color | Remove color |
+
 ## Example
 
 ```jsx

@@ -11,6 +11,7 @@ import { BubbleMenuWrapper, RegularButton } from '@rrte/toolbar';
 
 const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
   const [maxWidth, setMaxWidth] = useState(0);
+  const [firstBubbleMenuItem, setFirstBubbleMenuItem] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     const editorElement = document.querySelector("[data-testid='rrte-editor']") as HTMLElement;
@@ -29,9 +30,10 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
   }, []);
 
   return (
-    <BubbleMenuWrapper>
+    <BubbleMenuWrapper firstChild={firstBubbleMenuItem}>
       <div className={classes.bubbleMenu}>
         <RegularButton
+          ref={setFirstBubbleMenuItem}
           Icon={({ className }) => (
             <AddColumn
               className={classNames(className, classes.horizontallyFlippedIcon)}

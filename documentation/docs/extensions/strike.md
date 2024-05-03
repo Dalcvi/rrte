@@ -43,6 +43,12 @@ pnpm add @rrte/strike
 | toggleStrike  | -          | Toggles the selection as strike |
 | unsetStrike   | -          | Unset the selection as strike   |
 
+## Voice command translation keys
+
+| Translation key             | Explanation   |
+| --------------------------- | ------------- |
+| voice-command.toggle-strike | Toggle strike |
+
 ## Shortcuts
 
 - _Mod-S_: Toggle strike

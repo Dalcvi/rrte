@@ -43,6 +43,12 @@ pnpm add @rrte/bold
 | toggleBold    | -          | Toggles the selection as bold |
 | unsetBold     | -          | Unset the selection as bold   |
 
+## Voice command translation keys
+
+| Translation key           | Explanation |
+| ------------------------- | ----------- |
+| voice-command.toggle-bold | Toggle bold |
+
 ## Shortcuts
 
 - _Mod-B_: Toggle bold

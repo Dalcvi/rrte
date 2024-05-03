@@ -43,6 +43,13 @@ pnpm add @rrte/history
 | undo          | -          | Undos last action |
 | redo          | -          | Redos undid actio |
 
+## Voice command translation keys
+
+| Translation key    | Explanation              |
+| ------------------ | ------------------------ |
+| voice-command.redo | Reapply reverted changes |
+| voice-command.undo | Undo recent changes      |
+
 ## Example
 
 To see dropcursor working, type in some text, select it, and try dragging it somewhere else in text.
