@@ -8,8 +8,7 @@ export default class FakeEditor {
     return this;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  toggleBold(isActive: boolean) {
+  setHeading({}: { level: number }) {
     return this;
   }
 

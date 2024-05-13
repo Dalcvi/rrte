@@ -1,50 +1,185 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Dropdown } from '../../dropdown';
+import { Dropdown, DropdownConfig } from '../../dropdown';
+import React from 'react';
+import { i18nContext } from '@rrte/i18n';
 
-const config = {
-  name: 'correct-config',
-  type: 'dropdown',
-  text: 'correct-config',
-  DropdownPriority: 100,
-  priority: 1,
+const config: DropdownConfig = {
+  name: 'dropdown-btn',
+  type: 'dropdown' as const,
+  priority: 2,
+  text: 'dropdown-btn',
+  dropdownName: 'dropdown-btn',
+  DropdownPriority: 1,
   values: [
     {
-      name: 'correct-value-last',
-      text: 'correct-value-last',
-      priority: 1,
+      name: 'last',
+      text: 'last',
+      belongsTo: 'dropdown-btn',
       isActive: () => false,
+      onClick: () => {},
+      getIsDisabled: () => false,
+      priority: 1,
     },
     {
-      name: 'correct-value-first',
-      text: 'correct-value-first',
-      priority: 2,
+      name: 'first',
+      text: 'first',
+      belongsTo: 'dropdown-btn',
       isActive: () => false,
+      onClick: () => {},
+      getIsDisabled: () => false,
+      priority: 2,
     },
   ],
-  editor: {
-    isActive: () => true,
+  group: {
+    name: 'group-2',
+    text: 'group-2',
+    priority: 6,
+    toolbar: 'main',
   },
-} as any;
+};
 
 describe('dropdown', () => {
   it('should render the values in correct priority', () => {
-    render(<Dropdown {...config} />);
+    render(
+      <i18nContext.Provider value={{ t: (key: string) => key, language: 'en' }}>
+        <Dropdown {...config} configs={{}} editor={null as any} />
+      </i18nContext.Provider>
+    );
 
-    expect(screen.getByTestId('correct-config')).toBeInTheDocument();
+    expect(screen.getByTestId(config.name)).toBeInTheDocument();
   });
 
   it('should render values in correct priority', () => {
-    render(<Dropdown {...config} />);
+    render(
+      <i18nContext.Provider value={{ t: (key: string) => key, language: 'en' }}>
+        <Dropdown {...config} configs={{}} editor={null as any} />
+      </i18nContext.Provider>
+    );
 
-    const button = screen.getByTestId('correct-config');
+    const button = screen.getByTestId(config.name);
     fireEvent.click(button);
 
-    const values = screen.getAllByTestId('correct-value', { exact: false });
-    const firstValueTestId = values[0].getAttribute('data-testid');
-    const secondValueTestId = values[1].getAttribute('data-testid');
+    const dropdownItems = screen
+      .getByTestId(`${config.dropdownName}-dropdown-items`)
+      .querySelectorAll('li');
 
-    expect(firstValueTestId).toBe('correct-value-first');
-    expect(secondValueTestId).toBe('correct-value-last');
+    const firstItem = dropdownItems[0].querySelector('button');
+    const secondItem = dropdownItems[1].querySelector('button');
+
+    expect(firstItem?.getAttribute('data-testid')).toBe('first');
+    expect(secondItem?.getAttribute('data-testid')).toBe('last');
+  });
+
+  it('should call onClick when clicking on a value', () => {
+    const onClick = jest.fn();
+
+    const newConfig = {
+      ...config,
+      values: [
+        {
+          name: 'first',
+          text: 'first',
+          belongsTo: 'dropdown-btn',
+          isActive: () => false,
+          onClick,
+          getIsDisabled: () => false,
+          priority: 1,
+        },
+      ],
+    };
+
+    render(
+      <i18nContext.Provider value={{ t: (key: string) => key, language: 'en' }}>
+        <Dropdown {...newConfig} configs={{}} editor={null as any} />
+      </i18nContext.Provider>
+    );
+
+    const button = screen.getByTestId(config.name);
+
+    fireEvent.click(button);
+
+    const firstItem = screen.getByTestId('first');
+
+    fireEvent.click(firstItem as Element);
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('should check if value is disabled', () => {
+    const getIsDisabled = jest.fn().mockReturnValue(true);
+
+    const newConfig = {
+      ...config,
+      values: [
+        {
+          name: 'first',
+          text: 'first',
+          belongsTo: config.name,
+          isActive: () => false,
+          onClick: () => {},
+          getIsDisabled,
+          priority: 1,
+        },
+        {
+          name: 'second',
+          text: 'second',
+          belongsTo: config.name,
+          isActive: () => false,
+          onClick: () => {},
+          getIsDisabled: () => false,
+          priority: 1,
+        },
+      ],
+    };
+
+    render(
+      <i18nContext.Provider value={{ t: (key: string) => key, language: 'en' }}>
+        <Dropdown {...newConfig} configs={{}} editor={null as any} />
+      </i18nContext.Provider>
+    );
+
+    const button = screen.getByTestId(config.name);
+
+    fireEvent.click(button);
+
+    const firstItem = screen.getByTestId('first');
+
+    expect(firstItem).toBeDisabled();
+  });
+  it('should check if all values are active', () => {
+    const isActive = jest.fn().mockReturnValue(true);
+
+    const newConfig = {
+      ...config,
+      values: [
+        {
+          name: 'first',
+          text: 'first',
+          belongsTo: config.name,
+          isActive,
+          onClick: () => {},
+          getIsDisabled: () => false,
+          priority: 1,
+        },
+        {
+          name: 'second',
+          text: 'second',
+          belongsTo: config.name,
+          isActive,
+          onClick: () => {},
+          getIsDisabled: () => false,
+          priority: 1,
+        },
+      ],
+    };
+
+    render(
+      <i18nContext.Provider value={{ t: (key: string) => key, language: 'en' }}>
+        <Dropdown {...newConfig} configs={{}} editor={null as any} />
+      </i18nContext.Provider>
+    );
+
+    expect(isActive).toHaveBeenCalledTimes(2);
   });
 });

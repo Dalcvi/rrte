@@ -46,7 +46,6 @@ export const useModal = (closeOnAnyClick = true) => {
         const isActiveElementInOpeningButton = dropdownButton.contains(
           document.activeElement as HTMLElement
         );
-
         if (e.key === 'ArrowDown' && isActiveElementInOpeningButton) {
           if (!isOpen) {
             openDropdown();

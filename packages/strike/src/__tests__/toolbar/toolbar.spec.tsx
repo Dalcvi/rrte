@@ -1,6 +1,5 @@
-import { ToolbarButton } from '../../toolbar';
-import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { ToolbarButton } from '../../toolbar';
 import FakeEditor from '../editor.mock';
 jest.mock('../editor.mock', () => {
   return jest.fn().mockImplementation(() => {
@@ -20,63 +19,30 @@ describe('Strike toolbar button', () => {
     jest.clearAllMocks();
   });
   it('should toggle strike on click', () => {
-    const editor = new FakeEditor() as any;
-
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
-
-    const button = screen.getByTestId('strike-button');
-    fireEvent.click(button);
+    const editor = new FakeEditor();
+    ToolbarButton.onClick({ editor: editor as any, config: {} });
 
     expect(editor.chain).toHaveBeenCalledTimes(1);
     expect(editor.focus).toHaveBeenCalledTimes(1);
-    expect(editor.toggleStrike).toHaveBeenCalledTimes(2);
+    expect(editor.toggleStrike).toHaveBeenCalledTimes(1);
     expect(editor.run).toHaveBeenCalledTimes(1);
   });
 
-  it('should disable when it cannot toggle strike', () => {
-    const editor = new FakeEditor() as any;
+  it('should return true on disable when you cannot toggleStrike', () => {
+    const editor = new FakeEditor();
     editor.toggleStrike = jest.fn().mockReturnValue(false);
 
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    const isDisabled = ToolbarButton.getIsDisabled({ editor: editor as any, config: {} });
 
-    const button = screen.getByTestId('strike-button');
-    expect(button).toBeDisabled();
+    expect(isDisabled).toBe(true);
   });
 
-  it('should not strike on click if disabled', () => {
-    const editor = new FakeEditor() as any;
-    editor.toggleStrike = jest.fn().mockReturnValue(false);
-
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
-
-    const button = screen.getByTestId('strike-button');
-    fireEvent.click(button);
-
-    expect(editor.chain).toHaveBeenCalledTimes(0);
-    expect(editor.focus).toHaveBeenCalledTimes(0);
-    expect(editor.toggleStrike).toHaveBeenCalledTimes(1);
-    expect(editor.run).toHaveBeenCalledTimes(0);
-  });
-
-  it('should have active class when active', () => {
-    const editor = new FakeEditor() as any;
+  it('should return true on active when content is strike', () => {
+    const editor = new FakeEditor();
     editor.isActive = jest.fn().mockReturnValue(true);
 
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    const isActive = ToolbarButton.getIsActive({ editor: editor as any, config: {} });
 
-    const button = screen.getByTestId('strike-button');
-    const classNamesAmount = button.className.split(' ').length;
-    expect(classNamesAmount).toBe(2);
-  });
-
-  it('should not have active class when not active', () => {
-    const editor = new FakeEditor() as any;
-    editor.isActive = jest.fn().mockReturnValue(false);
-
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
-
-    const button = screen.getByTestId('strike-button');
-    const classNamesAmount = button.className.split(' ').length;
-    expect(classNamesAmount).toBe(1);
+    expect(isActive).toBe(true);
   });
 });

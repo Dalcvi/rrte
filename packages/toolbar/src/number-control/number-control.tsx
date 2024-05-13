@@ -49,7 +49,7 @@ export const NumberControl = forwardRef<
   const isDisabled = getIsDisabled({ ...props });
 
   return (
-    <section aria-label={t(text)} className={classes.container}>
+    <section aria-label={t(text)} className={classes.container} data-testid={text}>
       <button
         data-tooltip-id="toolbar-buttons-tooltip"
         data-tooltip-content={t(decreaseText)}

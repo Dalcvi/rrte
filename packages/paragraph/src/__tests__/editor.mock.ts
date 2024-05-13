@@ -1,6 +1,5 @@
 export default class FakeEditor {
-  commands: this;
-
+  commands;
   constructor() {
     this.commands = this;
   }
@@ -9,7 +8,7 @@ export default class FakeEditor {
     return this;
   }
 
-  toggleItalic() {
+  setParagraph() {
     return this;
   }
 

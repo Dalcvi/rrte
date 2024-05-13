@@ -23,7 +23,7 @@ export const Paragraph = () =>
     },
   });
 
-const toolbarDropdown: DropdownConfig = {
+export const toolbarDropdown: DropdownConfig = {
   name: 'text-type-paragraph',
   dropdownName: 'text type',
   type: ToolbarItemType.DROPDOWN,

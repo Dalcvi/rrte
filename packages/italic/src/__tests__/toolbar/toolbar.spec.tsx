@@ -1,7 +1,7 @@
-import { ToolbarButton } from '../../toolbar';
-import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { ToolbarButton } from '../../toolbar';
 import FakeEditor from '../editor.mock';
+
 jest.mock('../editor.mock', () => {
   return jest.fn().mockImplementation(() => {
     return {
@@ -21,62 +21,29 @@ describe('Italic toolbar button', () => {
   });
   it('should toggle italic on click', () => {
     const editor = new FakeEditor() as any;
-
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
-
-    const button = screen.getByTestId('italic-button');
-    fireEvent.click(button);
+    ToolbarButton.onClick({ editor, config: {} });
 
     expect(editor.chain).toHaveBeenCalledTimes(1);
     expect(editor.focus).toHaveBeenCalledTimes(1);
-    expect(editor.toggleItalic).toHaveBeenCalledTimes(2);
+    expect(editor.toggleItalic).toHaveBeenCalledTimes(1);
     expect(editor.run).toHaveBeenCalledTimes(1);
   });
 
-  it('should disable when it cannot toggle italic', () => {
+  it('should return true on disable when you cannot toggleItalic', () => {
     const editor = new FakeEditor() as any;
     editor.toggleItalic = jest.fn().mockReturnValue(false);
 
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    const isDisabled = ToolbarButton.getIsDisabled({ editor, config: {} });
 
-    const button = screen.getByTestId('italic-button');
-    expect(button).toBeDisabled();
+    expect(isDisabled).toBe(true);
   });
 
-  it('should not italic on click if disabled', () => {
-    const editor = new FakeEditor() as any;
-    editor.toggleItalic = jest.fn().mockReturnValue(false);
-
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
-
-    const button = screen.getByTestId('italic-button');
-    fireEvent.click(button);
-
-    expect(editor.chain).toHaveBeenCalledTimes(0);
-    expect(editor.focus).toHaveBeenCalledTimes(0);
-    expect(editor.toggleItalic).toHaveBeenCalledTimes(1);
-    expect(editor.run).toHaveBeenCalledTimes(0);
-  });
-
-  it('should have active class when active', () => {
+  it('should return true on active when content is italic', () => {
     const editor = new FakeEditor() as any;
     editor.isActive = jest.fn().mockReturnValue(true);
 
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    const isActive = ToolbarButton.getIsActive({ editor, config: {} });
 
-    const button = screen.getByTestId('italic-button');
-    const classNamesAmount = button.className.split(' ').length;
-    expect(classNamesAmount).toBe(2);
-  });
-
-  it('should not have active class when not active', () => {
-    const editor = new FakeEditor() as any;
-    editor.isActive = jest.fn().mockReturnValue(false);
-
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
-
-    const button = screen.getByTestId('italic-button');
-    const classNamesAmount = button.className.split(' ').length;
-    expect(classNamesAmount).toBe(1);
+    expect(isActive).toBe(true);
   });
 });

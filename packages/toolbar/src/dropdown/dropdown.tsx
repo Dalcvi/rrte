@@ -95,6 +95,7 @@ export const Dropdown = ({
             aria-label={t(dropdown.name)}
             ref={setDropdownList}
             className={classNames(classes.dropdownItemsContainer)}
+            data-testid={`${dropdown.name}-dropdown-items`}
           >
             {valuesByPriority.map(
               ({ text, iconConfig, getIsDisabled, name, className, onClick, belongsTo }, index) => {

@@ -18,7 +18,7 @@ export const RegularButton = forwardRef<
     config: Record<string, any>;
     secondaryTheme?: boolean;
   }
->(props => {
+>((props, ref) => {
   const {
     editor,
     config,
@@ -36,6 +36,7 @@ export const RegularButton = forwardRef<
 
   return (
     <button
+      ref={ref}
       aria-label={t(text)}
       disabled={getIsDisabled({ ...props })}
       onClick={() => onClick({ editor, config })}

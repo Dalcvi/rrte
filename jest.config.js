@@ -39,6 +39,10 @@ export default {
     '/.github/',
     '/.git/',
     '/.*.svg/',
+    '/node.ts',
+    '/mark.ts',
+    '/extension.ts',
+    '/editor.mock.ts',
   ],
 
   // Indicates which provider should be used to instrument code for coverage
@@ -102,6 +106,7 @@ export default {
   moduleNameMapper: {
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
     '^.+\\.svg$': 'jest-svg-transformer',
+    '\\.css$': '<rootDir>/__mocks__/styleMock.js',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

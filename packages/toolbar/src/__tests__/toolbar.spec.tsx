@@ -1,44 +1,177 @@
 import { Toolbar } from '../toolbar';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import React from 'react';
+import { SingleToolbarItem } from '../toolbar.types';
+import { i18nContext } from '@rrte/i18n';
 
 describe('toolbar', () => {
   it('should correctly prioritize items', () => {
-    const firstItem = {
-      toolbar: {
-        name: 'btn-second-place',
-        type: 'icon',
-        priority: 2,
-        Button: () => <div data-testid="second-button"></div>,
-      },
-      config: {},
-    };
-    const secondItem = {
-      toolbar: {
-        name: 'btn-third-place',
-        type: 'icon',
-        priority: 1,
-        Button: () => <div data-testid="third-button"></div>,
-      },
-      config: {},
-    };
-    const thirdItem = {
+    const firstItem: { toolbar: SingleToolbarItem<any>; config: any } = {
       toolbar: {
         name: 'btn-first-place',
-        type: 'icon',
+        type: 'icon' as const,
+        priority: 1,
+        text: 'first-place',
+        Icon: () => <div data-testid="first-place-button-icon"></div>,
+        onClick: () => {},
+        getIsActive: () => false,
+        getIsDisabled: () => false,
+        iconStyling: 'fill',
+        group: {
+          name: 'group-1',
+          text: 'group-1',
+          priority: 7,
+          toolbar: 'main',
+        },
+      },
+      config: {},
+    };
+    const secondItem: { toolbar: SingleToolbarItem<any>; config: any } = {
+      toolbar: {
+        name: 'btn-second-place',
+        type: 'dropdown' as const,
+        priority: 2,
+        text: 'second-place',
+        dropdownName: 'second-place',
+        DropdownPriority: 1,
+        values: [],
+        group: {
+          name: 'group-2',
+          text: 'group-2',
+          priority: 6,
+          toolbar: 'main',
+        },
+      },
+      config: {},
+    };
+    const thirdItem: { toolbar: SingleToolbarItem<any>; config: any } = {
+      toolbar: {
+        name: 'btn-third-place',
+        type: 'input-icon',
         priority: 3,
-        Button: () => <div data-testid="first-button"></div>,
+        text: 'third-place',
+        Icon: () => <div data-testid="third-place-button-icon"></div>,
+        onChange: () => {},
+        getAcceptableFiles: () => '',
+        getIsDisabled: () => false,
+        iconStyling: 'fill',
+        group: {
+          name: 'group-3',
+          text: 'group-3',
+          priority: 5,
+          toolbar: 'main',
+        },
       },
       config: {},
     };
 
-    render(<Toolbar editor={null as any} items={[firstItem, secondItem, thirdItem] as any[]} />);
-    const buttons = screen.getAllByTestId('-button', { exact: false });
-    const firstPlaceTestId = buttons[0].getAttribute('data-testid');
-    const secondPlaceTestId = buttons[1].getAttribute('data-testid');
-    const thirdPlaceTestId = buttons[2].getAttribute('data-testid');
-    expect(firstPlaceTestId).toBe('first-button');
-    expect(secondPlaceTestId).toBe('second-button');
-    expect(thirdPlaceTestId).toBe('third-button');
+    const fourthItem: { toolbar: SingleToolbarItem<any>; config: any } = {
+      toolbar: {
+        name: 'btn-fourth-place',
+        type: 'color-selection',
+        priority: 4,
+        text: 'fourth-place',
+        removeText: 'remove-fourth-place',
+        Icon: () => <div data-testid="fourth-place-button-icon"></div>,
+        onChange: () => {},
+        getValue: () => '',
+        getCanReset: () => false,
+        onReset: () => {},
+        getIsDisabled: () => false,
+        group: {
+          name: 'group-4',
+          text: 'group-4',
+          priority: 4,
+          toolbar: 'main',
+        },
+      },
+      config: {},
+    };
+
+    const fifthItem: { toolbar: SingleToolbarItem<any>; config: any } = {
+      toolbar: {
+        name: 'btn-fifth-place',
+        type: 'modal',
+        priority: 5,
+        text: 'fifth-place',
+        Icon: () => <div data-testid="fifth-place-button-icon"></div>,
+        ModalContent: () => <div></div>,
+        getIsDisabled: () => false,
+        iconStyling: 'fill',
+        group: {
+          name: 'group-5',
+          text: 'group-5',
+          priority: 3,
+          toolbar: 'main',
+        },
+      },
+      config: {},
+    };
+
+    const sixthItem: { toolbar: SingleToolbarItem<any>; config: any } = {
+      toolbar: {
+        name: 'btn-sixth-place',
+        type: 'number-control',
+        priority: 6,
+        text: 'sixth-place',
+        decreaseText: 'decrease-sixth-place',
+        increaseText: 'increase-sixth-place',
+        getValue: () => 0,
+        onChange: () => {},
+        getIsDisabled: () => false,
+        group: {
+          name: 'group-6',
+          text: 'group-6',
+          priority: 2,
+          toolbar: 'main',
+        },
+      },
+      config: {},
+    };
+
+    const seventhItem: { toolbar: SingleToolbarItem<any>; config: any } = {
+      toolbar: {
+        name: 'btn-seventh-place',
+        type: 'custom-logic',
+        priority: 7,
+        text: 'seventh-place',
+        Component: () => <div data-testid="seventh-place-button-icon"></div>,
+        group: {
+          name: 'group-7',
+          text: 'group-7',
+          priority: 1,
+          toolbar: 'main',
+        },
+      },
+      config: {},
+    };
+
+    const container = document.createElement('div');
+
+    render(
+      <i18nContext.Provider value={{ t: (key: string) => key, language: 'en' }}>
+        <Toolbar
+          editor={null as any}
+          items={[seventhItem, secondItem, sixthItem, firstItem, fifthItem, fourthItem, thirdItem]}
+          editorContainerRef={container}
+        />
+      </i18nContext.Provider>
+    );
+    const toolbarListGroups = screen.queryAllByTestId('toolbar-list');
+
+    const toolbarListItems = [
+      ...toolbarListGroups?.map(group => [...group.querySelectorAll('[data-testid]')]),
+    ].flat();
+
+    const itemsTestIds = toolbarListItems?.map(item => item.getAttribute('data-testid'));
+
+    expect(itemsTestIds[0]).toBe('first-place-button-icon');
+    expect(itemsTestIds[1]).toBe('btn-second-place');
+    expect(itemsTestIds[2]).toBe('third-place-button-icon');
+    expect(itemsTestIds[3]).toBe('fourth-place-button-icon');
+    expect(itemsTestIds[4]).toBe('fifth-place-button-icon');
+    expect(itemsTestIds[5]).toBe('sixth-place');
+    expect(itemsTestIds[6]).toBe('seventh-place-button-icon');
   });
 });

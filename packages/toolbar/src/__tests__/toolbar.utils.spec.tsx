@@ -1,8 +1,8 @@
+import React from 'react';
 import {
   DropdownConfig,
   RegularButtonConfig,
   SingleToolbarItem,
-  ToolbarItem,
   ToolbarItemType,
 } from '../toolbar.types';
 import {
@@ -11,93 +11,75 @@ import {
   getReducedMutliExtensions,
   reduceMultiExtensionValuesIntoOne,
   sortByPriority,
-  spreadToolbarItems,
 } from '../toolbar.utils';
 
-const mockButton = (name: string, priority: number) => ({
-  name,
-  type: ToolbarItemType.ICON,
-  text: name,
-  Button: () => <div>{name}</div>, // This is a mock, replace with actual component if needed
-  priority,
-});
-
-const mockDropdown = (name: string, priority: number) => ({
-  name,
-  type: ToolbarItemType.DROPDOWN,
-  text: name,
-  DropdownPriority: priority,
-  priority,
-  values: [
-    {
-      name: `${name}-value`,
-      text: `${name}-value`,
-      isActive: () => true,
-      onClick: () => {},
-      priority,
-    },
-  ],
-});
-
 describe('toolbar utils', () => {
-  describe('spreadToolbarItems', () => {
-    it('should spread array items into single items', () => {
-      const input = [
-        mockButton('Button1', 1),
-        [mockDropdown('Dropdown1', 1), mockButton('Button2', 2)],
-        mockDropdown('Dropdown2', 2),
-      ];
-
-      const expectedOutput = [
-        mockButton('Button1', 1),
-        mockDropdown('Dropdown1', 1),
-        mockButton('Button2', 2),
-        mockDropdown('Dropdown2', 2),
-      ];
-
-      expect(JSON.stringify(spreadToolbarItems(input))).toEqual(JSON.stringify(expectedOutput));
-    });
-
-    it('should return an empty array when the input is empty', () => {
-      const input = [] as ToolbarItem<any>[];
-      const expectedOutput = [] as SingleToolbarItem<any>[];
-
-      expect(JSON.stringify(spreadToolbarItems(input))).toEqual(JSON.stringify(expectedOutput));
-    });
-  });
-
   describe('getDifferentToolbarTypes', () => {
     it('should group items by toolbar type', () => {
       const items: (RegularButtonConfig<any> | DropdownConfig)[] = [
         {
-          name: 'Button1',
-          type: ToolbarItemType.ICON,
-          text: 'Button1',
-          Button: () => null as any,
+          name: 'regular-button-1',
+          type: 'icon' as const,
           priority: 1,
+          text: 'regular-button-1',
+          Icon: () => <div data-testid="regular-button-1"></div>,
+          onClick: () => {},
+          getIsActive: () => false,
+          getIsDisabled: () => false,
+          iconStyling: 'fill',
+          group: {
+            name: 'group-1',
+            text: 'group-1',
+            priority: 7,
+            toolbar: 'main',
+          },
         },
         {
-          name: 'Dropdown1',
-          type: ToolbarItemType.DROPDOWN,
-          text: 'Dropdown1',
+          name: 'dropdown-1',
+          type: 'dropdown' as const,
+          priority: 2,
+          text: 'dropdown',
+          dropdownName: 'dropdown',
           DropdownPriority: 1,
+          values: [],
+          group: {
+            name: 'group-2',
+            text: 'group-2',
+            priority: 6,
+            toolbar: 'main',
+          },
+        },
+        {
+          name: 'regular-button-2',
+          type: 'icon' as const,
           priority: 1,
-          values: [],
+          text: 'regular-button-2',
+          Icon: () => <div data-testid="regular-button-2"></div>,
+          onClick: () => {},
+          getIsActive: () => false,
+          getIsDisabled: () => false,
+          iconStyling: 'fill',
+          group: {
+            name: 'group-1',
+            text: 'group-1',
+            priority: 7,
+            toolbar: 'main',
+          },
         },
         {
-          name: 'Button2',
-          type: ToolbarItemType.ICON,
-          text: 'Button2',
-          Button: () => null as any,
+          name: 'dropdown-2',
+          type: 'dropdown' as const,
           priority: 2,
-        },
-        {
-          name: 'Dropdown2',
-          type: ToolbarItemType.DROPDOWN,
-          text: 'Dropdown2',
-          DropdownPriority: 2,
-          priority: 2,
+          text: 'dropdown',
+          dropdownName: 'dropdown',
+          DropdownPriority: 1,
           values: [],
+          group: {
+            name: 'group-2',
+            text: 'group-2',
+            priority: 6,
+            toolbar: 'main',
+          },
         },
       ];
 
@@ -105,48 +87,87 @@ describe('toolbar utils', () => {
 
       expect(result[ToolbarItemType.ICON]).toEqual([
         {
-          name: 'Button1',
-          type: ToolbarItemType.ICON,
-          text: 'Button1',
-          Button: expect.any(Function),
+          name: 'regular-button-1',
+          type: 'icon',
           priority: 1,
+          text: 'regular-button-1',
+          Icon: expect.any(Function),
+          onClick: expect.any(Function),
+          getIsActive: expect.any(Function),
+          getIsDisabled: expect.any(Function),
+          iconStyling: 'fill',
+          group: {
+            name: 'group-1',
+            text: 'group-1',
+            priority: 7,
+            toolbar: 'main',
+          },
         },
         {
-          name: 'Button2',
-          type: ToolbarItemType.ICON,
-          text: 'Button2',
-          Button: expect.any(Function),
-          priority: 2,
+          name: 'regular-button-2',
+          type: 'icon',
+          priority: 1,
+          text: 'regular-button-2',
+          Icon: expect.any(Function),
+          onClick: expect.any(Function),
+          getIsActive: expect.any(Function),
+          getIsDisabled: expect.any(Function),
+          iconStyling: 'fill',
+          group: {
+            name: 'group-1',
+            text: 'group-1',
+            priority: 7,
+            toolbar: 'main',
+          },
         },
       ]);
 
       expect(result[ToolbarItemType.DROPDOWN]).toEqual([
         {
-          name: 'Dropdown1',
-          type: ToolbarItemType.DROPDOWN,
-          text: 'Dropdown1',
+          name: 'dropdown-1',
+          type: 'dropdown',
+          priority: 2,
+          text: 'dropdown',
+          dropdownName: 'dropdown',
           DropdownPriority: 1,
-          priority: 1,
           values: [],
+          group: {
+            name: 'group-2',
+            text: 'group-2',
+            priority: 6,
+            toolbar: 'main',
+          },
         },
         {
-          name: 'Dropdown2',
-          type: ToolbarItemType.DROPDOWN,
-          text: 'Dropdown2',
-          DropdownPriority: 2,
+          name: 'dropdown-2',
+          type: 'dropdown',
           priority: 2,
+          text: 'dropdown',
+          dropdownName: 'dropdown',
+          DropdownPriority: 1,
           values: [],
+          group: {
+            name: 'group-2',
+            text: 'group-2',
+            priority: 6,
+            toolbar: 'main',
+          },
         },
       ]);
     });
 
     it('should return empty arrays for missing toolbar types', () => {
-      const items: (RegularButtonConfig<any> | DropdownConfig)[] = [];
+      const items: any[] = [];
 
       const result = getDifferentToolbarTypes(items);
 
       expect(result[ToolbarItemType.ICON]).toEqual([]);
       expect(result[ToolbarItemType.DROPDOWN]).toEqual([]);
+      expect(result[ToolbarItemType.INPUT_ICON]).toEqual([]);
+      expect(result[ToolbarItemType.CUSTOM_LOGIC]).toEqual([]);
+      expect(result[ToolbarItemType.COLOR_SELECTION]).toEqual([]);
+      expect(result[ToolbarItemType.MODAL]).toEqual([]);
+      expect(result[ToolbarItemType.NUMBER_CONTROL]).toEqual([]);
     });
   });
 
@@ -154,44 +175,51 @@ describe('toolbar utils', () => {
     it('should correctly create a config map', () => {
       const toolbarInfos = [
         {
-          toolbar: [
-            {
-              name: 'item1',
-              type: ToolbarItemType.ICON,
-              text: 'Item 1',
-              Button: () => null,
-              priority: 1,
+          toolbar: {
+            name: 'dropdown-1',
+            type: 'dropdown' as const,
+            priority: 2,
+            text: 'dropdown',
+            dropdownName: 'dropdown',
+            DropdownPriority: 1,
+            values: [],
+            group: {
+              name: 'group-2',
+              text: 'group-2',
+              priority: 6,
+              toolbar: 'main',
             },
-            {
-              name: 'item2',
-              type: ToolbarItemType.DROPDOWN,
-              text: 'Item 2',
-              DropdownPriority: 1,
-              priority: 2,
-              values: [],
-            },
-          ],
+          },
           config: { someConfig: 'value' },
         },
         {
           toolbar: {
-            name: 'item3',
-            type: ToolbarItemType.ICON,
-            text: 'Item 3',
-            Button: () => null,
-            priority: 3,
+            name: 'regular-button-2',
+            type: 'icon' as const,
+            priority: 1,
+            text: 'regular-button-2',
+            Icon: () => <div data-testid="regular-button-2"></div>,
+            onClick: () => {},
+            getIsActive: () => false,
+            getIsDisabled: () => false,
+            iconStyling: 'fill',
+            group: {
+              name: 'group-1',
+              text: 'group-1',
+              priority: 7,
+              toolbar: 'main',
+            },
           },
           config: { anotherConfig: 'value2' },
         },
       ] as {
-        toolbar: ToolbarItem<any>;
+        toolbar: SingleToolbarItem<any>;
         config: Record<string, any>;
       }[];
 
       const expectedOutput = {
-        item1: { someConfig: 'value' },
-        item2: { someConfig: 'value' },
-        item3: { anotherConfig: 'value2' },
+        'dropdown-1': { someConfig: 'value' },
+        'regular-button-2': { anotherConfig: 'value2' },
       };
 
       const result = getConfigsMapByName(toolbarInfos);
@@ -240,94 +268,133 @@ describe('toolbar utils', () => {
 
   describe('reduceMultiExtensionValuesIntoOne', () => {
     test('should reduce multiple extension values into one with the biggest priority', () => {
-      const items = [
+      const items: DropdownConfig[] = [
         {
-          name: 'Dropdown1',
-          type: ToolbarItemType.DROPDOWN,
-          text: 'Dropdown 1',
+          name: 'dropdown-1',
+          type: 'dropdown' as const,
+          priority: 2,
+          text: 'dropdown',
+          dropdownName: 'dropdown',
           DropdownPriority: 2,
-          priority: 1,
           values: [
             {
-              name: 'Value1',
-              text: 'Value 1',
-              isActive: () => true,
+              name: 'item-1',
+              text: 'item-1',
+              belongsTo: 'dropdown',
+              isActive: () => false,
               onClick: () => {},
-              priority: 1,
+              getIsDisabled: () => false,
+              priority: 2,
             },
             {
-              name: 'Value2',
-              text: 'Value 2',
-              isActive: () => true,
+              name: 'item-2',
+              text: 'item-2',
+              belongsTo: 'dropdown',
+              isActive: () => false,
               onClick: () => {},
+              getIsDisabled: () => false,
               priority: 2,
             },
           ],
+          group: {
+            name: 'group-2',
+            text: 'group-2',
+            priority: 6,
+            toolbar: 'main',
+          },
         },
         {
-          name: 'Dropdown2',
-          type: ToolbarItemType.DROPDOWN,
-          text: 'Dropdown 2',
+          name: 'dropdown-2',
+          type: 'dropdown' as const,
+          priority: 1,
+          text: 'dropdown-2',
+          dropdownName: 'dropdown',
           DropdownPriority: 1,
-          priority: 2,
           values: [
             {
-              name: 'Value3',
-              text: 'Value 3',
-              isActive: () => true,
+              name: 'item-3',
+              text: 'item-3',
+              belongsTo: 'dropdown',
+              isActive: () => false,
               onClick: () => {},
-              priority: 3,
+              getIsDisabled: () => false,
+              priority: 2,
             },
             {
-              name: 'Value4',
-              text: 'Value 4',
-              isActive: () => true,
+              name: 'item-4',
+              text: 'item-4',
+              belongsTo: 'dropdown',
+              isActive: () => false,
               onClick: () => {},
+              getIsDisabled: () => false,
               priority: 2,
             },
           ],
+          group: {
+            name: 'group-2',
+            text: 'group-2',
+            priority: 6,
+            toolbar: 'main',
+          },
         },
       ];
 
       const reducedDropdown = reduceMultiExtensionValuesIntoOne(items);
 
-      expect(reducedDropdown).toEqual({
-        name: 'Dropdown1',
-        type: ToolbarItemType.DROPDOWN,
-        text: 'Dropdown 1',
-        DropdownPriority: 2,
-        priority: 1,
-        values: [
-          {
-            name: 'Value1',
-            text: 'Value 1',
-            isActive: expect.any(Function),
-            onClick: expect.any(Function),
-            priority: 1,
+      expect(JSON.stringify(reducedDropdown)).toEqual(
+        JSON.stringify({
+          name: 'dropdown-1',
+          type: 'dropdown' as const,
+          priority: 2,
+          text: 'dropdown',
+          dropdownName: 'dropdown',
+          DropdownPriority: 2,
+          values: [
+            {
+              name: 'item-1',
+              text: 'item-1',
+              belongsTo: 'dropdown',
+              isActive: () => false,
+              onClick: () => {},
+              getIsDisabled: () => false,
+              priority: 2,
+            },
+            {
+              name: 'item-2',
+              text: 'item-2',
+              belongsTo: 'dropdown',
+              isActive: () => false,
+              onClick: () => {},
+              getIsDisabled: () => false,
+              priority: 2,
+            },
+            {
+              name: 'item-3',
+              text: 'item-3',
+              belongsTo: 'dropdown',
+              isActive: () => false,
+              onClick: () => {},
+              getIsDisabled: () => false,
+              priority: 2,
+            },
+            {
+              name: 'item-4',
+              text: 'item-4',
+              belongsTo: 'dropdown',
+              isActive: () => false,
+              onClick: () => {},
+              getIsDisabled: () => false,
+              priority: 2,
+            },
+          ],
+          group: {
+            name: 'group-2',
+            text: 'group-2',
+            priority: 6,
+            toolbar: 'main',
           },
-          {
-            name: 'Value2',
-            text: 'Value 2',
-            isActive: expect.any(Function),
-            onClick: expect.any(Function),
-            priority: 2,
-          },
-          {
-            name: 'Value3',
-            text: 'Value 3',
-            isActive: expect.any(Function),
-            onClick: expect.any(Function),
-            priority: 3,
-          },
-          {
-            name: 'Value4',
-            text: 'Value 4',
-            isActive: expect.any(Function),
-            onClick: expect.any(Function),
-            priority: 2,
-          },
-        ],
-      });
+        })
+      );
     });
 
     test('should handle an empty array', () => {
@@ -341,73 +408,106 @@ describe('toolbar utils', () => {
 
   describe('getReducedMutliExtensions', () => {
     const dropdown1: DropdownConfig = {
-      name: 'Dropdown1',
-      type: 'dropdown',
-      text: 'Dropdown1',
+      name: 'dropdown-1',
+      type: 'dropdown' as const,
+      priority: 2,
+      text: 'dropdown',
+      dropdownName: 'dropdown-2',
       DropdownPriority: 1,
-      priority: 1,
+      group: {
+        name: 'group-2',
+        text: 'group-2',
+        priority: 6,
+        toolbar: 'main',
+      },
       values: [
         {
-          name: 'Value1',
-          text: 'Value 1',
-          isActive: () => true,
+          name: 'item-1',
+          text: 'item-1',
+          belongsTo: 'dropdown',
+          isActive: () => false,
           onClick: () => {},
+          getIsDisabled: () => false,
           priority: 1,
         },
         {
-          name: 'Value2',
-          text: 'Value 2',
+          name: 'item-2',
+          text: 'item-2',
+          belongsTo: 'dropdown',
           isActive: () => false,
           onClick: () => {},
-          priority: 2,
+          getIsDisabled: () => false,
+          priority: 1,
         },
       ],
     };
 
     const dropdown2: DropdownConfig = {
-      name: 'Dropdown2',
-      type: 'dropdown',
-      text: 'Dropdown2',
-      DropdownPriority: 2,
+      name: 'dropdown-2',
+      type: 'dropdown' as const,
       priority: 2,
+      text: 'dropdown',
+      dropdownName: 'dropdown',
+      DropdownPriority: 1,
+      group: {
+        name: 'group-2',
+        text: 'group-2',
+        priority: 6,
+        toolbar: 'main',
+      },
       values: [
         {
-          name: 'Value3',
-          text: 'Value 3',
-          isActive: () => true,
+          name: 'item-3',
+          text: 'item-3',
+          belongsTo: 'dropdown',
+          isActive: () => false,
           onClick: () => {},
+          getIsDisabled: () => false,
           priority: 1,
         },
         {
-          name: 'Value4',
-          text: 'Value 4',
-          isActive: () => true,
+          name: 'item-4',
+          text: 'item-4',
+          belongsTo: 'dropdown',
+          isActive: () => false,
           onClick: () => {},
-          priority: 2,
+          getIsDisabled: () => false,
+          priority: 1,
         },
       ],
     };
 
     const dropdown3: DropdownConfig = {
-      name: 'Dropdown1',
-      type: 'dropdown',
-      text: 'Dropdown1',
-      DropdownPriority: 3,
-      priority: 3,
+      name: 'dropdown-3',
+      type: 'dropdown' as const,
+      priority: 2,
+      text: 'dropdown',
+      dropdownName: 'dropdown-2',
+      DropdownPriority: 1,
+      group: {
+        name: 'group-2',
+        text: 'group-2',
+        priority: 6,
+        toolbar: 'main',
+      },
       values: [
         {
-          name: 'Value5',
-          text: 'Value 5',
-          isActive: () => true,
+          name: 'item-5',
+          text: 'item-5',
+          belongsTo: 'dropdown',
+          isActive: () => false,
           onClick: () => {},
+          getIsDisabled: () => false,
           priority: 1,
         },
         {
-          name: 'Value6',
-          text: 'Value 6',
-          isActive: () => true,
+          name: 'item-6',
+          text: 'item-6',
+          belongsTo: 'dropdown',
+          isActive: () => false,
           onClick: () => {},
-          priority: 2,
+          getIsDisabled: () => false,
+          priority: 1,
         },
       ],
     };

@@ -19,7 +19,7 @@
     "build:prod": "cross-env NODE_ENV=production pnpm build && pnpm move-style-inject",
     "build:dev": "cross-env NODE_ENV=development pnpm build",
     "move-style-inject": "node ../../moveStyleInject.js",
-    "test": "jest --config='../../jest.config.js'"
+    "test": "jest --config='../../jest.config.js' --testPathPattern=packages/code/src"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",

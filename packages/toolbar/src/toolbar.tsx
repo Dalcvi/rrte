@@ -93,6 +93,7 @@ const ToolbarGroup = ({
       aria-orientation="horizontal"
       aria-label={t(groupedToolbars.group.text)}
       className={classNames(classes.toolbarList, wrapperClassName)}
+      data-testid="toolbar-list"
     >
       {sortedButtons.map(item => {
         switch (item.type) {

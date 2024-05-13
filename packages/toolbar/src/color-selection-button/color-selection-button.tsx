@@ -50,7 +50,7 @@ export const ColorSelectionButton = ({
         <div className={classes.icon}>
           <Icon value={value} />
         </div>
-        <div data-testid="color-bar" className={classes.colorBar} style={barStyle} />
+        <div className={classes.colorBar} style={barStyle} />
       </div>
       <button
         data-tooltip-id="toolbar-buttons-tooltip"
