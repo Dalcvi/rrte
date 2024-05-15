@@ -1,5 +1,5 @@
 export default class FakeEditor {
-  commands;
+  public commands: this;
   constructor() {
     this.commands = this;
   }
@@ -14,7 +14,7 @@ export default class FakeEditor {
     };
   }
 
-  state = {
+  public state = {
     selection: {
       $from: {
         parent: {
@@ -22,6 +22,9 @@ export default class FakeEditor {
             length: 0,
           },
         },
+      },
+      $to: {
+        pos: 0,
       },
     },
   };

@@ -21,7 +21,7 @@ describe('Strike', () => {
       />
     );
 
-    const strikeButton = screen.getByTestId('strike-button');
+    const strikeButton = screen.getByTestId('strike-button.text-regular-button');
     await userEvent.click(strikeButton);
 
     expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('strike');

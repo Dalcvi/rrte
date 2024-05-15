@@ -15,9 +15,10 @@ const BubbleMenu: BubbleMenuToolbar['Menu'] = ({ editor, t }) => {
 
   useEffect(() => {
     const editorElement = document.querySelector("[data-testid='rrte-editor']") as HTMLElement;
-    if (!editorElement || !window) {
+    if (!editorElement || !window || typeof ResizeObserver === 'undefined') {
       return;
     }
+
     const observer = new ResizeObserver(entries => {
       const maxWidth = entries[0].contentRect.width;
       setMaxWidth(maxWidth);

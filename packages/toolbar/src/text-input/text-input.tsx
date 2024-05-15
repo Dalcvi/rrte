@@ -14,6 +14,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <label className={classes.label}>
         {label}
         <input
+          data-testid={`${label}-input`}
           onKeyDown={onKeyDown}
           className={classes.textInput}
           value={value}

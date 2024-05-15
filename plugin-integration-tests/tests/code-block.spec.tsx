@@ -21,7 +21,7 @@ describe('Code block', () => {
       />
     );
 
-    const button = screen.getByTestId('codeblock-button');
+    const button = screen.getByTestId('codeblock-button.text-regular-button');
     await userEvent.click(button);
 
     const preTag = screen.getByTestId('codeBlock');

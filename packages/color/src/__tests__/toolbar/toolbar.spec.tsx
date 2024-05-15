@@ -1,9 +1,7 @@
-import React from 'react';
-import { ToolbarButton } from '../../toolbar';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import FakeEditor from '../editor.mock';
 import { currentSelectionAttributeValue } from '@rrte/common';
+import '@testing-library/jest-dom';
+import { ToolbarButton } from '../../toolbar';
+import FakeEditor from '../editor.mock';
 
 jest.mock('../editor.mock', () => {
   return jest.fn().mockImplementation(() => {
@@ -31,34 +29,18 @@ describe('Color toolbar button', () => {
   });
   it('should set color on color change', () => {
     const editor = new FakeEditor() as any;
-    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
-
-    const colorInput = screen.getByTestId('color-input');
-
-    fireEvent.change(colorInput, { target: { value: '#00000C' } });
+    const e = { target: { value: '#000000' } } as any;
+    ToolbarButton.onChange(e, { editor });
 
     expect(editor.chain).toHaveBeenCalledTimes(1);
     expect(editor.focus).toHaveBeenCalledTimes(1);
-    expect(editor.setColor).toHaveBeenCalledTimes(2);
+    expect(editor.setColor).toHaveBeenCalledWith('#000000');
     expect(editor.run).toHaveBeenCalledTimes(1);
   });
 
-  it('should have a reset button when color is set', () => {
+  it('should reset color on reset', () => {
     const editor = new FakeEditor() as any;
-    (currentSelectionAttributeValue as jest.Mock).mockReturnValue('#00000A');
-    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
-
-    const resetButton = screen.getByTestId('color-reset');
-    expect(resetButton).toBeInTheDocument();
-  });
-
-  it('should unset color on reset click', () => {
-    const editor = new FakeEditor() as any;
-    (currentSelectionAttributeValue as jest.Mock).mockReturnValue('#00000B');
-    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
-
-    const resetButton = screen.getByTestId('color-reset');
-    fireEvent.click(resetButton);
+    ToolbarButton.onReset({ editor });
 
     expect(editor.chain).toHaveBeenCalledTimes(1);
     expect(editor.focus).toHaveBeenCalledTimes(1);
@@ -66,25 +48,69 @@ describe('Color toolbar button', () => {
     expect(editor.run).toHaveBeenCalledTimes(1);
   });
 
-  it('letter color should be the same as selected color', () => {
+  it('should return true for getCanReset when there is a color value', () => {
     const editor = new FakeEditor() as any;
-    (currentSelectionAttributeValue as jest.Mock).mockReturnValue('#AAAAAA');
-    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
+    const canReset = ToolbarButton.getCanReset({ editor }, '#000000');
 
-    const colorInput = screen.getByTestId<HTMLInputElement>('color-input');
-    const colorLetter = screen.getByTestId('color-letter');
-    expect(colorInput.value).toBe('#aaaaaa');
-    expect(colorLetter.style.color).toBe('rgb(170, 170, 170)');
+    expect(canReset).toBe(true);
   });
 
-  it('bar color should be the same as selected color', () => {
+  it('should be disabled when you cant set color', () => {
     const editor = new FakeEditor() as any;
-    (currentSelectionAttributeValue as jest.Mock).mockReturnValue('#AAAAAA');
-    render(<ToolbarButton.Button editor={editor} config={{}} editorContainerRef={null} />);
+    editor.setColor = jest.fn().mockReturnValue(false);
+    const isDisabled = ToolbarButton.getIsDisabled({ editor });
 
-    const colorInput = screen.getByTestId<HTMLInputElement>('color-input');
-    const colorBar = screen.getByTestId('color-bar');
-    expect(colorInput.value).toBe('#aaaaaa');
-    expect(colorBar.style.background).toBe('rgb(170, 170, 170)');
+    expect(isDisabled).toBe(true);
+  });
+
+  it('should return current color value', () => {
+    const editor = new FakeEditor() as any;
+    (currentSelectionAttributeValue as jest.Mock).mockReturnValue('#000000');
+
+    const color = ToolbarButton.getValue({ editor });
+
+    expect(color).toBe('#000000');
+  });
+
+  it('should return undefined if no color value', () => {
+    const editor = new FakeEditor() as any;
+    (currentSelectionAttributeValue as jest.Mock).mockReturnValue({});
+
+    const color = ToolbarButton.getValue({ editor });
+
+    expect(color).toBe(undefined);
+  });
+
+  it('should return undefined if no element exists with the id', () => {
+    const editor = new FakeEditor() as any;
+    (currentSelectionAttributeValue as jest.Mock).mockReturnValue({ id: 'test' });
+
+    document.getElementById = jest.fn().mockReturnValue(undefined);
+
+    const color = ToolbarButton.getValue({ editor });
+
+    expect(color).toBe(undefined);
+  });
+
+  it('should return current value by id', () => {
+    const editor = new FakeEditor() as any;
+    (currentSelectionAttributeValue as jest.Mock).mockReturnValue({
+      id: 'test',
+    });
+
+    const fakeElement = document.createElement('div');
+    fakeElement.id = 'test';
+    fakeElement.style.color = 'red';
+
+    document.getElementById = jest.fn().mockReturnValue(fakeElement);
+
+    const color = ToolbarButton.getValue({ editor });
+    expect(color).toBe('red');
+  });
+
+  it('should have an icon', () => {
+    const icon = ToolbarButton.Icon({ value: '#000000' });
+
+    expect(icon).not.toBeNull();
   });
 });

@@ -53,6 +53,7 @@ export const NumberControl = forwardRef<
       <button
         data-tooltip-id="toolbar-buttons-tooltip"
         data-tooltip-content={t(decreaseText)}
+        data-testid={`${text}-number-control-decrease`}
         aria-label={t(decreaseText)}
         disabled={isDisabled || typeof currentValue === 'undefined' || currentValue <= 0}
         onClick={() => currentValue && handleNumberChange(currentValue.toString(), 'DECREASE')}
@@ -62,6 +63,7 @@ export const NumberControl = forwardRef<
       </button>
       <input
         ref={ref}
+        data-testid={`${text}-number-control-input`}
         disabled={isDisabled}
         data-tooltip-id="toolbar-buttons-tooltip"
         data-tooltip-content={t(text)}
@@ -73,6 +75,7 @@ export const NumberControl = forwardRef<
       />
       <button
         data-tooltip-id="toolbar-buttons-tooltip"
+        data-testid={`${text}-number-control-increase`}
         data-tooltip-content={t(increaseText)}
         aria-label={t(increaseText)}
         disabled={isDisabled || typeof currentValue === 'undefined'}

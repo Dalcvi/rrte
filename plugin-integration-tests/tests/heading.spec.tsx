@@ -14,10 +14,10 @@ describe('Heading', () => {
     const editorRef = {} as any;
     render(<Editor editorRef={editorRef} content={undefined} editorExtensions={[Heading()]} />);
 
-    const button = screen.getByTestId('text type');
+    const button = screen.getByTestId('text-styles-dropdown.text-dropdown-button');
     await userEvent.click(button);
 
-    const heading2 = screen.getByTestId('heading 2');
+    const heading2 = screen.getByTestId('heading-2-option-dropdown-item-1');
     await userEvent.click(heading2);
 
     const content = JSON.stringify(editorRef.current.getJSON());
@@ -42,6 +42,7 @@ describe('Heading', () => {
     render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
+    expect(document.querySelector('h1')).toBeInTheDocument();
   });
 
   it('should render h2', async () => {
@@ -61,6 +62,7 @@ describe('Heading', () => {
     render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
+    expect(document.querySelector('h2')).toBeInTheDocument();
   });
 
   it('should render h3', async () => {
@@ -80,6 +82,7 @@ describe('Heading', () => {
     render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
+    expect(document.querySelector('h3')).toBeInTheDocument();
   });
 
   it('should render h4', async () => {
@@ -99,6 +102,7 @@ describe('Heading', () => {
     render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
+    expect(document.querySelector('h4')).toBeInTheDocument();
   });
 
   it('should render h5', async () => {
@@ -118,6 +122,7 @@ describe('Heading', () => {
     render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
+    expect(document.querySelector('h5')).toBeInTheDocument();
   });
 
   it('should render h6', async () => {
@@ -137,5 +142,6 @@ describe('Heading', () => {
     render(<Editor editorRef={editorRef} content={content} editorExtensions={[Heading()]} />);
 
     expect(editorRef.current.getJSON()).toEqual(content);
+    expect(document.querySelector('h6')).toBeInTheDocument();
   });
 });

@@ -36,6 +36,7 @@ export const ModalButton = (props: {
         aria-controls={name}
         aria-expanded={isOpen}
         ref={setDropdownButton}
+        data-testid={`${text}-modal-button`}
         disabled={getIsDisabled({
           ...props,
         })}

@@ -38,6 +38,7 @@ export const RegularButton = forwardRef<
     <button
       ref={ref}
       aria-label={t(text)}
+      data-testid={`${text}-regular-button`}
       disabled={getIsDisabled({ ...props })}
       onClick={() => onClick({ editor, config })}
       className={classNames(classes.regularButton, {

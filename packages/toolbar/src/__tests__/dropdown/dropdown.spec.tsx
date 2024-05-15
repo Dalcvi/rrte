@@ -40,14 +40,14 @@ const config: DropdownConfig = {
 };
 
 describe('dropdown', () => {
-  it('should render the values in correct priority', () => {
+  it('should render the dropdown button', () => {
     render(
       <i18nContext.Provider value={{ t: (key: string) => key, language: 'en' }}>
         <Dropdown {...config} configs={{}} editor={null as any} />
       </i18nContext.Provider>
     );
 
-    expect(screen.getByTestId(config.name)).toBeInTheDocument();
+    expect(screen.getByTestId(`${config.text}-dropdown-button`)).toBeInTheDocument();
   });
 
   it('should render values in correct priority', () => {
@@ -57,18 +57,18 @@ describe('dropdown', () => {
       </i18nContext.Provider>
     );
 
-    const button = screen.getByTestId(config.name);
+    const button = screen.getByTestId(`${config.text}-dropdown-button`);
     fireEvent.click(button);
 
-    const dropdownItems = screen
-      .getByTestId(`${config.dropdownName}-dropdown-items`)
-      .querySelectorAll('li');
+    const dropdownItems = [
+      ...screen.getByTestId(`${config.text}-dropdown-items`).querySelectorAll('li'),
+    ];
 
-    const firstItem = dropdownItems[0].querySelector('button');
-    const secondItem = dropdownItems[1].querySelector('button');
+    const firstItem = dropdownItems[0].querySelector('[data-testid=first-dropdown-item-0]');
+    const secondItem = dropdownItems[1].querySelector('[data-testid=last-dropdown-item-1]');
 
-    expect(firstItem?.getAttribute('data-testid')).toBe('first');
-    expect(secondItem?.getAttribute('data-testid')).toBe('last');
+    expect(firstItem).toBeInTheDocument();
+    expect(secondItem).toBeInTheDocument();
   });
 
   it('should call onClick when clicking on a value', () => {
@@ -95,13 +95,11 @@ describe('dropdown', () => {
       </i18nContext.Provider>
     );
 
-    const button = screen.getByTestId(config.name);
+    const button = screen.getByTestId(`${config.text}-dropdown-button`);
 
     fireEvent.click(button);
 
-    const firstItem = screen.getByTestId('first');
-
-    fireEvent.click(firstItem as Element);
+    screen.getByTestId('first-dropdown-item-0').click();
 
     expect(onClick).toHaveBeenCalledTimes(1);
   });
@@ -139,11 +137,11 @@ describe('dropdown', () => {
       </i18nContext.Provider>
     );
 
-    const button = screen.getByTestId(config.name);
+    const button = screen.getByTestId(`${config.text}-dropdown-button`);
 
     fireEvent.click(button);
 
-    const firstItem = screen.getByTestId('first');
+    const firstItem = screen.getByTestId('first-dropdown-item-0');
 
     expect(firstItem).toBeDisabled();
   });

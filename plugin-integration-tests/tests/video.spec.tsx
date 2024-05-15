@@ -48,7 +48,7 @@ describe('Video', () => {
       />
     );
 
-    const button = screen.getByTestId('user-controlled-video-button');
+    const button = screen.getByTestId('video-button.text-regular-button');
     await userEvent.click(button);
 
     const vidElement = screen.getByTestId('video-comp');
@@ -68,6 +68,7 @@ describe('Video', () => {
             customSize: null,
             customWidth: 320,
             customHeight: 180,
+            title: null,
           },
         },
       ],

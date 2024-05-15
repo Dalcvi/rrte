@@ -17,7 +17,7 @@ describe('Code', () => {
       <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Code()]} />
     );
 
-    const button = screen.getByTestId('code-button');
+    const button = screen.getByTestId('code-button.text-regular-button');
     await userEvent.click(button);
 
     expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('code');

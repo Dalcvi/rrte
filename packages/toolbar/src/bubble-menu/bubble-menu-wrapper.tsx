@@ -36,9 +36,10 @@ export const BubbleMenuWrapper = forwardRef<HTMLElement, BubbleMenuWrapper>(
 
     useEffect(() => {
       const editor = document.querySelector("[data-testid='rrte-editor']") as HTMLElement;
-      if (!editor || !window) {
+      if (!editor || !window || typeof ResizeObserver === 'undefined') {
         return;
       }
+
       const observer = new ResizeObserver(entries => {
         const maxWidth = entries[0].contentRect.width;
         setMaxWidth(maxWidth);

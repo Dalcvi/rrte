@@ -53,6 +53,7 @@ export const InputIconButton = forwardRef<
         <button
           ref={ref}
           onClick={() => fileInput?.click()}
+          data-testid={`${text}-input-icon-button`}
           aria-label={t(text)}
           disabled={isDisabled}
           className={classNames(classes.inputIconButton, {

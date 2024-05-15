@@ -21,18 +21,28 @@ describe('Paragraph', () => {
       />
     );
 
-    const button = screen.getByTestId('text type');
+    const paragraphBefore = document.querySelector('p');
+    expect(paragraphBefore).toBeInTheDocument();
+
+    const button = screen.getByTestId('text-styles-dropdown.text-dropdown-button');
     await userEvent.click(button);
 
-    const heading2 = screen.getByTestId('heading 2');
+    const heading2 = screen.getByTestId('heading-2-option-dropdown-item-1');
     await userEvent.click(heading2);
 
+    expect(paragraphBefore).not.toBeInTheDocument();
+    const headingAfter = document.querySelector('h2');
+    expect(headingAfter).toBeInTheDocument();
+
     await userEvent.click(button);
-    const paragraph = screen.getByTestId('Paragraph');
+    const paragraph = screen.getByTestId('paragraph-option-dropdown-item-6');
     await userEvent.click(paragraph);
 
-    const content = JSON.stringify(editorRef.current.getJSON());
+    const paragraphAfter = document.querySelector('p');
+    expect(paragraphAfter).toBeInTheDocument();
+    expect(headingAfter).not.toBeInTheDocument();
 
+    const content = JSON.stringify(editorRef.current.getJSON());
     expect(content.includes('paragraph')).toBeTruthy();
   });
   it('should render  paragraph', async () => {

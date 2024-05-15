@@ -129,7 +129,10 @@ export const GifSearch = ({
           const setReference = gifs.length - 1 === index ? setLastItemRef : null;
           const addRef = gifs.length - 4 === index && search !== '' && gifs.length !== totalCount;
           return (
-            <li className={classes.gifItem}>
+            <li
+              className={classes.gifItem}
+              key={gif.images.original.webp ?? gif.images.original.mp4}
+            >
               <button
                 role="option"
                 aria-selected={false}

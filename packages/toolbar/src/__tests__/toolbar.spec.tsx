@@ -161,17 +161,37 @@ describe('toolbar', () => {
     const toolbarListGroups = screen.queryAllByTestId('toolbar-list');
 
     const toolbarListItems = [
-      ...toolbarListGroups?.map(group => [...group.querySelectorAll('[data-testid]')]),
+      ...toolbarListGroups?.map(group => [...group.querySelectorAll('li')]),
     ].flat();
 
-    const itemsTestIds = toolbarListItems?.map(item => item.getAttribute('data-testid'));
+    const firstToolbarItem = toolbarListItems[0].querySelector(
+      '[data-testid=first-place-regular-button]'
+    );
+    const secondToolbarItem = toolbarListItems[1].querySelector(
+      '[data-testid=second-place-dropdown-button]'
+    );
+    const thirdToolbarItem = toolbarListItems[2].querySelector(
+      '[data-testid=third-place-input-icon-button]'
+    );
+    const fourthToolbarItem = toolbarListItems[3].querySelector(
+      '[data-testid=fourth-place-color-selection-input]'
+    );
+    const fifthToolbarItem = toolbarListItems[4].querySelector(
+      '[data-testid=fifth-place-modal-button]'
+    );
+    const sixthToolbarItem = toolbarListItems[5].querySelector(
+      '[data-testid=sixth-place-number-control-input]'
+    );
+    const seventhToolbarItem = toolbarListItems[6].querySelector(
+      '[data-testid=seventh-place-button-icon]'
+    );
 
-    expect(itemsTestIds[0]).toBe('first-place-button-icon');
-    expect(itemsTestIds[1]).toBe('btn-second-place');
-    expect(itemsTestIds[2]).toBe('third-place-button-icon');
-    expect(itemsTestIds[3]).toBe('fourth-place-button-icon');
-    expect(itemsTestIds[4]).toBe('fifth-place-button-icon');
-    expect(itemsTestIds[5]).toBe('sixth-place');
-    expect(itemsTestIds[6]).toBe('seventh-place-button-icon');
+    expect(firstToolbarItem).toBeInTheDocument();
+    expect(secondToolbarItem).toBeInTheDocument();
+    expect(thirdToolbarItem).toBeInTheDocument();
+    expect(fourthToolbarItem).toBeInTheDocument();
+    expect(fifthToolbarItem).toBeInTheDocument();
+    expect(sixthToolbarItem).toBeInTheDocument();
+    expect(seventhToolbarItem).toBeInTheDocument();
   });
 });

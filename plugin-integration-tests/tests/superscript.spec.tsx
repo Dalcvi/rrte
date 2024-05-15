@@ -21,7 +21,7 @@ describe('Superscript', () => {
       />
     );
 
-    const button = screen.getByTestId('superscript-button');
+    const button = screen.getByTestId('superscript-button.text-regular-button');
     await userEvent.click(button);
 
     expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('superscript');

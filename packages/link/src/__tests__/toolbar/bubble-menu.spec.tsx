@@ -1,6 +1,7 @@
 import { LinkBubbleMenu } from '../../toolbar';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import React from 'react';
 import FakeEditor from '../editor.mock';
 jest.mock('../editor.mock', () => {
   return jest.fn().mockImplementation(() => {
@@ -33,12 +34,13 @@ describe('Link bubble menu', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should display current url', () => {
+
+  it('should display current link', () => {
     const editor = new FakeEditor() as any;
 
-    render(<LinkBubbleMenu.Menu editor={editor} config={{}} />);
+    render(<LinkBubbleMenu.Menu editor={editor} config={{}} t={(key: string) => key} />);
 
-    const input = screen.getByTestId<HTMLInputElement>('link-input');
+    const input = screen.getByTestId<HTMLInputElement>('link-address.label-input');
 
     expect(input.value).toBe('https://www.google.com');
   });
@@ -46,9 +48,9 @@ describe('Link bubble menu', () => {
   it('should set url on change', () => {
     const editor = new FakeEditor() as any;
 
-    render(<LinkBubbleMenu.Menu editor={editor} config={{}} />);
+    render(<LinkBubbleMenu.Menu editor={editor} config={{}} t={(key: string) => key} />);
 
-    const input = screen.getByTestId<HTMLInputElement>('link-input');
+    const input = screen.getByTestId<HTMLInputElement>('link-address.label-input');
 
     fireEvent.change(input, { target: { value: 'https://www.youtube.com' } });
 
@@ -58,6 +60,30 @@ describe('Link bubble menu', () => {
       href: 'https://www.youtube.com',
     });
     expect(editor.run).toHaveBeenCalledTimes(1);
+  });
+
+  it('should focus editor on enter click', () => {
+    const editor = new FakeEditor();
+    // @ts-ignore
+    editor.commands = {
+      ...editor,
+      focus: jest.fn(),
+    };
+
+    editor.state.selection = {
+      ...editor.state.selection,
+      $to: {
+        pos: 0,
+      },
+    };
+
+    render(<LinkBubbleMenu.Menu editor={editor as any} config={{}} t={(key: string) => key} />);
+
+    const input = screen.getByTestId<HTMLInputElement>('link-address.label-input');
+
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+
+    expect(editor.commands.focus).toHaveBeenCalledTimes(1);
   });
 
   describe('should not show bubble menu', () => {

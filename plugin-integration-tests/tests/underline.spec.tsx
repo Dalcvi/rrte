@@ -21,7 +21,7 @@ describe('Underline', () => {
       />
     );
 
-    const underlineButton = screen.getByTestId('underline-button');
+    const underlineButton = screen.getByTestId('underline-button.text-regular-button');
     await userEvent.click(underlineButton);
 
     expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('underline');

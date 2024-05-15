@@ -44,6 +44,7 @@ export const ColorSelectionButton = ({
           disabled={isDisabled}
           type="color"
           value={value}
+          data-testid={`${text}-color-selection-input`}
           className={classes.colorInput}
           onChange={e => onChange(e, { editor })}
         />

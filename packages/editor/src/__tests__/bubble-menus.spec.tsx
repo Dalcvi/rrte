@@ -2,6 +2,8 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import { BubbleMenuList } from '../bubble-menus';
 import FakeEditor from './editor.mock';
+import React from 'react';
+import { i18nContext } from '@rrte/i18n';
 jest.mock('./editor.mock', () => {
   return jest.fn().mockImplementation(() => {
     return {
@@ -39,6 +41,15 @@ describe('Bubble menus', () => {
         },
       },
     ];
-    render(<BubbleMenuList editor={editor} list={bubbleMenuList} />);
+    render(
+      <i18nContext.Provider
+        value={{
+          language: 'en',
+          t: (key: string) => key,
+        }}
+      >
+        <BubbleMenuList editor={editor} list={bubbleMenuList} />
+      </i18nContext.Provider>
+    );
   });
 });

@@ -17,7 +17,7 @@ describe('Bold', () => {
       <Editor editorRef={editorRef} content={undefined} editorExtensions={[Paragraph(), Bold()]} />
     );
 
-    const button = screen.getByTestId('bold-button');
+    const button = screen.getByTestId('bold-button.text-regular-button');
     await userEvent.click(button);
 
     expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('bold');

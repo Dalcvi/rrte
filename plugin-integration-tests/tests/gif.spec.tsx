@@ -254,9 +254,9 @@ describe('Gif', () => {
         editorExtensions={[Paragraph(), Gif('U2cUFPs3FgG3vLbp2DLXKRlUXn2N12bO')]}
       />
     );
-    const button = screen.getByTestId('gif-button');
+    const button = screen.getByTestId('gif-button.text-modal-button');
     await userEvent.click(button);
-    const gifSearch = screen.getByTestId('gif-search');
+    const gifSearch = screen.getByTestId('Search GIF-input');
     await userEvent.type(gifSearch, 't');
     await new Promise(r => setTimeout(r, 500));
     const firstImg = await screen.findByTestId(

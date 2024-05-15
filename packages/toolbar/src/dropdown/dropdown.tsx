@@ -40,7 +40,7 @@ export const Dropdown = ({
   return (
     <ToolbarModalContainer>
       <button
-        data-testid={dropdown.name}
+        data-testid={`${dropdown.text}-dropdown-button`}
         ref={setDropdownButton}
         role="combobox"
         tabIndex={isOpen ? -1 : 0}
@@ -95,7 +95,7 @@ export const Dropdown = ({
             aria-label={t(dropdown.name)}
             ref={setDropdownList}
             className={classNames(classes.dropdownItemsContainer)}
-            data-testid={`${dropdown.name}-dropdown-items`}
+            data-testid={`${dropdown.text}-dropdown-items`}
           >
             {valuesByPriority.map(
               ({ text, iconConfig, getIsDisabled, name, className, onClick, belongsTo }, index) => {
@@ -115,11 +115,11 @@ export const Dropdown = ({
                 return (
                   <li key={name} className={classes.dropdownItemContainer}>
                     <button
+                      data-testid={`${text}-dropdown-item-${index}`}
                       tabIndex={-1}
                       role="option"
                       aria-selected={selectedValue?.name === name}
                       aria-label={t(text)}
-                      data-testid={name}
                       disabled={getIsDisabled({ editor, config: configs[belongsTo] })}
                       className={classNames(classes.dropdownItem, className, {
                         [classes.iconItem]: !!itemIcon,

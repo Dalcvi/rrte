@@ -38,7 +38,7 @@ export const ToolbarButton: ColorSelectionButtonConfig = {
     const value = currentSelectionAttributeValue('color', editor);
     return value ? getColor(value) : undefined;
   },
-  getCanReset: ({ editor }, value) => {
+  getCanReset: ({}, value) => {
     const color = value ? getColor(value) : undefined;
 
     return !!color && typeof value === 'string' && value.length > 0;

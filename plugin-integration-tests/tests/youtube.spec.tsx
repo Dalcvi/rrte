@@ -26,9 +26,9 @@ describe('Youtube', () => {
         editorExtensions={[Paragraph(), Youtube()]}
       />
     );
-    const button = screen.getByTestId('youtube-button');
+    const button = screen.getByTestId('youtube-button.text-modal-button');
     await userEvent.click(button);
-    const ytInput = screen.getByTestId('youtube-input');
+    const ytInput = screen.getByTestId('Youtube URL-input');
     await userEvent.type(ytInput, 'https://www.youtube.com/watch?v=PE8HfRsEZUc');
     const addButton = screen.getByTestId('youtube-add-button');
     await userEvent.click(addButton);

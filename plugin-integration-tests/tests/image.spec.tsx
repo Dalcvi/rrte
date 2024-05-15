@@ -52,7 +52,7 @@ describe('Image', () => {
       />
     );
 
-    const button = screen.getByTestId('user-controlled-image-button');
+    const button = screen.getByTestId('image-button.text-regular-button');
     await userEvent.click(button);
 
     const imgElement = screen.getByTestId('image-comp');
@@ -70,6 +70,7 @@ describe('Image', () => {
             originalWidth: 200,
             originalHeight: 300,
             alt: null,
+            caption: null,
             customSize: null,
             customWidth: null,
             customHeight: null,

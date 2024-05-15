@@ -1,7 +1,7 @@
-import { ToolbarButton } from '../../toolbar';
-import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { ToolbarButton } from '../../toolbar';
 import FakeEditor from '../editor.mock';
+
 jest.mock('../editor.mock', () => {
   return jest.fn().mockImplementation(() => {
     return {
@@ -23,63 +23,36 @@ describe('Link toolbar menu button', () => {
     jest.clearAllMocks();
   });
   it('should toggle link on click', () => {
-    const editor = new FakeEditor() as any;
-
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
-
-    const button = screen.getByTestId('link-button');
-    fireEvent.click(button);
+    const editor = new FakeEditor();
+    ToolbarButton.onClick({ editor: editor as any, config: {} });
 
     expect(editor.chain).toHaveBeenCalledTimes(1);
     expect(editor.focus).toHaveBeenCalledTimes(1);
-    expect(editor.toggleLink).toHaveBeenCalledTimes(2);
+    expect(editor.toggleLink).toHaveBeenCalledTimes(1);
     expect(editor.run).toHaveBeenCalledTimes(1);
   });
 
-  it('should be disabled when it cannot toggle link', () => {
-    const editor = new FakeEditor() as any;
+  it('should return true on disable when you cannot toggleLink', () => {
+    const editor = new FakeEditor();
     editor.toggleLink = jest.fn().mockReturnValue(false);
 
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    const isDisabled = ToolbarButton.getIsDisabled({ editor: editor as any, config: {} });
 
-    const button = screen.getByTestId('link-button');
-    expect(button).toBeDisabled();
+    expect(isDisabled).toBe(true);
   });
 
-  it('should not link on click if disabled', () => {
-    const editor = new FakeEditor() as any;
-    editor.toggleLink = jest.fn().mockReturnValue(false);
-
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
-
-    const button = screen.getByTestId('link-button');
-    fireEvent.click(button);
-
-    expect(editor.chain).toHaveBeenCalledTimes(0);
-    expect(editor.focus).toHaveBeenCalledTimes(0);
-    expect(editor.toggleLink).toHaveBeenCalledTimes(1);
-    expect(editor.run).toHaveBeenCalledTimes(0);
-  });
-
-  it('should have active class when active', () => {
-    const editor = new FakeEditor() as any;
+  it('should return true on active when content is link', () => {
+    const editor = new FakeEditor();
     editor.isActive = jest.fn().mockReturnValue(true);
 
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
+    const isActive = ToolbarButton.getIsActive({ editor: editor as any, config: {} });
 
-    const button = screen.getByTestId('link-button');
-    const classNamesAmount = button.className.split(' ').length;
-    expect(classNamesAmount).toBe(2);
+    expect(isActive).toBe(true);
   });
 
-  it('should not have active class when not active', () => {
-    const editor = new FakeEditor() as any;
-    editor.isActive = jest.fn().mockReturnValue(false);
+  it('should have an icon', () => {
+    const icon = ToolbarButton.Icon({ className: 'test' });
 
-    render(<ToolbarButton.Button editor={editor} config={{}} />);
-
-    const button = screen.getByTestId('link-button');
-    const classNamesAmount = button.className.split(' ').length;
-    expect(classNamesAmount).toBe(1);
+    expect(icon).not.toBeNull();
   });
 });

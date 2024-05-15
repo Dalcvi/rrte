@@ -22,7 +22,7 @@ describe('Bullet list', () => {
       />
     );
 
-    const button = screen.getByTestId('bullet-list-button');
+    const button = screen.getByTestId('bullet-list-button.text-regular-button');
     await userEvent.click(button);
 
     const bulletListTag = screen.getByTestId('bulletList');

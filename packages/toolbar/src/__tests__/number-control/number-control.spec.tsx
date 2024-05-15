@@ -1,6 +1,6 @@
 import { i18nContext } from '@rrte/i18n';
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { NumberControl, NumberControlConfig } from '../../number-control';
 

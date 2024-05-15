@@ -21,7 +21,7 @@ describe('Subscript', () => {
       />
     );
 
-    const button = screen.getByTestId('subscript-button');
+    const button = screen.getByTestId('subscript-button.text-regular-button');
     await userEvent.click(button);
 
     expect(editorRef.current.view.state.storedMarks[0].type.name).toEqual('subscript');
