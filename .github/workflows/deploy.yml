@@ -17,13 +17,19 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: yarn
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: Build website
-        run: yarn build
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Repo
+        run: pnpm build
+
+      - name: Build documentation
+        run: |
+          cd documentation
+          pnpm build
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
