@@ -36,6 +36,12 @@ jobs:
           cd documentation
           pnpm build
 
+      - name: Print current directory
+        run: pwd
+
+      - name: List all directories
+        run: ls -la
+
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
