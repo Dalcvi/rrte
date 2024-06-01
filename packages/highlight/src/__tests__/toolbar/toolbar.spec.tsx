@@ -1,8 +1,7 @@
-import { ToolbarButton } from '../../toolbar';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import FakeEditor from '../editor.mock';
 import { currentSelectionAttributeValue } from '@rrte/common';
+import '@testing-library/jest-dom';
+import { ToolbarButton } from '../../toolbar';
+import FakeEditor from '../editor.mock';
 
 jest.mock('../editor.mock', () => {
   return jest.fn().mockImplementation(() => {
