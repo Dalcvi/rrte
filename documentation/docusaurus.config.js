@@ -1,49 +1,48 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const lightCodeTheme = require('prism-react-renderer/themes/github');
+const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "RRTE",
-  tagline: "React Rich Text Editor",
-  favicon: "img/favicon.ico",
+  title: 'RRTE',
+  tagline: 'React Rich Text Editor',
+  favicon: 'img/favicon.ico',
+  organizationName: 'dalcvi',
+  projectName: 'rrte',
+  deploymentBranch: 'master',
 
   // Set the production url of your site here
-  url: "https://your-docusaurus-test-site.com",
+  url: 'https://dalcvi.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/",
+  baseUrl: '/rrte/',
+  trailingSlash: false,
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: "rrte", // Usually your GitHub org/user name.
-  projectName: "React Rich Text Editor", // Usually your repo name.
-
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "en",
-    locales: ["en"],
+    defaultLocale: 'en',
+    locales: ['en'],
   },
 
   presets: [
     [
-      "classic",
+      'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
+          sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
+          customCss: require.resolve('./src/css/custom.css'),
         },
       }),
     ],
@@ -53,30 +52,30 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "RRTE",
+        title: 'RRTE',
         items: [
           {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
-            position: "left",
-            label: "Tutorial",
+            type: 'docSidebar',
+            sidebarId: 'tutorialSidebar',
+            position: 'left',
+            label: 'Tutorial',
           },
           {
-            href: "https://github.com/Dalcvi/rrte",
-            label: "GitHub",
-            position: "right",
+            href: 'https://github.com/Dalcvi/rrte',
+            label: 'GitHub',
+            position: 'right',
           },
         ],
       },
       footer: {
-        style: "dark",
+        style: 'dark',
         links: [
           {
-            title: "Links",
+            title: 'Links',
             items: [
               {
-                label: "GitHub",
-                href: "https://github.com/Dalcvi/rrte",
+                label: 'GitHub',
+                href: 'https://github.com/Dalcvi/rrte',
               },
             ],
           },
@@ -88,7 +87,7 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
-  themes: ["@docusaurus/theme-live-codeblock"],
+  themes: ['@docusaurus/theme-live-codeblock'],
 };
 
 module.exports = config;

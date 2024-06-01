@@ -1,8 +1,7 @@
+import { currentSelectionAttributeValue } from '@rrte/common';
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
 import { ToolbarButton } from '../../toolbar';
 import FakeEditor from '../editor.mock';
-import { currentSelectionAttributeValue } from '@rrte/common';
 
 jest.mock('../editor.mock', () => {
   return jest.fn().mockImplementation(() => {
