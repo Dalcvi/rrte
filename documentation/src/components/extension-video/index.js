@@ -51,7 +51,7 @@ export const ExtensionControlledVideo = () => {
           onVideoAdd: async (file, videoAttr) => {
             return videoAttr;
           },
-          acceptedVideoFileTypes: ['video/mp4', 'video/mov'],
+          acceptedVideoFileTypes: ['video/mp4', 'video/quicktime'],
         }),
         Id(),
         Paragraph(),
