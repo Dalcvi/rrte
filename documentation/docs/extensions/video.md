@@ -102,7 +102,7 @@ function MyComponent() {
         Video({
           type: 'user-controlled',
           maxFileSize: 100000000,
-          acceptedVideoFileTypes: ['video/jpeg', 'video/png'],
+          acceptedVideoFileTypes: ['video/mp4', 'video/mov'],
           onVideoAddClick: async () => {
             const tempFile = {
               // src to a video
@@ -152,7 +152,7 @@ function MyComponent() {
           onVideoAdd: async (file, videoAttr) => {
             return videoAttr;
           },
-          acceptedVideoFileTypes: ['video/jpeg', 'video/png'],
+          acceptedVideoFileTypes: ['video/mp4', 'video/mov'],
         }),
         Paragraph(),
       ]}
