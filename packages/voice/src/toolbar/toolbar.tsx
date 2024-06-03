@@ -20,6 +20,7 @@ const Button: CustomLogicButtonConfig['Component'] = ({ editor, editorContainerR
     getCurrentSuggestedCommands,
     getLastTriendCommand,
     handleSpeechCommand,
+    turnOnDictationMode,
   } = useSpeechStateMachine(editor, t, language);
 
   useEffect(() => {
@@ -93,6 +94,20 @@ const Button: CustomLogicButtonConfig['Component'] = ({ editor, editorContainerR
                     {t('suggested-commands.title')}
                   </h3>
                   <ul role="tree" className={classes.suggestedCommandsContainer}>
+                    <li className={classes.group}>
+                      <span className={classes.groupTitle}>{t('dictation-commands.title')}</span>
+                      <ul
+                        role="group"
+                        aria-labelledby={t('dictation-commands.title')}
+                        className={classes.suggestedCommandsGroup}
+                      >
+                        <li>
+                          <button className={classes.command} onClick={turnOnDictationMode}>
+                            {t('begin-dictation-mode')}
+                          </button>
+                        </li>
+                      </ul>
+                    </li>
                     {Object.keys(suggestedCommands).map(group => {
                       return (
                         <li key={group} className={classes.group}>
@@ -104,6 +119,11 @@ const Button: CustomLogicButtonConfig['Component'] = ({ editor, editorContainerR
                             aria-labelledby={group}
                             className={classes.suggestedCommandsGroup}
                           >
+                            <li>
+                              <button className={classes.command} onClick={turnOnDictationMode}>
+                                {t('begin-dictation-mode')}
+                              </button>
+                            </li>
                             {suggestedCommands[group]
                               .sort((a, b) => {
                                 if (a.activationKeyword < b.activationKeyword) {

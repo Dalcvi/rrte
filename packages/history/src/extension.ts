@@ -17,6 +17,10 @@ declare module '@tiptap/core' {
        * Reapply reverted changes
        */
       redo: () => ReturnType;
+      /**
+       * Clear history
+       */
+      clearHistory: () => ReturnType;
     };
   }
 }

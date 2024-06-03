@@ -9,17 +9,28 @@ export default function Web() {
   const [comments, setComments] = useState([]);
   const editor = useRef(null);
   const extensions = useMemo(() => getConfig(), []);
+  const [fakeUpdate, setFakeUpdate] = useState(false);
+  const [language, setLanguage] = useState('EN');
 
   return (
     <div>
+      <label>
+        Language: <br />
+        <select value={language} onChange={e => setLanguage(e.target.value)}>
+          <option>EN</option>
+          <option>LT</option>
+        </select>
+      </label>
       <div className={classes.commentsContainer}>
         <div className={classes.commentBoxContainer}>
-          <div className={classes.commentBox}>
+          <div className={classes.commentBox} key={fakeUpdate.toString()}>
             <Editor
+              key={language}
               content={content}
               onUpdateJson={content => {
                 setContent(content);
               }}
+              language={language.toLocaleLowerCase()}
               editorRef={editor}
               editorExtensions={extensions}
               editorWrapperClassName={classes.editor}
@@ -36,6 +47,7 @@ export default function Web() {
                 if (editor.current && content) {
                   setComments(comments => [...comments, content]);
                   editor.current.commands.clearContent(true);
+                  setFakeUpdate(prev => !prev);
                 }
               }}
             >

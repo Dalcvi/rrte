@@ -200,7 +200,7 @@ export const TextNode = Node.create({
           const { selection } = tr;
           const { from, to } = selection;
 
-          if (!from || !to) {
+          if (!from || !to || from === to) {
             return false;
           }
 
@@ -249,89 +249,89 @@ export const TextNode = Node.create({
 
           return true;
         },
-      selectPreviousSentenceAlso:
-        () =>
-        ({ tr, commands, state }) => {
-          const { selection } = tr;
-          const { from, to } = selection;
+      selectPreviousSentenceAlso: () => () => {
+        return false;
+        // const { selection } = tr;
+        // const { from, to } = selection;
 
-          if (!from || !to) {
-            return false;
-          }
+        // if (!from || !to) {
+        //   return false;
+        // }
 
-          const selectionMinimumFrom = Math.max(
-            selection.$from.pos - selection.$from.textOffset - 1,
-            1
-          );
-          const resolvedPos = state.doc.resolve(selectionMinimumFrom);
-          const checkNodeAt = selectionMinimumFrom - resolvedPos.depth - 1;
-          const otherResolvedPos = checkNodeAt > 0 ? state.doc.resolve(checkNodeAt) : null;
-          const resolvedNode = !!otherResolvedPos
-            ? otherResolvedPos.node(otherResolvedPos.depth)
-            : null;
-          const isOtherResolvedNodeText =
-            (!!resolvedNode && resolvedNode?.isTextblock) || resolvedNode?.isText;
+        // const selectionMinimumFrom = Math.max(
+        //   selection.$from.pos - selection.$from.textOffset - 1,
+        //   1
+        // );
+        // const resolvedPos = state.doc.resolve(selectionMinimumFrom);
+        // const checkNodeAt = selectionMinimumFrom - resolvedPos.depth - 1;
+        // const otherResolvedPos = checkNodeAt > 0 ? state.doc.resolve(checkNodeAt) : null;
+        // const resolvedNode = !!otherResolvedPos
+        //   ? otherResolvedPos.node(otherResolvedPos.depth)
+        //   : null;
+        // const isOtherResolvedNodeText =
+        //   (!!resolvedNode && resolvedNode?.isTextblock) || resolvedNode?.isText;
 
-          const minimumFrom = isOtherResolvedNodeText
-            ? Math.min(0, selectionMinimumFrom - resolvedNode.nodeSize + 1)
-            : selectionMinimumFrom;
+        // const minimumFrom = isOtherResolvedNodeText
+        //   ? Math.min(0, selectionMinimumFrom - resolvedNode.nodeSize + 1)
+        //   : selectionMinimumFrom;
 
-          // Find the start of the sentence. Either the start of the text in the parent node OR the first letter of the sentence
-          let start = from;
-          while (
-            start > minimumFrom &&
-            (!tr.doc.textBetween(start - 1, start).match(/[.!?]/) ||
-              (tr.doc.textBetween(start - 1, start).match(/[.!?]/) &&
-                (start === from || (isOtherResolvedNodeText && start === from - 1))))
-          ) {
-            start -= 1;
-          }
-          const end = to;
+        // // Find the start of the sentence. Either the start of the text in the parent node OR the first letter of the sentence
+        // let start = from;
+        // while (
+        //   start > minimumFrom &&
+        //   (!tr.doc.textBetween(start - 1, start).match(/[.!?]/) ||
+        //     (tr.doc.textBetween(start - 1, start).match(/[.!?]/) &&
+        //       (start === from || (isOtherResolvedNodeText && start === from - 1))))
+        // ) {
+        //   start -= 1;
+        // }
+        // const end = to;
 
-          if (start === end) {
-            return false;
-          }
+        // if (start === end) {
+        //   return false;
+        // }
 
-          commands.setTextSelection({
-            from: start,
-            to: end,
-          });
+        // commands.setTextSelection({
+        //   from: start,
+        //   to: end,
+        // });
 
-          return true;
-        },
+        // return true;
+      },
       selectNextSentenceAlso() {
-        return ({ tr, commands }) => {
-          const { selection } = tr;
-          const { from, to } = selection;
+        return () => {
+          return false;
+          // const { selection } = tr;
+          // const { from, to } = selection;
 
-          if (!from || !to) {
-            return false;
-          }
+          // if (!from || !to) {
+          //   return false;
+          // }
 
-          const maximumTo = Math.min(
-            to - selection.$from.parentOffset + selection.$to.parent.content.size - 1,
-            tr.doc.nodeSize - 2
-          );
-          // Find the end of the sentence. Either the end of the text in the parent node OR the last letter of the sentence
-          let end = to;
-          while (
-            end < maximumTo &&
-            (!tr.doc.textBetween(end, end + 1).match(/[.!?]/) || end === to + 1)
-          ) {
-            end += 1;
-          }
-          const start = from;
+          // const maximumTo = Math.min(
+          //   to - selection.$from.parentOffset + selection.$to.parent.content.size - 1,
+          //   tr.doc.nodeSize - 2
+          // );
+          // // Find the end of the sentence. Either the end of the text in the parent node OR the last letter of the sentence
+          // let end = to;
+          // while (
+          //   end < maximumTo &&
+          //   (!tr.doc.textBetween(end, end + 1).match(/[.!?]/) || end === to + 1)
+          // ) {
+          //   end += 1;
+          // }
+          // const start = from;
 
-          if (start === end) {
-            return false;
-          }
+          // if (start === end) {
+          //   return false;
+          // }
 
-          commands.setTextSelection({
-            from: start,
-            to: end,
-          });
+          // commands.setTextSelection({
+          //   from: start,
+          //   to: end,
+          // });
 
-          return true;
+          // return true;
         };
       },
     };
