@@ -56,7 +56,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
               Icon={({ className }) => (
                 <BackIcon className={className} height="15px" width="15px" />
               )}
-              text={'gif.back'}
+              text={'video.back'}
               getIsActive={() => false}
               getIsDisabled={() => false}
               iconStyling="stroke"
@@ -119,7 +119,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
           {replaceButton}
           <RegularButton
             Icon={({ className }) => <AlignLeft className={className} height="15px" width="15px" />}
-            text={'gif.align-left'}
+            text={'video-align-left.label'}
             getIsActive={() => alignment === 'left'}
             getIsDisabled={() => false}
             iconStyling="stroke"
@@ -133,7 +133,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
             Icon={({ className }) => (
               <AlignCenter className={className} height="15px" width="15px" />
             )}
-            text={'gif.align-center'}
+            text={'video-align-center.label'}
             getIsActive={() => alignment === 'center'}
             getIsDisabled={() => false}
             iconStyling="stroke"
@@ -147,7 +147,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
             Icon={({ className }) => (
               <AlignRight className={className} height="15px" width="15px" />
             )}
-            text={'gif.align-right'}
+            text={'video-align-right.label'}
             getIsActive={() => alignment === 'right'}
             getIsDisabled={() => false}
             iconStyling="stroke"
@@ -161,7 +161,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
             Icon={({ className }) => (
               <AccessibilityIcon className={className} height="15px" width="15px" />
             )}
-            text={'gif.accessibility'}
+            text={'video.accessibility'}
             getIsActive={() => false}
             ref={setAccessibilityButton}
             getIsDisabled={() => false}
@@ -176,7 +176,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
             Icon={({ className }) => (
               <CustomSize className={className} height="15px" width="15px" />
             )}
-            text={'gif.align-size'}
+            text={'video.align-size'}
             getIsActive={() => isCustomSizeEnabled}
             getIsDisabled={() => false}
             iconStyling="fill"
@@ -192,7 +192,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
         <hr className={classes.divider} />
         <div className={classes.row}>
           <NumberInput
-            label={t('gif.width')}
+            label={t('video-width.label')}
             value={currentAttributes.customWidth === null ? 320 : currentAttributes.customWidth}
             isDisabled={!isCustomSizeEnabled}
             onChange={value =>
@@ -200,7 +200,7 @@ const BubbleMenu: BubbleMenuToolbar<UploadConfig>['Menu'] = ({ editor, config, t
             }
           />
           <NumberInput
-            label={t('gif.height')}
+            label={t('video-height.label')}
             value={currentAttributes.customHeight === null ? 180 : currentAttributes.customHeight}
             isDisabled={!isCustomSizeEnabled}
             onChange={value =>
